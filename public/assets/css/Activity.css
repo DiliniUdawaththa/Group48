@@ -1,0 +1,155 @@
+body{
+    margin: 0;
+    width: 100vw;
+    font-family: 'Poppins',sans-serif;
+    overflow: hidden;
+}
+.ride{
+    background-color: #D9D9D9;
+    display: flex;
+    
+}
+
+/* -----------------------sidebar------------------------------------------ */
+.sidebar{
+   width: 300px;
+   color: #D9D9D9;
+   background-color:#162938;
+   height: 100vh;
+}
+.barimagetag{
+    text-align: center;
+}
+.barimage{
+    padding: 10px;
+    height: 80px;
+    
+}
+/* ------------------------------- */
+.profile{
+    text-align: center;
+
+}
+.userimage{
+    height: 120px;
+    border-radius: 100px;
+    width: 120px;
+
+}
+.profile h3{
+    margin-bottom: 10px;
+}
+.profile h6{
+    margin-top: 0;
+}
+/* .username{
+
+} */
+
+/* --------------------------------- */
+
+.linktag{
+    display: flex;
+    flex-direction: column;
+}
+.link{
+    color: #D9D9D9;
+    text-decoration: none;
+    font-weight: 600px;
+    font-size: 20px;
+}
+.linkbutton {
+    padding: 10px;
+}
+.linkbutton i {
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+.linkbutton:hover{
+    background-color: #1f3648;
+}
+/* ------------------------------------------------------------------- */
+
+.activity{
+    background-color:#D9D9D9;
+    width:81%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.heading{
+    display: flex;
+    align-items: center;
+    width: 92%;
+    background-color: #162938;
+    height: 40px;
+    padding: 20px 30px;
+    color: #D9D9D9;
+    margin-top: 8px;
+    border-radius: 10px;
+    
+}
+.heading div{
+    pad: 10px;
+}
+.heading .date{
+    display: flex;
+    width: 10%;
+}
+.heading .time{
+    display: flex;
+    width: 10%;
+}
+.heading .name{
+    display: flex;
+    width: 20%;
+}
+.heading .location{
+    display: flex;
+    width: 25%;
+}
+.heading .fare{
+    display: flex;
+    width: 10%;
+}
+.data {
+    display: flex;
+    align-items: center;
+    width: 92%;
+    background-color:#eeeded;
+    height: 40px;
+    padding: 10px 30px;
+    color:#162938;
+    margin-top: 8px;
+    border-radius: 10px;
+    border: solid #eeeded;
+}
+.data:hover{
+    border: solid #162938;
+    cursor: pointer;
+}
+.data div{
+    pad: 10px;
+}
+.data .date{
+    display: flex;
+    width: 10%;
+}
+.data .time{
+    display: flex;
+    width: 10%;
+}
+.data .name{
+    display: flex;
+    width: 20%;
+}
+.data .location{
+    display: flex;
+    width: 25%;
+}
+.data .fare{
+    display: flex;
+    width: 10%;
+}

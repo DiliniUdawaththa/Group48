@@ -1,0 +1,783 @@
+body{
+    margin: 0;
+    width: 100vw;
+    font-family: 'Poppins',sans-serif;
+    overflow: hidden;
+}
+/* -----------------------------------mobile top bar----------------------------------- */
+.topbar{
+    display: none;
+    background-color:#162938;
+    height: 10vh;
+}
+.topbarin{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+}
+.topbar img{
+    margin-left: 11vw;
+    height: 10vh;
+}
+.topbar .person{
+    border-radius: 80px;
+    height: 6.5vh;
+    width: 6.5vh;
+    margin-right: 30px;
+}
+#menu{
+    display: flex;
+    font-size: 5.5vh;
+    color: #D9D9D9;
+    position: absolute;
+    top: 2.25vh;
+    left: 30px;
+}
+
+/* ------------------------------------side open bar--------------------------- */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:#162938;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidenav a {
+    padding: 15px 8px 15px 32px;
+    text-decoration: none;
+    font-size: 40px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: white;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 70px;
+    margin-left: 50px;
+  }
+
+.sidenav img{
+    margin-top: 80px;
+    height: 170px;
+    width: 170px;
+    border-radius: 100px;
+}
+.sidenav h3{
+    color: #D9D9D9;
+    font-size: 30px;
+    margin-bottom: 0;
+
+}
+.sidenav .sideprofile{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.sidenav .sideprofile i{
+    font-size: 30px;
+    margin: 0;
+}
+
+
+
+
+.ride{
+    background-color: #D9D9D9;
+    display: flex;
+    
+}
+
+
+
+
+
+/* -----------------------sidebar------------------------------------------ */
+.sidebar{
+   width: 300px;
+   color: #D9D9D9;
+   background-color:#162938;
+   height: 100vh;
+}
+.barimagetag{
+    text-align: center;
+}
+.barimage{
+    padding: 10px;
+    height: 80px;
+    
+}
+/* ------------------------------- */
+.profile{
+    text-align: center;
+
+}
+.userimage{
+    height: 120px;
+    border-radius: 100px;
+    width: 120px;
+
+}
+.profile h3{
+    margin-bottom: 10px;
+}
+.profile h6{
+    margin-top: 0;
+}
+/* .username{
+
+} */
+
+/* --------------------------------- */
+
+.linktag{
+    display: flex;
+    flex-direction: column;
+}
+.link{
+    color: #D9D9D9;
+    text-decoration: none;
+    font-weight: 600px;
+    font-size: 20px;
+}
+.linkbutton {
+    padding: 10px;
+}
+.linkbutton i {
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+.linkbutton:hover{
+    background-color: #1f3648;
+}
+
+
+/* -------------------------ridemain-------------------------------- */
+.ridemain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.step1{
+    display: block;
+    height: 70vh;
+    width: 70vw;
+    padding: 0 5%;
+    position: relative;
+
+}
+
+@media(max-width:768px) {
+    .step1{
+        width: 0px;
+    }
+   
+}
+.step1 h1{
+    padding: 20px;
+    margin-bottom: 35px;
+}
+.step1form{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+.step1input{
+    height: 30px;
+    width: 100%;
+    border-style: none none solid none;
+    background-color: #D9D9D9;
+    outline: none;
+    font-size: 15px;
+}
+.step1label{
+    display: flex;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    position: relative;
+}
+.step1 i{
+    display: flex;
+    position: absolute;
+    font-size: 25px;
+    bottom:-25px;
+    right: 0;
+    cursor: pointer;
+}
+#next1{
+    color: #D9D9D9;
+    background-color: #162938;
+    display: flex;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 60px;
+    margin-left: 90%;
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+.step2{
+    display: none;
+    height: 70vh;
+    width: 50vw;
+    position: relative;
+}
+
+.step2 img{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    z-index: 2;
+}
+.step2 #prev2{
+    color: #D9D9D9;
+    background-color:#162938;
+    display: flex;
+    position: absolute;
+    padding: 10px 20px;
+    bottom: 10px;
+    right: 85px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+ .step2 #next2{
+    color: #D9D9D9;
+    background-color: #162938;
+    display: flex;
+    position: absolute;
+    padding: 10px 20px;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* ---------------------------------------------------------------------------------------------------- */
+.step3{
+    display: none;
+    height: 70vh;
+    width: 50vw;
+    position: relative;
+   
+}
+.step3 .column {
+    display: flex;
+    justify-content: center;
+}
+.step3  .type{
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    margin: 20px;
+    position: relative; 
+    border-radius: 8px;  
+    border: solid #D9D9D9; 
+}
+.type:hover{
+    filter: brightness(0.8);
+    cursor: pointer;
+    border-color: #1f3648;
+}
+.type img{
+    object-fit: cover;
+    height: 110px;
+    width: 150px;
+    border-radius: 8px; 
+}
+.ctext{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+.step3button{
+    display: flex;
+    margin-left: 75%;
+}
+#next3{
+    color: #D9D9D9;
+    background-color: #162938;
+    display: flex;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 20px;
+
+}
+#prev3{
+    color: #D9D9D9;
+    background-color:#162938;
+    display: flex;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* ------------------------------------------------------------------------------------------------------- */
+.step4{
+    color: #162938;
+    display: none;
+    height: 70vh;
+    width: 50vw;
+    position: relative;
+}
+.sf{
+    display: flex;
+    background-color: #162938;
+    color: #D9D9D9;
+    height: 20px;
+    align-items: center;
+    justify-content: right;
+    padding-right: 10px;
+}
+.driverlist{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color:#9f9f9f;
+    border-radius: 10px;
+}
+.driverlist i{
+    font-size: 7px;
+    margin: 3px 0 3px  0;
+}
+.driverlist .imgstar{
+    display: flex;
+    flex-direction: column;
+}
+.driverlist .imgstar img{
+    margin-top: 4px;
+    display: flex;
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+}
+.driverlist .imgstar span{
+    display: flex;
+}
+.driverlist .name{
+    display: flex;
+}
+.driverlist .fare{
+    display: flex;
+    flex-direction: column;
+}
+.driverlist .nrbutton{
+    display: flex;
+}
+.driverlist .nrbutton button{
+    display: flex;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+
+}
+.driverlist .nrbutton .Negotiate{
+    color:#162938;
+    background-color:#D9D9D9;
+}
+.driverlist .nrbutton .Request{
+    color: #D9D9D9;
+    background-color: #162938;
+    margin-left: 10px;
+}
+.step4button{
+    display: flex;
+    margin-left: 75%;
+    margin-top: 20px;
+}
+#next4{
+    color: #D9D9D9;
+    background-color: #162938;
+    display: flex;
+    padding: 10px 20px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#prev4{
+    color: #D9D9D9;
+    background-color:#162938;
+    display: flex;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* ----------------------------------------------------------------------------- */
+.step5{
+    display: none;
+    height: 70vh;
+    width: 50vw;
+    position: relative;
+}
+.step5 img{
+    height: 100%;
+    width: 100%;
+    border-radius: 18px;
+}
+.step5 h1{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 20px;
+}
+#next5{
+    color: #D9D9D9;
+    background-color: #162938;
+    display: flex;
+    position: absolute;
+    padding: 10px 20px;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* ------------------------------------------------------------------------------ */
+.step6{
+    display: none;
+    height: 70vh;
+    width: 50vw;
+    position: relative;
+}
+.step6 img{
+    height: 100%;
+    width: 100%;
+    border-radius: 18px;
+}
+.step6 h1{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 20px;
+}
+.safety{
+    color: #D9D9D9;
+    background-color: #162938;
+    display: flex;
+    position: absolute;
+    padding: 6px 12px;
+    top: 10px;
+    right: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#next6{
+    color: #D9D9D9;
+    background-color: #162938;
+    display: flex;
+    position: absolute;
+    padding: 10px 20px;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* --------------------------------------------------------------------------------------- */
+.step7{
+    display: none;
+    height: 70vh;
+    width: 50vw;
+}
+.step7 .switch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 15%;
+    border: solid #162938;
+
+}
+.step7 .switch .switch1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #162938;
+    color: #D9D9D9;
+    width: 50%;
+    height: 30px;
+    cursor: pointer;
+
+}
+.step7 .switch .switch2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D9D9D9;
+    color: #162938;
+    width: 50%;
+    height: 30px;
+    cursor: pointer;
+}
+#finclude{
+    display: block;
+   
+}
+.step7 img{
+    display: flex;
+    height: 150px;
+    width: 150px;
+    border-radius: 30px;
+    margin:  25px auto;
+}
+.step7 h3{
+    text-align: center;
+
+}
+ .staricon{
+    display: flex;
+    justify-content: center;
+    
+}
+.staricon i{
+    display: flex;
+    font-size: 25px;
+    color: #9f9f9f;
+    cursor: pointer;
+}
+#freport{
+    display: none;
+}
+.reportform{
+    margin-top: 16px;
+   display: flex;
+}
+.reportlist{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+.reportform div{
+    margin: 5px;
+}
+.reporttext{
+    width: 60%;
+}
+.reporttext input{
+    width: 80%;
+    border-radius: 25px;
+    background-color: #f0f0f0;
+    border: none;
+    padding: 15px 5px 180px 15px ;
+}
+#next7{
+    color: #D9D9D9;
+    background-color: #162938;
+    display: flex;
+    margin:  25px auto 5px auto;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.step7 a{
+    text-decoration: none;
+    color: #162938;
+    display: flex;
+    justify-content: center;
+    margin: 3px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* -----------------------------------media----------------------------------- */
+
+@media(max-width:1000px){
+    *{
+        overflow: hidden;
+    }
+    .topbar{
+        display: block;
+    }
+    .sidebar{
+        display: none;
+    }
+    .ridemain{
+        width: 100%;
+        height: 90vh;
+    }
+    .step1{
+        width: 100%;
+        height: 90vh;
+    }
+    .step1 i{
+        top: 0;
+        right: 0;
+        font-size: 3.75vw;
+    }
+    #next1{
+        position: absolute;
+        font-size: 3vh;
+        bottom: 40px;
+        right: 7vw;
+    }
+    .step1 h1{
+        margin-top: 25vh;
+          font-size: 40px;
+    }
+    .step1label{
+        font-size: 30px;
+        margin-top: 3vh;
+    }
+    .step2{
+        width: 100%;
+        height: 90vh;
+    }
+    #next2{
+        font-size: 3vh;
+        bottom: 40px;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        right: 5vw;
+    }
+    #prev2{
+        font-size: 3vh;
+        bottom: 40px;
+        margin-right: 13vw;
+        margin-bottom: 20px;    
+    }
+    .step3{
+        width: 100%;
+        height: 90vh;
+    }
+    .step3 h1{
+        margin-top: 5vh;
+        margin-bottom: 15vh;
+        margin-left: 5vw;
+        font-size: 50px;
+    }
+    .step3 .type{
+        height: 15vh;
+        width: 14vh;
+    }
+    .step3 .type img{
+        width: 14vh;
+        height: 11vh;
+    }
+    .step3 .type span{
+        font-size: 30px;
+    }
+
+    #next3{
+        position: absolute;
+        font-size: 3vh;
+        bottom: 40px;
+        right: 5vw;
+    }
+    #prev3{
+        position: absolute;
+        font-size: 3vh;
+        bottom: 40px;
+        right: 23vw;
+    }
+    .step4{
+        width: 100%;
+        height: 90vh;
+    }
+    .step4 h1{
+        margin-left: 2vh;
+        font-size: 50px;
+    }
+    .step4 .sf{
+        height: 4vh;
+        font-size: 2vh;
+    }
+    .step4 .driverlist{
+        height: 8vh;
+    }
+    .step4 .driverlist img{
+        height: 6vh;
+        width: 6vh;
+        border-radius: 100px;
+    }
+    .step4 .driverlist i{
+        font-size: 1vh;
+    }
+    .step4 .driverlist .name{
+        font-size: 2vh;
+    }
+    .step4 .driverlist .fare{
+        font-size: 2vh;
+    }
+    .step4 .driverlist button{
+        font-size: 2vh;
+    }
+    #next4{
+        position: absolute;
+        font-size: 3vh;
+        bottom: 40px;
+        right: 5vw;
+    }
+    #prev4{
+        position: absolute;
+        font-size: 3vh;
+        bottom: 40px;
+        right: 34vw;
+    }
+    .step5{
+        width: 100%;
+        height: 90vh;
+    }
+    #next5{
+        font-size: 3vh;
+        bottom: 40px;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        right: 5vw;
+    }
+    .step6{
+        width: 100%;
+        height: 90vh;
+    }
+    #next6{
+        font-size: 3vh;
+        bottom: 40px;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        right: 5vw;
+    }
+    .step7{
+        width: 100%;
+        height: 90vh;
+    }
+    /* #next7{
+        font-size: 3vh;
+        bottom: 40px;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        right: 5vw;
+    } */
+}
+

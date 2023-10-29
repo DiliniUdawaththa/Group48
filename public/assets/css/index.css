@@ -1,0 +1,393 @@
+*{
+
+    font-family: 'Poppins',sans-serif;
+   
+}
+
+@media(max-width:1100px){
+    .bannerbox{
+        display: none;
+    }
+    .navication a{
+        display: none;
+    }
+
+
+}
+
+.header{
+    position: fixed;
+    width: 100%;
+    background: #162938;
+    display: flex;
+    justify-content: space-between;
+    z-index: 99;
+}
+
+
+.logoname{
+    margin-left: 15px;
+    width: 175px;
+}
+.nav{
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.a{
+    padding: 21px 13px;
+    position: relative;
+    font-size: 1.1em;
+    color: #D9D9D9;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+.a::after{
+    display: flex;
+    content: '';
+    
+    width: 100%;
+    height: 3px;
+    background: #D9D9D9;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition:transform.5s;
+}
+ .a:hover:after{
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+
+.login{
+     color: #D9D9D9;
+     border: none;
+     justify-content: center;
+     padding: 6px 13px;
+     border-radius: 14px;
+     cursor: pointer;
+     margin-left: 70px;
+     text-decoration: none;
+     margin-top: 17px;
+
+}
+.signup{
+    color: #162938;
+    border: none;
+    justify-content: center;
+    text-align: center;
+    background-color: #D9D9D9;
+    padding: 6px 13px;
+    margin-top: 17px;
+    margin-right: 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 17px;
+
+}
+
+/* banner part ---------------------------------------------------------------------------------*/
+
+.banner{
+    position: relative;
+    color: #162938;
+
+}
+.bannerimage{
+    margin-top: 60px;
+    width: 100%;
+    height: 90%;
+    background-color: black;
+    filter: brightness(0.6); 
+    z-index: 1;
+}
+.bannerbox{
+   
+    background-color: #D9D9D9;
+    width: 35%;
+    height: 500px;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+
+}
+.bannerboxtop{
+    display: flex;
+    border: solid #b5b5b5;
+}
+
+.Driver{
+    width: 33%;
+    text-align: center;
+    cursor: pointer;
+    background-color: #b5b5b5;
+         
+}
+
+.Driver i{
+   font-size: 30px; 
+   padding-top: 20px;
+   
+}
+
+.Ride{
+    width: 34%;
+    text-align: center;
+    cursor: pointer;
+    background-color: #D9D9D9;;
+}
+
+.Ride i{
+    font-size: 30px; 
+    padding-top: 20px;
+   
+}
+
+.aboutus{
+    width: 33%;
+    text-align: center;
+    cursor: pointer;
+    background-color: #b5b5b5;
+
+}
+
+.aboutus i{
+    font-size: 30px; 
+    padding-top: 20px;
+}
+
+/* banner down box contant */
+#driver{
+    display: none;
+}
+#driver div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+}
+#driver p{
+    padding: 4px 35px;
+}
+#driver button{
+    margin-top: 20px ;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    color:#D9D9D9;
+    font-weight: 600;
+    background-color: #162938;
+}
+#driver h1{
+    font-weight: 600;
+     margin-left: 30px;
+}
+
+
+#aboutus{
+    display: none;
+}
+#ride div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#ride h1{
+     font-weight: 600;
+     margin-left: 30px;
+}
+#ride input{
+    width: 70%;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 7px;
+}
+#ride p{
+    padding: 3px 35px;
+}
+#ride button{
+    margin-top: 20px ;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    color:#D9D9D9;
+    font-weight: 600;
+    background-color: #162938;
+}
+
+
+/* contant part----------------------------------------------------------------------------------------- */
+.contant{
+    color: #162938;
+
+}
+
+.contant1{
+    width: 90%;
+    height: 400px;
+    margin: 0px 5% 0 5%;
+    display: flex;
+    position: relative;
+    
+}
+.align{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+   
+}
+
+.align1{
+    padding: 20px 5px;
+    width: 50%;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+}
+.contant_image{
+    object-fit: cover;
+    width: 90%;
+    height: 350px;
+}
+.contant_text{
+
+}
+.contant_title{
+   text-align: left;
+}
+.contant_button{
+   
+    color: white;
+    background-color: #162938;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    position: absolute;
+    bottom: 40px;
+    right: 4%;
+}
+
+/* contact page style ----------------------------------------------------------------------------*/
+.contact{
+    padding-top: 25px;
+    background-color:rgb(216, 213, 213);
+    color: #162938;
+}
+.contact h1{
+    text-align: center;
+    margin-bottom: 25px;
+}
+.contact_way{
+    display: flex;
+    justify-content: space-around;
+}
+.contact_way div{
+    text-align: center;
+    /* background-color: #D9D9D9; */
+    width: 10%;
+    padding: 30px;
+      
+}
+.contact_way div i{
+    color: #D9D9D9;
+       font-size: 30px;
+       background-color: #162938;
+       padding: 15px;
+       border-radius: 9px;
+}
+.contact_way div h3{
+    text-decoration: underline;
+}
+
+/* about page--------------------------------------------------------------- */
+
+.about{
+    color: #162938;
+    margin-top: 25px;
+    padding-top: 25px;
+    overflow: hidden;
+    background: url(../img/TAXI.jpg);
+
+}
+.about h1{
+    text-align: center;
+}
+.fpara{
+    padding: 15px 100px;
+    background-color: #D9D9D9;
+    opacity: 0.9;
+}
+.fpara p{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.spara{
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-around;
+}
+.para_part1{
+    background-color: #D9D9D9;
+    opacity: 0.8;
+    width: 40%;
+    height: 400px;
+    margin-bottom: 25px;
+    position: relative;
+}
+.para_part1 p{
+    padding: 30px;
+}
+.para_part1 button{
+    color: white;
+    background-color: #162938;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    position: absolute;
+    bottom: 40px;
+    right: 4%;
+}
+/* footer part--------------------------------------------------------------------------------- */
+.footer{
+    background-color: #162938;
+    color: #D9D9D9;
+
+}
+.footer_text{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+ 
+}
+.footerp{
+    margin: 10px 4px;
+
+}
+.footer_icon{
+     display: flex;
+     text-align: center;
+     justify-content: center;
+}
+.footer_icon i{
+    color:#162938;
+    background-color: #D9D9D9;
+    margin: 5px;
+    font-size: 20px;
+    padding: 4px;
+    border-radius: 16px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    
+}
