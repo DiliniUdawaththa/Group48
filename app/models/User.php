@@ -15,6 +15,8 @@ class User extends Model
 		'phone',
 		'email',
 		'password',
+		'term1',
+		'term2',	
 		'role',
 		'date',
 	];
@@ -51,11 +53,16 @@ class User extends Model
 		// {
 		// 	$this->errors['password'] = "Passwords do not match";
 		// }
-
-		// if(empty($data['terms']))
-		// {
-		// 	$this->errors['terms'] = "Please accept the terms and conditions";
-		// }		
+		if(empty($data['term1']))
+		{
+			if(empty($data['term2']))
+			    {$this->errors['term2'] = "Please accept the terms and conditions";}
+		}
+		if(!empty($data['term1']))
+		{
+			if(!empty($data['term2']))
+			    {$this->errors['term2'] = "Please select one term";}
+		}
 		
 		if(empty($this->errors))
 		{

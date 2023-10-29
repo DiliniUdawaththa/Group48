@@ -41,14 +41,7 @@
                     
                 </div>
                 
-                <select name="cars" id="actors" class="actors">
-                    <option value="volvo">PASSENGER</option>
-                    <option value="saab">DRIVER</option>
-                    <option value="opel">OFFICER</option>
-                    <option value="audi">ADMIN</option>
-                  </select>    
-                <br> 
-                <br>                                  
+                                                 
                 <div class="remember-forgot">
                     <label>
                         <input type="checkbox">Remember me

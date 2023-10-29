@@ -46,6 +46,37 @@ class Auth
 
 		return false;
 	}
+	public static function is_officer()
+	{
+		if(!empty($_SESSION['USER_DATA']))
+		{
+			if($_SESSION['USER_DATA']->role == 'officer'){
+				return true;
+			}
+		}
 
-	
+		return false;
+	}
+
+	public static function is_driver()
+	{
+		if(!empty($_SESSION['USER_DATA']))
+		{
+			if($_SESSION['USER_DATA']->role == 'driver'){
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public static function __callStatic($funcname,$args)
+	{
+		  $key= str_replace("get","",strtolower($funcname));
+		  if(!empty($_SESSION['USER_DATA']->$key))
+		  {
+               return $_SESSION['USER_DATA']->$key;
+		  }
+           return '';
+	}
 }

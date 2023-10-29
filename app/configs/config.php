@@ -10,7 +10,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost')
     define('DBUSER','root');
     define('DBPASS','');
     define('DBDRIVER','mysql');
-    define('ROOT','http://localhost/FAREFLEX/public/');
+    define('ROOT','http://localhost/FAREFLEX/public');
 
 }else{
     define('DBHOST','localhost');

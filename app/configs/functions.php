@@ -45,3 +45,8 @@ function message($msg ='',$erase = false)
 	}
 	return false;
 }
+
+function esc($str)
+{
+	return n12br(htmlspecialchars($str));
+}

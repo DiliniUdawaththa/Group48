@@ -7,10 +7,27 @@
             color: red;
             font-size: 1px;
         }
-        .border_dangerx {
-            border ;
-            border: 2px solid red; /* Set the border to 2px width, solid style, and red color */
-                 }
+        
+
+        input[type=checkbox] {
+            background-color: #808694;
+            border-radius: 2px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+             position: relative;
+        }
+        #option2{
+            margin-left: 15px;
+        }
+
+    input[type=checkbox]:checked {
+        background-color: #808694;
+        background: #808694 url("data:image/gif;base64,R0lGODlhCwAKAIABAP////3cnSH5BAEKAAEALAAAAAALAAoAAAIUjH+AC73WHIsw0UCjglraO20PNhYAOw==") 3px 3px no-repeat;
+    }
     </style>
     <title>Document</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/signup1.css">
@@ -74,7 +91,27 @@
                     <?php endif;?>
                     
                 </div>
-                  
+                <script>
+                          var checkbox = document.getElementById(checkboxId);
+                        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                        
+                        // Uncheck all checkboxes
+                        checkboxes.forEach(function(cb) {
+                            if (cb.id !== checkboxId) {
+                                cb.checked = false;
+                            }
+                        });  function handleCheckboxClick(checkboxId) {
+                    
+        }
+                </script>
+                    <input <?= set_value('term1') ? 'checked':''; ?> type="checkbox" name="term1"  id="checkbox1" onclick="toggleCheckboxes(this)">
+                    <label for="option1">Passender</label>
+                    
+                    <input <?= set_value('term2') ? 'checked':''; ?> type="checkbox" name="term2"  id="checkbox2" onclick="toggleCheckboxes(this)">
+                    <label for="option2">Driver</label><br>
+                    <?php if(!empty($errors['term2'])):?>
+                          <small id="Firstname-error" class="signup-error" style="color: red;"><?=$errors['term2']?></small>
+                        <?php endif;?><br><br>
                 <button class="btn" type="submit">Next</button>
                 </div>
             </form>
