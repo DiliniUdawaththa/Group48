@@ -5,6 +5,23 @@
     <title>Document</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/login.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
+    <style>
+         .message{
+            margin-top: 10px;
+            height: 50px;
+            width: 100%;
+            
+         }
+         .message p{
+            padding: 10px;
+            font-size: 1em;
+            color: #026334;
+            background-color: #a7cfbc;
+            
+            
+         }
+         
+    </style>
 </head>
 <body>
     <header>
@@ -16,7 +33,7 @@
             <h2><center>Login</center></h2>
 
             <?php if(message()):?>
-                <div><?=message('',true)?></div>
+                <div class="message"><center><p><?=message('',true)?></p></center></div>
             <?php endif;?>
             <?php if(!empty($errors['email'])):?>
                 <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['email']?></small>
