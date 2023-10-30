@@ -15,14 +15,15 @@ class User extends Model
 		'phone',
 		'email',
 		'password',
-		'term1',
-		'term2',	
+		// 'term1',
+		// 'term2',	
 		'role',
 		'date',
 	];
 
 	public function validate($data)
 	{
+		$this->role ='';
 		$this->errors = [];
 
 		if(empty($data['name']))
@@ -53,6 +54,8 @@ class User extends Model
 		// {
 		// 	$this->errors['password'] = "Passwords do not match";
 		// }
+
+		// show($data['term1']);
 		if(empty($data['term1']))
 		{
 			if(empty($data['term2']))
@@ -63,7 +66,16 @@ class User extends Model
 			if(!empty($data['term2']))
 			    {$this->errors['term2'] = "Please select one term";}
 		}
-		
+		if(empty($data['term1']))
+		{
+			  $this->role = 'driver';
+		}
+		if(empty($data['term2']))
+		{
+			$this->role = 'user';
+
+		}
+		// show($this->role);
 		if(empty($this->errors))
 		{
 			return true;
