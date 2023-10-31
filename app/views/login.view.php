@@ -20,13 +20,22 @@
             
             
          }
+         .signup-error{
+            color: maroon;
+            margin-top: 25px;
+            height: 50px;
+            width: 100%;
+            background-color:#d1baba;
+            padding: 10px 50px;
+            border-radius: 10px;
+         }
          
     </style>
 </head>
 <body>
-    <header>
-        <img src="<?= ROOT ?>/assets/img/logo.png" class="logo"/>
-    </header>
+    <!-- <header>
+        <img src="/assets/img/logo.png" class="logo"/>
+    </header> -->
     <div class="wrapper">
        <a href="http://localhost/FAREFLEX/public"><span class="close"><i class="fa-solid fa-xmark"></i></span></a>
         <div class="form-box login"></div>
@@ -35,8 +44,9 @@
             <?php if(message()):?>
                 <div class="message"><center><p><?=message('',true)?></p></center></div>
             <?php endif;?>
+
             <?php if(!empty($errors['email'])):?>
-                <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['email']?></small>
+                <center><small id="Firstname-error" class="signup-error" > <?=$errors['email']?></small></center>
              <?php endif;?>
 
             <form action="#" method="post">

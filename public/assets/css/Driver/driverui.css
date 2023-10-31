@@ -1,0 +1,368 @@
+*{
+    margin: 0;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+p{
+    display:inline;
+}
+.page-container{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    height: 100vh;
+}
+
+@media screen and (max-width: 1000px){
+    .page-container{
+        grid-template-columns: 30% 70%;
+    }
+}
+
+.side-nav{
+    border: 1px solid black;
+    background-color: #162938;
+    text-align: center;
+    
+}
+
+@media screen and (max-width: 700px){
+    .page-container{
+        display: block;
+        background-color: aliceblue;
+    }
+    .side-nav{
+        display: none;
+    }
+}
+
+
+.logo{
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-pic{
+    width:50%;
+    border-radius: 100%;
+    display:block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.status-light{
+    height: 10px;
+    margin-left: 3px;
+}
+.name{
+
+    color:white;
+    font-size: 18px;
+    margin:5px;
+    font-weight:normal;
+    
+}
+
+.rating{
+    width:20%;
+}
+
+
+
+.options{
+    margin-top:30px;
+}
+
+.opt1, .opt2 ,.opt3, .opt4{
+    text-align: left;
+    color:white;
+    width: 100%;
+    padding: 9px 9px 9px 20px;
+    cursor: pointer;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+
+}
+
+.opt1:hover, .opt2:hover ,.opt3:hover, .opt4:hover{
+    background-color: #194672;
+    transition: 0.1s;
+}
+
+.body-container{
+    background-color: aliceblue;
+}
+
+/*-------------------------Notification Container---------------------*/
+
+.notification-container{
+    display:block;
+}
+
+.inner-noticontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    min-height: 50vh;
+    margin: 20px auto;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    color: lightgray;
+}
+
+/*-------------------------Activity Container---------------------*/
+
+.activity-container{
+    display: none;
+}
+.status-container{
+    width: 90%;
+    background-color: white;
+    display: block;
+    margin: 30px auto;
+    padding:20px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+.select-status {
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.active, .inactive{
+    background-color: #E4E4E4;
+    cursor: pointer;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 25px;
+    font-weight:lighter;
+}
+
+.inactive{
+    background-color: #E4E4E4;
+    color: black;
+}
+.active{
+    background-color: #162938;
+    color: white;
+}
+
+
+
+.request-container{
+    text-align: center;
+    width: 50%;
+    padding-top:10px;
+    margin: 5% auto;
+    min-height: 30vh;
+    background-color: white;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.request-box{
+    border-radius: 7px;
+    min-height: 100px;
+    background-color: rgb(209, 217, 223);
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    margin :5px;
+}
+
+.request-customer-pic{
+    height: 50px;
+    border-radius: 100%;
+    display: block;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.destination{
+    width: 60%;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    
+
+}
+.map-view-btn, .accept-btn {
+    cursor: pointer;
+    display: block;
+    height: 30px;
+    width: 90px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    border: 0px;
+    margin: 5px;
+
+}
+
+.accept-btn{
+    background-color: rgb(51, 209, 51);
+    color: white;
+}
+.accept-btn:hover{
+    background-color: rgb(36, 180, 36);
+    color: white;
+}
+
+
+
+/*----------------Profile Container-------------------------*/
+
+
+.profile-container{
+    display: none;
+}
+
+.profile-bar{
+    margin: 20px auto;
+    background-color: white;
+    width: 80%;
+    min-height: 200px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.propic-container{
+    text-align: center;
+    margin-top: 10%;
+    padding: 5px;
+    padding-bottom: 15px;
+}
+.propic{
+    width: 90%;
+    display: block;
+    margin: 0% auto;
+}
+
+.upload-propic{
+    margin-top:5%;
+    border: 0px;
+    height:30px;
+    width: 70px;
+    background-color:rgb(233, 233, 233);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.detail-container{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+.profile-details-table{
+    display: block;
+    width: 80%;
+    height:fit-content;
+    border-spacing: 0 10px;
+    margin-top: 10%;
+}
+
+.profile-details-table button{
+        border-radius: 0px;
+        border: 0px;
+        cursor: pointer;
+        background-color: white;
+}
+
+.tr1{
+    background-color: aliceblue;
+}
+.profile-details-table img{
+    height:10px
+}
+
+.col1{
+    text-align: right;
+    width: 30%;
+}
+
+.col2{
+    text-align: left;
+    padding-left: 15px;
+}
+.col3{
+    width: 5%;
+}
+.upload-propic:hover{ background-color: rgb(214, 214, 214);}
+
+@media screen and (max-width: 700px){
+    .profile-bar{
+        grid-template-columns: 100%;
+        grid-template-rows:20% 70% ;
+    }
+    .detail-container{
+        font-size: 18px;
+    }
+    .propic{
+        width: 50%;
+        display: block;
+        margin: 0% auto;
+        border-radius: 100%;
+    }
+}
+
+/*-----------------------------Log Out-------------------------------*/
+
+.logout-container{
+    padding:30px;
+    width: 50%;
+    height: 200px;
+    display: none;
+    text-align: center;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+}
+
+.logout-container button{
+    height:40px;
+    width:150px;
+    border: 0px;
+    cursor: pointer;
+}
+.cancel-btn{
+}
+
+.logout-btn{
+    background-color: #194672;
+    color:white;
+}
+.logout-btn:hover{
+    background-color: rgb(207, 207, 207);
+    color:black;
+}
+.cancel-logout{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.logout-text{
+    margin-top: 10px;
+    display: block;
+    font-size: 16px;
+}
+
+.cancel-logout{
+
+}

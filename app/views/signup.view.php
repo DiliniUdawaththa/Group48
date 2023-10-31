@@ -20,8 +20,8 @@
             cursor: pointer;
              position: relative;
         }
-        #option2{
-            margin-left: 15px;
+        #checkbox{
+            margin-left: 20px;
         }
 
     input[type=checkbox]:checked {
@@ -34,9 +34,9 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
 </head>
 <body>
-    <header>
-        <img src="<?= ROOT ?>/assets/img/logo.png" class="logo"/>
-    </header>
+    <!-- <header>
+        <img src="/assets/img/logo.png" class="logo"/>
+    </header> -->
     <div class="wrapper">
         <a href="http://localhost/FAREFLEX/public"><span class="close"><i class="fa-solid fa-xmark"></i></span></a>
         <div class="form-box login"></div>
@@ -91,24 +91,12 @@
                     <?php endif;?>
                     
                 </div>
-                <script>
-                          var checkbox = document.getElementById(checkboxId);
-                        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                        
-                        // Uncheck all checkboxes
-                        checkboxes.forEach(function(cb) {
-                            if (cb.id !== checkboxId) {
-                                cb.checked = false;
-                            }
-                        });  function handleCheckboxClick(checkboxId) {
+            
+                    <input <?= set_value('term1') ? 'checked':''; ?> type="checkbox"  name="term1"  class="checkbox" >
+                    <label for="option1">Passenger </label>
                     
-        }
-                </script>
-                    <input <?= set_value('term1') ? 'checked':''; ?> type="checkbox" name="term1"  id="checkbox1" onclick="toggleCheckboxes(this)">
-                    <label for="option1">Passender</label>
-                    
-                    <input <?= set_value('term2') ? 'checked':''; ?> type="checkbox" name="term2"  id="checkbox2" onclick="toggleCheckboxes(this)">
-                    <label for="option2">Driver</label><br>
+                    <input <?= set_value('term2') ? 'checked':''; ?> type="checkbox" name="term2" class="checkbox"  >
+                    <label for="option2"> Driver</label><br>
                     <?php if(!empty($errors['term2'])):?>
                           <small id="Firstname-error" class="signup-error" style="color: red;"><?=$errors['term2']?></small>
                         <?php endif;?><br><br>
