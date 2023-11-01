@@ -16,7 +16,7 @@
         <a class="a" href="#section1" >Home</a>
         <a class="a" href="#section2" >Services</a>
         <a class="a" href="#section3" >Contact</a>
-        <a class="a" href="http://localhost/FAREFLEX/public/signup" >About</a>
+        <a class="a" href="#section4" >About</a>
         <a href="http://localhost/FAREFLEX/public/login"  class="login">Log in</a>
         <a href="http://localhost/FAREFLEX/public/signup" class="signup">Sign up </a>
     </div>

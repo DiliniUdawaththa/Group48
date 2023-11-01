@@ -11,9 +11,9 @@
     <body>
         <div class="page-container">
             <div class="side-nav">
-                <img src="images/Logo.png" class="logo">
+                <img src="<?= ROOT ?>/assets/img/images/Logo.png" class="logo">
                 <div>
-                    <img src="images/profilepic.png" class="profile-pic">
+                    <img src="<?= ROOT ?>/assets/img/images/profilepic.png" class="profile-pic">
                     
                     <h4 class="name">Thusikaran<img src="<?= ROOT ?>/assets/img/images/active.png" id="status_icon" class="status-light"></h4>
                     <img src="<?= ROOT ?>/assets/img/images/rating.png" class="rating">
@@ -52,8 +52,8 @@
                         <h2>Request for ride</h2>
                         <div class="request-box">
                             <div>
-                                <img src="images/default_profile.png" class="request-customer-pic">
-                                <img src="images/rating.png" style="height: 10px;display: block;">
+                                <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="request-customer-pic">
+                                <img src="<?= ROOT ?>/assets/img/images/rating.png" style="height: 10px;display: block;">
                             </div>
                             <div class="destination">
                                 <p style="display: block;margin: 5px;">From: 25, Hill Street, Colombo</p>
@@ -66,8 +66,8 @@
                         </div>
                         <div class="request-box">
                             <div>
-                                <img src="images/default_profile.png" class="request-customer-pic">
-                                <img src="images/rating.png" style="height: 10px;display: block;">
+                                <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="request-customer-pic">
+                                <img src="<?= ROOT ?>/assets/img/images/rating.png" style="height: 10px;display: block;">
                             </div>
                             <div class="destination">
                                 <p style="display: block;margin: 5px;">From: 43, Bambalapitiya, Colombo</p>
@@ -83,8 +83,8 @@
                 <div class="profile-container">
                     <div class="profile-bar">
                         <div class="propic-container">
-                            <img src="images/profilepic.png" class="propic">
-                            <button class="upload-propic"><img src="images/upload_icon.png" style="height:10px"> Upload</button>
+                            <img src="<?= ROOT ?>/assets/img/images/profilepic.png" class="propic">
+                            <button class="upload-propic"><img src="<?= ROOT ?>/assets/img/images/upload_icon.png" style="height:10px"> Upload</button>
                         </div>
                         <div class="detail-container">
                             <table class="profile-details-table">
@@ -176,7 +176,7 @@
 
             active_btn.addEventListener('click',function (){
                 status = 1
-                status_icon.src = 'images/active.png';
+                status_icon.src = '<?= ROOT ?>/assets/img/images/active.png';
                 active_btn.style.backgroundColor = '#162938'
                 active_btn.style.color = 'white'
                 inactive_btn.style.backgroundColor = '#E4E4E4'
@@ -184,7 +184,7 @@
             })
             inactive_btn.addEventListener('click',function (){
                 status = 0
-                status_icon.src = 'images/inactive.png';
+                status_icon.src = '<?= ROOT ?>/assets/img/images/inactive.png';
                 active_btn.style.backgroundColor = '#E4E4E4'
                 active_btn.style.color = 'black'
                 inactive_btn.style.backgroundColor = '#162938'
