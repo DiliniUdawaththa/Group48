@@ -26,34 +26,50 @@ class User extends Model
 		$this->role ='';
 		$this->errors = [];
 
-		if(empty($data['name']))
-		{
-			$this->errors['name'] = " name is required";
-		}
+		
+        if (empty($data['name'])) {
+            $this->errors['name'] = "A  name is required.";
+        } elseif (!preg_match("/^[a-zA-Z]+$/", trim($data['name']))) {
+            $this->errors['name'] = "name can only have letters.";
+        }
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $this->errors['email'] = "Email is not valid.";
+        }
 
-		if(empty($data['phone']))
-		{
-			$this->errors['phone'] = "phone is required";
-		}
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
 
-		if(empty($data['email']) && FILTER_VALIDATE_EMAIL)
-		{
-			$this->errors['email'] = "Email is not valid";
-		}else
-		if($this->where(['email'=>$data['email']]))
-		{
-			$this->errors['email'] = "That email already exists";
-		}
+            $this->errors['email'] = "Email is not valid.";
+        } elseif ($this->where(['email'=> $data['email']])) {
+            $this->errors['email'] = "Email already exist.";
+        }
 
-		if(empty($data['password']))
-		{
-			$this->errors['password'] = "A password is required";
-		}
+        if (empty($data['password'])) {
+            $this->errors['password'] = "Password is required.";
+        } elseif (strlen($data['password']) < 8) {
+            $this->errors['password'] = "Password must be at least 8 characters long.";
+        // } elseif ($data['Password'] !== $data['Password2']) {
+        //     $this->errors['Password'] = "Passwords do not match.";
+        }
 
+<<<<<<< HEAD
+
+		if (empty($data['phone'])) {
+			$this->errors['phone'] = "Contact number is required.";
+		} elseif (!preg_match("/^[0-9]+$/", $data['phone'])) {
+			$this->errors['phone'] = "Contact number can only have numbers.";
+		} elseif (strlen($data['phone']) < 10) {
+			$this->errors['phone'] = "Contact number must be  10 digits long.";
+		} elseif (strlen($data['phone']) >10) {
+			$this->errors['phone'] = "Contact number must be  10 digits long.";
+		}
+		
+
+=======
 		// if($data['password'] !== $data['retype_password'])
 		// {
 		// 	$this->errors['password'] = "Passwords do not match";
 		// }
+>>>>>>> 6ab90ad7684fc7e7316fb3469084f0e2ea8cd705
 
 		// show($data['term1']);
 		if(empty($data['term1']))

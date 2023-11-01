@@ -66,6 +66,21 @@ class Database
 		";
 
 		$this->query($query);
+
+	    $query= "
+			CREATE TABLE IF NOT EXISTS `addplace` (
+			`id` int(255) NOT NULL AUTO_INCREMENT,
+			`name` varchar(100) NOT NULL,
+			`category` varchar(100) NOT NULL,
+			`icon` varchar(100) NOT NULL,
+			`address` varchar(255) NOT NULL,
+			`date` datetime NOT NULL,
+			PRIMARY KEY (`id`)
+			) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+			";
+		
+		$this->query($query);
+
 	}
 
 	
