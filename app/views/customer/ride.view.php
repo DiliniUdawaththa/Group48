@@ -2,7 +2,11 @@
 <html>
 <head>
     <title>Document</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ridestep.css">
+=======
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/ridestep.css">
+>>>>>>> 6ab90ad7684fc7e7316fb3469084f0e2ea8cd705
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
 </head>
 <body id="body">
@@ -43,10 +47,17 @@
       <!-- ----------------------------------------mobile virsion top bar---------------------- -->
      
         <!-- side bar========================= -->
+<<<<<<< HEAD
         <div class="sidebar">
 
              <div class="barimagetag">
                 <img src="<?= ROOT ?>/assets/img/logoname.png" alt="" class="barimage">
+=======
+        <div class="sidebar" >
+
+             <div class="barimagetag">
+                <img src="<?= ROOT ?>/assets/img/logo_name.png" alt="" class="barimage">
+>>>>>>> 6ab90ad7684fc7e7316fb3469084f0e2ea8cd705
              </div>
 
 
@@ -64,6 +75,7 @@
              
 
              <div class="linktag">
+<<<<<<< HEAD
                 <a href="<?=ROOT?>/customer" class="link"><div class="linkbutton1"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
                 <a href="<?=ROOT?>/customer/add_place" class="link"><div class="linkbutton"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
                 <a href="<?=ROOT?>/customer/add_place" class="link"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
@@ -78,6 +90,13 @@
              </div>
            
              
+=======
+                <a href="#" class="link"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
+                <a href="#" class="link"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="#" class="link"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
+                <a href="#" class="link"><div class="linkbutton"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
+             </div>
+>>>>>>> 6ab90ad7684fc7e7316fb3469084f0e2ea8cd705
         </div>
 
 <!-- ---------------------------------------------------------------------------------- -->
@@ -477,6 +496,7 @@
                       star4.style.color = '#D1B000';
                       star5.style.color = '#D1B000';
                     });
+<<<<<<< HEAD
 // ---------------------------------------------------------logout part-------------------------------------------------------------------
             const logout_option = document.querySelector('.linkbutton2')
             const logout_container = document.querySelector('.logout-container')
@@ -492,6 +512,9 @@
                     logout_container.style.display = 'none'
                     main.style.display='block'
                     })
+=======
+
+>>>>>>> 6ab90ad7684fc7e7316fb3469084f0e2ea8cd705
             </script>
         </div>
     </div>

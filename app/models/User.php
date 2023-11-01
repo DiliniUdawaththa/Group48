@@ -51,6 +51,7 @@ class User extends Model
         //     $this->errors['Password'] = "Passwords do not match.";
         }
 
+<<<<<<< HEAD
 
 		if (empty($data['phone'])) {
 			$this->errors['phone'] = "Contact number is required.";
@@ -63,6 +64,12 @@ class User extends Model
 		}
 		
 
+=======
+		// if($data['password'] !== $data['retype_password'])
+		// {
+		// 	$this->errors['password'] = "Passwords do not match";
+		// }
+>>>>>>> 6ab90ad7684fc7e7316fb3469084f0e2ea8cd705
 
 		// show($data['term1']);
 		if(empty($data['term1']))

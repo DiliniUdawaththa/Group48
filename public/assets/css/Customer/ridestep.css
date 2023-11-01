@@ -249,7 +249,7 @@ body{
 }
 
 .step1{
-    display: block;
+    display: none;
     height: 70vh;
     width: 70vw;
     padding: 0 5%;
@@ -585,7 +585,7 @@ body{
 }
 /* --------------------------------------------------------------------------------------- */
 .step7{
-    display: none;
+    display: block;
     height: 70vh;
     width: 50vw;
 }
