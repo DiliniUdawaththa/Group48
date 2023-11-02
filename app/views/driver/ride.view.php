@@ -40,7 +40,7 @@
                 </div>
                 <div class="activity-container">
                     <div class="status-container">
-                        <h2>Hello, Thusikaran</h2>
+                        <h2>Hello, <?php echo $_SESSION['USER_DATA']->name; ?></h2>
                         
                         <div class="select-status">
                             <div><p>Active status:</p></div>
