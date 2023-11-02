@@ -10,6 +10,7 @@ class Add_Place extends Model
 	protected $table = "addplace";
 
 	protected $allowedColumns = [
+        'id',
 
 		'name',
 		'category',
@@ -67,6 +68,13 @@ class Add_Place extends Model
         $query = "delete from $this->table where id = :id;";
 
         return $this->query($query,['id' => $id]);
+    }
+
+    public function update_addplace($id, $data)
+    {
+        $query = $this->update($id, $data);
+        return $query;
+        
     }
 
 }

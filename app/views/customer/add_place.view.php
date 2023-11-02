@@ -88,7 +88,7 @@
                       <td class="td_name"><?= $row->name; ?></td>
                       <td class="td_address"><?= $row->address; ?></td>
                       <td class="td_button">
-                      <button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: #407217;"></i></i></button>
+                     <a href="<?=ROOT?>/customer/add_place_update/<?=$row->id?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: #407217;"></i></i></button></a>
                       <a href="<?=ROOT?>/customer/add_place_delete/<?=$row->id?>"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: #7b1417;"></i></button></a>
                       </td>
                      </tr>

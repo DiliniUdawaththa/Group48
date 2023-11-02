@@ -60,9 +60,41 @@
         }
         $data['errors'] = [];
         $add_place = new Add_Place();
+        $rows = $add_place->findAll();
+        $data['rows'] = array();
+
+        for($i = 0;$i < count($rows); $i++)
+        {
+            if($rows[$i]->id == $id)
+                $data['rows'][] = $rows[$i];
+        }
+
+        if($_SERVER['REQUEST_METHOD'] == "POST")
+		{
+			if($add_place->validate($_POST))
+			{
+                // print_r($_POST);die();
+                
+                // $_POST['icon'] =$add_place->icon;
+                $_POST['date'] = date("Y-m-d H:i:s");
+               
+                $add_place->fit_icon($_POST);
+                $_POST['icon']= $add_place ->icon;
+                $_POST['id']=$id;
+                // print_r($_POST);die();
+                $add_place->update($id,$_POST);
+              
+                // $add_place->update($id,$add_place->icon);    
+             //   $add_place->update($id,$add_place->icon);
+                // message("Successfully Add Place");
+				redirect('customer/add_place');
+            }
+           
+        }
+        
         
         $data['title'] = "Add_Place";
-        $this->view('customer/add_place',$data);
+        $this->view('customer/add_place_update',$data);
 
     }
     public function add_place_insert(){

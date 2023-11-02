@@ -79,19 +79,20 @@
                  <div class="input_box">
 
                        
-
+                 <?php foreach ($rows as $row) : ?>
                       <div>
                           <label for="name" class="label">Placename</label><br>
                         </div>
-                          <input value="<?= set_value('name') ?>" type="text" name="name" id="name" class="<?=!empty($errors['name']) ? 'error':'';?>" required>
+                          <input value="<?= $row->name; ?>" type="text" name="name" id="name" class="<?=!empty($errors['name']) ? 'error':'';?>" required>
                           <?php if(!empty($errors['name'])):?>
                              <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['name']?> </small>
                            <?php endif;?>
                           <br>
+                          
                        <div>
                           <label for="category" class="label" >Category</label><br>
                         </div>
-                          <input value="<?= set_value('category') ?>" list="categorys" name="category" id="categoryInput" required>
+                          <input value="<?= $row->category; ?>" list="categorys" name="category" id="categoryInput" required>
                               <datalist id="categorys">
                                 <option value="Home">
                                 <option value="Food & Drink">
@@ -110,12 +111,13 @@
                           <!-- <i class="fa-solid fa-location-dot"></i> -->
                           <br>
                         </div>
-                          <input value="<?= set_value('address') ?>" type="text" name="address" id="address" required>
+                          <input value="<?= $row->address; ?>" type="text" name="address" id="address" required>
                           <br>
-                          <button  id="submit_btn" class="submit_btn">Submit</button>
+                          <button type="submit"  name="submit id="submit_btn" class="submit_btn">Submit</button>
                           <br>
                           <a href="<?=ROOT?>/customer/add_place"><small class="skip"><center>skip</center></small></a>
                   </div>
+                  <?php endforeach; ?>
               </form>
             </div>
            
