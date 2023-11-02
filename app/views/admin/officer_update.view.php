@@ -21,19 +21,22 @@
         </div>
 
         <div class="officer_form">
+        
             <form action="" method="post">
+            
                  <div class="officer_box">
+                 <?php foreach ($rows as $row) : ?>
                       <div>
                           <label for="" class="label">Employee ID</label><br>
                         </div>
-                          <input type="text" name="empID"  required>
+                          <input type="text" value="<?= $row->empID; ?>" name="empID"  required>
                           <?php if(!empty($errors['empID'])):?>
                           <?php endif;?>
                           <br>
                         <div>
                           <label for="" class="label" >Name</label><br>
                         </div>
-                          <input type="text" name="Name" required>
+                          <input type="text" value="<?= $row->Name; ?>" name="Name" required>
                             <?php if(!empty($errors['Name'])):?>
                             <?php endif;?>
                             <br>
@@ -42,7 +45,7 @@
                           <!-- <i class="fa-solid fa-location-dot"></i> -->
                           <br>
                         </div>
-                          <input type="text" name="Email" required>
+                          <input type="text" value="<?= $row->Email; ?>" name="Email" required>
                           
                           <?php if(!empty($errors['Email'])):?>
                              <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['address']?></small> -->
@@ -53,7 +56,7 @@
                           <!-- <i class="fa-solid fa-location-dot"></i> -->
                           <br>
                         </div>
-                          <input type="text" name="Mobile" required>
+                          <input type="text" value="<?= $row->Mobile; ?>" name="Mobile" required>
                           
                           <?php if(!empty($errors['Mobile'])):?>
                         <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['Mobile']?></small>  -->
@@ -63,7 +66,10 @@
                           <br>
                           <!-- <small class="skip"><center>skip</center></small> -->
                   </div>
+                  <?php endforeach; ?>
+                 
               </form>
+           
         </div>
 
        

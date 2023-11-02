@@ -122,6 +122,7 @@ public function update($id, $data)
 	}
 	$query = trim($query, ",");
 	$query .= " where id = :id";
+	// print_r($query);	
 
 
 	$this->query($query, $data);

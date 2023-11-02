@@ -45,9 +45,10 @@ class Officer extends Model{
 
         if(empty($this->errors))
 		{
+            // show($_POST);
 			return true;
 		}
-
+        show($_POST);
 		return false;
 	}
 
