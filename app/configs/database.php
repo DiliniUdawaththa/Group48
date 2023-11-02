@@ -94,6 +94,16 @@ class Database
 		
 		$this->query($query);
 
+		$query= "
+			CREATE TABLE `driverregistration` (
+			`email` varchar(50) NOT NULL,
+			`status` int(2) NOT NULL,
+			PRIMARY KEY (`email`)
+		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+			";
+		
+		$this->query($query);
+
 	}
 	
 

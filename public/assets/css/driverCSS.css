@@ -1,0 +1,262 @@
+*{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+.header-container {
+    height:103px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    align-items:center;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: fixed;
+    top:0px;
+    
+}
+.header-spacing{
+    height: 103px;
+}
+#logo{
+    width:220px;
+    height:69px;
+}
+
+.profile-pic{
+    width:60px;
+    height:60px;
+}
+
+
+
+.outer-container{
+
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+.inner-container{
+    text-align: center;
+}
+
+.text1{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 30%;
+    margin-bottom: 50px;
+}
+
+.welcome-text{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    margin-left: 20%;
+    display:block;
+}
+
+
+.setup-options{
+    display: grid;
+    grid-template-columns: 15% 85%;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 20px;
+
+}
+
+
+.setup-options-inner{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.line{
+    width:98%;
+    height:1px;
+}
+.arrow,.arrow1{
+    width: 15px;
+    height: 15px;
+    margin: 7px;
+}
+
+a{
+    color:black;
+    text-decoration: none;
+}
+.document_icon{
+    height:30px;
+    width:30px;
+    margin-top: 10%;
+}
+
+@media screen and (max-width: 600px){
+    .outer-container{
+        text-align: center;
+        
+    }
+    .welcome-text{
+        font-size: 30px;
+        margin-left: 0px;
+    }
+    .text1{
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .setup-options{
+        grid-template-columns: 10% 90%;
+        margin-left:5%;
+        margin-right: 5%;
+    }
+    .document_icon{
+        height:25px;
+        width:25px;
+        margin-top: 30%;
+    }
+    .setup-options-inner{
+        font-size: 14px;
+        margin-left: 5%;
+    }
+}
+
+.profile:hover , .d-license:hover, .r-license:hover, .v-reg:hover, .v-insurance:hover{
+    font-size: 19px;
+    transition: 0.1s;
+    font-weight: bold;
+}
+
+.submit-btn{
+    height: 38px;
+    width: 150px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 0px;
+    color:white;
+    background-color: black;
+    margin-top: 50px;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.submit-btn:hover{
+    color:black;
+    background-color: white;
+    border:1px solid black;
+    
+    
+
+}
+
+.upload-container{
+    text-align: center;
+    display: block;
+    padding:50px;
+
+}
+.help-btn{
+    height: 38px;
+    width: 100px;
+    border-radius: 8px;
+    border: 0px;
+    font-weight: bold;
+}
+
+.profilepic{
+    /* Profile picture */
+    width: 250px;
+    height: 250px;
+    margin: 0px auto;
+}
+
+.license-pic{
+    /* Drivers License Picture */
+    width: 250px;
+}
+
+.rlicense-pic{ 
+    /* Revenue license picture */
+    width: 250px;
+}
+
+.v-registration{
+    width: 200px;
+}
+
+.insurance-pic{
+    width: 250px;
+}
+
+
+
+.upload{
+    font-size: 16px;
+    font-weight:bolder;
+}
+.upload-btn{
+    display:block;
+    margin: auto;
+    height: 45px;
+    width: 225px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 0px;
+    color:white;
+    background-color: black;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);}
+
+    .upload-btn:hover{
+        background-color: rgb(225, 222, 219);
+        color: black;
+        border: 1px solid black;
+    }
+.image-container{
+    height:350px;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;
+
+
+}
+.help{
+    font-family: 'Courier New';
+    color: white;
+    width: 50%;
+    height: 200px;
+    display: none;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;
+    background:rgba(0,0,0,0.9);
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    border:2px solid white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+}
+@media screen and (max-width: 600px){
+    .help{
+        width:70%;
+    }
+}
+li{
+    margin: 10px;
+}
+
+#close{
+    font-size: 18px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    border: 0px;
+    display: block;
+    border-radius: 10%;
+    font-weight: bold;
+}
+
+
