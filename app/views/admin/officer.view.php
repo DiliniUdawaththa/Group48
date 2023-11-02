@@ -16,8 +16,54 @@
             </div>
 
             <div class="operation">
-                <button type="button" class="button-style">+ Add Officer</button>
+                <button type="button" class="button-style" id="plus">+ Add Officer</button>
             </div>
+        </div>
+
+        <div class="officer_form">
+            <form action="" method="post">
+                 <div class="officer_box">
+                      <div>
+                          <label for="" class="label">Employee ID</label><br>
+                        </div>
+                          <input type="text" name="empID"  required>
+                          <?php if(!empty($errors['empID'])):?>
+                          <?php endif;?>
+                          <br>
+                        <div>
+                          <label for="" class="label" >Name</label><br>
+                        </div>
+                          <input type="text" name="Name" required>
+                            <?php if(!empty($errors['Name'])):?>
+                            <?php endif;?>
+                            <br>
+                        <div>
+                          <label for="" class="label">Email</label>
+                          <!-- <i class="fa-solid fa-location-dot"></i> -->
+                          <br>
+                        </div>
+                          <input type="text" name="Email" required>
+                          
+                          <?php if(!empty($errors['Email'])):?>
+                             <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['address']?></small> -->
+                          <?php endif;?>
+                          <br>
+                        <div>
+                          <label for="" class="label">Mobile</label>
+                          <!-- <i class="fa-solid fa-location-dot"></i> -->
+                          <br>
+                        </div>
+                          <input type="text" name="Mobile" required>
+                          
+                          <?php if(!empty($errors['Mobile'])):?>
+                        <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['Mobile']?></small>  -->
+                          <?php endif;?>
+                          <br>
+                          <button type="submit" class="submit_btn">Submit</button>
+                          <br>
+                          <!-- <small class="skip"><center>skip</center></small> -->
+                  </div>
+              </form>
         </div>
 
         <div class="table1">
@@ -31,7 +77,19 @@
                         <td>Option</td>
                     </tr>
                 </thead>
-                <tbody>
+                <?php foreach ($rows as $row) : ?>
+                    <tr class="data">
+                        <td class="td_empID"><?= $row->empID; ?></td>
+                        <td class="td_name"><?= $row->Name; ?></td>
+                        <td class="td_email"><?= $row->Email; ?></td>
+                        <td class="td_mobile"><?= $row->Mobile; ?></td>
+                        <td class="td_button">
+                            <button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: #407217;"></i></i></button>
+                            <button class="delete_btn"><i class="fa-solid fa-trash" style="color: #7b1417;"></i></button>
+                        </td>
+                     </tr>
+                 <?php endforeach; ?>
+                <!-- <tbody>
                     <tr>
                         <td>001</td>
                         <td>Amila Perera</td>
@@ -62,8 +120,36 @@
                             <button class="delete">Delete</button>
                         </td>
                     </tr>
-                </tbody>
+                </tbody> -->
             </table>
         </div>
     </section>
+    <script>
+        // const logout_option = document.querySelector('.linkbutton2')
+        // const logout_container = document.querySelector('.logout-container')
+        // const cancel_button = document.querySelector('.cancel-btn')
+        //   //  const logout_button = document.querySelector('.logout-btn')
+        //         logout_option.addEventListener('click',()=>{
+        //             logout_container.style.display = 'block'
+        //             })
+
+        //             cancel_button.addEventListener('click', ()=>{
+        //             logout_container.style.display = 'none'
+        //             })
+
+        const table = document.querySelector('.table1')
+        const form = document.querySelector('.officer_form')
+        const skip = document.querySelector('.skip')
+        const plus = document.getElementById('plus')
+
+        plus.addEventListener('click',()=>{
+            form.style.display = 'block'
+            table.style.display = 'none'
+        })
+
+        skip.addEventListener('click',()=>{
+            form.style.display = 'none'
+            table.style.display = 'block'
+        })
+    </script>
 </body>
