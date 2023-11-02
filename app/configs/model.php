@@ -80,6 +80,28 @@ class Model extends Database
 		return false;
 
 	}
+	public function delete($data)
+	{
+
+		$keys = array_keys($data);
+
+		$query = "delete from ".$this->table." where ";
+
+		foreach ($keys as $key) {
+			$query .= $key . "=:" . $key . " && ";
+		}
+ 
+ 		$query = trim($query,"&& ");
+		$res = $this->query($query,$data);
+
+		if(is_array($res))
+		{
+			return $res;
+		}
+
+		return false;
+
+	}
 // ------------------------------------------------------------------------------------------------------------------------------
 
 public function findAll()
