@@ -184,7 +184,7 @@ body{
     border: none;
     background-color: #162938;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
-    height: 40px;
+    height: 60px;
 }
 .title th{
     color:#D9D9D9;
@@ -257,7 +257,7 @@ body{
 }
 /* form inner input and buttons--  add place form ---------------------------------------------- */
 .add_form{
-    display: none;
+    display: block;
     height: 100%;
     width:60%;
     /* border: solid; */
@@ -330,6 +330,7 @@ body{
     cursor: pointer;
     color: #162938  ;
     margin: 0;
+    text-decoration: none;
 }
 .skip:hover{
     text-decoration: underline;

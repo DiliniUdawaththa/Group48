@@ -22,7 +22,7 @@ class Add_Place extends Model
 	{
 		$this->errors = [];
 
-        if (!preg_match("/^[a-zA-Z]+$/", trim($data['name']))) {
+        if (!preg_match("/^[a-zA-Z\s]*$/", trim($data['name']))) {
             $this->errors['name'] = "name can only have letters.";
         }elseif ($this->where(['name'=> $data['name']])) {
             $this->errors['name'] = "name already exist.";
@@ -61,6 +61,12 @@ class Add_Place extends Model
             $this->icon= "fa-solid fa-globe";
         }
        
+    }
+    public function delete_addplace($id = null)
+    {
+        $query = "delete from $this->table where id = :id;";
+
+        return $this->query($query,['id' => $id]);
     }
 
 }
