@@ -224,7 +224,7 @@
                             <table class="profile-details-table">
                                 <tr class="tr1">
                                     <td class="col1">Full Name</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->name; ?></td>
+                                    <td class="col2">Isuka Premathilake</td>
                                     <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
                                 </tr>
                                 <tr>

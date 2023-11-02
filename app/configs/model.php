@@ -26,7 +26,7 @@ class Model extends Database
 
 		$query = "insert into " . $this->table;
 		$query .= " (".implode(",", $keys) .") values (:".implode(",:", $keys) .")";
-		show($query);
+        // show($query);		show($query);
 
 		$this->query($query,$data);
 
@@ -79,67 +79,6 @@ class Model extends Database
 		return false;
 
 	}
-
-	public function delete($data)
-	{
-
-		$keys = array_keys($data);
-
-		$query = "delete from ".$this->table." where ";
-
-		foreach ($keys as $key) {
-			$query .= $key . "=:" . $key . " && ";
-		}
- 
- 		$query = trim($query,"&& ");
-		$res = $this->query($query,$data);
-
-		if(is_array($res))
-		{
-			return $res;
-		}
-
-		return false;
-
-	}
-	
-	public function update($data, $where)
-	{
-		// $data is an associative array containing the new values to update
-		// $where is an associative array containing the condition for updating
-
-		$updateColumns = array_keys($data);
-		$whereColumns = array_keys($where);
-
-		$updateQuery = "UPDATE " . $this->table . " SET ";
-		$updateValues = [];
-
-		foreach ($updateColumns as $column) {
-			$updateQuery .= $column . " = :" . $column . ", ";
-			$updateValues[":" . $column] = $data[$column];
-		}
-
-		$updateQuery = rtrim($updateQuery, ', '); // Remove the trailing comma
-
-		$whereQuery = " WHERE ";
-		foreach ($whereColumns as $column) {
-			$whereQuery .= $column . " = :" . $column . " AND ";
-			$updateValues[":" . $column] = $where[$column];
-		}
-
-		$whereQuery = rtrim($whereQuery, ' AND ');
-
-		$query = $updateQuery . $whereQuery;
-		show($query);
-		$res = $this->query($query, $updateValues);
-
-		if (is_array($res)) {
-			return $res;
-		}
-
-		return false;
-	}
-
 
 	
 
