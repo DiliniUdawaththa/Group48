@@ -20,6 +20,29 @@
         $this->view('admin/customer',$data);
     }
 
+    // ride profile controller
+    public function ride(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $data['title'] = "Rides";
+        $this->view('admin/ride',$data);
+    }
+
+    // driver profile controller
+    public function driver(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $data['title'] = "Drivers";
+        $this->view('admin/driver',$data);
+    }
+
+
     // officer profile controller
     public function officer(){
         if(!Auth::logged_in())
@@ -71,7 +94,7 @@
         $data['title'] = "Officer";
         $this->view('admin/officer_form',$data);
     }
-    public function officer_delete(){
+    public function officer_delete($empID=null){
         if(!Auth::logged_in())
         {
             message('please login to view the admin section');
@@ -80,8 +103,15 @@
         $data['errors'] = [];
         $add_officer = new officer();
 
-        $data['title'] = "Officer";
-        $this->view('admin/officer',$data);
+        $rows = $add_officer->findAll();
+        $data['rows'] = array();
+
+        for($i = 0;$i < count($rows); $i++)
+        {
+                $data['rows'][] = $rows[$i];
+        }
+        $add_officer->delete_addofficer($empID);
+        redirect('admin/officer');
     }
     public function officer_update(){
         if(!Auth::logged_in())

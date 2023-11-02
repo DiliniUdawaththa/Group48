@@ -41,7 +41,7 @@
                         <td class="td_mobile"><?= $row->Mobile; ?></td>
                         <td class="td_button">
                             <button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: #407217;"></i></i></button>
-                            <button class="delete_btn"><i class="fa-solid fa-trash" style="color: #7b1417;"></i></button>
+                            <a href="<?=ROOT?>/admin/officer_delete/<?=$row->empID?>"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: #7b1417;"></i></button>
                         </td>
                      </tr>
                  <?php endforeach; ?>

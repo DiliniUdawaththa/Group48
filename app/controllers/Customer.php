@@ -19,6 +19,60 @@
         }
         $data['errors'] = [];
         $add_place = new Add_Place();
+		
+        $rows = $add_place->findAll();
+        $data['rows'] = array();
+
+        for($i = 0;$i < count($rows); $i++)
+        {
+                  $data['rows'][] = $rows[$i];
+        }
+        
+        // show($rows);
+        $data['title'] = "Add_Place";
+        $this->view('customer/add_place',$data);
+    }
+    public function add_place_delete($id=null){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['errors'] = [];
+        $add_place = new Add_Place();
+        $rows = $add_place->findAll();
+        $data['rows'] = array();
+
+        for($i = 0;$i < count($rows); $i++)
+        {
+                $data['rows'][] = $rows[$i];
+        }
+        $add_place->delete_addplace($id);
+        redirect('customer/add_place');
+            
+
+    }
+    public function add_place_update($id=null){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['errors'] = [];
+        $add_place = new Add_Place();
+        
+        $data['title'] = "Add_Place";
+        $this->view('customer/add_place',$data);
+
+    }
+    public function add_place_insert(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['errors'] = [];
+        $add_place = new Add_Place();
 		if($_SERVER['REQUEST_METHOD'] == "POST")
 		{
 			if($add_place->validate($_POST))
@@ -27,25 +81,16 @@
                 $_POST['icon'] =$add_place->icon;
                 $_POST['date'] = date("Y-m-d H:i:s");
                 $add_place->insert($_POST);
-                // message("Your profile was sucessfuly created. please login");
-				// redirect('customer/add_place');
+                // message("Successfully Add Place");
+				redirect('customer/add_place');
             }
            
         }
-        $rows = $add_place->findAll();
-        $data['rows'] = array();
-
-        for($i = 0;$i < count($rows); $i++)
-        {
-                $data['rows'][] = $rows[$i];
-        }
-        
-        // show($rows);
-
+        $data['errors'] = $add_place ->errors;
         $data['title'] = "Add_Place";
-        $this->view('customer/add_place',$data);
-    }
+        $this->view('customer/add_place_form',$data);
 
+    }
     // public function Activity(){
     //     if(!Auth::logged_in())
     //     {

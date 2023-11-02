@@ -51,4 +51,12 @@ class Officer extends Model{
 		return false;
 	}
 
+    public function delete_addofficer($empID = null)
+    {
+        $query = "delete from $this->table where empID = :empID;";
+
+        return $this->query($query,['empID' => $empID]);
+    }
+
+
 }

@@ -73,30 +73,52 @@
           <!-- <div></div> -->
          <center>
           <div class="place_container">
-            
-            <div class="add_table ">
-                <table>
-                  <tr class="title">
-                    <th class="th1">Icon</th>
-                    <th class="th2">Name</th>
-                    <th class="th3">Location</th>
-                    <th class="th4"></th>
-                  </tr>
-                  <?php foreach ($rows as $row) : ?>
-                    <tr class="data"> 
-                      <td class="td_i"><i class="<?= $row->icon; ?>"></i></td>
-                      <td class="td_name"><?= $row->name; ?></td>
-                      <td class="td_address"><?= $row->address; ?></td>
-                      <td class="td_button">
-                      <button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: #407217;"></i></i></button>
-                      <a href="<?=ROOT?>/customer/add_place_delete/<?=$row->id?>"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: #7b1417;"></i></button></a>
-                      </td>
-                     </tr>
-                 <?php endforeach; ?>
-                  
-                </table>
-                <a href="<?=ROOT?>/customer/add_place_insert"><i class="fa-solid fa-square-plus"  id="plus"></i></a>
+            <div class="add_form">
+              <form name="addPlaceForm" action="" method="post" onsubmit="return validateForm()">
+                 <div class="place_top"><h1><i class="fa-solid fa-map-location-dot"></i> Add Place</h1></div>
+                 <div class="input_box">
+
+                       
+
+                      <div>
+                          <label for="name" class="label">Placename</label><br>
+                        </div>
+                          <input value="<?= set_value('name') ?>" type="text" name="name" id="name" class="<?=!empty($errors['name']) ? 'error':'';?>" required>
+                          <?php if(!empty($errors['name'])):?>
+                             <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['name']?> </small>
+                           <?php endif;?>
+                          <br>
+                       <div>
+                          <label for="category" class="label" >Category</label><br>
+                        </div>
+                          <input value="<?= set_value('category') ?>" list="categorys" name="category" id="categoryInput" required>
+                              <datalist id="categorys">
+                                <option value="Home">
+                                <option value="Food & Drink">
+                                <option value="Shopping">
+                                <option value="Education">
+                                <option value="Religion">
+                                <option value="Hotels & lodging"></option>
+                                <option value="Hospital"></option>
+                                <option value="Bank"></option>
+                                <option value="Office"></option>
+                                <option value="Other"></option>
+                              </datalist>
+                              <br>
+                         <div class="address">
+                          <label for="address" class="label">Address</label>
+                          <!-- <i class="fa-solid fa-location-dot"></i> -->
+                          <br>
+                        </div>
+                          <input value="<?= set_value('address') ?>" type="text" name="address" id="address" required>
+                          <br>
+                          <button  id="submit_btn" class="submit_btn">Submit</button>
+                          <br>
+                          <a href="<?=ROOT?>/customer/add_place"><small class="skip"><center>skip</center></small></a>
+                  </div>
+              </form>
             </div>
+           
            
           </div>
          </center>
@@ -120,10 +142,10 @@
 
                     // --------------------------------------------------------------------------------------------
 
-            //   const table = document.querySelector('.add_table')
-            //   const form = document.querySelector('.add_form')
-            //   const skip = document.querySelector('.skip')
-            //   const plus = document.getElementById('plus')
+              const table = document.querySelector('.add_table')
+              const form = document.querySelector('.add_form')
+              const skip = document.querySelector('.skip')
+              const plus = document.getElementById('plus')
              
 
             // plus.addEventListener('click',()=>{
@@ -156,15 +178,16 @@
                               }
                           }
 
+                          if (!validOption) {
+                              // Clear the input if the entered value is not in the datalist
+                              this.value = '';
+                          }
                       });
 
       // --------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
         // ------------------------------------------------------------------------------------------------------------------------
-          // const plus=document.getElementById("plus")
-          // plus.addEventListener('click', ()=>{
-          //               window.location.href = "http://localhost/FAREFLEX/public/customer/add_place_insert";
-          //           })
+
           </script>
 
       </body>
