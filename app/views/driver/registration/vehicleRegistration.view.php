@@ -14,9 +14,9 @@
             <button class="help-btn" id="help-btn">Help</button>
         </div>
         <div class="upload-container">
-            <p class="upload">Upload a picture of your Driver License</p>
+            <p class="upload">Upload a picture of your Vechicle Registration Document</p>
 
-            <div class="image-container"><img class="license-pic" id="license" src="<?= ROOT?>/assets/img/images/License.png"></div>
+            <div class="image-container"><img class="v-registration" id="v-registration" src="<?= ROOT?>/assets/img/images/vehicleRegistration.png"></div>
             <button class="upload-btn" id="upload-profile-pic">Upload Photo</button>
             <input type="file" name="photo" id="photoInput" style="display: none;">
         </div>

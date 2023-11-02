@@ -11,6 +11,15 @@
        
         $data['vehicles'] = 0;
         $data['vehicledata'] = [];
+
+        $driverreg = new Driverregistration();
+
+        $row1 = $driverreg->where([
+            "email"=> $_SESSION['USER_DATA']->email,
+        ]);
+        if(!isset($row1[0])){
+            redirect('driver/registration');
+        }
         
 
         $vehicle = new Vehicle();
@@ -87,6 +96,46 @@
 
             }
             $this->view('driver/registration/registration',$data);
+        
+    }
+
+    public function driverLicense(){
+
+        $driverreg = new Driverregistration();
+
+            $this->view('driver/registration/driverLicense',$data);
+        
+    }
+
+    public function profilePicture(){
+
+        $driverreg = new Driverregistration();
+
+            $this->view('driver/registration/profilePicture',$data);
+        
+    }
+
+    public function revenueLicense(){
+
+        $driverreg = new Driverregistration();
+
+            $this->view('driver/registration/revenueLicense',$data);
+        
+    }
+
+    public function vehicleInsurance(){
+
+        $driverreg = new Driverregistration();
+
+            $this->view('driver/registration/vehicleInsurance',$data);
+        
+    }
+
+    public function vehicleRegistration(){
+
+        $driverreg = new Driverregistration();
+
+            $this->view('driver/registration/vehicleRegistration',$data);
         
     }
  }
