@@ -79,7 +79,29 @@ class Model extends Database
 
 	}
 // ------------------------------------------------------------------------------------------------------------------------------
+public function update($id, $data)
+{
+	if (!empty($this->allowedColumns)) {
+		foreach ($data as $key => $value) {
+			if (!in_array($key, $this->allowedColumns)) {
+				unset($data[$key]);
+			}
+		}
+	}
 
+	$keys = array_keys($data);
+	// $id = array_search($id, $data);
+
+	$query = "update " . $this->table . " set ";
+	foreach ($keys as $key) {
+		$query .= $key . "=:" . $key . ",";
+	}
+	$query = trim($query, ",");
+	$query .= " where id = :id";
+
+
+	$this->query($query, $data);
+}
 public function findAll()
 {
 	$query = "select * from $this->table;";
