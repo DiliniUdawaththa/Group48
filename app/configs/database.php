@@ -67,6 +67,19 @@ class Database
 
 		$this->query($query);
 
+		$query = "
+			CREATE TABLE IF NOT EXISTS `vehicle` (
+			`licenseplate` varchar(100) NOT NULL,
+			`owner` varchar(100) NOT NULL,
+			`type` varchar(20) NOT NULL,
+			`color` varchar(10) DEFAULT NULL,
+			PRIMARY KEY (`licenseplate`)
+		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+		   
+		   ";
+		$this->query($query);
+
+
 	    $query= "
 			CREATE TABLE IF NOT EXISTS `addplace` (
 			`id` int(255) NOT NULL AUTO_INCREMENT,
@@ -82,6 +95,7 @@ class Database
 		$this->query($query);
 
 	}
+	
 
 	
 }
