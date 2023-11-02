@@ -110,7 +110,9 @@
         {
                 $data['rows'][] = $rows[$i];
         }
+
         $add_officer->delete_addofficer($empID);
+        
         redirect('admin/officer');
     }
     public function officer_update(){

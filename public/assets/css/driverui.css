@@ -79,7 +79,7 @@ p{
     margin-top:30px;
 }
 
-.opt1, .opt2 ,.opt3, .opt4{
+.opt1, .opt2 ,.opt3, .opt4, .opt2-1{
     text-align: left;
     color:white;
     width: 100%;
@@ -89,7 +89,7 @@ p{
 
 }
 
-.opt1:hover, .opt2:hover ,.opt3:hover, .opt4:hover{
+.opt1:hover, .opt2:hover ,.opt3:hover, .opt4:hover,.opt2-1:hover{
     background-color: #194672;
     transition: 0.1s;
 }
@@ -124,7 +124,7 @@ p{
         margin-top:60px;
     }
 
-    .opt1, .opt2 ,.opt3, .opt4{
+    .opt1, .opt2 ,.opt3, .opt4 ,.opt2-1{
         margin-top: 30px;
         font-size: 20px;
     }
@@ -233,7 +233,7 @@ p{
     
 
 }
-.map-view-btn, .accept-btn {
+.map-view-btn, .accept-btn,.map-view-btn1, .accept-btn1 {
     cursor: pointer;
     display: block;
     height: 30px;
@@ -245,11 +245,11 @@ p{
 
 }
 
-.accept-btn{
+.accept-btn,.accept-btn1{
     background-color: rgb(51, 209, 51);
     color: white;
 }
-.accept-btn:hover{
+.accept-btn:hover,.accept-btn1:hover{
     background-color: rgb(36, 180, 36);
     color: white;
 }
@@ -279,7 +279,293 @@ p{
 
 
 }
+.map-route{
+    height: 50vh;
+    display: none;
+    text-align: right;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    
+}
 
+.map-route img{
+    width:700px;
+    display: block;
+}
+
+.close-map{
+    background-color: black;
+    color: white;
+    cursor:pointer;
+}
+
+.offer-container{
+    min-height: 300px;
+    min-width: 400px;
+    display: none;
+    text-align: right;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    
+}
+
+.offer-table{
+    margin: 0% auto;
+    font-size: 20px;
+    margin-top: 50px;
+}
+
+.offer-table input{
+    font-size: 20px;
+}
+
+.send-offer{
+    margin: 0% auto;
+    font-size: 20px;
+    height: 50px;
+    width: 170px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: rgb(51, 209, 51);
+    color:white;
+    cursor: pointer;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.send-offer:hover{
+    background-color: rgb(36, 180, 36);
+}
+
+#fare-amount{
+    border: 1px solid black;
+    width: 170px;
+    height: 40px;
+    text-align: center;
+}
+
+.close-offer{
+    background-color: black;
+    color: white;
+    cursor:pointer;
+}
+@media screen and (max-width: 700px){
+    .map-route{
+        width: 100%;
+    }
+    .map-route img{
+        width: 98%;
+        margin: 0% auto;
+    }
+}
+/*-------------------Vehicles Container----------------------------*/
+
+.vehicles-container{
+    display: none;
+}
+
+.empty-vehicles{
+    margin: 20px auto;
+    background-color: white;
+    width: 60%;
+    min-height: 200px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding-top: 30px;
+
+}
+
+.empty-vehicles button{
+    height: 35px;
+    width: 100px;
+    background-color: rgb(39, 89, 136);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.empty-vehicles button:hover{
+    background-color: rgb(15, 60, 102);
+}
+
+
+.add-vehicle{
+    display: none;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+.veh-attribute{
+    text-align: right;
+    font-weight: bold;
+}
+
+.veh-value{
+    text-align: left;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.add-btn{
+    height: 35px;
+    width: 60px;
+    background-color: rgb(39, 89, 136);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.vehicles-bar{
+    margin: 20px auto;
+    background-color: white;
+    width: 80%;
+    min-height: 100px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    display: block;
+    text-align: center;
+    justify-content: center;
+    padding: 2px;
+}
+
+.vehicles-bar h1{
+    margin:20px;
+}
+
+.vehicle1{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    background-color: rgb(233, 233, 233);
+    border: 1px solid black;
+    margin :10px;
+    padding:2px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+
+}
+
+
+
+.vehicle1-type, .vehicle1-lp, .vehicle1-color, .vehicle1-btns{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.update-veh , .delete-veh {
+    height: 40px;
+    width: 70px;
+    margin: 2px;
+    border-radius: 5px;
+    border: 0px;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.update-veh:hover {
+    background-color: dimgray;
+    color: white;
+}
+
+.delete-veh:hover{
+    background-color: brown;
+}
+
+.update-veh{
+    background-color: white;
+}
+.delete-veh{
+    background-color: rgb(233, 10, 10);
+    color: #E4E4E4;
+}
+@media screen and (max-width: 700px){
+    .vehicles-bar td{
+        display: block;
+    }
+    .veh-attribute{
+        text-align: left;
+        font-weight: bold;
+    }
+    
+    .veh-value{
+        text-align: left;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        padding-top: 5px;
+    }
+
+    .vehicle1{
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 25% 25% 25% 25%;
+        background-color: rgb(233, 233, 233);
+        border: 1px solid black;
+        margin :10px;
+        padding:2px;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+    
+    }
+    
+}
+
+.update-veh1{
+    padding:30px;
+    width: 50%;
+    min-height: 200px;
+    display: none;
+    text-align: center;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+}
+
+.update-veh1 table{
+    display: inline-block;
+    text-align: center;
+    margin-top: 20px;
+    
+}
+
+.save-veh-btn {
+    height:40px;
+    width:150px;
+    border: 0px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.save-veh-btn{
+    background-color: #194672;
+    color: white;
+}
+
+.save-veh-btn:hover{
+    background-color: #162938;
+}
 /*----------------Profile Container-------------------------*/
 
 

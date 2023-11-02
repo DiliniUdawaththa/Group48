@@ -24,9 +24,9 @@
         $data['rows'] = array();
 
         for($i = 0;$i < count($rows); $i++)
-        {
-                  $data['rows'][] = $rows[$i];
-        }
+         {
+                   $data['rows'][] = $rows[$i];
+         }
         
         // show($rows);
         $data['title'] = "Add_Place";
