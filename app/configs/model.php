@@ -28,6 +28,7 @@ class Model extends Database
 		$query .= " (".implode(",", $keys) .") values (:".implode(",:", $keys) .")";
         // show($query);		show($query);
 
+        // show($query);
 		$this->query($query,$data);
 
 	}
@@ -79,7 +80,13 @@ class Model extends Database
 		return false;
 
 	}
+// ------------------------------------------------------------------------------------------------------------------------------
 
+public function findAll()
+{
+	$query = "select * from $this->table;";
+	return $this->query($query);
+}
 	
 
 }

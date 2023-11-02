@@ -225,7 +225,7 @@
                                 <tr class="tr1">
                                     <td class="col1">Full Name</td>
                                     <td class="col2">Isuka Premathilake</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
+                                    <td class="col3"><button><img src="images/edit_icon.png"></button></td>
                                 </tr>
                                 <tr>
                                     <td class="col1">NIC</td>
