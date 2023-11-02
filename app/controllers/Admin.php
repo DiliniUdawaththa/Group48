@@ -29,21 +29,7 @@
         }
         $data['errors'] = [];
         $add_officer = new officer();
-		if($_SERVER['REQUEST_METHOD'] == "POST")
-		{
-			if($add_officer->validate($_POST))
-			{
-                // $_POST['empID'] =$add_officer->empID;
-                // $_POST['Name'] =$add_officer->Name;
-                // $_POST['Email'] =$add_officer->Email;
-                // $_POST['Mobile'] =$add_officer->Mobile;
-                // $_POST['date'] = date("Y-m-d H:i:s");
-                $add_officer->insert($_POST);
-                // message("Your profile was sucessfuly created. please login");
-				// redirect('customer/add_place');
-            }
-           
-        }
+
         $rows = $add_officer->findAll();
         $data['rows'] = array();
 
@@ -58,6 +44,57 @@
         $this->view('admin/officer',$data);
     }
 
+    public function officer_insert(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $data['errors'] = [];
+        $add_officer = new officer();
+        if($_SERVER['REQUEST_METHOD'] == "POST")
+		{
+			if($add_officer->validate($_POST))
+			{
+                // $_POST['empID'] =$add_officer->empID;
+                // $_POST['Name'] =$add_officer->Name;
+                // $_POST['Email'] =$add_officer->Email;
+                // $_POST['Mobile'] =$add_officer->Mobile;
+                // $_POST['date'] = date("Y-m-d H:i:s");
+                $add_officer->insert($_POST);
+                // message("Your profile was sucessfuly created. please login");
+				// redirect('customer/add_place');
+            }
+           
+        }
+
+        $data['title'] = "Officer";
+        $this->view('admin/officer_form',$data);
+    }
+    public function officer_delete(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $data['errors'] = [];
+        $add_officer = new officer();
+
+        $data['title'] = "Officer";
+        $this->view('admin/officer',$data);
+    }
+    public function officer_update(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $data['errors'] = [];
+        $add_officer = new officer();
+
+        $data['title'] = "Officer";
+        $this->view('admin/officer',$data);
+    }
     // profile page
     public function profile($id=null)
     {

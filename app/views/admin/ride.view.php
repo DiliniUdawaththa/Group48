@@ -12,7 +12,7 @@
    <section id="interface">
         <div class="navi">
             <div class="navi1">
-                <h2>CUSTOMERS</h2>
+                <h2>RIDES</h2>
             </div>
         </div>
     </section>
