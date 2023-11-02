@@ -1,0 +1,230 @@
+*{
+    margin: 0;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-sizing: border-box;
+}
+.main-div {
+    background-color: #b9cae2;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.div-1 {
+    background-color: #172d3d;
+    height: 100vh;
+    text-align: center;
+}
+
+.div-1 h1 {
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+
+.option{
+    font-size: 18px;
+    color: white;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    padding-left: 10px;
+    margin-top: 20px;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    height: 30px;
+}
+.option:hover{
+    background-color: #091d2e;
+}
+
+.option a{
+    color: white;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
+
+/*----------------------------------------*/
+
+
+/* admin dashboard */
+.admin-top {
+    background-color: #162938;
+    height: 60px;
+    color: white;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 25px;
+    padding: 10px;
+    font-weight: 400;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-midle {
+    display: block;
+    text-align: center;
+    background-color: #162938;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: 400;
+    width: 80%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.midle-1 {
+    background-color: #B7B6B6;
+    width: 85%;
+    height: 75px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 35px;
+    text-align: center;
+    font-size: 25px;
+    padding: 10px;
+    font-weight: 400;
+    padding-top: 18px;
+    padding-left: 50px;
+}
+
+.midle-1 a{
+    text-decoration: none;
+    color: black;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/*----------------------------------------*/
+
+.driver-reg-table{
+    font-size: 18px;
+    margin-left: auto; 
+    margin-right: auto;
+    
+}
+
+.reg-attribute{
+    padding: 20px;
+    color: white;
+    text-align: right;
+    padding-right: 30px;
+}
+
+.request-box{
+    border-radius: 7px;
+    min-height: 100px;
+    background-color: rgb(7, 23, 36);
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    margin :5px;
+    font-size: 15px;
+    color: white;
+}
+
+.btn1, .btn2{
+    height:30px;
+    font-size: 15px;
+    width: 100px;
+    margin:5px;
+    border-radius:5px;
+    border: 0px;
+    cursor: pointer;
+}
+.btn2{
+    background-color: red;
+    color: white;
+}
+
+.btn2:hover{
+    background-color: rgb(179, 10, 10);
+}
+
+
+
+.std-fare table{
+    color: white;
+    font-size: 18px;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.std-fare td{
+    padding: 15px;
+}
+
+
+.update-fare{
+    height: 30px;
+    width: 80px;
+    border-radius: 7px;
+    border: 0px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+.logout-container{
+    padding:30px;
+    width: 50%;
+    min-height: 200px;
+    display: none;
+    text-align: center;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+}
+
+.logout-container button{
+    height:40px;
+    width:150px;
+    border: 0px;
+    cursor: pointer;
+}
+
+.logout-btn{
+    background-color: #194672;
+    color:white;
+}
+.logout-btn:hover{
+    background-color: rgb(207, 207, 207);
+    color:black;
+}
+.cancel-logout{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.logout-text{
+    margin-top: 10px;
+    display: block;
+    font-size: 16px;
+}
