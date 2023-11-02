@@ -40,7 +40,7 @@
                 </div>
                 <div class="activity-container">
                     <div class="status-container">
-                        <h2>Hello, Thusikaran</h2>
+                        <h2>Hello, <?php echo $_SESSION['USER_DATA']->name; ?></h2>
                         
                         <div class="select-status">
                             <div><p>Active status:</p></div>
@@ -223,9 +223,9 @@
                         <div class="detail-container">
                             <table class="profile-details-table">
                                 <tr class="tr1">
-                                    <td class="col1">Full Name</td>
-                                    <td class="col2">Isuka Premathilake</td>
-                                    <td class="col3"><button><img src="images/edit_icon.png"></button></td>
+                                    <td class="col1">Name</td>
+                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->name; ?></td>
+                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
                                 </tr>
                                 <tr>
                                     <td class="col1">NIC</td>
@@ -239,12 +239,12 @@
                                 </tr>
                                 <tr>
                                     <td class="col1">Email</td>
-                                    <td class="col2">isukapremathilake@gmail.com</td>
+                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->email; ?></td>
                                     <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
                                 </tr>
                                 <tr class="tr1">
                                     <td class="col1">Phone</td>
-                                    <td class="col2"> 0783272623</td>
+                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->phone; ?></td>
                                     <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
                                 </tr>
                                 <tr>
@@ -286,7 +286,13 @@
             const cancel_button = document.querySelector('.cancel-btn')
             const logout_button = document.querySelector('.logout-btn')
             
-           
+            logout_option.addEventListener('click',function (){
+                logout_container.style.display = 'block';
+            })
+
+            cancel_button.addEventListener('click',function (){
+                logout_container.style.display = 'none';
+            })
             
             more.addEventListener('click', function (){
                 if(sidenav == 1){
@@ -331,6 +337,8 @@
                 vehicles_option.style.backgroundColor = ''
                 notification_option.style.backgroundColor = ''
             })
+
+
 
             vehicles_option.addEventListener('click',function (){
                 profile_container.style.display = 'none'
@@ -394,14 +402,6 @@
                     document.getElementById('fare-amount').disabled = false
                 }
             });
-
-            logout_option.addEventListener('click',function (){
-                logout_container.style.display = 'block'
-            })
-
-            cancel_button.addEventListener('click',function (){
-                logout_container.style.display = 'none'
-            })
 
             function addVehicle(){
                 addVehBtn.style.display = 'none';

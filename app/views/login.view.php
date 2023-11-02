@@ -20,18 +20,6 @@
             
             
          }
-<<<<<<< HEAD
-         .signup-error{
-            color: maroon;
-            margin-top: 25px;
-            height: 50px;
-            width: 100%;
-            background-color:#d1baba;
-            padding: 10px 50px;
-            border-radius: 10px;
-         }
-=======
->>>>>>> 6ab90ad7684fc7e7316fb3469084f0e2ea8cd705
          
     </style>
 </head>
