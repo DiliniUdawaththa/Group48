@@ -22,12 +22,14 @@
 		
         $rows = $add_place->findAll();
         $data['rows'] = array();
+       
+        if(isset($rows[0])){
 
         for($i = 0;$i < count($rows); $i++)
         {
                 $data['rows'][] = $rows[$i];
         }
-        
+        }
         // show($rows);
         $data['title'] = "Add_Place";
         $this->view('customer/add_place',$data);
@@ -73,20 +75,12 @@
 		{
 			if($add_place->validate($_POST))
 			{
-                // print_r($_POST);die();
-                
-                // $_POST['icon'] =$add_place->icon;
                 $_POST['date'] = date("Y-m-d H:i:s");
                
                 $add_place->fit_icon($_POST);
                 $_POST['icon']= $add_place ->icon;
                 $_POST['id']=$id;
-                // print_r($_POST);die();
                 $add_place->update($id,$_POST);
-              
-                // $add_place->update($id,$add_place->icon);    
-             //   $add_place->update($id,$add_place->icon);
-                // message("Successfully Add Place");
 				redirect('customer/add_place');
             }
            
