@@ -14,6 +14,7 @@
             <img class="profile-pic" src="<?= ROOT?>/assets/img/images/Image-60.png">
         </div>
         <div class="outer-container">
+            <div style="margin-top:60px;"></div>
             <p class="welcome-text">Welcome, <?php echo $_SESSION['USER_DATA']->name; ?></p>
             <p class="text1">
                 Here are the steps you need to follow to set up your profile.

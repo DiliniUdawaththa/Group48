@@ -76,6 +76,7 @@
     }
 
     public function registration(){
+        $data['errors'] = [];
 
         $driverreg = new Driverregistration();
 
@@ -100,6 +101,7 @@
     }
 
     public function driverLicense(){
+        $data['errors'] = [];
 
         $driverreg = new Driverregistration();
 
@@ -108,6 +110,7 @@
     }
 
     public function profilePicture(){
+        $data['errors'] = [];
 
         $driverreg = new Driverregistration();
 
@@ -116,6 +119,7 @@
     }
 
     public function revenueLicense(){
+        $data['errors'] = [];
 
         $driverreg = new Driverregistration();
 
@@ -124,6 +128,7 @@
     }
 
     public function vehicleInsurance(){
+        $data['errors'] = [];
 
         $driverreg = new Driverregistration();
 
@@ -132,6 +137,7 @@
     }
 
     public function vehicleRegistration(){
+        $data['errors'] = [];
 
         $driverreg = new Driverregistration();
 

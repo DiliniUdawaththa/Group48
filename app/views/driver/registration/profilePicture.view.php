@@ -14,6 +14,7 @@
             <button class="help-btn" id="help-btn">Help</button>
         </div>
         <div class="upload-container">
+        <div style="margin-top:60px;"></div>
             <p class="upload">Upload a picture of yourself</p>
 
             <div class="image-container"><img class="profilepic" id="propic" src="<?= ROOT?>/assets/img/images/profilepic.jpg"></div>

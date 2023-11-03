@@ -14,6 +14,7 @@
             <button class="help-btn" id="help-btn">Help</button>
         </div>
         <div class="upload-container">
+        <div style="margin-top:60px;"></div>
             <p class="upload">Upload a picture of your Revenue License</p>
 
             <div class="image-container"><img class="rlicense-pic" id="rlicense" src="<?= ROOT?>/assets/img/images/revenueLicense.png"></div>
