@@ -86,14 +86,15 @@
                 // $_POST['date'] = date("Y-m-d H:i:s");
                 $add_officer->insert($_POST);
                 // message("Your profile was sucessfuly created. please login");
-				// redirect('customer/add_place');
+				redirect('admin/officer');
             }
            
         }
-
+        $data['errors'] = $add_officer ->errors;
         $data['title'] = "Officer";
         $this->view('admin/officer_form',$data);
     }
+
     public function officer_delete($empID=null){
         if(!Auth::logged_in())
         {
@@ -115,6 +116,7 @@
         
         redirect('admin/officer');
     }
+
     public function officer_update($empID=null){
         if(!Auth::logged_in())
         {
@@ -135,8 +137,8 @@
         if($_SERVER['REQUEST_METHOD'] == "POST")
 		{
             
-			// if($add_officer->validate($_POST))
-			// {    
+			if($add_officer->validate($_POST))
+			{    
                 // show($_POST);
                 $_POST['empID']=$empID; 
                 // show($_POST);           
@@ -145,13 +147,14 @@
 				// redirect('customer/add_place');
 
                 redirect('admin/officer');
-            // }
+            }
            
         }
 
         $data['title'] = "Officer";
         $this->view('admin/officer_update',$data);
     }
+    
     // profile page
     public function profile($id=null)
     {
