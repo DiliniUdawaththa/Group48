@@ -66,7 +66,7 @@
                         landscapes, thrilling adventures, and memories that will last a lifetime. Register now to secure your spot!</p>
                 </div>
             </div>
-            <div id="aboutus">how are u</div>
+            <div id="aboutus">A taxi management system, where customers select their drivers, boasts key features for a superior experience. Customers access driver profiles with ratings, photos, and reviews, ensuring informed choices. Real-time GPS tracking enhances safety, while in-app messaging facilitates easy communication. A driver rating system allows customers to provide feedback. These features empower customers, ensuring transparency, convenience, and satisfaction in the taxi booking process.</div>
             <script>
 
             //home box 

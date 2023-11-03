@@ -25,10 +25,10 @@
                 <h1><?php echo $_SESSION['USER_DATA']->name; ?> - Officer</h1>
             </div>
             <div class="ms-5 mt-3 category">
-                <div class="option" id="opt1" style="background-color:#091d2e;"><a href="<?=ROOT?>/officer/dashboard">Dashboard</a></div>
-                <div class="option" id="opt2"><a href="<?=ROOT?>/officer/officerdriverRegistration">Driver Registration</a></div>
-                <div class="option" id="opt3"><a href="<?=ROOT?>/officer/complains">Complains</a></div>
-                <div class="option" id="opt4"><a href="<?=ROOT?>/officer/standardFare">Standard Fair</a></div>
+                <div class="option"><a href="dashboard.vew.php">Dashboard</a></div>
+                <div class="option" style="background-color:#091d2e;"><a href="<?=ROOT?>/officer/officerdriverRegistration">Driver Registration</a></div>
+                <div class="option"><a href="<?=ROOT?>/officer/complains">Complains</a></div>
+                <div class="option"><a href="<?=ROOT?>/officer/standardFare">Standard Fair</a></div>
                 <div class="option" id="opt5" style="cursor: pointer;"><a>Logout</a></div>
             </div>
         </div>
@@ -37,13 +37,28 @@
 
         <div class="div-dash">
             <div class="admin-top">
-                <i class="fa fa-user"></i>&nbsp; Officer Dashboard
+                <i class="fa fa-user"></i> Driver Registration
             </div>
             <div class="admin-midle">
-                <div class="midle-1"><a href="<?=ROOT?>/officer/dashboard"><b>Driver Registration</b></a></div>
-                <div class="midle-1"><a href="<?=ROOT?>/officer/officerdriverRegistration"><b>Drivers</b></a></div>      
-                <div class="midle-1"><a href="<?=ROOT?>/officer/complains"><b>Complains</b></a></div>
-                <div class="midle-1"><a href="<?=ROOT?>/officer/standardFare"><b>Standard Fair</b></a></div>
+                <table class="driver-reg-table">
+                    <tr>
+                        <td class="reg-attribute">Name:</td>
+                        <td class="reg-value"><input type="text" style="height:30px;font-size: 18px;"></td>
+                    </tr>
+                    <tr>
+                        <td class="reg-attribute">Email:</td>
+                        <td class="reg-value"><input type="text" style="height:30px;font-size: 18px;"></td>
+                    </tr>
+                    <tr>
+                        <td class="reg-attribute">Phone:</td>
+                        <td class="reg-value"><input type="text" style="height:30px;font-size: 18px;"></td>
+                    </tr>
+                    <tr>
+                        <td class="reg-attribute">Password:</td>
+                        <td class="reg-value"><input type="text" style="height:30px;font-size: 18px;"></td>
+                    </tr>
+                </table>
+                <Button style="height:30px; width: 150px;font-size: 18px; cursor: pointer; margin-top: 30px;">Create</Button>
                 
             </div>
         </div>
@@ -66,6 +81,7 @@
             logout_container.style.display = 'none';
         })
 </script>
+
 </body>
 
 </html>
