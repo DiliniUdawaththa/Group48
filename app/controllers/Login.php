@@ -31,7 +31,17 @@ class Login extends Controller
                     }
                     else if(Auth::is_driver())
                     {
-                        redirect('driver/ride');
+                        $driverreg = new Driverregistration();
+                        $row1 = $driverreg->where([
+                            "email"=> $_POST["email"],
+                        ]);
+                        if(!isset($row1[0])){
+                            redirect('driver/registration');
+                        }else{
+                            redirect('driver/ride');
+                        }
+
+                        
                     }
                     else{
                         redirect('customer/ride');

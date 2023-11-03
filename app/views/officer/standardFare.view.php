@@ -25,10 +25,10 @@
                 <h1><?php echo $_SESSION['USER_DATA']->name; ?> - Officer</h1>
             </div>
             <div class="ms-5 mt-3 category">
-                <div class="option" id="opt1" style="background-color:#091d2e;"><a href="<?=ROOT?>/officer/dashboard">Dashboard</a></div>
+                <div class="option" id="opt1"><a href="dashboard.vew.php">Dashboard</a></div>
                 <div class="option" id="opt2"><a href="<?=ROOT?>/officer/officerdriverRegistration">Driver Registration</a></div>
                 <div class="option" id="opt3"><a href="<?=ROOT?>/officer/complains">Complains</a></div>
-                <div class="option" id="opt4"><a href="<?=ROOT?>/officer/standardFare">Standard Fair</a></div>
+                <div class="option" id="opt4" style="background-color:#091d2e;"><a href="<?=ROOT?>/officer/standardFare">Standard Fair</a></div>
                 <div class="option" id="opt5" style="cursor: pointer;"><a>Logout</a></div>
             </div>
         </div>
@@ -37,14 +37,39 @@
 
         <div class="div-dash">
             <div class="admin-top">
-                <i class="fa fa-user"></i>&nbsp; Officer Dashboard
+                <i class="fa fa-user"></i>&nbsp; Standard Fare Table
             </div>
             <div class="admin-midle">
-                <div class="midle-1"><a href="<?=ROOT?>/officer/dashboard"><b>Driver Registration</b></a></div>
-                <div class="midle-1"><a href="<?=ROOT?>/officer/officerdriverRegistration"><b>Drivers</b></a></div>      
-                <div class="midle-1"><a href="<?=ROOT?>/officer/complains"><b>Complains</b></a></div>
-                <div class="midle-1"><a href="<?=ROOT?>/officer/standardFare"><b>Standard Fair</b></a></div>
-                
+                <div class="std-fare">
+                    <table>
+                        <tr>
+                            <th>Type</td>
+                            <th>Fare(Rs/Km)</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>ThreeWheeler</td>
+                            <td>120</td>
+                            <td><button class="update-fare">Update</button></td>
+                        </tr>
+                        <tr>
+                            <td>Car</td>
+                            <td>200</td>
+                            <td><button class="update-fare">update</button></td>
+                        </tr>
+                        <tr>
+                            <td>Van</td>
+                            <td>250</td>
+                            <td><button class="update-fare">Update</button></td>
+                        </tr>
+                        <tr>
+                            <td>Bus</td>
+                            <td>320</td>
+                            <td><button class="update-fare">Update</button></td>
+                        </tr>
+                    </table>
+
+                </div>
             </div>
         </div>
     </div>

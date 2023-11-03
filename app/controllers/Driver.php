@@ -7,11 +7,22 @@
             redirect("login");
         }
         $data['errors'] = [];
+        
+       
         $data['vehicles'] = 0;
         $data['vehicledata'] = [];
+
+        $driverreg = new Driverregistration();
+
+        $row1 = $driverreg->where([
+            "email"=> $_SESSION['USER_DATA']->email,
+        ]);
+        if(!isset($row1[0])){
+            redirect('driver/registration');
+        }
         
 
-		$vehicle = new Vehicle();
+        $vehicle = new Vehicle();
         $owner = $_SESSION['USER_DATA']->email;
         // show($_SESSION['USER_DATA']->email);
 
@@ -57,10 +68,75 @@
             }
         }
 
-        
+            
 
         $data['title'] = "Driver";
         $this->view('driver/ride',$data);
+        
+    }
+
+    public function registration(){
+
+        $driverreg = new Driverregistration();
+
+        $row1 = $driverreg->where([
+            "email"=> $_SESSION['USER_DATA']->email,
+        ]);
+        if(isset($row1[0])){
+            redirect('driver/ride');
+        }
+
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+                if(isset($_POST['registration'])){
+                    $Registerdata['email'] = $_SESSION['USER_DATA']->email;
+                    $Registerdata['status'] = 1;
+                    $driverreg->insert($Registerdata);
+                    redirect('driver/ride');
+                }
+
+            }
+            $this->view('driver/registration/registration',$data);
+        
+    }
+
+    public function driverLicense(){
+
+        $driverreg = new Driverregistration();
+
+            $this->view('driver/registration/driverLicense',$data);
+        
+    }
+
+    public function profilePicture(){
+
+        $driverreg = new Driverregistration();
+
+            $this->view('driver/registration/profilePicture',$data);
+        
+    }
+
+    public function revenueLicense(){
+
+        $driverreg = new Driverregistration();
+
+            $this->view('driver/registration/revenueLicense',$data);
+        
+    }
+
+    public function vehicleInsurance(){
+
+        $driverreg = new Driverregistration();
+
+            $this->view('driver/registration/vehicleInsurance',$data);
+        
+    }
+
+    public function vehicleRegistration(){
+
+        $driverreg = new Driverregistration();
+
+            $this->view('driver/registration/vehicleRegistration',$data);
+        
     }
  }
  //echo " sample home page";
