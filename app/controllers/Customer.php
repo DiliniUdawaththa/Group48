@@ -117,24 +117,24 @@
         $this->view('customer/add_place_form',$data);
 
     }
-    // public function Activity(){
-    //     if(!Auth::logged_in())
-    //     {
-    //         message('please login to view the page');
-    //         redirect("login");
-    //     }
-    //     $data['title'] = "Activity";
-    //     $this->view('customer/activity',$data);
-    // }
-    // public function Help(){
-    //     if(!Auth::logged_in())
-    //     {
-    //         message('please login to view the page');
-    //         redirect("login");
-    //     }
-    //     $data['title'] = "Help";
-    //     $this->view('customer/help',$data);
-    // }
+    public function Activity(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Activity";
+        $this->view('customer/activity',$data);
+    }
+    public function Help(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Help";
+        $this->view('customer/help',$data);
+    }
  }
  //echo " sample home page";
  ?>
