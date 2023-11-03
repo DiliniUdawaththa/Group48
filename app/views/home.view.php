@@ -50,7 +50,7 @@
                         system driver. Lead participants through captivating routes, showcasing the heart of our city.
                         Your expertise will shape memorable journeys.
                     </p>
-                    <button>Join us</button>
+                    <a href="<?=ROOT?>/signup"><button>Join us</button></a>
                     <p>Be part of creating remarkable experiences and a strong sense of camaraderie.
                         Become a driver and propel the spirit of adventure forward!</p>
                 </div>
@@ -61,12 +61,12 @@
                 <div>
                     <input type="text" placeholder="Enter pickup location">
                     <input type="text" placeholder="Enter destination">
-                    <button>Register now</button>
+                    <a href="<?=ROOT?>/signup"><button>Register now</button></a>
                     <p> Embark on an unforgettable journey with us! Join our exciting ride event and experience breathtaking
                         landscapes, thrilling adventures, and memories that will last a lifetime. Register now to secure your spot!</p>
                 </div>
             </div>
-            <div id="aboutus">how are u</div>
+            <div id="aboutus">A taxi management system, where customers select their drivers, boasts key features for a superior experience. Customers access driver profiles with ratings, photos, and reviews, ensuring informed choices. Real-time GPS tracking enhances safety, while in-app messaging facilitates easy communication. A driver rating system allows customers to provide feedback. These features empower customers, ensuring transparency, convenience, and satisfaction in the taxi booking process.</div>
             <script>
 
             //home box 
@@ -109,25 +109,24 @@
                 //scroll target
 
                 document.addEventListener("DOMContentLoaded", function () {
-                    const navLinks = document.querySelectorAll(".navication a");
+                        const navLinks = document.querySelectorAll(".nav .a");
 
-                    navLinks.forEach((link) => {
-                        link.addEventListener("click", (e) => {
-                            e.preventDefault();
+                        navLinks.forEach((link) => {
+                            link.addEventListener("click", (e) => {
+                               e.preventDefault();
 
-                            const targetId = link.getAttribute("href");
-                            const targetSection = document.querySelector(targetId);
+                               const targetId = link.getAttribute("href");
+                               const targetSection = document.querySelector(targetId);
 
-                            if (targetSection) {
-                                window.scrollTo({
-                                    top: targetSection.offsetTop - 50, // Adjust for fixed navigation bar
-                                    behavior: "smooth",
-                                });
-                            }
+                                if (targetSection) {
+                                    window.scrollTo({
+                                       top: targetSection.offsetTop -50, // Adjust for fixed navigation bar
+                                       behavior: "smooth",
+                                    });
+                                }
+                             });
                         });
                     });
-                });
-
             </script>
         </div>
 
