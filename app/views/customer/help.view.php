@@ -18,7 +18,7 @@
 
              <div class="profile">
                 <img src="<?= ROOT ?>/assets/img/person.png" alt="" class="userimage">
-                <H3 class="username">Thusikaran-<?=Auth::getname();?></H3>
+                <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>

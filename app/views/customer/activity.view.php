@@ -15,7 +15,7 @@
 
         <div class="profile">
            <img src="<?= ROOT ?>/assets/img/person.png" alt="" class="userimage">
-           <H3 class="username">Thusikaran-<?=Auth::getname();?></H3>
+           <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?php echo $_SESSION['USER_DATA']->name; ?> </H3>
            <h6>
              <i class="fa-solid fa-star" style="color: #D1B000;"></i>
              <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -70,10 +70,10 @@
                 <div class="fare">Fare</div>
             </div>
             <div class="data">
-                <div class="date">Date</div>
-                <div class="time">Time</div>
-                <div class="name">Name</div>
-                <div class="location">Location</div>
+                <div class="date">12/7/2022</div>
+                <div class="time">09:31PM</div>
+                <div class="name">Mr.Ravi</div>
+                <div class="location">Fortcity</div>
                 <div class="location">Location</div>
                 <div class="fare">Fare</div>
             </div>
