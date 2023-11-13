@@ -34,7 +34,8 @@
         $data['title'] = "Add_Place";
         $this->view('customer/add_place',$data);
     }
-    public function add_place_delete($id=null){
+   }
+    public  function add_place_delete($id=null){
         if(!Auth::logged_in())
         {
             message('please login to view the page');
@@ -52,7 +53,7 @@
         $add_place->delete_addplace($id);
         redirect('customer/add_place');
             
-
+     
     }
     public function add_place_update($id=null){
         if(!Auth::logged_in())

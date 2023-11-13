@@ -171,7 +171,7 @@
             <img src="<?= ROOT ?>/assets/img/contan3.jpg" class="contant_image">
         </div>
         <div class="align1">
-            <h1 class="contant_title">Ride</h1>
+            <h1 class="contant_title">Safety</h1>
             <p class="contant_text">
                 FlexFare Ride-Hailing includes the largest fleet of vehicles in Sri Lanka
                 offering both on-demand and pre-booking features at the best rates,
@@ -218,12 +218,12 @@
         <p>Movement is what we power. It’s our lifeblood. It runs through our veins. It’s what gets us out of bed each morning. It pushes us to constantly reimagine how we can move better. For you. For all the places you want to go. For all the things you want to get. For all the ways you want to earn. Across the entire world. In real time. At the incredible speed of now.</p>
     </div>
     <div class="spara">
-        <div class="para_part1">
+        <!-- <div class="para_part1">
             <h1>Our System</h1>
             <p></p>
-        </div>
+        </div> -->
         <div class="para_part1">
-            <h1>Our Aim</h1>
+            <h1>Our System</h1>
             <p>At FAREFLEX, our enduring aim is to be at the forefront of positive change in the driving education landscape. We are unwavering in our commitment to road safety and the transformation of the driving experience. Our vision encompasses the delivery of comprehensive, tailored driving education that transcends the boundaries of standard test preparation. We aspire to nurture a generation of responsible, confident, and exceptionally skilled drivers, equipping them not only with the knowledge to pass their tests but with a deep-seated commitment to safety, courtesy, and respect for all road users. Our ultimate goal is to actively contribute to the creation of a world where our roads are not just safer, but where they become hubs of community, shared experiences, and the sheer joy of driving, enriching the lives of all those we serve.</p>
             <button >Learn more</button>
         </div>
