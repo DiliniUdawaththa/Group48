@@ -46,7 +46,7 @@
         <div class="sidebar">
 
              <div class="barimagetag">
-                <img src="<?= ROOT ?>/assets/img/logoname.png" alt="" class="barimage">
+                <img src="<?= ROOT ?>/assets/img/logoname.png" alt=" " class="barimage">
              </div>
 
 
