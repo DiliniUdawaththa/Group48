@@ -8,7 +8,8 @@
         }
         $data['title'] = "Dashboard";
         $this->view('admin/dashboard',$data);
-    } 
+    }
+
     // customer profile controller
      public function customer(){
         if(!Auth::logged_in())
@@ -56,12 +57,12 @@
         $rows = $add_officer->findAll();
         $data['rows'] = array();
 
-        for($i = 0;$i < count($rows); $i++)
-        {
-            $data['rows'][] = $rows[$i];
-        }
+        // for($i = 0;$i < count($rows); $i++)
+        // {
+        //     $data['rows'][] = $rows[$i];
+        // }
         
-        // show($rows);
+        //show($rows);
 
         $data['title'] = "Officer";
         $this->view('admin/officer',$data);
@@ -93,6 +94,7 @@
         $data['errors'] = $add_officer ->errors;
         $data['title'] = "Officer";
         $this->view('admin/officer_form',$data);
+
     }
 
     public function officer_delete($empID=null){
