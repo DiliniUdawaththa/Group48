@@ -60,7 +60,9 @@ class User extends Model
 			$this->errors['phone'] = "Contact number must be  10 digits long.";
 		} elseif (strlen($data['phone']) >10) {
 			$this->errors['phone'] = "Contact number must be  10 digits long.";
-		}
+		}elseif ($this->where(['phone'=> $data['phone']])) {
+            $this->errors['phone'] = "mobile number already exist.";
+        }
 		
 
 
@@ -68,12 +70,12 @@ class User extends Model
 		if(empty($data['term1']))
 		{
 			if(empty($data['term2']))
-			    {$this->errors['term2'] = "Please accept the terms and conditions";}
+			    {$this->errors['term2'] = "Please select your role";}
 		}
 		if(!empty($data['term1']))
 		{
 			if(!empty($data['term2']))
-			    {$this->errors['term2'] = "Please select one term";}
+			    {$this->errors['term2'] = "Please select one role";}
 		}
 		if(empty($data['term1']))
 		{
