@@ -228,3 +228,32 @@ table tbody tr:nth-child(odd) {
     border-radius: 5px;
     cursor: pointer;
 }
+/*------------------------------add officer form----------------------------*/
+.officer_form{
+    display: none;
+    height: 100%;
+    width:60%;
+    /* border: solid; */
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+}
+.officer_box{
+    width:50%;
+    height: 100%;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    margin-top: 30px 30px;
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.officer_box input{
+    padding-left: 10px;
+    font-size: 17px;
+    color:#194672;
+    width: 100%;
+    height: 42px;
+    margin-bottom: 10px;
+    margin-top: 7px;
+    border-radius: 8px;
+    border: none;
+}

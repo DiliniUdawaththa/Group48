@@ -1,98 +1,156 @@
-* {
+*{
+
+    font-family: 'Poppins',sans-serif;
+    /* box-sizing: border-box; */
+}
+body{
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins' , sans-serif;
+    width: 100vw;
+    font-family: 'Poppins',sans-serif;
+    /* overflow: hidden; */
 }
-
-body {
-    width: 100%;
-    background: #E5E7EB;
-    position: relative;
+.main{
+    background-color: #D9D9D9;
     display: flex;
+    /* flex-direction: row; */
+    
 }
 
-#menu {
-    background: #111827;
-    width: 230px;
-    height: 100%;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    left: 0;
+/* ------------------------side bar----------------- */
+.sidebar{
+    width: 300px;
+    color: #D9D9D9;
+    background-color:#111827;
+    height: 100vh;
+    overflow: hidden;
+ }
+.logo{
+    text-align: center;
 }
-
-#menu .logo img {
-    width: 230px;
-    height: 100px;
-    align-items: center;
-    padding: 30px 30px 0 30px;
+.barimage{
+    padding: 10px;
+    height: 80px;
+    
 }
+/* ------------------------------- */
 .profile{
     text-align: center;
 
 }
 .userimage{
-    margin-top: 10px;
-    height: 90px;
+    height: 120px;
     border-radius: 100px;
-    width: 90px;
+    width: 120px;
 
 }
 .profile h3{
-    margin-top: 10px;
     margin-bottom: 10px;
-    color: aliceblue;
+}
+.profile h6{
+    margin-top: 0;
 }
 
-#menu .items {
-    margin-top: 40px;
-}
+/* --------------------------------- */
 
-#menu .items li {
-    list-style: none;
-    padding: 15px 0;
-    transition: 0.3s ease;
+.items{
+    display: flex;
+    flex-direction: column;
 }
-
-#menu .items li:hover {
-    background: #253047;
-    cursor: pointer;
+.link{
+    color: #D9D9D9;
+    text-decoration: none;
+    font-weight: 600px;
+    font-size: 20px;
 }
+.linkbutton {
+    padding: 19px 10px;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+}
+.linkbutton2 {
+    padding: 19px 10px;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+}
+.linkbutton1{
+    padding: 15px 10px;
+    background-color: #1f3648;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+}
+.linkbutton i {
+    margin-right: 15px;
+    margin-left: 10px;
+}
+.linkbutton2 i {
+    margin-right: 15px;
+    margin-left: 10px;
+}
+.linkbutton1 i {
+    margin-right: 15px;
+    margin-left: 10px;
 
-#menu .items li:nth-child(1) {
+}
+.linkbutton1:nth-child(1){
     border-left: 4px solid #fff;
 }
 
-#menu .items li i {
-    color: aliceblue;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+.linkbutton:hover{
+    background-color: #1f3648;
+}
+.linkbutton2:hover{
+    background-color: #1f3648;
+}
+/* logout part-------------------------------------------------------------------------- */
+.logout-container{
+    padding:30px;
+    width: 50%;
+    height: 200px;
+    display: none;
     text-align: center;
-    font-size: 14px;
-    margin: 0 10px 0 25px;
+    color: black;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+}
+.logout-container button{
+    height:40px;
+    width:150px;
+    border: 0px;
+    cursor: pointer;
+}
+.logout-btn{
+    background-color: #194672;
+    color:white;
+}
+.logout-btn:hover{
+    background-color: rgb(207, 207, 207);
+    color:black;
+}
+.cancel-logout{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.logout-text{
+    margin-top: 10px;
+    display: block;
+    font-size: 16px;
 }
 
-#menu .items li:hover i,
-#menu .items li:hover a {
-    color: #F3F4F6;
+.interface {
+    width: 80%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */   
 }
 
-#menu .items li a {
-    text-decoration: none;
-    color: #f0eaea;
-    font-weight: 300px;
-    transition: 0.3s ease;
-}
-
-#interface {
-    width: calc(100% - 200px);
-    margin-left: 230px;
-    position: relative;    
-}
-
-#interface .navigation {
+.navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -104,7 +162,7 @@ body {
     border-radius: 8px;
 }
 
-#interface .navigation .search {
+.search {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -112,22 +170,22 @@ body {
     color: #fff;
 }
 
-#interface .navigation .search i {
+.search i {
     margin-right: 14px;
     color: #fff;
 }
 
-#interface .navigation .search input {
+.search input {
     border: none;
     outline: none;
     font-size: 20px;
 }
 
-#interface .navigation .profile i {
+.profile i {
     color: #fff;
 }
 
-#interface .navi{
+.navi{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -139,15 +197,11 @@ body {
     border-radius: 6px;
 }
 
-#interface .navi .navi1 {
+.navi .navi1 {
     justify-content: flex-start;
     align-items: center;
     padding: 10px 14px;
     color: #111827;
-}
-
-#interface .table1{
-    padding: 30px 30px;
 }
 
 .values {
@@ -195,26 +249,7 @@ body {
     background-color: #232c3c; 
 }
 
-.update{
-    background-color: green;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-.delete{
-    background-color: red;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-table {
+/* table {
 	border-collapse: collapse;
     font-family: Tahoma, Geneva, sans-serif;
     width: 100%;
@@ -241,7 +276,7 @@ table tbody tr {
 }
 table tbody tr:nth-child(odd) {
 	background-color: #ffffff;
-}
+} */
 
 /* add officer */
 

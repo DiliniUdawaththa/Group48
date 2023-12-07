@@ -57,12 +57,12 @@
         $rows = $add_officer->findAll();
         $data['rows'] = array();
 
-        // for($i = 0;$i < count($rows); $i++)
-        // {
-        //     $data['rows'][] = $rows[$i];
-        // }
+        for($i = 0;$i < count($rows); $i++)
+        {
+            $data['rows'][] = $rows[$i];
+        }
         
-        //show($rows);
+        // show($rows);
 
         $data['title'] = "Officer";
         $this->view('admin/officer',$data);
@@ -80,10 +80,10 @@
 		{
 			if($add_officer->validate($_POST))
 			{
-                // $_POST['empID'] =$add_officer->empID;
-                // $_POST['Name'] =$add_officer->Name;
-                // $_POST['Email'] =$add_officer->Email;
-                // $_POST['Mobile'] =$add_officer->Mobile;
+                $_POST['empID'] =$add_officer->empID;
+                $_POST['Name'] =$add_officer->Name;
+                $_POST['Email'] =$add_officer->Email;
+                $_POST['Mobile'] =$add_officer->Mobile;
                 // $_POST['date'] = date("Y-m-d H:i:s");
                 $add_officer->insert($_POST);
                 // message("Your profile was sucessfuly created. please login");

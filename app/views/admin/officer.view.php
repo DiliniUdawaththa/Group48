@@ -83,8 +83,8 @@
                             <td class="td_email"><?= $row->Email; ?></td>
                             <td class="td_mobile"><?= $row->Mobile; ?></td>
                             <td class="td_button">
-                            <a href="<?=ROOT?>/admin/officer_update/<?=$row->empID?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: #407217;"></i></i></button></a>
-                            <a href="<?=ROOT?>/admin/officer_delete/<?=$row->empID?>"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: #7b1417;"></i></button>
+                            <a href="<?=ROOT?>/admin/officer_update/<?=$row->empID?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: black;"></i></i></button></a>
+                            <a href="<?=ROOT?>/admin/officer_delete/<?=$row->empID?>"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: black;"></i></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -112,8 +112,8 @@
                         })
 
         //...................................................
-        // const table = document.querySelector('.table1')
-        // const form = document.querySelector('.officer_form')
+        const table = document.querySelector('.table1')
+        const form = document.querySelector('.officer_form')
         // const skip = document.querySelector('.skip')
         // const plus = document.getElementById('plus')
 
