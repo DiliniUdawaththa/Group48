@@ -59,5 +59,12 @@ class Officer extends Model{
         return $this->query($query,['empID' => $empID]);
     }
 
+    public function update_addofficer($empID, $data)
+    {
+        $query = $this->update($empID, $data);
+        return $query;
+        
+    }
+
 
 }
