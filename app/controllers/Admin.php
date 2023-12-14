@@ -17,6 +17,21 @@
             message('please login to view the admin section');
             redirect("login");
         }
+
+        $add_customer = new AdminCustomer();
+
+        $data = [
+            'role' => "customer"
+        ];
+
+        $rows = $add_customer->where($data);
+        $data['rows'] = array();
+
+        for($i = 0;$i < count($rows); $i++)
+        {
+            $data['rows'][] = $rows[$i];
+        }
+
         $data['title'] = "Customer";
         $this->view('admin/customer',$data);
     }
@@ -39,6 +54,21 @@
             message('please login to view the admin section');
             redirect("login");
         }
+
+        $add_driver = new AdminDriver();
+
+        $data = [
+            'role' => "driver"
+        ];
+
+        $rows = $add_driver->where($data);
+        $data['rows'] = array();
+
+        for($i = 0;$i < count($rows); $i++)
+        {
+            $data['rows'][] = $rows[$i];
+        }
+
         $data['title'] = "Drivers";
         $this->view('admin/driver',$data);
     }

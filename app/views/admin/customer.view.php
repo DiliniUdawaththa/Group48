@@ -60,7 +60,25 @@
                     <h2>CUSTOMER</h2>
                 </div>
             </div>
-        </div>
+
+            <div class="table1">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Email</td>
+                            <td>Mobile</td>
+                        </tr>
+                    </thead>
+                    <?php foreach ($rows as $row) : ?>
+                        <tr class="data">
+                            <td class="td_name"><?= $row->name; ?></td>
+                            <td class="td_email"><?= $row->email; ?></td>
+                            <td class="td_mobile"><?= $row->phone; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
     <!-- </div> -->
 
    
@@ -80,5 +98,7 @@
                     logout_button.addEventListener('click', ()=>{
                     window.location.href = "<?=ROOT?>/logout";
                     })
+
+        const table = document.querySelector('.table1')
     </script>
 </body>

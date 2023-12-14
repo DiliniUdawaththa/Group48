@@ -89,7 +89,7 @@
                       <input type="text" name="Email" required>
                             
                       <?php if(!empty($errors['Email'])):?>
-                              <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['address']?></small> -->
+                              <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['address']?></small>
                       <?php endif;?>
                       <br>
                     <div>
