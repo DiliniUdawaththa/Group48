@@ -1,6 +1,6 @@
 <?php
 
-class Officer extends Model{
+class AdminOfficer extends Model{
     public $errors = [];
 	protected $table = "addofficer";
 
@@ -48,7 +48,7 @@ class Officer extends Model{
             // show($_POST);
 			return true;
 		}
-        show($_POST);
+        // show($_POST);
 		return false;
 	}
 

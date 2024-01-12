@@ -64,52 +64,57 @@
               </div> -->
           </div>
 
+          <center>
           <div class="officer_form">
-              <form action="" method="post">
+              <form action="" method="post" onsubmit="return validateForm()">
                   <div class="officer_box">
                     <div>
-                      <label for="" class="label">Employee ID</label><br>
+                      <label for="empID" class="label">Employee ID</label><br>
                     </div>
-                      <input type="text" name="empID"  required>
+                      <input value="<?= set_value('empID') ?>" type="text" name="empID" class="<?=!empty($errors['empID']) ? 'error':'';?>" required>
                       <?php if(!empty($errors['empID'])):?>
+                        <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['name']?> </small> -->
                       <?php endif;?>
                       <br>
                     <div>
-                      <label for="" class="label" >Name</label><br>
+                      <label for="Name" class="label" >Name</label><br>
                     </div>
-                      <input type="text" name="Name" required>
+                    <input value="<?= set_value('Name') ?>" type="text" name="Name" class="<?=!empty($errors['Name']) ? 'error':'';?>" required>
                       <?php if(!empty($errors['Name'])):?>
                       <?php endif;?>
                       <br>
                     <div>
-                      <label for="" class="label">Email</label>
+                      <label for="Email" class="label">Email</label>
                       <!-- <i class="fa-solid fa-location-dot"></i> -->
                       <br>
                     </div>
-                      <input type="text" name="Email" required>
+                    <input value="<?= set_value('Email') ?>" type="text" name="Email" class="<?=!empty($errors['Email']) ? 'error':'';?>" required>
                             
                       <?php if(!empty($errors['Email'])):?>
                               <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['address']?></small>
                       <?php endif;?>
                       <br>
                     <div>
-                      <label for="" class="label">Mobile</label>
+                      <label for="Mobile" class="label">Mobile</label>
                             <!-- <i class="fa-solid fa-location-dot"></i> -->
                       <br>
                     </div>
-                      <input type="text" name="Mobile" required>
+                    <input value="<?= set_value('Mobile') ?>" type="text" name="Mobile" class="<?=!empty($errors['Mobile']) ? 'error':'';?>" required>
                             
                       <?php if(!empty($errors['Mobile'])):?>
                           <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['Mobile']?></small>  -->
                       <?php endif;?>
                       <br>
-                      <a href="<?=ROOT?>/admin/officer/"><button type="submit" class="submit_btn">Submit</button>
-                            <!-- <a href="<?=ROOT?>/admin/officer/"><button type="submit" class="cancel_btn">Cancel</button> -->
-                            <!-- <small class="skip"><center>skip</center></small> -->
-                  </div>
+                      <!-- <button  id="submit_btn" class="submit_btn">Submit</button> -->
+                      <div class="btn">
+                      <a href="<?=ROOT?>/admin/officer/"><button type="submit" class="submit_btn">Submit</button></a>
+                      <!-- <a href="<?=ROOT?>/admin/officer"><small class="submit" class="cancel_btn">Cancel</button> -->
+                      <a href="<?=ROOT?>/admin/officer"><small class="skip"><center>Cancel</center></small></a>
+                      </div>
+                    </div>
                 </form>
           </div>
-
+       </center>
         </div>
     <script>
         const logout_option = document.querySelector('.linkbutton2')
@@ -128,9 +133,9 @@
                 window.location.href = "<?=ROOT?>/logout";
                 })
 
-        // const table = document.querySelector('.table1')
+        const table = document.querySelector('.table1')
         const form = document.querySelector('.officer_form')
         // const skip = document.querySelector('.skip')
-        // const plus = document.getElementById('plus')
+        const operation = document.getElementById('plus')
     </script>
 </body>

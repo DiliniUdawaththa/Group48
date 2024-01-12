@@ -228,9 +228,13 @@ table tbody tr:nth-child(odd) {
     border-radius: 5px;
     cursor: pointer;
 }
+.td_button{
+    display: flex;
+    align-content: center;
+}
 /*------------------------------add officer form----------------------------*/
 .officer_form{
-    display: none;
+    display: block;
     height: 100%;
     width:60%;
     /* border: solid; */
@@ -256,4 +260,91 @@ table tbody tr:nth-child(odd) {
     margin-top: 7px;
     border-radius: 8px;
     border: none;
+}
+.label{
+    color: #162938;
+    font-size: 20px;
+    text-align: left;
+    
+    /* float: left; */
+   
+}
+.btn{
+    display: flex;
+    justify-content: space-between;
+}
+.submit_btn{
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 17px;
+    margin:  0 35% ;
+    background-color: #162938;
+    border: none;
+    color: #D9D9D9;
+}
+.submit_btn:hover{
+    background-color: #1f3648;
+}
+.skip{
+    cursor: pointer;
+    /* padding: 12px 16px; */
+    /* border-radius: 8px; */
+    font-size: 17px;
+    margin:  0 35% ;
+    background-color: #162938;
+    border: none;
+    color: #162938;
+    text-decoration: none;
+}
+.skip:hover{
+    /* text-decoration: underline; */
+    background-color: #1f3648;
+}
+
+/* Delete part-------------------------------------------------------------------------- */
+.delete-container{
+    padding:30px;
+    width: 50%;
+    height: 200px;
+    display: none;
+    text-align: center;
+    color: black;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+}
+.delete-container button{
+    height:40px;
+    width:150px;
+    border: 0px;
+    cursor: pointer;
+}
+.dlt-btn{
+    background-color: #194672;
+    color:white;
+}
+.dlt-btn:hover{
+    background-color: rgb(207, 207, 207);
+    color:black;
+}
+.cancel-delete{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.delete-text{
+    margin-top: 10px;
+    display: block;
+    font-size: 16px;
+}
+.dltbutton{
+    display:flex;
 }
