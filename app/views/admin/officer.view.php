@@ -84,12 +84,19 @@
                             <td class="td_mobile"><?= $row->Mobile; ?></td>
                             <td class="td_button">
                             <a href="<?=ROOT?>/admin/officer_update/<?=$row->empID?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: black;"></i></i></button></a>
-                            <a href="<?=ROOT?>/admin/officer_delete/<?=$row->empID?>"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: black;"></i></button>
+                            <a href="#"><div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: black;"></i></div></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
             </div>
+
+            <div class="delete-container">
+                <h2>Delete</h2>
+                <p class="delete-text">Are you sure you want to Delete this record</p>
+                <div class="cancel-delete"><button class="cancel-btn1">Cancel</button><button class="dlt-btn">Delete</button></div>
+            </div>
+
         </div>
     <!-- </div> -->
 
@@ -111,11 +118,27 @@
                         window.location.href = "<?=ROOT?>/logout";
                         })
 
+        const delete_option = document.querySelector('.dltbutton')
+        const delete_container = document.querySelector('.delete-container')
+        const cancel_button1 = document.querySelector('.cancel-btn1')
+            const delete_button = document.querySelector('.dlt-btn')
+                delete_option.addEventListener('click',()=>{
+                    delete_container.style.display = 'block'
+                    })
+
+                    cancel_button1.addEventListener('click', ()=>{
+                        delete_container.style.display = 'none'
+                        })
+
+                        delete_button.addEventListener('click', ()=>{
+                        window.location.href = "<?=ROOT?>/admin/officer_delete/<?=$row->empID?>";
+                        })
+
         //...................................................
         const table = document.querySelector('.table1')
         const form = document.querySelector('.officer_form')
         // const skip = document.querySelector('.skip')
-        // const plus = document.getElementById('plus')
+        const operation = document.getElementById('plus')
 
         // plus.addEventListener('click',()=>{
         //     form.style.display = 'block'

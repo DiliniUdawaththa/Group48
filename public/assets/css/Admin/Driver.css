@@ -199,3 +199,12 @@ table tbody tr {
 table tbody tr:nth-child(odd) {
 	background-color: #ffffff;
 }
+.detail_btn{
+    background-color: rgb(82, 41, 194);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}

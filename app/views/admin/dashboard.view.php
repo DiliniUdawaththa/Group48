@@ -57,7 +57,7 @@
         <div class="interface">
             <div class="navi">
                     <div class="navi1">
-                        <h3>Admin Dashboard</h3>
+                        <h2>Admin Dashboard</h2>
                     </div>
 
                 <div class="operation">

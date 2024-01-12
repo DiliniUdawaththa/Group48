@@ -82,20 +82,21 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_officer = new officer();
+        $add_officer = new AdminOfficer();
 
         $rows = $add_officer->findAll();
         $data['rows'] = array();
 
+        if(isset($rows[0])){
         for($i = 0;$i < count($rows); $i++)
         {
             $data['rows'][] = $rows[$i];
         }
         
         // show($rows);
-
         $data['title'] = "Officer";
         $this->view('admin/officer',$data);
+        }
     }
 
     public function officer_insert(){
@@ -105,7 +106,7 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_officer = new officer();
+        $add_officer = new AdminOfficer();
         if($_SERVER['REQUEST_METHOD'] == "POST")
 		{
 			if($add_officer->validate($_POST))
@@ -119,7 +120,6 @@
                 // message("Your profile was sucessfuly created. please login");
 				redirect('admin/officer');
             }
-           
         }
         $data['errors'] = $add_officer ->errors;
         $data['title'] = "Officer";
@@ -134,7 +134,7 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_officer = new officer();
+        $add_officer = new AdminOfficer();
 
         $rows = $add_officer->findAll();
         $data['rows'] = array();
@@ -156,7 +156,7 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_officer = new officer();
+        $add_officer = new AdminOfficer();
         $rows = $add_officer->findAll();
         $data['rows'] = array();
 
@@ -176,7 +176,6 @@
                 // show($_POST);           
                 $add_officer->update($empID,$_POST);
                 // message("Your profile was sucessfuly created. please login");
-				// redirect('customer/add_place');
 
                 redirect('admin/officer');
             }
