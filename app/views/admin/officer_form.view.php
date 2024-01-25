@@ -58,10 +58,6 @@
               <div class="navi1">
                   <h2>OFFICER</h2>
               </div>
-
-              <!-- <div class="operation">
-                  <button type="button" class="button-style" id="plus">Add Officer</button>
-              </div> -->
           </div>
 
           <center>
@@ -73,44 +69,47 @@
                     </div>
                       <input value="<?= set_value('empID') ?>" type="text" name="empID" class="<?=!empty($errors['empID']) ? 'error':'';?>" required>
                       <?php if(!empty($errors['empID'])):?>
-                        <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['name']?> </small> -->
+                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['empID']?> </small>
                       <?php endif;?>
                       <br>
+
                     <div>
                       <label for="Name" class="label" >Name</label><br>
                     </div>
-                    <input value="<?= set_value('Name') ?>" type="text" name="Name" class="<?=!empty($errors['Name']) ? 'error':'';?>" required>
+                    <input value="<?= set_value('Name') ?>" type="text" name="Name" required>
                       <?php if(!empty($errors['Name'])):?>
+                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['Name']?> </small>
                       <?php endif;?>
                       <br>
+
                     <div>
                       <label for="Email" class="label">Email</label>
                       <!-- <i class="fa-solid fa-location-dot"></i> -->
                       <br>
                     </div>
-                    <input value="<?= set_value('Email') ?>" type="text" name="Email" class="<?=!empty($errors['Email']) ? 'error':'';?>" required>
-                            
+                    <input value="<?= set_value('Email') ?>" type="text" name="Email" required>       
                       <?php if(!empty($errors['Email'])):?>
-                              <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['address']?></small>
+                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['Email']?></small>
                       <?php endif;?>
                       <br>
+
                     <div>
                       <label for="Mobile" class="label">Mobile</label>
                             <!-- <i class="fa-solid fa-location-dot"></i> -->
                       <br>
                     </div>
-                    <input value="<?= set_value('Mobile') ?>" type="text" name="Mobile" class="<?=!empty($errors['Mobile']) ? 'error':'';?>" required>
-                            
+                    <input value="<?= set_value('Mobile') ?>" type="text" name="Mobile" required>              
                       <?php if(!empty($errors['Mobile'])):?>
-                          <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['Mobile']?></small>  -->
+                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['Mobile']?></small> 
                       <?php endif;?>
                       <br>
+
+                      <!-- <div class="btn"> -->
                       <!-- <button  id="submit_btn" class="submit_btn">Submit</button> -->
-                      <div class="btn">
-                      <a href="<?=ROOT?>/admin/officer/"><button type="submit" class="submit_btn">Submit</button></a>
+                      <a href="<?=ROOT?>/admin/officer/"><button type="submit" class="submit_btn"><center>Submit</center></button></a>
                       <!-- <a href="<?=ROOT?>/admin/officer"><small class="submit" class="cancel_btn">Cancel</button> -->
                       <a href="<?=ROOT?>/admin/officer"><small class="skip"><center>Cancel</center></small></a>
-                      </div>
+                      <!-- </div> -->
                     </div>
                 </form>
           </div>
@@ -136,6 +135,6 @@
         const table = document.querySelector('.table1')
         const form = document.querySelector('.officer_form')
         // const skip = document.querySelector('.skip')
-        const operation = document.getElementById('plus')
+        const operation = document.getElementById('submit_btn')
     </script>
 </body>

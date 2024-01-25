@@ -16,14 +16,21 @@ class AdminOfficer extends Model{
 	{
 		$this->errors = [];
 
+        // show($data['empID']);
+        $this->empID = $data['empID'];
+        $this->Name = $data['Name'];
+        $this->Email = $data['Email'];
+        $this->Mobile = $data['Mobile'];
+       // show($this->empID);
+
+        if ($this->where(['empID'=> $data['empID']])) {
+            $this->errors['empID'] = "Employee ID already exist.";
+        }
+
         if (!preg_match("/^[a-zA-Z]+$/", trim($data['Name']))) {
              $this->errors['Name'] = "name can only have letters.";
         }elseif ($this->where(['Name'=> $data['Name']])) {
              $this->errors['Name'] = "name already exist.";
-        }
-
-        if (!filter_var($data['Email'], FILTER_VALIDATE_EMAIL)) {
-            $this->errors['Email'] = "Email is not valid.";
         }
 
         if (!filter_var($data['Email'], FILTER_VALIDATE_EMAIL)) {
@@ -41,7 +48,9 @@ class AdminOfficer extends Model{
 			$this->errors['Mobile'] = "Contact number must be  10 digits long.";
 		} elseif (strlen($data['Mobile']) >10) {
 			$this->errors['Mobile'] = "Contact number must be  10 digits long.";
-		}
+		} elseif ($this->where(['Mobile'=> $data['Mobile']])) {
+            $this->errors['Mobile'] = "Mobile number already exist.";
+        }
 
         if(empty($this->errors))
 		{
