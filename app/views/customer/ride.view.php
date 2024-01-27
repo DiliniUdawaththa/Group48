@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Document</title>
+<title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ridestep.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
 </head>
@@ -22,7 +22,7 @@
 
       <div class="sideprofile">
          <img src="<?= ROOT ?>/assets/img/person.jpg" alt="">
-         <H3 >Thusikaran</H3>
+         <H3 ><?php echo $_SESSION['USER_DATA']->name; ?> </H3>
          <h6>
            <i class="fa-solid fa-star" style="color: #D1B000;"></i>
            <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -46,13 +46,13 @@
         <div class="sidebar">
 
              <div class="barimagetag">
-                <img src="<?= ROOT ?>/assets/img/logoname.png" alt="" class="barimage">
+                <img src="<?= ROOT ?>/assets/img/logoname.png" alt=" " class="barimage">
              </div>
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/person.jpg" alt="" class="userimage">
-                <H3 class="username">Thusikaran</H3>
+                <img src="<?= ROOT ?>/assets/img/person.png" alt="" class="userimage">
+                <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -64,10 +64,10 @@
              
 
              <div class="linktag">
-                <a href="<?=ROOT?>/customer" class="link"><div class="linkbutton1"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
+                <a href="<?=ROOT?>/customer/ride" class="link"><div class="linkbutton1"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
                 <a href="<?=ROOT?>/customer/add_place" class="link"><div class="linkbutton"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
-                <a href="<?=ROOT?>/customer/add_place" class="link"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
-                <a href="<?=ROOT?>/customer/add_place" class="link"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
+                <a href="<?=ROOT?>/customer/activity" class="link"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="<?=ROOT?>/customer/help" class="link"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
                 <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
              </div>
       
@@ -111,7 +111,7 @@
                       <img src="<?= ROOT ?>/assets/img/c1.png" alt="">
                       <div class="ctext">
                          <span>Moto</span>
-                         <span><b>$157.00</b></span>
+                         <span><b>Rs 157.00</b></span>
                          <span class="no_user"><b>1</b><i class="fa-solid fa-user-group"></i></i></span>
                       </div>
                   </div>
@@ -119,7 +119,7 @@
                       <img src="<?= ROOT ?>/assets/img/c2.jpeg" alt="">
                       <div class="ctext">
                         <span>Auto</span>
-                        <span><b>$200.00</b></span>
+                        <span><b>Rs 200.00</b></span>
                         <span class="no_user"><b>3</b><i class="fa-solid fa-user-group"></i></i></span>
                      </div>
                   </div>
@@ -127,7 +127,7 @@
                       <img src="<?= ROOT ?>/assets/img/c3.png" alt="">
                       <div class="ctext">
                         <span>Car</span>
-                        <span><b>$230.00</b></span>
+                        <span><b>Rs 230.00</b></span>
                         <span class="no_user"><b>4</b><i class="fa-solid fa-user-group"></i></i></span>
                      </div>
                  </div>
@@ -137,7 +137,7 @@
                      <img src="<?= ROOT ?>/assets/img/c3.png" alt="">
                      <div class="ctext">
                         <span>AC-Car</span>
-                        <span><b>$260.00</b></span>
+                        <span><b>Rs 260.00</b></span>
                         <span class="no_user"><b>4</b><i class="fa-solid fa-user-group"></i></i></span>
                      </div>
                  </div>
@@ -145,7 +145,7 @@
                       <img src="<?= ROOT ?>/assets/img/c4.png" alt="">
                       <div class="ctext">
                         <span>Mini-Van</span>
-                        <span><b>$300.00</b></span>
+                        <span><b>Rs 300.00</b></span>
                         <span class="no_user"><b>6</b><i class="fa-solid fa-user-group"></i></i></span>
                      </div>
                   </div>
@@ -159,7 +159,7 @@
 <!-- -------------------------------------------------------------------------------------------- -->
              <div class="step4" id="step4">
                 <h1>Request  for Driver</h1>
-                <div class="sf"><h4>Standed fare  :  600/-</h4></div>
+                <div class="sf"><h4>Standed fare  : Rs 500.00</h4></div>
                 
                 <div class="driverlist">
                   
@@ -172,7 +172,7 @@
                         <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
                      </span></div>
                   <div class="name">Mr.S.Makesh</div>
-                  <div class="fare">Fare<br><b>500/-</b></div>
+                  <div class="fare">Fare<br><b>Rs 400.00</b></div>
                   <div class="nrbutton">
                      <button class="Negotiate">Negotiate</button>
                      <button class="Request">Select</button>
@@ -188,8 +188,8 @@
                      <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
                      <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
                   </span></div>
-                  <div class="name">Mr.S.Makesh</div>
-                  <div class="fare">Fare<br><b>500/-</b></div>
+                  <div class="name">Mr.S.Ravi</div>
+                  <div class="fare">Fare<br><b>Rs 420.00</b></div>
                   <div class="nrbutton">
                      <button class="Negotiate">Negotiate</button>
                      <button class="Request">Select</button>
@@ -205,8 +205,8 @@
                      <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
                      <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
                   </span></div>
-                  <div class="name">Mr.S.Makesh</div>
-                  <div class="fare">Fare<br><b>500/-</b></div>
+                  <div class="name">Mr.S.Raja</div>
+                  <div class="fare">Fare<br><b>Rs 450.00</b></div>
                   <div class="nrbutton">
                      <button class="Negotiate">Negotiate</button>
                      <button class="Request">Select</button>
@@ -222,8 +222,8 @@
                      <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
                      <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
                   </span></div>
-                  <div class="name">Mr.S.Makesh</div>
-                  <div class="fare">Fare<br><b>500/-</b></div>
+                  <div class="name">Mr.S.Kamal</div>
+                  <div class="fare">Fare<br><b>Rs 500.00</b></div>
                   <div class="nrbutton">
                      <button class="Negotiate">Negotiate</button>
                      <button class="Request">Select</button>
@@ -239,8 +239,8 @@
                      <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
                      <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
                   </span></div>
-                  <div class="name">Mr.S.Makesh</div>
-                  <div class="fare">Fare<br><b>500/-</b></div>
+                  <div class="name">Mr.S.Lambo</div>
+                  <div class="fare">Fare<br><b>Rs 500.00</b></div>
                   <div class="nrbutton">
                      <button class="Negotiate">Negotiate</button>
                      <button class="Request">Select</button>

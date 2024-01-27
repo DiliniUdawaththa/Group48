@@ -22,16 +22,20 @@
 		
         $rows = $add_place->findAll();
         $data['rows'] = array();
+       
+        if(isset($rows[0])){
 
         for($i = 0;$i < count($rows); $i++)
-        {
-                $data['rows'][] = $rows[$i];
-        }
+         {
+                   $data['rows'][] = $rows[$i];
+         }
         
         // show($rows);
         $data['title'] = "Add_Place";
         $this->view('customer/add_place',$data);
+        }
     }
+
     public function add_place_delete($id=null){
         if(!Auth::logged_in())
         {
@@ -49,9 +53,8 @@
         }
         $add_place->delete_addplace($id);
         redirect('customer/add_place');
-            
-
     }
+    
     public function add_place_update($id=null){
         if(!Auth::logged_in())
         {
@@ -73,20 +76,12 @@
 		{
 			if($add_place->validate($_POST))
 			{
-                // print_r($_POST);die();
-                
-                // $_POST['icon'] =$add_place->icon;
                 $_POST['date'] = date("Y-m-d H:i:s");
                
                 $add_place->fit_icon($_POST);
                 $_POST['icon']= $add_place ->icon;
                 $_POST['id']=$id;
-                // print_r($_POST);die();
                 $add_place->update($id,$_POST);
-              
-                // $add_place->update($id,$add_place->icon);    
-             //   $add_place->update($id,$add_place->icon);
-                // message("Successfully Add Place");
 				redirect('customer/add_place');
             }
            
@@ -123,24 +118,24 @@
         $this->view('customer/add_place_form',$data);
 
     }
-    // public function Activity(){
-    //     if(!Auth::logged_in())
-    //     {
-    //         message('please login to view the page');
-    //         redirect("login");
-    //     }
-    //     $data['title'] = "Activity";
-    //     $this->view('customer/activity',$data);
-    // }
-    // public function Help(){
-    //     if(!Auth::logged_in())
-    //     {
-    //         message('please login to view the page');
-    //         redirect("login");
-    //     }
-    //     $data['title'] = "Help";
-    //     $this->view('customer/help',$data);
-    // }
+    public function Activity(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Activity";
+        $this->view('customer/activity',$data);
+    }
+    public function Help(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Help";
+        $this->view('customer/help',$data);
+    }
  }
  //echo " sample home page";
  ?>

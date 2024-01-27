@@ -52,7 +52,6 @@ class User extends Model
         }
 
 
-
 		if (empty($data['phone'])) {
 			$this->errors['phone'] = "Contact number is required.";
 		} elseif (!preg_match("/^[0-9]+$/", $data['phone'])) {
@@ -61,24 +60,22 @@ class User extends Model
 			$this->errors['phone'] = "Contact number must be  10 digits long.";
 		} elseif (strlen($data['phone']) >10) {
 			$this->errors['phone'] = "Contact number must be  10 digits long.";
-		}
+		}elseif ($this->where(['phone'=> $data['phone']])) {
+            $this->errors['phone'] = "mobile number already exist.";
+        }
 		
 
-		// if($data['password'] !== $data['retype_password'])
-		// {
-		// 	$this->errors['password'] = "Passwords do not match";
-		// }
 
 		// show($data['term1']);
 		if(empty($data['term1']))
 		{
 			if(empty($data['term2']))
-			    {$this->errors['term2'] = "Please accept the terms and conditions";}
+			    {$this->errors['term2'] = "Please select your role";}
 		}
 		if(!empty($data['term1']))
 		{
 			if(!empty($data['term2']))
-			    {$this->errors['term2'] = "Please select one term";}
+			    {$this->errors['term2'] = "Please select one role";}
 		}
 		if(empty($data['term1']))
 		{

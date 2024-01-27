@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/Add_Place.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
-    <title>Document</title>
+    <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <style>
         .error {
             border: 1px solid red;
@@ -38,8 +38,8 @@
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/person.jpg" alt="" class="userimage">
-                <H3 class="username">Thusikaran</H3>
+                <img src="<?= ROOT ?>/assets/img/person.png" alt="" class="userimage">
+                <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -53,8 +53,8 @@
              <div class="linktag">
                 <a href="<?= ROOT ?>/customer" class="link"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
                 <a href="<?= ROOT ?>/customer/add_place" class="link"><div class="linkbutton1"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
-                <a href="#" class="link"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
-                <a href="#" class="link"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
+                <a href="<?= ROOT ?>/customer/activity" class="link"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="<?= ROOT ?>/customer/help" class="link"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
                 <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
              </div>
       

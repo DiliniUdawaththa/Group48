@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Dashboard.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Driver.css">
     <style>
         .error{
             border: 1px solid red;
@@ -37,9 +37,9 @@
                 <H3 class="username"><?=Auth::getname();?></H3>
             </div>
             <div class="items">
-                <a href="<?=ROOT?>/admin" class="link"><div class="linkbutton1"><i class="fa-solid fa-gauge"></i>Dashboard</div></a>
+                <a href="<?=ROOT?>/admin" class="link"><div class="linkbutton"><i class="fa-solid fa-gauge"></i>Dashboard</div></a>
                 <a href="<?=ROOT?>/admin/customer" class="link"><div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div></a>
-                <a href="<?=ROOT?>/admin/driver" class="link"><div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div></a>
+                <a href="<?=ROOT?>/admin/driver" class="link"><div class="linkbutton1"><i class="fa-solid fa-user-group"></i>Drivers</div></a>
                 <a href="<?=ROOT?>/admin/officer" class="link"><div class="linkbutton"><i class="fa-solid fa-user-tie"></i>Officer</div></a>
                 <a href="<?=ROOT?>/admin/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-taxi"></i>Rides</div></a>
                 <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>Logout</div></a>
@@ -53,52 +53,41 @@
 
                  
         </div>
-   
+
         <div class="interface">
             <div class="navi">
-                    <div class="navi1">
-                        <h2>Admin Dashboard</h2>
-                    </div>
-
-                <div class="operation">
-                    <i class="fa-solid fa-bell"></i>
+                <div class="navi1">
+                    <h2>DRIVERS</h2>
                 </div>
             </div>
 
-            <div class="values">
-                <div class="val-box">
-                    <i class="fa-solid fa-users"></i>
-                    <div>
-                        <span>Customers</span>
-                        <h3>1000</h3>
-                    </div>   
-                </div>
-                <div class="val-box">
-                    <i class="fa-solid fa-user-group"></i>
-                    <div>
-                        <span>Drivers</span>
-                        <h3>100</h3>
-                    </div>
-                </div>
-                <div class="val-box">
-                    <i class="fa-solid fa-user-tie"></i>
-                    <div>
-                        <span>Officers</span>
-                        <h3>4</h3>
-                    </div>
-                </div>
-                <div class="val-box">
-                    <i class="fa-solid fa-taxi"></i>
-                    <div>
-                        <span>Rides</span>
-                        <h3>400</h3>
-                    </div>
-                </div>
+            <div class="table1">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Email</td>
+                            <td>Mobile</td>
+                            <td>More</td>
+                        </tr>
+                    </thead>
+                    <?php foreach ($rows as $row) : ?>
+                        <tr class="data">
+                            <td class="td_name"><?= $row->name; ?></td>
+                            <td class="td_email"><?= $row->email; ?></td>
+                            <td class="td_mobile"><?= $row->phone; ?></td>
+                            <td class="td_button">
+                            <a href="<?=ROOT?>/admin/driver/"><button class="detail_btn"><i class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
             </div>
-        </div>        
-    </div>
 
-       
+        </div>
+    <!-- </div> -->
+
+   
     <script>
         const logout_option = document.querySelector('.linkbutton2')
         const logout_container = document.querySelector('.logout-container')
@@ -112,10 +101,8 @@
                     logout_container.style.display = 'none'
                     })
 
-                        logout_button.addEventListener('click', ()=>{
-                        window.location.href = "<?=ROOT?>/logout";
-                        })
+                    logout_button.addEventListener('click', ()=>{
+                    window.location.href = "<?=ROOT?>/logout";
+                    })
     </script>
-
 </body>
-</html>

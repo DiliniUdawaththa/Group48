@@ -14,6 +14,7 @@
             <button class="help-btn" id="help-btn">Help</button>
         </div>
         <div class="upload-container">
+        <div style="margin-top:60px;"></div>
             <p class="upload">Upload a picture of your Vechicle Insurance</p>
 
             <div class="image-container"><img class="insurance-pic" id="insurance-pic" src="<?= ROOT?>/assets/img/images/insurance.png"></div>
