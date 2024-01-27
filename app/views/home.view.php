@@ -6,12 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/index.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
 </head>
 <body style="margin:0px">
 <div class="header" id="section1">
-    <img src="<?= ROOT ?>/assets/img/logo_name.png" class="logoname">
+    <img src="<?= ROOT ?>/assets/img/logonamenw.png" class="logoname">
     <div class="nav">
         <a class="a" href="#section1" >Home</a>
         <a class="a" href="#section2" >Services</a>
@@ -42,28 +43,34 @@
         <div>
             <div id="driver">
                 <h1>
-                    Drivers!
+                    Work as a driver
                 </h1>
                 <div>
-                    <p>
+                    <ul>
+                    <li><p>
                         Passionate about urban exploration and adventure? Consider joining us as a city travel
                         system driver. Lead participants through captivating routes, showcasing the heart of our city.
                         Your expertise will shape memorable journeys.
-                    </p>
+                    </p></li>
+                    <li><p>Be part of creating remarkable experiences and a strong sense of camaraderie.
+                        Become a driver and propel the spirit of adventure forward!</p></li>
+                    </ul>
                     <button>Join us</button>
-                    <p>Be part of creating remarkable experiences and a strong sense of camaraderie.
-                        Become a driver and propel the spirit of adventure forward!</p>
                 </div>
             </div>
             <div id="ride">
 
-                <h1>Request a ride now</h1>
-                <div>
-                    <input type="text" placeholder="Enter pickup location">
-                    <input type="text" placeholder="Enter destination">
-                    <button>Register now</button>
-                    <p> Embark on an unforgettable journey with us! Join our exciting ride event and experience breathtaking
-                        landscapes, thrilling adventures, and memories that will last a lifetime. Register now to secure your spot!</p>
+                
+                <div><img src="<?= ROOT ?>/assets/img/customer_phone.png" class="phone-img"> </div>
+                <div class="ride-text">
+                    <h1>Request a ride now</h1>
+                    <ul>
+                        <li>Select your pickup location and where you wish to arrive, and let the beauty of the path unfold before you</li>
+                        <li>Embark on an unforgettable journey with us! Join our exciting ride event and experience breathtaking
+                        landscapes, thrilling adventures, and memories that will last a lifetime.</li>
+                        
+                    </ul>
+                    <button class="ride-btn">Register Now</button>
                 </div>
             </div>
             <div id="aboutus">A taxi management system, where customers select their drivers, boasts key features for a superior experience. Customers access driver profiles with ratings, photos, and reviews, ensuring informed choices. Real-time GPS tracking enhances safety, while in-app messaging facilitates easy communication. A driver rating system allows customers to provide feedback. These features empower customers, ensuring transparency, convenience, and satisfaction in the taxi booking process.</div>
@@ -78,30 +85,48 @@
                 const aboutus = document.getElementById('aboutus');
 
                 icon1.addEventListener('click', () => {
-                    driver.style.display = 'block';
+                    driver.style.display = 'flex';
                     ride.style.display = 'none';
                     aboutus.style.display = 'none';
                     icon1.style.backgroundColor="#D9D9D9";
-                    icon2.style.backgroundColor="#b5b5b5";
-                    icon3.style.backgroundColor="#b5b5b5";
+                    icon1.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)";
+                    icon1.style.marginTop= "10px";
+                    icon2.style.backgroundColor="#ffffff";
+                    icon2.style.removeProperty("box-shadow");
+                    icon2.style.marginTop= "0px";
+                    icon3.style.backgroundColor="#ffffff";
+                    icon3.style.removeProperty("box-shadow");
+                    icon3.style.marginTop= "0px";
                 });
 
                 icon2.addEventListener('click', () => {
                     driver.style.display = 'none';
-                    ride.style.display = 'block';
+                    ride.style.display = 'flex';
                     aboutus.style.display = 'none';
-                    icon2.style.backgroundColor='#D9D9D9';
-                    icon1.style.backgroundColor="#b5b5b5";
-                    icon3.style.backgroundColor="#b5b5b5";
+                    icon2.style.backgroundColor="#D9D9D9";
+                    icon2.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)";
+                    icon2.style.marginTop= "10px";
+                    icon1.style.backgroundColor="#ffffff";
+                    icon1.style.removeProperty("box-shadow");
+                    icon1.style.marginTop= "0px";
+                    icon3.style.backgroundColor="#ffffff";
+                    icon3.style.removeProperty("box-shadow");
+                    icon3.style.marginTop= "0px";
                 });
 
                 icon3.addEventListener('click', () => {
                     driver.style.display = 'none';
                     ride.style.display = 'none';
-                    aboutus.style.display = 'block';
+                    aboutus.style.display = 'flex';
                     icon3.style.backgroundColor="#D9D9D9";
-                    icon2.style.backgroundColor="#b5b5b5";
-                    icon1.style.backgroundColor="#b5b5b5";
+                    icon3.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)";
+                    icon3.style.marginTop= "10px";
+                    icon2.style.backgroundColor="#ffffff";
+                    icon2.style.removeProperty("box-shadow");
+                    icon2.style.marginTop= "0px";
+                    icon1.style.backgroundColor="#ffffff";
+                    icon1.style.removeProperty("box-shadow");
+                    icon1.style.marginTop= "0px";
 
 
                 });
