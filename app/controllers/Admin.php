@@ -11,30 +11,59 @@
     }
 
     // customer profile controller
-     public function customer(){
-        if(!Auth::logged_in())
-        {
+    //  public function customer(){
+    //     if(!Auth::logged_in())
+    //     {
+    //         message('please login to view the admin section');
+    //         redirect("login");
+    //     }
+
+    //     $add_customer = new AdminCustomer();
+
+    //     $data = [
+    //         'role' => "customer"
+    //     ];
+
+    //     $rows = $add_customer->where($data);
+    //     $data['rows'] = array();
+
+    //     for($i = 0;$i < count($rows); $i++)
+    //     {
+    //         $data['rows'][] = $rows[$i];
+    //     }
+
+    //     $data['title'] = "Customer";
+    //     $this->view('admin/customer',$data);
+    // }
+
+    public function customer() {
+        if (!Auth::logged_in()) {
             message('please login to view the admin section');
             redirect("login");
         }
-
+    
         $add_customer = new AdminCustomer();
-
+    
+        $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+    
         $data = [
-            'role' => "customer"
+            'role' => 'customer',
         ];
-
-        $rows = $add_customer->where($data);
-        $data['rows'] = array();
-
-        for($i = 0;$i < count($rows); $i++)
-        {
-            $data['rows'][] = $rows[$i];
+    
+        if ($searchTerm !== null) {
+            // If a search term is provided, perform a search
+            $rows = $add_customer->where1($data, $searchTerm);
+        } else {
+            // Otherwise, retrieve all customers
+            $rows = $add_customer->where($data);
         }
-
+    
+        $data['rows'] = is_array($rows) ? $rows : [];
+    
         $data['title'] = "Customer";
-        $this->view('admin/customer',$data);
+        $this->view('admin/customer', $data);
     }
+    
 
     // ride profile controller
     public function ride(){
@@ -109,8 +138,10 @@
         $add_officer = new AdminOfficer();
         if($_SERVER['REQUEST_METHOD'] == "POST")
 		{
+            
 			if($add_officer->validate($_POST))
 			{
+                //  show($add_officer->Name);
                 $_POST['empID'] =$add_officer->empID;
                 $_POST['Name'] =$add_officer->Name;
                 $_POST['Email'] =$add_officer->Email;
@@ -168,17 +199,16 @@
         // show($_POST);
         if($_SERVER['REQUEST_METHOD'] == "POST")
 		{
+            // show($_POST);
             
-			if($add_officer->validate($_POST))
-			{    
-                // show($_POST);
-                $_POST['empID']=$empID; 
-                // show($_POST);           
-                $add_officer->update($empID,$_POST);
+            // if($add_officer->validate($_POST))
+			// {    
+                $_POST['empID']=$empID;            
+                $add_officer->update_addofficer($empID,$_POST);
                 // message("Your profile was sucessfuly created. please login");
 
                 redirect('admin/officer');
-            }
+            // }
            
         }
 
@@ -199,6 +229,18 @@
 
         $data['title'] = "Profile";
         $this->view('admin/profile',$data);
+    }
+
+    // Searchbar
+    public function search() {
+        if (isset($_GET['search'])) {
+            $searchTerm = $_GET['search'];
+            $model = new YourModel();
+            $data = $model->searchData($searchTerm);
+            include 'YourView.php';
+        } else {
+            // Redirect or handle the absence of search term
+        }
     }
 
 
