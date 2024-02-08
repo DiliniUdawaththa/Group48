@@ -141,7 +141,7 @@ body{
     display: block;
     font-size: 16px;
 }
-
+/*-----------------------interface-----------------------*/
 .interface {
     width: 80%;
     height: 100vh;
@@ -189,33 +189,41 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #fff;
-    padding: 15px 30px;
-    border-left: 4px;
+    background: #111827;
+    padding: 5px 15px 5px 15px;
+    /* border-left: 4px;
     border-right: 4px;
-    border-top: 4px;
-    border-radius: 6px;
+    border-top: 4px; */
+    /* border-radius: 6px; */
+    border: solid 4px #fff;
 }
 
 .navi .navi1 {
     justify-content: flex-start;
     align-items: center;
     padding: 10px 14px;
-    color: #111827;
+    color: #fff;
+}
+
+.operation{
+    color: #fff;
+    padding: 10px 14px;
 }
 
 .values {
-    padding: 30px 30px 0 30px;
+    padding: 20px 20px 20px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    background-color: #111827;
+    border: solid 4px #fff;
 }
 
 .values .val-box {
     background: #fff;
     width: 200px;
-    padding: 14px 14px;
+    padding: 10px 10px;
     border-radius: 60px;
     display: flex;
     justify-content: flex-start;
@@ -248,38 +256,6 @@ body{
 .button-style:hover {
     background-color: #232c3c; 
 }
-
-/* table {
-	border-collapse: collapse;
-    font-family: Tahoma, Geneva, sans-serif;
-    width: 100%;
-    table-layout: auto;
-}
-table td {
-	padding: 15px;
-}
-table thead td {
-	background-color: #111827;
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 13px;
-	border: 1px solid #54585d;
-    text-align: center;
-}
-table tbody td {
-	color: #636363;
-	border: 1px solid #dddfe1;
-    text-align: center;
-}
-table tbody tr {
-	background-color: #f9fafb;
-}
-table tbody tr:nth-child(odd) {
-	background-color: #ffffff;
-} */
-
-/* add officer */
-
 .submit_btn{
     cursor: pointer;
     padding: 12px 16px;
@@ -338,100 +314,22 @@ table tbody tr:nth-child(odd) {
     border: none;
 }
 
-/* admin dashboard styling */
-#interface .grph{
+/*-------------------Weekly rides bar chart------------------ */
+.chart_phase{
     display: flex;
-    padding: 30px 30px 0 30px;
-    width: 100%;
-    align-items: center;
+    flex-direction: row;
+    height: 50%;
+    /* width: 100%; */
+    border: solid 4px #fff;
+    background-color: #D9D9D9;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
 }
-
-.container{
+#chart1{
     display: flex;
-    position: relative;
-    width: 700px;
-    height: 600px;
-    background-color: #f0eaea;
-    border: 1px solid #bbb;
-    border-top: none;
-    border-right: none;
-    margin-top: 100px;
-    z-index: 0;
+    width: auto;
+    padding: 0px 20px 0px 0px;
 }
-
-.v-meter{
-    position: relative;
-    top: 0px;
-    left: -30px;
-    width: 700px;
-    height: 500px;
-    z-index: 100;
+.chart_des{
+    display: flex;
+    width: 25%;
 }
-
-.v-meter li{
-    position: relative;
-    left: -11px;
-    height: 100px;
-    border-bottom: solid 1px #1785a7;
-}
-
-.v-meter li::before{
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: -30px;
-    height: 100%;
-    border-bottom: solid 1px #1785a7;
-    transform: skew(45deg);
-    width: 30px;
-}
-
-.v-meter li div{
-    position: absolute;
-    width: 80px;
-    font-size: 16px;
-    left: -115px;
-    padding-top: 55px;
-    color: #111827;
-    text-align: right;
-}
-
-.bar{
-    width: 50px;
-    height: 32%;
-    background-color: #162938;
-    position: absolute;
-    left: 10%;
-    bottom: 5px;
-    z-index: 1000;
-    margin: 0 40px;
-}
-
-.bar::after{
-    content: '';
-    width: 50px;
-    height: 20px;
-    background-color: #162938;
-    position: absolute;
-    top: -20px;
-    left: -10px;
-    transform: skew(45deg);
-}
-
-.bar::before{
-    content: '';
-    width: 20px;
-    height: 100%;
-    background-color: #162938;
-    position: absolute;
-    left: -20px;
-    top: -10px;
-    bottom: 5px;
-    transform: skew(45deg);
-}
-
-.two{
-    left: 25%;
-    height: 55%;
-}
-
