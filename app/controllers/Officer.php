@@ -36,6 +36,27 @@
         $data['title'] = "Officer";
         $this->view('Officer/standardFare',$data);
     }
+    public function customer_complain(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Officer";
+        $this->view('Officer/customer_complain',$data);
+    }
+
+    public function driver_complain(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Officer";
+        $this->view('Officer/driver_complain',$data);
+    }
+
+
  }
  //echo " sample home page";
  ?>

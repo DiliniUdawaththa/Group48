@@ -66,8 +66,8 @@
             </div>
             <div class="items">
                 <a href="<?=ROOT?>/officer" class="link"><div class="linkbutton"><i class="fa-solid fa-gauge"></i>Dashboard</div></a>
-                <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link"><div class="linkbutton1"><i class="fa-solid fa-users"></i>Driver Registration</div></a>
-                <a href="<?=ROOT?>/officer/complains" class="link"><div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div></a>
+                <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link"><div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration</div></a>
+                <a href="<?=ROOT?>/officer/complains" class="link"><div class="linkbutton1"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div></a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link"><div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div></a>
                 <a href="<?=ROOT?>/admin/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-taxi"></i>Rides</div></a>
                 <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>Logout</div></a>
@@ -103,13 +103,13 @@
     <div class="interface">
         <div class="navi">
             <div class="navi1">
-                <h2>DRIVER REGISTRATION</h2>
+                <h2>CUSTOMER COMPLAINS</h2>
             </div>
         </div>
 
         
     </div>
-
+    
 
 </body>
 </html>
