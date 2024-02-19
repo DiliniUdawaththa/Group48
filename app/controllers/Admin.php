@@ -152,8 +152,13 @@
                 $_POST['email'] =$add_officer->email;
                 $_POST['phone'] =$add_officer->phone;
                 $_POST['role'] = "officer";
-                $p_word = 'officer123';
-                $_POST['password'] = password_hash($p_word,PASSWORD_DEFAULT);
+                $p_word = $add_officer->generatePassword();
+
+                if($add_officer->sendMail($_POST['email'],$p_word)){
+                    $_POST['password'] = password_hash($p_word,PASSWORD_DEFAULT);
+                }
+
+                // $_POST['password'] = password_hash($p_word,PASSWORD_DEFAULT);
                 $_POST['date'] = date("Y-m-d H:i:s");
                 $add_officer->insert($_POST);
                 // message("Your profile was sucessfuly created. please login");
