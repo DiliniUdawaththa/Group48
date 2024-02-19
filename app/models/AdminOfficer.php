@@ -2,7 +2,7 @@
 
 class AdminOfficer extends Model{
     public $errors = [];
-	protected $table = "addofficer";
+	protected $table = "users";
 
 	protected $allowedColumns = [
 
@@ -11,18 +11,18 @@ class AdminOfficer extends Model{
 		'email',
 		'phone',
         'password',
+        'role',
+		'date',
 	];
 
     public function validate($data)
 	{
 		$this->errors = [];
-
-        // show($data['empID']);
+        
         $this->empID = $data['empID'];
         $this->name = $data['name'];
         $this->email = $data['email'];
         $this->phone = $data['phone'];
-        $this->password = '12345678';
 
        // show($this->empID);
 

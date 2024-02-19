@@ -110,10 +110,15 @@
             message('please login to view the admin section');
             redirect("login");
         }
-        $data['errors'] = [];
+        // $data['errors'] = [];
         $add_officer = new AdminOfficer();
 
-        $rows = $add_officer->findAll();
+        $data = [
+            'role' => "officer"
+        ];
+
+
+        $rows = $add_officer->where($data);
         $data['rows'] = array();
 
         if(isset($rows[0])){
@@ -146,7 +151,10 @@
                 $_POST['name'] =$add_officer->name;
                 $_POST['email'] =$add_officer->email;
                 $_POST['phone'] =$add_officer->phone;
-                // $_POST['date'] = date("Y-m-d H:i:s");
+                $_POST['role'] = "officer";
+                $p_word = 'officer123';
+                $_POST['password'] = password_hash($p_word,PASSWORD_DEFAULT);
+                $_POST['date'] = date("Y-m-d H:i:s");
                 $add_officer->insert($_POST);
                 // message("Your profile was sucessfuly created. please login");
 				redirect('admin/officer');
