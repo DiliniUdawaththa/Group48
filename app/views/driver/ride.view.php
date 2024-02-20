@@ -8,6 +8,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?= ROOT ?>/assets/css/driverui.css">
+        <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
+        <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     </head>
     <body>
         <div class="navigation-bar">
@@ -16,7 +19,7 @@
         </div>
         <div class="page-container">
             <div class="side-nav">
-                <img src="<?= ROOT ?>/assets/img/images/Logo.png" class="logo">
+                <img src="<?= ROOT ?>/assets/img/logonamenw.png" class="logo">
                 <div>
                     <img src="<?= ROOT ?>/assets/img/images/profilepic.png" class="profile-pic">
                     
@@ -24,18 +27,22 @@
                     <img src="<?= ROOT ?>/assets/img/images/rating.png" class="rating">
                 </div>
                 <div class="options">
-                    <div class="opt1"> Notification</div>
-                    <div class="opt2"> Activity</div>
-                    <div class="opt2-1"> Vehicles</div>
-                    <div class="opt3"> Profile</div>
-                    <div class="opt4"> Logout</div>
+                    <div class="opt1"><div><i class="fa fa-tasks" aria-hidden="true" style="margin-right: 10px;"></i> Hire Request</div><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                    <div class="opt2"><div><i class="fa fa-line-chart" aria-hidden="true" style="margin-right: 10px;"></i> Analytics</div><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                    <div class="opt2-1"><div><i class="fa fa-car" aria-hidden="true" style="margin-right: 10px;"></i> Vehicles</div><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                    <div class="opt3"><div><i class="fa fa-user" aria-hidden="true" style="margin-right: 10px;"></i> Profile</div><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                    <div class="opt4"><div><i class="fa fa-sign-out" aria-hidden="true" style="margin-right: 10px;"></i> Logout</div></div>
 
                 </div>
             </div>
             <div class="body-container">
-                <div class="notification-container">
-                    <div class="inner-noticontainer">
-                        <p>No Notifications yet!</p>
+                <div class="notification-bar">
+                    <div class="nosubmit">
+                        <input class="search-box" type="search" placeholder="Search...">
+                    </div>
+                    <div>
+                        <i class="fa-regular fa-bell noti-icon"></i>
+                        <i class="fa-regular fa-message msg-icon"></i>
                     </div>
                 </div>
                 <div class="activity-container">
@@ -110,6 +117,55 @@
                         </div>
                     </div>
                 </div>
+                <div class="analytics-container">
+                    <div class="today-analytics">
+                        <div class="t-topic"><h3>Today's Performance</h3> </div>
+                        <div class="t-body">
+                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/coin.png" class="performance-img"> <p class="p-stat">LKR 2,000</p></div>
+                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/clock.png" class="performance-img"><p class="p-stat">126 Mins</p></div>
+                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/bar-chart.png" class="performance-img"> <p class="p-stat">13  Rides</p></div>       
+
+
+                        </div>
+
+                    </div>
+                    <div class="charts-container">
+                        <div class="chart">
+                            <h3 style="text-align: center;">Daily Rides</h3>
+                            <div id="chart1">
+                            </div>
+                        </div>
+
+                        <div class="chart">
+                            <div id="chart2">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <script>
+
+                var options = {
+                chart: {
+                    type: 'line',
+                    width: 600 ,
+                },
+                series: [{
+                    name: 'sales',
+                    data: [27,23,18,19,17,13,25,19,22]
+                }],
+                xaxis: {
+                    categories: ["Feb 14","Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22"]
+                }
+                }
+                var chart = new ApexCharts(document.querySelector("#chart1"), options);
+                chart.render();
+
+                var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
+                chart2.render();
+
+                </script>
                 <div class="vehicles-container">
                     <?php if($data['vehicles']==0):?>
                         
@@ -264,6 +320,7 @@
                 </div>
             </div>
         </div>
+
         <script>
             var status = 1
             var sidenav = 1
@@ -273,12 +330,12 @@
             const active_btn = document.querySelector('.active');
             const inactive_btn = document.querySelector('.inactive');
             const status_icon = document.getElementById('status_icon');
-            const notification_option = document.querySelector('.opt1');
+            const hire_option = document.querySelector('.opt1');
             const activity_option = document.querySelector('.opt2');
             const vehicles_option = document.querySelector('.opt2-1');
             const profile_option = document.querySelector('.opt3');
             const logout_option = document.querySelector('.opt4')
-            const notification_container = document.querySelector('.notification-container')
+            const notification_container = document.querySelector('.analytics-container')
             const activity_container = document.querySelector('.activity-container')
             const vehicles_container = document.querySelector('.vehicles-container')
             const profile_container = document.querySelector('.profile-container')
@@ -305,12 +362,12 @@
                 
 
             })
-            notification_option.addEventListener('click', function (){
-                notification_container.style.display = 'block'
-                activity_container.style.display = 'none'
+            hire_option.addEventListener('click', function (){
+                notification_container.style.display = 'none'
+                activity_container.style.display = 'block'
                 profile_container.style.display = 'none'
                 vehicles_container.style.display = 'none'
-                notification_option.style.backgroundColor = '#194672'
+                hire_option.style.backgroundColor = '#194672'
                 activity_option.style.backgroundColor = ''
                 profile_option.style.backgroundColor = ''
                 vehicles_option.style.backgroundColor = ''
@@ -318,10 +375,10 @@
 
             activity_option.addEventListener('click',function (){
                 profile_container.style.display = 'none'
-                notification_container.style.display = 'none'
-                activity_container.style.display = 'block'
+                notification_container.style.display = 'block'
+                activity_container.style.display = 'none'
                 vehicles_container.style.display = 'none'
-                notification_option.style.backgroundColor = ''
+                hire_option.style.backgroundColor = ''
                 activity_option.style.backgroundColor = '#194672'
                 profile_option.style.backgroundColor = ''
                 vehicles_option.style.backgroundColor = ''
@@ -335,7 +392,7 @@
                 profile_option.style.backgroundColor = '#194672'
                 activity_option.style.backgroundColor = ''
                 vehicles_option.style.backgroundColor = ''
-                notification_option.style.backgroundColor = ''
+                hire_option.style.backgroundColor = ''
             })
 
 
@@ -348,7 +405,7 @@
                 vehicles_option.style.backgroundColor = '#194672'
                 profile_option.style.backgroundColor = ''
                 activity_option.style.backgroundColor = ''
-                notification_option.style.backgroundColor = ''
+                hire_option.style.backgroundColor = ''
             })
 
             active_btn.addEventListener('click',function (){
@@ -415,6 +472,8 @@
             document.querySelector('.cancel-veh-btn').addEventListener('click', function(){
                 document.querySelector('.update-veh1').style.display = 'none'
             })
+
+
         </script>
     </body>
 </html>
