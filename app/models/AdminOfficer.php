@@ -34,9 +34,9 @@ class AdminOfficer extends Model{
 
        // show($this->empID);
 
-        // if ($this->where(['empID'=> $data['empID']])) {
-        //     $this->errors['empID'] = "Employee ID already exist.";
-        // }
+        if ($this->where(['empID'=> $data['empID']])) {
+            $this->errors['empID'] = "Employee ID already exist.";
+        }
 
         if (!preg_match("/^[a-zA-Z\s]+$/", trim($data['name']))) {
              $this->errors['name'] = "name can only have letters.";
