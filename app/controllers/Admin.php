@@ -47,7 +47,7 @@
         $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
     
         $data = [
-            'role' => 'customer',
+            'role' => 'user',
         ];
     
         if ($searchTerm !== null) {
