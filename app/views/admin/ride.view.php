@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Ride.css">
     <style>
         .error{
@@ -60,8 +61,39 @@
                     <h2>RIDES</h2>
                 </div>
             </div>
+            <div class = "chart_phase">
+                <div id="chart" style="height: 80%;">
+                </div>
+                <div id="chart1" style="height: 80%;">
+                </div>
+            </div>
+            <div class="table1">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>rideID</td>
+                            <td>custID</td>
+                            <td>driverID</td>
+                            <!-- <td>Mobile</td>
+                            <td>Option</td> -->
+                        </tr>
+                    </thead>
+                    <!-- <?php foreach ($rows as $row) : ?>
+                        <tr class="data">
+                            <td class="td_empID"><?= $row->empID; ?></td>
+                            <td class="td_name"><?= $row->Name; ?></td>
+                            <td class="td_email"><?= $row->Email; ?></td>
+                            <td class="td_mobile"><?= $row->Mobile; ?></td>
+                            <td class="td_button">
+                            <a href="<?=ROOT?>/admin/officer_update/<?=$row->empID?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: black;"></i></i></button></a>
+                            <a href="<?=ROOT?>/admin/officer_delete/<?=$row->empID?>"><div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: black;"></i></div></button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?> -->
+                </table>
+            </div>
         </div>
-    <!-- </div> -->
+    </div>
 
    
     <script>
@@ -80,5 +112,58 @@
                     logout_button.addEventListener('click', ()=>{
                     window.location.href = "<?=ROOT?>/logout";
                     })
+                    
+        const table = document.querySelector('.table1')
+
+        var options = {
+            chart: {
+                type: 'bar',
+                width: '90%',
+                height: '90%'
+            },
+            series: [{
+                name: 'Rides',
+                data: [30,40,35,50,49,60,54]
+            }],
+            title: {
+                text: 'Weekly Rides',
+                align: 'left',
+                offsetX: 110
+            },
+            xaxis: {
+                categories: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+            }
+        }
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+        var options1 = {
+            chart: {
+                type: 'line',
+                width: '90%',
+                height: '90%'
+            },
+            series: [{
+                name: 'Day',
+                data: [30,40,35,50,49,60,54]
+            },
+            {
+                name: 'Night',
+                data: [10,12,18,23,34,12,28]
+            }],
+            title: {
+                text: 'Weekly Rides',
+                align: 'left',
+                offsetX: 110
+            },
+            xaxis: {
+                categories: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+            }
+        }
+
+        var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
+        chart1.render();
+
     </script>
 </body>

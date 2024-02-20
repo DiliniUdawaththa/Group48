@@ -110,10 +110,15 @@
             message('please login to view the admin section');
             redirect("login");
         }
-        $data['errors'] = [];
+        // $data['errors'] = [];
         $add_officer = new AdminOfficer();
 
-        $rows = $add_officer->findAll();
+        $data = [
+            'role' => "officer"
+        ];
+
+
+        $rows = $add_officer->where($data);
         $data['rows'] = array();
 
         if(isset($rows[0])){
@@ -143,10 +148,18 @@
 			{
                 //  show($add_officer->Name);
                 $_POST['empID'] =$add_officer->empID;
-                $_POST['Name'] =$add_officer->Name;
-                $_POST['Email'] =$add_officer->Email;
-                $_POST['Mobile'] =$add_officer->Mobile;
-                // $_POST['date'] = date("Y-m-d H:i:s");
+                $_POST['name'] =$add_officer->name;
+                $_POST['email'] =$add_officer->email;
+                $_POST['phone'] =$add_officer->phone;
+                $_POST['role'] = "officer";
+                $p_word = $add_officer->generatePassword();
+
+                if($add_officer->sendMail($_POST['email'],$p_word)){
+                    $_POST['password'] = password_hash($p_word,PASSWORD_DEFAULT);
+                }
+
+                // $_POST['password'] = password_hash($p_word,PASSWORD_DEFAULT);
+                $_POST['date'] = date("Y-m-d H:i:s");
                 $add_officer->insert($_POST);
                 // message("Your profile was sucessfuly created. please login");
 				redirect('admin/officer');
@@ -235,9 +248,14 @@
     public function search() {
         if (isset($_GET['search'])) {
             $searchTerm = $_GET['search'];
-            $model = new YourModel();
-            $data = $model->searchData($searchTerm);
-            include 'YourView.php';
+            $model = new AdminCustomer();
+            // $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+    
+            $data = [
+                'role' => 'customer',
+            ];
+            $data = $model->where1($data, $searchTerm);
+            include 'customer.view.php';
         } else {
             // Redirect or handle the absence of search term
         }

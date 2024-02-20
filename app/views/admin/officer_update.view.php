@@ -74,8 +74,8 @@
                         <div>
                             <label for="" class="label" >Name</label><br>
                         </div>
-                        <input type="text" value="<?= $row->Name; ?>" name="Name" readonly>
-                        <?php if(!empty($errors['Name'])):?>
+                        <input type="text" value="<?= $row->name; ?>" name="name" readonly>
+                        <?php if(!empty($errors['name'])):?>
                         <?php endif;?>
                         <br>
 
@@ -84,8 +84,8 @@
                             <!-- <i class="fa-solid fa-location-dot"></i> -->
                             <br>
                         </div>
-                        <input type="text" value="<?= $row->Email; ?>" name="Email" required>    
-                        <?php if(!empty($errors['Email'])):?>
+                        <input type="text" value="<?= $row->email; ?>" name="email" required>    
+                        <?php if(!empty($errors['email'])):?>
                                 <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['address']?></small> -->
                         <?php endif;?>
                         <br>
@@ -95,8 +95,8 @@
                             <!-- <i class="fa-solid fa-location-dot"></i> -->
                             <br>
                         </div>
-                        <input type="text" value="<?= $row->Mobile; ?>" name="Mobile" required>
-                        <?php if(!empty($errors['Mobile'])):?>
+                        <input type="text" value="<?= $row->phone; ?>" name="phone" required>
+                        <?php if(!empty($errors['phone'])):?>
                             <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['Mobile']?></small>  -->
                         <?php endif;?>
                         <br>

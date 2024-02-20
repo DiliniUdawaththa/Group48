@@ -74,33 +74,33 @@
                       <br>
 
                     <div>
-                      <label for="Name" class="label" >Name</label><br>
+                      <label for="name" class="label" >Name</label><br>
                     </div>
-                    <input value="<?= set_value('Name') ?>" type="text" name="Name" required>
-                      <?php if(!empty($errors['Name'])):?>
-                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['Name']?> </small>
+                    <input value="<?= set_value('name') ?>" type="text" name="name" required>
+                      <?php if(!empty($errors['name'])):?>
+                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['name']?> </small>
                       <?php endif;?>
                       <br>
 
                     <div>
-                      <label for="Email" class="label">Email</label>
+                      <label for="email" class="label">Email</label>
                       <!-- <i class="fa-solid fa-location-dot"></i> -->
                       <br>
                     </div>
-                    <input value="<?= set_value('Email') ?>" type="text" name="Email" required>       
-                      <?php if(!empty($errors['Email'])):?>
-                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['Email']?></small>
+                    <input value="<?= set_value('email') ?>" type="text" name="email" required>       
+                      <?php if(!empty($errors['email'])):?>
+                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['email']?></small>
                       <?php endif;?>
                       <br>
 
                     <div>
-                      <label for="Mobile" class="label">Mobile</label>
+                      <label for="phone" class="label">Mobile</label>
                             <!-- <i class="fa-solid fa-location-dot"></i> -->
                       <br>
                     </div>
-                    <input value="<?= set_value('Mobile') ?>" type="text" name="Mobile" required>              
-                      <?php if(!empty($errors['Mobile'])):?>
-                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['Mobile']?></small> 
+                    <input value="<?= set_value('phone') ?>" type="text" name="phone" required>              
+                      <?php if(!empty($errors['phone'])):?>
+                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['phone']?></small> 
                       <?php endif;?>
                       <br>
 
