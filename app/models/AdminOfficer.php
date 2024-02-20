@@ -146,7 +146,7 @@ class AdminOfficer extends Model{
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
 
-            $mail->setFrom('diliniudawaththa@gmail.com', 'Perera');
+            $mail->setFrom('diliniudawaththa@gmail.com', 'FAREFLEX Admin User');
             $mail->addAddress($toMail);
             $mail->isHTML(true);
             $mail->Subject = 'Your username and password';
