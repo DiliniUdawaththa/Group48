@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Dashboard.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Officer.css">
     <style>
     .error {
         border: 1px solid red;
@@ -26,31 +26,28 @@
         background-color: #a7cfbc;
     }
 
-    .con-button {
-        width: 80%;
-        background-color: #000000;
-        color: white;
+    .detail_btn {
+        background-color: rgb(82, 41, 194);
+        color: #fff;
+        padding: 10px 20px;
         border: none;
-        border-radius: 10px;
-        height: 50px;
-        font-size: 20px;
-        margin: auto;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .delete_btn {
+        background-color: red;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .dltbutton {
         display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .none-dec {
-        text-decoration: none;
-    }
-
-
-    .box1 {
-        width: 80%;
-        margin: auto;
-        text-align: center;
-        position: relative;
-        top: 50px;
     }
     </style>
 </head>
@@ -72,19 +69,16 @@
                     <div class="linkbutton"><i class="fa-solid fa-gauge"></i>Dashboard</div>
                 </a>
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
-                    <div class="linkbutton1"><i class="fa-solid fa-id-card"></i>Driver Registration</div>
+                    <div class="linkbutton"><i class="fa-solid fa-id-card"></i></i>Driver Registration</div>
                 </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Drivers</div>
+                    <div class="linkbutton1"><i class="fa-solid fa-users"></i>Drivers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
                     <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
                 </a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div>
-                </a>
-                <a href="<?=ROOT?>/officer/driver" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-taxi"></i>Drivers</div>
                 </a>
                 <a href="#" class="link">
                     <div class="linkbutton2"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>Logout</div>
@@ -122,14 +116,40 @@
         <div class="interface">
             <div class="navi">
                 <div class="navi1">
-                    <h2>DRIVER REGISTRATION</h2>
+                    <h2>DRIVERS</h2>
                 </div>
             </div>
 
+            <div class="table1">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Email</td>
+                            <td>Mobile</td>
+                            <td>More</td>
+                        </tr>
+                    </thead>
+                    <?php foreach ($rows as $row) : ?>
+                    <tr class="data">
+                        <td class="td_name"><?= $row->name; ?></td>
+                        <td class="td_email"><?= $row->email; ?></td>
+                        <td class="td_mobile"><?= $row->phone; ?></td>
+                        <td class="td_button">
+                            <a href="<?=ROOT?>/officer/driver/"><button class="detail_btn"><i
+                                        class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
+                            <a href="<?=ROOT?>/officer/driver_delete/<?=$row->id?>">
+                                <div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash"
+                                            style="color: black;"></i></div></button>
+
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+
+            </div>
 
         </div>
-
-
 </body>
 
 </html>

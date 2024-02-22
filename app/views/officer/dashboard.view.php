@@ -22,6 +22,34 @@
             color: #026334;
             background-color: #a7cfbc;
         }
+
+        .con-button {
+            width: 80%;
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            height: 50px;
+            font-size: 20px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .none-dec {
+            text-decoration: none;
+        }
+
+
+        .box1 {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            position: relative;
+            top: 50px;
+        }
+
     </style>
 </head>
 <body>
@@ -38,10 +66,10 @@
             </div>
             <div class="items">
                 <a href="<?=ROOT?>/officer" class="link"><div class="linkbutton1"><i class="fa-solid fa-gauge"></i>Dashboard</div></a>
-                <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link"><div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration</div></a>
+                <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link"><div class="linkbutton"><i class="fa-solid fa-id-card"></i>Driver Registration</div></a>
+                <a href="<?=ROOT?>/officer/driver" class="link"><div class="linkbutton"><i class="fa-solid fa-users"></i>Drivers</div></a>
                 <a href="<?=ROOT?>/officer/complains" class="link"><div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div></a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link"><div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div></a>
-                <a href="<?=ROOT?>/admin/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-taxi"></i>Rides</div></a>
                 <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>Logout</div></a>
             </div>
 
@@ -56,11 +84,32 @@
    
         <div class="interface">
             <div class="navi">
-                    <div class="navi1">
-                        <h2>Officer Dashboard</h2>
-                    </div>
+                <div class="navi1">
+                    <h2>Officer Dashboard</h2>
+                </div>
+            </div>
 
-                <div class="operation">
+            <div class="main-div">
+                <div class="box1">
+                    <a class="none-dec" href="<?=ROOT?>/officer/officerdriverRegistration">
+                        <div class="con-button">Driver Registration</div>
+                    </a>
+                    <br/><br/><br>
+                    <a class="none-dec" href="<?=ROOT?>/officer/complains">
+                        <div class="con-button">Complains</div>
+                    </a>
+                    <br/><br/><br>
+                    <a class="none-dec" href="<?=ROOT?>/officer/standardFare">
+                        <div class="con-button">Standard Fare</div>
+                    </a>
+                    
+                    <!--<a class="none-dec" href="<?=ROOT?>/officer/driver_complain">
+                        <div class="con-button">Drivers</div>
+                    </a>-->
+                </div>
+            </div>
+
+                <!--<div class="operation">
                     <i class="fa-solid fa-bell"></i>
                 </div>
             </div>
@@ -94,7 +143,7 @@
                         <h3>400</h3>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>        
     </div>
 
