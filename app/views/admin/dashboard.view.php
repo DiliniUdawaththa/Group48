@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Dashboard.css">
     <style>
         .error{
@@ -95,6 +96,14 @@
                     </div>
                 </div>
             </div>
+            <div class = "chart_phase">
+                <div class="chart_des">
+                    <h3>Annual Registration</h3>
+                </div>
+                <div id="chart1" style="height: 80%; width:100%;">
+                    <!-- <h2>Weekly rides</h2> -->
+                </div>
+            </div>       
         </div>        
     </div>
 
@@ -115,6 +124,95 @@
                         logout_button.addEventListener('click', ()=>{
                         window.location.href = "<?=ROOT?>/logout";
                         })
+
+        var options1 = {
+          series: [{
+          name: 'Customers',
+          type: 'column',
+          data: [200, 250, 100, 159, 167, 132, 165, 154, 143, 200, 154, 176]
+        }, {
+          name: 'Drivers',
+          type: 'column',
+          data: [100, 133, 148, 98, 165, 95, 129, 87, 98, 81, 90, 99]
+        }],
+          chart: {
+          height: '100%',
+          width: '100%',
+          type: 'line',
+          stacked: false
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          width: [1, 1, 4]
+        },
+        // title: {
+        //   text: 'User registration',
+        //   align: 'left',
+        //   offsetX: 110
+        // },
+        xaxis: {
+          categories: ["January", "Feb", "March", "April", "May","June", "July", "August", "September", "October", "November", "December"],
+        },
+        yaxis: [
+          {
+            axisTicks: {
+              show: true,
+            },
+            axisBorder: {
+              show: true,
+              color: '#008FFB'
+            },
+            labels: {
+              style: {
+                colors: '#008FFB',
+              }
+            },
+            title: {
+              text: "No of users",
+              style: {
+                color: '#008FFB',
+              }
+            },
+            tooltip: {
+              enabled: true
+            }
+          },
+          // {
+            // seriesName: 'Revenue',
+            // opposite: true,
+            // axisTicks: {
+            //   show: true,
+            // },
+            // axisBorder: {
+            //   show: true,
+            //   color: 'green'
+            // },
+          //   labels: {
+          //     style: {
+          //       colors: 'green',
+          //     },
+          //   }  
+          // },
+        ],
+        tooltip: {
+          fixed: {
+            enabled: true,
+            position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
+            offsetY: 30,
+            offsetX: 60
+          },
+        }
+        // legend: {
+        //   horizontalAlign: 'left',
+        //   verticalAlign: 'top',
+        //   offsetX: 40
+        // }
+        };
+
+        var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
+        chart1.render();
     </script>
 
 </body>

@@ -9,6 +9,11 @@
     <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/index.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
+    <style>
+    .contant {
+        background: url("<?= ROOT ?>/assets/img/sketchesbckg.png");
+    }
+</style>
 </head>
 <body style="margin:0px">
 <div class="header" id="section1">
@@ -16,8 +21,8 @@
     <div class="nav">
         <a class="a" href="#section1" >Home</a>
         <a class="a" href="#section2" >Services</a>
-        <a class="a" href="#section3" >Contact</a>
-        <a class="a" href="#section4" >About</a>
+        <a class="a" href="#section3" >About</a>
+        <a class="a" href="#section4" >Contact</a>
         <a href="http://localhost/FAREFLEX/public/login"  class="login">Log in</a>
         <a href="http://localhost/FAREFLEX/public/signup" class="signup">Sign up </a>
     </div>
@@ -73,7 +78,15 @@
                     <button class="ride-btn">Register Now</button>
                 </div>
             </div>
-            <div id="aboutus">A taxi management system, where customers select their drivers, boasts key features for a superior experience. Customers access driver profiles with ratings, photos, and reviews, ensuring informed choices. Real-time GPS tracking enhances safety, while in-app messaging facilitates easy communication. A driver rating system allows customers to provide feedback. These features empower customers, ensuring transparency, convenience, and satisfaction in the taxi booking process.</div>
+            <div id="aboutus">
+                <ul>
+                        <li>A taxi management system, where customers select their drivers, boasts key features for a superior experience. </li>
+                        <li>Customers access driver profiles with ratings, photos, and reviews, ensuring informed choices. </li>
+                        <li>Real-time GPS tracking enhances safety, while in-app messaging facilitates easy communication. A driver rating system allows customers to provide feedback. These features empower customers, ensuring transparency, convenience, and satisfaction in the taxi booking process.</li>
+                        
+                </ul>
+                
+            </div>
             <script>
 
             //home box 
@@ -208,52 +221,68 @@
     </div>
 </div>
 
-<div class="contact" id="section3">
-    <h1>CONTACT US</h1>
-    <div class="contact_way">
-        <div>
-            <i class="fa-solid fa-comment-dots"></i>
-            <p>Text us</p>
-            <h3>077-301-6416</h3>
-        </div>
-        <div>
-            <i class="fa-solid fa-phone-volume"></i>
-            <p>Call us</p>
-            <h3>070-136-0797</h3>
-        </div>
-        <div>
-            <i class="fa-brands fa-facebook-messenger"></i>
-            <p>Message us</p>
-            <h3>FACEBOOK Message</h3>
-        </div>
-        <div>
-            <i class="fa-solid fa-envelope"></i>
-            <p>Email us</p>
-            <h3>FAREFLEX2023<br>@gmail.com</h3>
-        </div>
-    </div>
-</div>
 
-<div class="about" id="section4">
+<div class="about" id="section3">
     <!-- <img src="./img/TAXI.jpg" alt=""> -->
 
     <h1>ABOUT US</h1>
-    <div class="fpara">
-        <h2>We reimagine the way the world moves for the better</h2>
-        <p>Movement is what we power. It’s our lifeblood. It runs through our veins. It’s what gets us out of bed each morning. It pushes us to constantly reimagine how we can move better. For you. For all the places you want to go. For all the things you want to get. For all the ways you want to earn. Across the entire world. In real time. At the incredible speed of now.</p>
-    </div>
-    <div class="spara">
-        <!-- <div class="para_part1">
-            <h1>Our System</h1>
-            <p></p>
-        </div> -->
-        <div class="para_part1">
-            <h1>Our System</h1>
-            <p>At FAREFLEX, our enduring aim is to be at the forefront of positive change in the driving education landscape. We are unwavering in our commitment to road safety and the transformation of the driving experience. Our vision encompasses the delivery of comprehensive, tailored driving education that transcends the boundaries of standard test preparation. We aspire to nurture a generation of responsible, confident, and exceptionally skilled drivers, equipping them not only with the knowledge to pass their tests but with a deep-seated commitment to safety, courtesy, and respect for all road users. Our ultimate goal is to actively contribute to the creation of a world where our roads are not just safer, but where they become hubs of community, shared experiences, and the sheer joy of driving, enriching the lives of all those we serve.</p>
-            <button >Learn more</button>
+    <div class="inner-about">
+        <div class="fpara">
+            <h2>We reimagine the way the world moves for the better</h2>
+            <p>Movement is what we power. It’s our lifeblood. It runs through our veins. It’s what gets us out of bed each morning. It pushes us to constantly reimagine how we can move better. For you. For all the places you want to go. For all the things you want to get. For all the ways you want to earn. Across the entire world. In real time. At the incredible speed of now.</p>
+        </div>
+        <div class="spara">
+            <img src="<?= ROOT ?>/assets/img/Aboutpic.jpg" class="about-img">
+            <!-- <div class="para_part1">
+                <h1>Our System</h1>
+                <p></p>
+            </div> -->
+            <div class="para_part1">
+                <h1>Our System</h1>
+                <p>At FAREFLEX, we're dedicated to transforming driving education. Our vision: deliver comprehensive, personalized instruction for safe, confident, and skilled drivers. We aim to contribute to a world with safer roads and a positive driving experience, enriching lives through community and joy.</p>
+            </div>
         </div>
     </div>
 </div>
+<div class="contact" id="section4">
+    <img src="<?= ROOT ?>/assets/img/contactlogo.png" class="contact-logo">
+    <div class="contact-details">
+        <p>Contact</p>
+        <div class="contact_way">
+            <div>
+                
+                <p><i class="fa-solid fa-comment-dots" style="background: white;"></i> 077-301-6416</p>
+                <!-- <h3></h3> -->
+            </div>
+            <div>
+                
+                <p><i class="fa-solid fa-phone-volume" style="background: white;"></i> 070-136-0797</p>
+                <!-- <h3></h3> -->
+            </div>
+            <div>
+                
+                <p><i class="fa-brands fa-facebook-messenger" style="background: white;"></i> Messenger</p>
+                <!-- <h3>FACEBOOK Message</h3> -->
+            </div>
+            <div>
+                
+                <p><i class="fa-solid fa-envelope" style="background: white;"></i> contact@fareflex.lk</p>
+                <!-- <h3>FAREFLEX2023<br>@gmail.com</h3> -->
+            </div>
+        </div>
+    </div>
+    <div id="socials">
+    <div class="footer_icon">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-youtube"></i>
+        <i class="fa-brands fa-instagram"></i>
+
+    </div>
+
+    </div>
+</div>
+
 
 <div class="footer">
     <div class="footer_text">
@@ -265,13 +294,13 @@
         <p class="footerp"> | </p>
         <p class="footerp">  Contact Us</p>
     </div>
-    <div class="footer_icon">
+    <!-- <div class="footer_icon">
         <i class="fa-brands fa-facebook-f"></i>
         <i class="fa-brands fa-twitter"></i>
         <i class="fa-brands fa-youtube"></i>
         <i class="fa-brands fa-instagram"></i>
 
-    </div>
+    </div> -->
 
 
 

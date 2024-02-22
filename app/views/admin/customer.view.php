@@ -59,6 +59,12 @@
                 <div class="navi1">
                     <h2>CUSTOMER</h2>
                 </div>
+                <div class="search">
+                <form action="<?= ROOT ?>/admin/customer" method="GET">
+                    <input type="text" name="search" placeholder="Search for customers">
+                    <input type="submit" value="Search" class="srch">
+                </form>
+                </div>
             </div>
 
             <div class="table1">

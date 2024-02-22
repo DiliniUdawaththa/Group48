@@ -79,12 +79,12 @@
                     <?php foreach ($rows as $row) : ?>
                         <tr class="data">
                             <td class="td_empID"><?= $row->empID; ?></td>
-                            <td class="td_name"><?= $row->Name; ?></td>
-                            <td class="td_email"><?= $row->Email; ?></td>
-                            <td class="td_mobile"><?= $row->Mobile; ?></td>
+                            <td class="td_name"><?= $row->name; ?></td>
+                            <td class="td_email"><?= $row->email; ?></td>
+                            <td class="td_mobile"><?= $row->phone; ?></td>
                             <td class="td_button">
                             <a href="<?=ROOT?>/admin/officer_update/<?=$row->empID?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: black;"></i></i></button></a>
-                            <a href="#"><div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: black;"></i></div></button>
+                            <a href="<?=ROOT?>/admin/officer_delete/<?=$row->empID?>"><div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: black;"></i></div></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>

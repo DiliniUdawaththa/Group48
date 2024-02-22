@@ -55,6 +55,7 @@ class Database
 			 `email` varchar(100) NOT NULL,
 			 `password` varchar(255) NOT NULL,
 			 `role` varchar(20) NOT NULL,
+			 `empID` int(10),
 			 `date` date DEFAULT NULL,
 			 PRIMARY KEY (`id`),
 			 KEY `email` (`email`),
@@ -82,11 +83,12 @@ class Database
 		//add officer table
 		$query = "
 			CREATE TABLE IF NOT EXISTS `addofficer` (
-			`empID` text NOT NULL,
-			`Name` text NOT NULL,
-			`Email` text NOT NULL,
-			`Mobile` text NOT NULL,
-			PRIMARY KEY (`empID`)
+			`empID` int(10) NOT NULL,
+			`name` text NOT NULL,
+			`email` text NOT NULL,
+			`phone` text NOT NULL,
+			`password` varchar(255) NOT NULL,
+			 PRIMARY KEY (`empID`)
 		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 		   
 		   ";
