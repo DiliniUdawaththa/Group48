@@ -18,11 +18,15 @@ body{
 
 /* ------------------------side bar----------------- */
 .sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 300px;
     color: #D9D9D9;
     background-color:#111827;
     height: 100vh;
     overflow: hidden;
+    z-index: 1000;
  }
 .logo{
     text-align: center;
@@ -143,18 +147,29 @@ body{
 }
 /*-----------------------interface-----------------------*/
 .interface{
-    width: 80%;
+    width: calc(100% - 300px);
     height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: 60px;
+    padding-left: 300px;
+    padding-right: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
     /* justify-content: center; */
 }
 .navi{
+    position: fixed;
+    top: 0;
+    left: 300px;
+    right: 5px;
+    width: calc(100% - 300px);
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: #fff;
-    padding: 15px 30px;
+    padding-right: 20px;
+    padding: 15px 50px 15px 10px;
     border-left: 4px;
     border-right: 4px;
     border-top: 4px;
@@ -165,6 +180,9 @@ body{
     align-items: center;
     padding: 10px 14px;
     color: #111827;
+}
+.operation{
+    padding-right: 20px;
 }
 .button-style {
     background-color: #111827; 
@@ -180,7 +198,7 @@ body{
 }
 /*-------------------------table------------------------------*/
 .table1{
-    padding: 30px 30px;
+    padding: 70px 30px;
 }
 table {
 	border-collapse: collapse;
@@ -236,6 +254,7 @@ table tbody tr:nth-child(odd) {
 .officer_form{
     display: block;
     height: 100%;
+    padding-top: 60px;
     width:60%;
     /* border: solid; */
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
