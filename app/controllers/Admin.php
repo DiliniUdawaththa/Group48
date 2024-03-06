@@ -111,7 +111,7 @@
             redirect("login");
         }
         // $data['errors'] = [];
-        $add_officer = new AdminOfficer();
+        $add_officer = new User();
 
         $data = [
             'role' => "officer"
@@ -140,11 +140,12 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_officer = new AdminOfficer();
+        $add_officer1 = new AdminOfficer();
+        $add_officer = new User();
         if($_SERVER['REQUEST_METHOD'] == "POST")
 		{
             
-			if($add_officer->validate($_POST))
+			if($add_officer->validate_officer($_POST))
 			{
                 //  show($add_officer->Name);
                 $_POST['empID'] =$add_officer->empID;
@@ -158,9 +159,13 @@
                     $_POST['password'] = password_hash($p_word,PASSWORD_DEFAULT);
                 }
 
-                // $_POST['password'] = password_hash($p_word,PASSWORD_DEFAULT);
                 $_POST['date'] = date("Y-m-d H:i:s");
                 $add_officer->insert($_POST);
+
+                //add officer detail to the addofficer table
+                if($add_officer1->addOfficerTable($_POST)){
+                    $add_officer1->insert($_POST);
+                }
                 // message("Your profile was sucessfuly created. please login");
 				redirect('admin/officer');
             }
@@ -178,7 +183,7 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_officer = new AdminOfficer();
+        $add_officer = new User();
 
         $rows = $add_officer->findAll();
         $data['rows'] = array();
@@ -200,7 +205,7 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_officer = new AdminOfficer();
+        $add_officer = new User();
         $rows = $add_officer->findAll();
         $data['rows'] = array();
 
@@ -260,6 +265,11 @@
             // Redirect or handle the absence of search term
         }
     }
+
+    // public function mail(){
+    //     $newMail = new reminderMail();
+    //     $newMail->selectDriver();
+    // }
 
 
  }

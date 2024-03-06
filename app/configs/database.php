@@ -55,7 +55,7 @@ class Database
 			 `email` varchar(100) NOT NULL,
 			 `password` varchar(255) NOT NULL,
 			 `role` varchar(20) NOT NULL,
-			 `empID` int(10),
+			 `empID` int(10) UNIQUE,
 			 `date` date DEFAULT NULL,
 			 PRIMARY KEY (`id`),
 			 KEY `email` (`email`),
@@ -87,7 +87,6 @@ class Database
 			`name` text NOT NULL,
 			`email` text NOT NULL,
 			`phone` text NOT NULL,
-			`password` varchar(255) NOT NULL,
 			 PRIMARY KEY (`empID`)
 		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 		   
