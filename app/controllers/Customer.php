@@ -7,7 +7,108 @@
             redirect("login");
         }
         $data['title'] = "Ride";
-        $this->view('customer/ride',$data);
+        $this->view('customer/ride_step1',$data);
+    }
+
+    // step1 stage
+    public function ride_step1(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        // if ($_SERVER["REQUEST_METHOD"]=="POST") {
+             // Access individual POST parameters
+            //  show($_POST);
+            // $name = $_POST["name1"];
+
+            // // Use the retrieved POST data
+            // show($name);
+            // }
+        $data['title'] = "Ride";
+        $this->view('customer/ride_step1',$data);
+    }
+
+    // public function ride_stepa(){
+    //     // if(!Auth::logged_in())
+    //     // {
+    //     //     message('please login to view the page');
+    //     //     redirect("login");
+    //     // }
+    //     // if ($_SERVER["REQUEST_METHOD"]) {
+    //     //      show($_GET(name));
+    //     // }
+    //     // $this->view('customer/ride_stepa');
+    //     // $data['title'] = "Ride";
+    //     // $this->view('customer/ride_step1',$data);
+    // }
+     
+    public function ride_step2(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Ride";
+        $this->view('customer/ride_step2',$data);
+    }
+
+    public function ride_step3(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Ride";
+        $this->view('customer/ride_step3',$data);
+    }
+
+    public function ride_step4(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Ride";
+        $this->view('customer/ride_step4',$data);
+    }
+
+    public function ride_step5(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        // $data['errors'] = [];
+        // $message = new Message();
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            
+            $address=$_POST["address"];
+            show($address);
+         }
+        // show($_POST);
+        $data['title'] = "Ride";
+        $this->view('customer/ride_step5',$data);
+    }
+
+    public function ride_step6(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Ride";
+        $this->view('customer/ride_step6',$data);
+    }
+
+    public function ride_step7(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['title'] = "Ride";
+        $this->view('customer/ride_step7',$data);
     }
 
     //this is Add place page  controller

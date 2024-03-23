@@ -1,0 +1,92 @@
+*{
+
+    font-family: 'Poppins',sans-serif;
+    /* box-sizing: border-box; */
+}
+body{
+    margin: 0;
+    width: 100vw;
+    font-family: 'Poppins',sans-serif;
+    /* overflow: hidden; */
+}
+.main{
+    background-color: #D9D9D9;
+    display: flex;
+    /* flex-direction: row; */
+    
+}
+/* ------------------------------------------------------------------- */
+.activity{
+    background-color:#D9D9D9;
+    width:80.4%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    margin-left: 300px;
+    position:relative;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+
+  .box{
+    margin: 40px;
+    width: 100%;
+    display: flex;
+    
+  }
+  
+
+  .contant{
+   display: flex;
+   flex-direction: column;
+   width:50%;
+   background-color: #111827;
+   padding: 20px;
+  }
+  #back{
+    font-size: 30px;
+    color: #D9D9D9;
+  }
+  .contant h2{
+    color: #D9D9D9;
+  }
+  .contant center{
+    margin: auto;
+  }
+  .contant img{
+      width: 200px;
+      height: 200px;
+      border-radius: 20px;
+  }
+  .golink{
+    margin: auto;
+    text-decoration: none;
+  }
+  .go{
+    padding: 8px 40px;
+    width: 50px;
+    font-style: bold;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    border-color: white;
+    background-color: #111827;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    animation: pulse 1s infinite alternate;
+  }
+  /* //beat the button */
+  @keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+  }
+  .refresh{
+    color: #D9D9D9;
+    font-size: 13px;
+    margin: 0;
+  }
