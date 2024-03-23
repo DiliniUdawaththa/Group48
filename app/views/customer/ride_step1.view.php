@@ -37,7 +37,8 @@
 <!-- ---------------------------------------------------------------------------------- -->
 <div class="activity">
         <div class="searchbox">
-            <div class="search" >
+
+        <div class="search" >
                 <h1>                   
                      Go anywhere with <br>FareFlex
                 </h1>
