@@ -6,17 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/index.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
+    <style>
+    .contant {
+        background: url("<?= ROOT ?>/assets/img/sketchesbckg.png");
+    }
+</style>
 </head>
 <body style="margin:0px">
 <div class="header" id="section1">
-    <img src="<?= ROOT ?>/assets/img/logo_name.png" class="logoname">
+    <img src="<?= ROOT ?>/assets/img/logonamenw.png" class="logoname">
     <div class="nav">
         <a class="a" href="#section1" >Home</a>
         <a class="a" href="#section2" >Services</a>
-        <a class="a" href="#section3" >Contact</a>
-        <a class="a" href="#section4" >About</a>
+        <a class="a" href="#section3" >About</a>
+        <a class="a" href="#section4" >Contact</a>
         <a href="http://localhost/FAREFLEX/public/login"  class="login">Log in</a>
         <a href="http://localhost/FAREFLEX/public/signup" class="signup">Sign up </a>
     </div>
@@ -42,31 +48,45 @@
         <div>
             <div id="driver">
                 <h1>
-                    Drivers!
+                    Work as a driver
                 </h1>
                 <div>
-                    <p>
+                    <ul>
+                    <li><p>
                         Passionate about urban exploration and adventure? Consider joining us as a city travel
                         system driver. Lead participants through captivating routes, showcasing the heart of our city.
                         Your expertise will shape memorable journeys.
-                    </p>
-                    <a href="<?=ROOT?>/signup"><button>Join us</button></a>
-                    <p>Be part of creating remarkable experiences and a strong sense of camaraderie.
-                        Become a driver and propel the spirit of adventure forward!</p>
+                    </p></li>
+                    <li><p>Be part of creating remarkable experiences and a strong sense of camaraderie.
+                        Become a driver and propel the spirit of adventure forward!</p></li>
+                    </ul>
+                    <button>Join us</button>
                 </div>
             </div>
             <div id="ride">
 
-                <h1>Request a ride now</h1>
-                <div>
-                    <input type="text" placeholder="Enter pickup location">
-                    <input type="text" placeholder="Enter destination">
-                    <a href="<?=ROOT?>/signup"><button>Register now</button></a>
-                    <p> Embark on an unforgettable journey with us! Join our exciting ride event and experience breathtaking
-                        landscapes, thrilling adventures, and memories that will last a lifetime. Register now to secure your spot!</p>
+                
+                <div><img src="<?= ROOT ?>/assets/img/customer_phone.png" class="phone-img"> </div>
+                <div class="ride-text">
+                    <h1>Request a ride now</h1>
+                    <ul>
+                        <li>Select your pickup location and where you wish to arrive, and let the beauty of the path unfold before you</li>
+                        <li>Embark on an unforgettable journey with us! Join our exciting ride event and experience breathtaking
+                        landscapes, thrilling adventures, and memories that will last a lifetime.</li>
+                        
+                    </ul>
+                    <button class="ride-btn">Register Now</button>
                 </div>
             </div>
-            <div id="aboutus">A taxi management system, where customers select their drivers, boasts key features for a superior experience. Customers access driver profiles with ratings, photos, and reviews, ensuring informed choices. Real-time GPS tracking enhances safety, while in-app messaging facilitates easy communication. A driver rating system allows customers to provide feedback. These features empower customers, ensuring transparency, convenience, and satisfaction in the taxi booking process.</div>
+            <div id="aboutus">
+                <ul>
+                        <li>A taxi management system, where customers select their drivers, boasts key features for a superior experience. </li>
+                        <li>Customers access driver profiles with ratings, photos, and reviews, ensuring informed choices. </li>
+                        <li>Real-time GPS tracking enhances safety, while in-app messaging facilitates easy communication. A driver rating system allows customers to provide feedback. These features empower customers, ensuring transparency, convenience, and satisfaction in the taxi booking process.</li>
+                        
+                </ul>
+                
+            </div>
             <script>
 
             //home box 
@@ -78,30 +98,48 @@
                 const aboutus = document.getElementById('aboutus');
 
                 icon1.addEventListener('click', () => {
-                    driver.style.display = 'block';
+                    driver.style.display = 'flex';
                     ride.style.display = 'none';
                     aboutus.style.display = 'none';
                     icon1.style.backgroundColor="#D9D9D9";
-                    icon2.style.backgroundColor="#b5b5b5";
-                    icon3.style.backgroundColor="#b5b5b5";
+                    icon1.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)";
+                    icon1.style.marginTop= "10px";
+                    icon2.style.backgroundColor="#ffffff";
+                    icon2.style.removeProperty("box-shadow");
+                    icon2.style.marginTop= "0px";
+                    icon3.style.backgroundColor="#ffffff";
+                    icon3.style.removeProperty("box-shadow");
+                    icon3.style.marginTop= "0px";
                 });
 
                 icon2.addEventListener('click', () => {
                     driver.style.display = 'none';
-                    ride.style.display = 'block';
+                    ride.style.display = 'flex';
                     aboutus.style.display = 'none';
-                    icon2.style.backgroundColor='#D9D9D9';
-                    icon1.style.backgroundColor="#b5b5b5";
-                    icon3.style.backgroundColor="#b5b5b5";
+                    icon2.style.backgroundColor="#D9D9D9";
+                    icon2.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)";
+                    icon2.style.marginTop= "10px";
+                    icon1.style.backgroundColor="#ffffff";
+                    icon1.style.removeProperty("box-shadow");
+                    icon1.style.marginTop= "0px";
+                    icon3.style.backgroundColor="#ffffff";
+                    icon3.style.removeProperty("box-shadow");
+                    icon3.style.marginTop= "0px";
                 });
 
                 icon3.addEventListener('click', () => {
                     driver.style.display = 'none';
                     ride.style.display = 'none';
-                    aboutus.style.display = 'block';
+                    aboutus.style.display = 'flex';
                     icon3.style.backgroundColor="#D9D9D9";
-                    icon2.style.backgroundColor="#b5b5b5";
-                    icon1.style.backgroundColor="#b5b5b5";
+                    icon3.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)";
+                    icon3.style.marginTop= "10px";
+                    icon2.style.backgroundColor="#ffffff";
+                    icon2.style.removeProperty("box-shadow");
+                    icon2.style.marginTop= "0px";
+                    icon1.style.backgroundColor="#ffffff";
+                    icon1.style.removeProperty("box-shadow");
+                    icon1.style.marginTop= "0px";
 
 
                 });
@@ -183,52 +221,68 @@
     </div>
 </div>
 
-<div class="contact" id="section3">
-    <h1>CONTACT US</h1>
-    <div class="contact_way">
-        <div>
-            <i class="fa-solid fa-comment-dots"></i>
-            <p>Text us</p>
-            <h3>077-301-6416</h3>
-        </div>
-        <div>
-            <i class="fa-solid fa-phone-volume"></i>
-            <p>Call us</p>
-            <h3>070-136-0797</h3>
-        </div>
-        <div>
-            <i class="fa-brands fa-facebook-messenger"></i>
-            <p>Message us</p>
-            <h3>FACEBOOK Message</h3>
-        </div>
-        <div>
-            <i class="fa-solid fa-envelope"></i>
-            <p>Email us</p>
-            <h3>FAREFLEX2023<br>@gmail.com</h3>
-        </div>
-    </div>
-</div>
 
-<div class="about" id="section4">
+<div class="about" id="section3">
     <!-- <img src="./img/TAXI.jpg" alt=""> -->
 
     <h1>ABOUT US</h1>
-    <div class="fpara">
-        <h2>We reimagine the way the world moves for the better</h2>
-        <p>Movement is what we power. It’s our lifeblood. It runs through our veins. It’s what gets us out of bed each morning. It pushes us to constantly reimagine how we can move better. For you. For all the places you want to go. For all the things you want to get. For all the ways you want to earn. Across the entire world. In real time. At the incredible speed of now.</p>
-    </div>
-    <div class="spara">
-        <!-- <div class="para_part1">
-            <h1>Our System</h1>
-            <p></p>
-        </div> -->
-        <div class="para_part1">
-            <h1>Our System</h1>
-            <p>At FAREFLEX, our enduring aim is to be at the forefront of positive change in the driving education landscape. We are unwavering in our commitment to road safety and the transformation of the driving experience. Our vision encompasses the delivery of comprehensive, tailored driving education that transcends the boundaries of standard test preparation. We aspire to nurture a generation of responsible, confident, and exceptionally skilled drivers, equipping them not only with the knowledge to pass their tests but with a deep-seated commitment to safety, courtesy, and respect for all road users. Our ultimate goal is to actively contribute to the creation of a world where our roads are not just safer, but where they become hubs of community, shared experiences, and the sheer joy of driving, enriching the lives of all those we serve.</p>
-            <button >Learn more</button>
+    <div class="inner-about">
+        <div class="fpara">
+            <h2>We reimagine the way the world moves for the better</h2>
+            <p>Movement is what we power. It’s our lifeblood. It runs through our veins. It’s what gets us out of bed each morning. It pushes us to constantly reimagine how we can move better. For you. For all the places you want to go. For all the things you want to get. For all the ways you want to earn. Across the entire world. In real time. At the incredible speed of now.</p>
+        </div>
+        <div class="spara">
+            <img src="<?= ROOT ?>/assets/img/Aboutpic.jpg" class="about-img">
+            <!-- <div class="para_part1">
+                <h1>Our System</h1>
+                <p></p>
+            </div> -->
+            <div class="para_part1">
+                <h1>Our System</h1>
+                <p>At FAREFLEX, we're dedicated to transforming driving education. Our vision: deliver comprehensive, personalized instruction for safe, confident, and skilled drivers. We aim to contribute to a world with safer roads and a positive driving experience, enriching lives through community and joy.</p>
+            </div>
         </div>
     </div>
 </div>
+<div class="contact" id="section4">
+    <img src="<?= ROOT ?>/assets/img/contactlogo.png" class="contact-logo">
+    <div class="contact-details">
+        <p>Contact</p>
+        <div class="contact_way">
+            <div>
+                
+                <p><i class="fa-solid fa-comment-dots" style="background: white;"></i> 077-301-6416</p>
+                <!-- <h3></h3> -->
+            </div>
+            <div>
+                
+                <p><i class="fa-solid fa-phone-volume" style="background: white;"></i> 070-136-0797</p>
+                <!-- <h3></h3> -->
+            </div>
+            <div>
+                
+                <p><i class="fa-brands fa-facebook-messenger" style="background: white;"></i> Messenger</p>
+                <!-- <h3>FACEBOOK Message</h3> -->
+            </div>
+            <div>
+                
+                <p><i class="fa-solid fa-envelope" style="background: white;"></i> contact@fareflex.lk</p>
+                <!-- <h3>FAREFLEX2023<br>@gmail.com</h3> -->
+            </div>
+        </div>
+    </div>
+    <div id="socials">
+    <div class="footer_icon">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-youtube"></i>
+        <i class="fa-brands fa-instagram"></i>
+
+    </div>
+
+    </div>
+</div>
+
 
 <div class="footer">
     <div class="footer_text">
@@ -240,13 +294,13 @@
         <p class="footerp"> | </p>
         <p class="footerp">  Contact Us</p>
     </div>
-    <div class="footer_icon">
+    <!-- <div class="footer_icon">
         <i class="fa-brands fa-facebook-f"></i>
         <i class="fa-brands fa-twitter"></i>
         <i class="fa-brands fa-youtube"></i>
         <i class="fa-brands fa-instagram"></i>
 
-    </div>
+    </div> -->
 
 
 

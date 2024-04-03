@@ -55,6 +55,7 @@ class Database
 			 `email` varchar(100) NOT NULL,
 			 `password` varchar(255) NOT NULL,
 			 `role` varchar(20) NOT NULL,
+			 `empID` int(10),
 			 `date` date DEFAULT NULL,
 			 PRIMARY KEY (`id`),
 			 KEY `email` (`email`),
@@ -79,6 +80,20 @@ class Database
 		   ";
 		$this->query($query);
 
+		//add officer table
+		$query = "
+			CREATE TABLE IF NOT EXISTS `addofficer` (
+			`empID` int(10) NOT NULL,
+			`name` text NOT NULL,
+			`email` text NOT NULL,
+			`phone` text NOT NULL,
+			`password` varchar(255) NOT NULL,
+			 PRIMARY KEY (`empID`)
+		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+		   
+		   ";
+		$this->query($query);
+
 
 	    $query= "
 			CREATE TABLE IF NOT EXISTS `addplace` (
@@ -95,7 +110,7 @@ class Database
 		$this->query($query);
 
 		$query= "
-			CREATE TABLE `driverregistration` (
+			CREATE TABLE IF NOT EXISTS `driverregistration` (
 			`email` varchar(50) NOT NULL,
 			`status` int(2) NOT NULL,
 			PRIMARY KEY (`email`)
