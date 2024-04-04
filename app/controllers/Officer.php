@@ -15,8 +15,33 @@
             message('please login to view the page');
             redirect("login");
         }
+        $data['errors'] = [];
+        $add_standardFare = new standardFare();
+
         $data['title'] = "Officer";
         $this->view('Officer/officerdriverRegistration',$data);
+
+        /* if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['errors'] = [];
+
+        $add_standardFare = new standardFare();
+
+        $rows = $add_standardFare->findAll();
+        $data['rows'] = array();
+
+        if(isset($rows[0])){
+        for($i = 0;$i < count($rows); $i++)
+        {
+            $data['rows'][] = $rows[$i];
+        }
+
+        $data['title'] = "standardFare";
+        $this->view('Officer/standardFare',$data);
+        } */
     }
     public function complains(){
         if(!Auth::logged_in())
@@ -134,7 +159,7 @@
                 // show($_POST);
                 $_POST['Fid']=$Fid; 
                 // show($_POST);           
-                $add_standardFare->update($Fid, $_POST);
+                $add_standardFare->officerupdate($Fid, $_POST);
                 redirect('officer/standardFare');
             }
            
@@ -228,21 +253,62 @@
 
         $add_OfficerDriver = new OfficerDriver();
 
+        $search = isset($_GET['sarch']) ? $_GET['search'] : null;
+
         $data = [
             'role' => "driver"
         ];
 
-        $rows = $add_OfficerDriver->where($data);
-        $data['rows'] = array();
+        if($search !== null){
+            $rows = $add_OfficerDriver->where2($data , $search);
+        }else {
+            // Otherwise, retrieve all customers
+            $rows = $add_OfficerDriver->where($data);
+        }
 
-        for($i = 0;$i < count($rows); $i++)
+        
+
+        //$rows = $add_OfficerDriver->where($data);
+        //$data['rows'] = array();
+        $data['rows'] = is_array($rows) ? $rows : [];
+
+        /*for($i = 0;$i < count($rows); $i++)
         {
             $data['rows'][] = $rows[$i];
-        }
+        }*/
 
         $data['title'] = "Drivers";
         $this->view('officer/driver',$data);
     }
+
+
+    /* public function customer() {
+        if (!Auth::logged_in()) {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+    
+        $add_customer = new AdminCustomer();
+    
+        $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+    
+        $data = [
+            'role' => 'user',
+        ];
+    
+        if ($searchTerm !== null) {
+            // If a search term is provided, perform a search
+            $rows = $add_customer->where1($data, $searchTerm);
+        } else {
+            // Otherwise, retrieve all customers
+            $rows = $add_customer->where($data);
+        }
+    
+        $data['rows'] = is_array($rows) ? $rows : [];
+    
+        $data['title'] = "Customer";
+        $this->view('admin/customer', $data);
+    } */
 
     public function driver_delete($id=null){
         if(!Auth::logged_in())

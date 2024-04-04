@@ -7,6 +7,7 @@
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Dashboard.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Officer.css">
     <style>
     .error {
         border: 1px solid red;
@@ -124,6 +125,20 @@
                 <div class="navi1">
                     <h2>DRIVER REGISTRATION</h2>
                 </div>
+            </div>
+            <div class="table1">
+                <table>
+                    <thead>
+                        <tr>
+                            <!--<td>ID</td>-->
+                            <td>Driver Name</td>
+                            <td>Vehicle Type</td>
+                            <td>Vehicle Number</td>
+                            <td>Contact Details</td>
+                            <td>Option</td>
+                        </tr>
+                    </thead>
+                </table>
             </div>
 
 

@@ -118,6 +118,12 @@
                 <div class="navi1">
                     <h2>DRIVERS</h2>
                 </div>
+                <div class="search">
+                    <form action="<?= ROOT ?>/officer/driver" method="GET">
+                        <input type="text" name="search" placeholder="Search for driver">
+                        <input type="submit" value="Search" class="srch">
+                    </form>
+                </div>
             </div>
 
             <div class="table1">
