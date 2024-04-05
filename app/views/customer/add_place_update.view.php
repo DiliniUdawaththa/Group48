@@ -11,7 +11,7 @@
         }
         .message{
             /* margin-top:; */
-            height: 50px;
+            height: 50px;   
             width: 100%;
             margin-bottom: 10px;
             
@@ -113,7 +113,7 @@
                         </div>
                           <input value="<?= $row->address; ?>" type="text" name="address" id="address" required>
                           <br>
-                          <button type="submit"  name="submit id="submit_btn" class="submit_btn">Submit</button>
+                          <button type="submit"  name="submit" id="submit_btn" class="submit_btn">Submit</button>
                           <br>
                           <a href="<?=ROOT?>/customer/add_place"><small class="skip"><center>skip</center></small></a>
                   </div>

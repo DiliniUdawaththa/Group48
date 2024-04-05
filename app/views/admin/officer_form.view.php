@@ -14,7 +14,7 @@
         .message{
             height: 50px;
             width: 100%;
-            margin-bottom: 10px;
+            margin-bottom: 10px;  
         }
         .message p{
             padding: 10px;
@@ -41,7 +41,7 @@
                 <a href="<?=ROOT?>/admin/customer" class="link"><div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div></a>
                 <a href="<?=ROOT?>/admin/driver" class="link"><div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div></a>
                 <a href="<?=ROOT?>/admin/officer" class="link"><div class="linkbutton1"><i class="fa-solid fa-user-tie"></i>Officer</div></a>
-                <a href="<?=ROOT?>/admin/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-taxi"></i>Rides</div></a>
+                <!--<a href="<?=ROOT?>/admin/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-taxi"></i>Rides</div></a>-->
                 <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>Logout</div></a>
             </div>
 
