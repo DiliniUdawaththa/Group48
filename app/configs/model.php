@@ -261,4 +261,73 @@ class Model extends Database
 	
 	
 
+	public function officerupdate($Fidd, $data)
+	{
+		if (!empty($this->allowedColumns)) {
+			foreach ($data as $key => $value) {
+				if (!in_array($key, $this->allowedColumns)) {
+					unset($data[$key]);
+				}
+			}
+		}
+
+		$keys = array_keys($data);
+		// $Fid = array_search($Fid, $data);
+
+		$query = "update " . $this->table . " set ";
+		foreach ($keys as $key) {
+			$query .= $key . "=:" . $key . ",";
+		}
+		$query = trim($query, ",");
+		$query .= " where Fid = :Fid";
+		// print_r($query);	
+
+
+		$this->query($query, $data);
+	}
+
+
+	/*public function searchByEmail($email)
+{
+    $query = "SELECT * FROM " . $this->table . " WHERE email LIKE :email";
+    $data = array('email' => '%' . $email . '%');
+    $res = $this->query($query, $data);
+
+    if (is_array($res)) {
+        return $res;
+    }
+
+    return false;
+}*/
+
+
+public function where2($data, $search = null)
+	{
+		$keys = array_keys($data);
+		$query = "SELECT * FROM " . $this->table . " WHERE ";
+
+		// If $searchTerm is provided, include it in the WHERE clause
+		if ($search !== null) {
+			$query .= "(";
+			foreach ($keys as $key) {
+				$query .= $key . " LIKE '%" . $search . "%' OR ";
+			}
+			// $query = $query . ") AND ";
+			$query = rtrim($query, "OR ") . ") AND ";
+		}
+
+		foreach ($keys as $key) {
+			$query .= $key . "=:" . $key . " AND ";
+		}
+
+		$query = rtrim($query, "AND ");
+		$res = $this->query($query, $data);
+
+		if (is_array($res)) {
+			return $res;
+		}
+
+		return false;
+	}
+
 }

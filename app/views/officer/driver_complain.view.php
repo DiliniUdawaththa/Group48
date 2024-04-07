@@ -69,7 +69,7 @@
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link"><div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration</div></a>
                 <a href="<?=ROOT?>/officer/complains" class="link"><div class="linkbutton1"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div></a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link"><div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div></a>
-                <!--<a href="<?=ROOT?>/admin/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-taxi"></i>Rides</div></a>-->
+                <a href="<?=ROOT?>/admin/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-taxi"></i>Rides</div></a>
                 <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>Logout</div></a>
             </div>
 
@@ -103,21 +103,11 @@
     <div class="interface">
         <div class="navi">
             <div class="navi1">
-                <h2>COMPLAINS</h2>
+                <h2>DRIVER COMPLAINS</h2>
             </div>
         </div>
 
-        <div class="main-div">
-            <div class="box1">
-                <a class="none-dec" href="<?=ROOT?>/officer/customer_complain">
-                    <div class="con-button">Customer Complains</div>
-                </a>
-                <br/><br/><br>
-                <a class="none-dec" href="<?=ROOT?>/officer/driver_complain">
-                    <div class="con-button">Driver Complains</div>
-                </a>
-            </div>
-        </div>
+        
     </div>
     
 
