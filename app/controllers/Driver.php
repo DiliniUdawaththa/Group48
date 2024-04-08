@@ -144,6 +144,15 @@
             $this->view('driver/registration/vehicleRegistration',$data);
         
     }
+
+    public function renewHelp(){
+        $this->view('driver/renewRegistration/help');
+    }
+
+    public function expire(){
+        $this->view('driver/renewRegistration/expireform');
+    }
+
  }
  //echo " sample home page";
  ?>
