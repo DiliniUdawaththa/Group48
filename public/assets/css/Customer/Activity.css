@@ -179,7 +179,7 @@ position: fixed;
     display: flex;
     width: 10%;
 }
-.heading .time{
+.heading .vehicle{
     display: flex;
     width: 10%;
 }
@@ -218,7 +218,7 @@ position: fixed;
     display: flex;
     width: 10%;
 }
-.data .time{
+.data .vehicle{
     display: flex;
     width: 10%;
 }

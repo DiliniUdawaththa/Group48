@@ -44,8 +44,12 @@
                     <h2>Select the alternative path <br>
                     click the map</h2>
                    
-                    <a href="<?=ROOT?>/customer/ride_step3" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
-                    <a href="<?=ROOT?>/customer/ride_step2" class="refresh">Refresh</a>
+                    <form method="POST">
+                        <a href="<?=ROOT?>/customer/ride_step3" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
+                        <input type="text" id="time" name="time">
+                        <input type="text" id="distance" name="distance">
+                    </form>
+                    <a href="<?=ROOT?>/customer/ride_step1" class="refresh">Refresh</a>
 
                 </center>
                 
@@ -84,24 +88,34 @@
     googleStreets.addTo(map)
 
     var Routing;
-    var lat=6.901963
-    var long=80.861292
-    var lat1=6.901963
-    var lon1=79.861292
+    var lat=<?php echo isset($_GET['l_lat']) ? json_encode($_GET['l_lat']) : 'null'; ?>;
+    var long=<?php echo isset($_GET['l_long']) ? json_encode($_GET['l_long']) : 'null'; ?>;
+    var lat1=<?php echo isset($_GET['d_lat']) ? json_encode($_GET['d_lat']) : 'null'; ?>;
+    var lon1=<?php echo isset($_GET['d_long']) ? json_encode($_GET['d_long']) : 'null'; ?>;
     Routing = L.Routing.control({
         waypoints: [
             L.latLng(lat,long),
             L.latLng(lat1,lon1)
         ]
-    });
+    }); 
+
+Routing.on('routesfound', function(e) {
+    var route = e.routes[0];
+    var distance = route.summary.totalDistance; // Distance in meters
+    var time = route.summary.totalTime; // Time in seconds
+
+
+    document.getElementById("time").value='0'+Math.floor(time/3600) + ':'+Math.floor((time%3600)/60);
+    document.getElementById("distance").value=(distance/1000).toFixed(2);
+    
+});
 
     Routing.addTo(map);
+    
     var lat2=(lat1+lat)/2
     var lon2=(lon1+long)/2
     map.flyTo([lat2,lon2], 14)
     const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
     popupElement.classList.add('leaflet-routing-container-hide');
-   
-           
-        
+     
     </script>

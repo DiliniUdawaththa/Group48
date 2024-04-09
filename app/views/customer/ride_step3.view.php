@@ -38,7 +38,7 @@
 <div class="activity">
         <div class="mainbox">
             <div class="contant" >
-                <a href="./find_3.html"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
+                <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
                 <center>
                     
                     <h2>Select the Vehicle</h2>
@@ -89,9 +89,11 @@
                         </div>
 
                     </div>
-                   
+                    <form action="" method="POST">
+                   <input type="text" name="vehicle" id="vehicle" value="" >
                     <a href="<?=ROOT?>/customer/ride_step4" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
-
+                    </form>
+                   
                 </center>
                 
                 
@@ -136,10 +138,12 @@
         buttonContainer.style.display = 'block';
 
 
-       // bike---------------------------------------------------------------------------------------------------------------
-        var newLat=6.901963
-        var newLng=79.861292
+       // ---------------------------------------------------------------------------------------------------------------
+        var newLat=<?php echo isset($_GET['l_lat']) ? json_encode($_GET['l_lat']) : 'null'; ?>;
+        var newLng=<?php echo isset($_GET['l_long']) ? json_encode($_GET['l_long']) : 'null'; ?>;
+        map.flyTo([lat,long], 15)
         deleteAllMarkers();
+       //bike ----------------------------------------------------------------------------------------------------------------
         if(boxId=="box1"){
             var taxi = L.icon({
                 iconUrl : '<?= ROOT ?>/assets/img/customer/bike.png',
@@ -160,21 +164,23 @@
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
                 var marker1 = L.marker(coords[i],{icon : taxi})
-                if(z<z1){
+                if(z<3*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
                 }
         
             }
-            
-        }else if(boxId=='box2')
+            document.getElementById("vehicle").value='bike';
+        }
+    // auto ---------------------------------------------------------------------------------------------------------------------------------        
+        else if(boxId=='box2')
         {
             var taxi = L.icon({
                 iconUrl : '<?= ROOT ?>/assets/img/customer/auto.png',
                 iconSize:[50,30]
             })
             
-            coords=[[ 6.903528493716559,79.86255888285733],[6.90578774905135,79.85891096002354],[6.90259068644725,79.85790241665184],[ 6.908217502180756,79.85777366643418]]
+            coords=[[ 6.90002849379999,79.86005888288888],[6.90178774900000,79.85791096000000],[6.90859068644444,79.8529024166666],[ 6.90621750218888,79.8507736664444]]
             let l =coords.length;
             if(markers.length!=0){
             
@@ -188,20 +194,22 @@
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
                 var marker1 = L.marker(coords[i],{icon : taxi})
-                if(z<z1){
+                if(z<5*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
                 }
         
             }
+            document.getElementById("vehicle").value='auto';
         }
+// car---------------------------------------------------------------------------------------------------------------------------------
         else if(boxId == 'box3') {
             var taxi = L.icon({
                 iconUrl : '<?= ROOT ?>/assets/img/customer/taxi.png',
                 iconSize:[50,30]
             })
             
-            coords=[[ 6.903528493716559,79.86255888285733],[6.90578774905135,79.85891096002354],[6.90259068644725,79.85790241665184],[ 6.908217502180756,79.85777366643418]]
+            coords=[[ 6.905,79.865],[6.906,79.854],[6.902,79.855],[ 6.905,79.858]]
             let l =coords.length;
             if(markers.length!=0){
             
@@ -215,21 +223,22 @@
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
                 var marker1 = L.marker(coords[i],{icon : taxi})
-                if(z<z1){
+                if(z<5*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
                 }
         
             }
-
+            document.getElementById("vehicle").value='car';
         }
+//-Ac-car-----------------------------------------------------------------------------------------------------------------------------------
         else if(boxId == 'box4') {
             var taxi = L.icon({
                 iconUrl : '<?= ROOT ?>/assets/img/customer/taxi.png',
                 iconSize:[50,30]
             })
             
-            coords=[[ 6.903528493716559,79.86255888285733],[6.90578774905135,79.85891096002354],[6.90259068644725,79.85790241665184],[ 6.908217502180756,79.85777366643418]]
+            coords=[[ 6.903,79.862],[6.905,79.858],[6.902,79.857],[ 6.908,79.857]]
             let l =coords.length;
             if(markers.length!=0){
             
@@ -243,14 +252,15 @@
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
                 var marker1 = L.marker(coords[i],{icon : taxi})
-                if(z<z1){
+                if(z<3*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
                 }
         
             }
+            document.getElementById("vehicle").value='Ac-car';
         }
-
+//--------------------------------------------------------------------------------------------------------------------------------
         function deleteAllMarkers() {
             for (var i = 0; i < markers.length; i++) {
                 map.removeLayer(markers[i]); // Remove each marker from the map
@@ -278,10 +288,10 @@
     googleStreets.addTo(map)
 
     var Routing;
-    var lat=6.901963
-    var long=80.861292
-    var lat1=6.901963
-    var lon1=79.861292
+    var lat=<?php echo isset($_GET['l_lat']) ? json_encode($_GET['l_lat']) : 'null'; ?>;
+    var long=<?php echo isset($_GET['l_long']) ? json_encode($_GET['l_long']) : 'null'; ?>;
+    var lat1=<?php echo isset($_GET['d_lat']) ? json_encode($_GET['d_lat']) : 'null'; ?>;
+    var lon1=<?php echo isset($_GET['d_long']) ? json_encode($_GET['d_long']) : 'null'; ?>;
     Routing = L.Routing.control({
         waypoints: [
             L.latLng(lat,long),
@@ -290,7 +300,6 @@
     });
 
     Routing.addTo(map);
-    map.flyTo([lat1,lon1], 15)
     const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
     popupElement.classList.add('leaflet-routing-container-hide');
    

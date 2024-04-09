@@ -1,53 +1,66 @@
 <?php
  class Customer extends Controller{
+    // public function index(){
+    //     if(!Auth::logged_in())
+    //     {
+    //         message('please login to view the page');
+    //         redirect("login");
+    //     }
+    //     $data['title'] = "Ride";
+    //     $this->view('customer/ride_step1',$data);
+    // }
+
+    // step1 stage-----------------------------------------------------------------------------------------------------------------
     public function index(){
         if(!Auth::logged_in())
         {
             message('please login to view the page');
             redirect("login");
         }
+        if ($_SERVER["REQUEST_METHOD"]=="POST") {
+              $location=$_POST["location"];
+              $destination=$_POST["destination"];
+              if(!empty($location) &&  !empty($destination))
+              {
+                $l_lat=$_POST["l_lat"];
+                $l_long=$_POST["l_long"];
+                $d_lat=$_POST["d_lat"];
+                $d_long=$_POST["d_long"];
+                 redirect('customer/ride_step2/.php?location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long);
+              }
+              else{
+                $data['errors']['location'] = "select the pickup location";
+              }
+            }
         $data['title'] = "Ride";
         $this->view('customer/ride_step1',$data);
     }
 
-    // step1 stage
-    public function ride_step1(){
-        if(!Auth::logged_in())
-        {
-            message('please login to view the page');
-            redirect("login");
-        }
-        // if ($_SERVER["REQUEST_METHOD"]=="POST") {
-             // Access individual POST parameters
-            //  show($_POST);
-            // $name = $_POST["name1"];
 
-            // // Use the retrieved POST data
-            // show($name);
-            // }
-        $data['title'] = "Ride";
-        $this->view('customer/ride_step1',$data);
-    }
-
-    // public function ride_stepa(){
-    //     // if(!Auth::logged_in())
-    //     // {
-    //     //     message('please login to view the page');
-    //     //     redirect("login");
-    //     // }
-    //     // if ($_SERVER["REQUEST_METHOD"]) {
-    //     //      show($_GET(name));
-    //     // }
-    //     // $this->view('customer/ride_stepa');
-    //     // $data['title'] = "Ride";
-    //     // $this->view('customer/ride_step1',$data);
-    // }
      
     public function ride_step2(){
         if(!Auth::logged_in())
         {
             message('please login to view the page');
             redirect("login");
+        }
+        if ($_SERVER["REQUEST_METHOD"]=="POST") {
+            show($_POST);
+            if(!empty($_GET))
+            {
+                $location=$_GET['location'];
+                $l_lat=$_GET['l_lat'];
+                $l_long=$_GET['l_long'];
+                $destination=$_GET['destination'];
+                $d_lat=$_GET['d_lat'];
+                $d_long=$_GET['d_long'];
+
+                $time= $_POST['time'];
+                $distance=$_POST['distance'];
+
+                redirect('customer/ride_step3/.php?time='.$time.'&distance='.$distance.'&location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long);
+
+            }
         }
         $data['title'] = "Ride";
         $this->view('customer/ride_step2',$data);
@@ -59,6 +72,20 @@
             message('please login to view the page');
             redirect("login");
         }
+            $location=$_GET['location'];
+            $l_lat=$_GET['l_lat'];
+            $l_long=$_GET['l_long'];
+            $destination=$_GET['destination'];
+            $d_lat=$_GET['d_lat'];
+            $d_long=$_GET['d_long'];
+            $time= $_GET['time'];
+            $distance=$_GET['distance'];
+
+        if ($_SERVER["REQUEST_METHOD"]=="POST")
+        {
+            $vehicle=$_POST['vehicle'];
+            redirect('customer/ride_step4/.php?time='.$time.'&distance='.$distance.'&location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long.'&vehicle='.$vehicle);
+        }
         $data['title'] = "Ride";
         $this->view('customer/ride_step3',$data);
     }
@@ -68,6 +95,39 @@
         {
             message('please login to view the page');
             redirect("login");
+        }
+        $rides = new Rides();
+        $driver_staus= new Driver_status;
+
+        $rows = $driver_staus->findAll();
+        $data['rows'] = array();
+       
+        if(isset($rows[0])){
+
+            for($i = 0;$i < count($rows); $i++)
+            {
+                    $data['rows'][] = $rows[$i];
+            }
+        }
+        if ($_SERVER["REQUEST_METHOD"]=="POST")
+        {
+            
+            $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
+            $_POST['driver_id']=4;
+            $_POST['date'] = date("Y-m-d H:i:s");
+            $_POST['location']=$_GET['location'];
+            $_POST['l_lat']=$_GET['l_lat'];
+            $_POST['l_long']=$_GET['l_long'];
+            $_POST['destination']=$_GET['destination'];
+            $_POST['d_lat']=$_GET['d_lat'];
+            $_POST['d_long']=$_GET['d_long'];
+            $_POST['vehicle']=$_GET['vehicle'];
+            $_POST['time']=$_GET['time'];
+            $_POST['distance']=$_GET['distance'];
+            $_POST['fare']=500;
+            $_POST['state']="Reject";
+            $rides->insert($_POST);
+            redirect('customer/ride_step5');
         }
         $data['title'] = "Ride";
         $this->view('customer/ride_step4',$data);
@@ -79,14 +139,6 @@
             message('please login to view the page');
             redirect("login");
         }
-        // $data['errors'] = [];
-        // $message = new Message();
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            
-            $address=$_POST["address"];
-            show($address);
-         }
-        // show($_POST);
         $data['title'] = "Ride";
         $this->view('customer/ride_step5',$data);
     }
@@ -225,9 +277,32 @@
             message('please login to view the page');
             redirect("login");
         }
+        $data['errors'] = [];
+        $rides = new Rides();
+        $user = new User();
+		
+        $rows = $rides->findAll();
+        $rows2 = $user->findAll();
+
+        $data['rows'] = array();
+        $data['$rows2'] = array();
+
+        if(isset($rows[0])){
+            for($i = count($rows)-1;$i >= 0; $i--)
+            {
+                    $data['rows'][] = $rows[$i];
+            }
+        }
+        if(isset($rows2[0])){
+            for($i = 0;$i < count($rows2); $i++)
+            {
+                    $data['rows2'][] = $rows2[$i];
+            }
+        }
         $data['title'] = "Activity";
         $this->view('customer/activity',$data);
     }
+
     public function Help(){
         if(!Auth::logged_in())
         {

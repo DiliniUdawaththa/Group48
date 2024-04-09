@@ -38,7 +38,7 @@
 <div class="activity">
         <div class="mainbox">
             <div class="contant" >
-                <a href="./find_3.html"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
+                <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
                 <center>
                     
                     <h2>Select the Driver</h2>
@@ -110,9 +110,10 @@
                            <button class="Request">Select</button>
                         </div>
                       </div>
-                   
+                      <form action="" method="POST">
+                   <!-- <input type="text" value='' name='Driver_Id' id='Driver_Id'> -->
                     <a href="<?=ROOT?>/customer/ride_step5" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
-
+                    </form>
                 </center>
                 
                 
@@ -218,10 +219,10 @@
     googleStreets.addTo(map)
 
     var Routing;
-    var lat=6.901963
-    var long=80.861292
-    var lat1=6.901963
-    var lon1=79.861292
+    var lat=<?php echo isset($_GET['l_lat']) ? json_encode($_GET['l_lat']) : 'null'; ?>;
+    var long=<?php echo isset($_GET['l_long']) ? json_encode($_GET['l_long']) : 'null'; ?>;
+    var lat1=<?php echo isset($_GET['d_lat']) ? json_encode($_GET['d_lat']) : 'null'; ?>;
+    var lon1=<?php echo isset($_GET['d_long']) ? json_encode($_GET['d_long']) : 'null'; ?>;
     Routing = L.Routing.control({
         waypoints: [
             L.latLng(lat,long),
@@ -230,26 +231,28 @@
     });
 
     Routing.addTo(map);
-    map.flyTo([lat1,lon1], 15)
     const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
     popupElement.classList.add('leaflet-routing-container-hide');
 
 
       // bike---------------------------------------------------------------------------------------------------------------
+     
       var markers=[];
-      var newLat=6.901963
-        var newLng=79.861292
+      var vehicle;
+      var newLat=<?php echo isset($_GET['l_lat']) ? json_encode($_GET['l_lat']) : 'null'; ?>;
+      var newLng=<?php echo isset($_GET['l_long']) ? json_encode($_GET['l_long']) : 'null'; ?>;
+      var vehicle=<?php echo isset($_GET['vehicle']) ? json_encode($_GET['vehicle']) : 'null'; ?>;
         deleteAllMarkers();
-            var taxi = L.icon({
-                iconUrl : '<?= ROOT ?>/assets/img/customer/bike.png',
-                iconSize:[30,30]
-            })
-            
+                   vehicle = L.icon({
+                    iconUrl : '<?= ROOT ?>/assets/img/customer/'+vehicle+'.png',
+                    iconSize:[50,30]
+                })     
             coords=[[ 6.903528493716559,79.86255888285733],[6.90578774905135,79.85891096002354],[6.90259068644725,79.85790241665184],[ 6.908217502180756,79.85777366643418]]
             let l =coords.length;
             if(markers.length!=0){
             
             }
+            map.flyTo([lat,long], 15)
             for(let i=0; i<l; i++){
                 // console.log('Marker position updated to:', [newLat, newLng]);
                 var x = (coords[i][0]-newLat)*(coords[i][0]-newLat)
@@ -257,8 +260,8 @@
                 var z = x+y;
                 var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
-                var z1 = 3*(x1+y1);
-                var marker1 = L.marker(coords[i],{icon : taxi})
+                var z1 = 5*(x1+y1);
+                var marker1 = L.marker(coords[i],{icon :  vehicle})
                 if(z<z1){
                     marker1.addTo(map)
                     markers.push(marker1);

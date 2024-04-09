@@ -23,7 +23,7 @@ body{
 
 /* ------------------------------------------------------------------- */
  .activity{
-    background-color:#D9D9D9;
+    background-color: aliceblue;
     width:80.4%;
     height: 100vh;
     display: flex;
@@ -38,16 +38,21 @@ body{
     margin: 40px;
     width: 100%;
     display: flex;
-    
+    border-radius: 25px;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    border-radius:  50px 0px 0  50px;
   }
   
 
   .search{
+    border-radius:  50px 0px 0  50px;
    display: flex;
    flex-direction: column;
-   width:50%;
-   background-color: #111827;
-   padding: 20px;
+   width:48%;
+   background-image: linear-gradient(to right, white, #84D7EB);
+
+   padding: 40px;
+   /* box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3); */
   }
 
   .search-box {
@@ -59,7 +64,8 @@ body{
 .search-input {
     width: 100%;
     padding-left: 30px;
-    border: 1px solid #ccc;
+    border: 1px solid ;
+    background-color: aliceblue;
     border-radius: 15px;
     box-sizing: border-box;
     border: none;
@@ -72,7 +78,7 @@ body{
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
-    color: #555;
+    color: black;
     cursor: pointer;
 }
 #searchicon {
@@ -107,10 +113,10 @@ body{
     background-color: #e0e0e0;
 }
   .search h1{
-    color: #D9D9D9;
+    color: black;
   }
   .search h2{
-    color: #D9D9D9;
+    color: black;
     margin-bottom: 40px;
   }
   .golink{
@@ -119,7 +125,7 @@ body{
   }
 
   .go{
-    margin: auto;
+    margin: 90px auto;
     padding: 8px 40px;
     width: 50px;
     font-style: bold;
@@ -127,10 +133,11 @@ body{
     justify-content: center;
     border-radius: 10px;
     border-color: white;
-    background-color: #111827;
-    color: white;
+    background-color:white ;
+    color: #111827;
     cursor: pointer;
     font-size: 15px;
+    border: solid #111827;
     /* text-decoration: none; */
   }
 
