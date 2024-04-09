@@ -1,0 +1,4 @@
+{
+  "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode",
+  "editor.formatOnSave": true
+}

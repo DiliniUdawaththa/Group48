@@ -119,6 +119,7 @@ class Database
 		
 		$this->query($query);
 
+<<<<<<< HEAD
 		$query= "
 		  DROP TABLE IF EXISTS `driver_status`;
 		  CREATE TABLE IF NOT EXISTS `driver_status` (
@@ -176,6 +177,20 @@ class Database
 		  
 			";
 		
+=======
+		$query="
+			CREATE TABLE IF NOT EXISTS `standardFare` (
+			`id` int(255) NOT NULL AUTO_INCREMENT,
+			`faretype` varchar(20) NOT NULL,
+			`vehicletype` varchar(20) NOT NULL,
+			`fare` int(255) NOT NULL,
+			`updatedby` varchar(50) DEFAULT NULL,
+			`date`datetime NOT NULL,
+			PRIMARY KEY (`id`)
+		)ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+		";
+
+>>>>>>> 3414e297d101c306e0a294bcc7aa7ce8778bd645
 		$this->query($query);
 
 	}
