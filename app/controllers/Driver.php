@@ -153,6 +153,36 @@
         $this->view('driver/renewRegistration/expireform');
     }
 
+    public function renew1(){
+        $this->view('driver/renewRegistration/renewStep1');
+    }
+
+    public function renew2(){
+        $this->view('driver/renewRegistration/renewStep2');
+    }
+
+    public function downloadSlip() {
+        // Set the file path
+        $pdfFilePath = "./assets/documents/paymentSlip.pdf";
+
+        // Check if file exists
+        if (file_exists($pdfFilePath)) {
+            // Set headers for force download
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($pdfFilePath) . '"');
+            header('Content-Length: ' . filesize($pdfFilePath));
+
+            // Read the file and output it to the browser
+            readfile($pdfFilePath);
+
+            // Terminate script after file download
+            exit;
+        } else {
+            // Handle file not found error
+            die('File not found.');
+        }
+    }
+
  }
  //echo " sample home page";
  ?>

@@ -6,15 +6,15 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
 </head>
 <body>
+
     <div class='outer-box'>
         <div class="wrapper-box">
             <div class='wrapper-hdr'>
-                <h2>HOW TO RENEW YOUR REGISTRATION</h2>
+                <h2>Driver Registration Renew - Step 01</h2>
             </div>
             <div class='content'>        
-                <ol>
-                    <li>Click on <b>RENEW</b> button.</li>
-                    <li>Download the payment slip. Use it when you are doing the payment.</li>
+                <ul>
+                    <li>You have to pay the annual renewal fee. </li>
                     <li>Payment details.
                         <ul style="padding-left: 30px">
                             <li>Account No: <b>84662532</b></li>
@@ -23,14 +23,15 @@
                             <li>Amount: <b>Rs 1500.00</b></li>
                         </ul>
                     </li>
-                    <li>Fill the form and upload the company payment slip copy.</li>
-                    <li>Your registration will be renewed within 1 working day. You will be notified through an email.</li>
-                </ol>       
+                    <li>You can do the payment either at any branch of people's bank or using any online banking app.</li>
+                    <li>If the payment is done through online banking submit a screenshot of a confirmation mail.</li>
+                    <li><a href="<?=ROOT?>/Driver/downloadSlip">Download payment slip</a></li>
+                </ul>       
             </div>    
         </div>
         <div class='bttn'>
                 <button class="back-btn" type="submit">BACK</button>
-                <button class="renew-btn" type="submit">RENEW</button>
+                <button class="renew-btn" type="submit">NEXT</button>
         </div>
     </div>
 
@@ -42,7 +43,7 @@
             window.location.href = "<?=ROOT?>/Driver/expire";
         })
         renew_button.addEventListener('click', ()=>{
-            window.location.href = "<?=ROOT?>/Driver/renew1";
+            window.location.href = "<?=ROOT?>/Driver/renew2";
         })
         
     </script>

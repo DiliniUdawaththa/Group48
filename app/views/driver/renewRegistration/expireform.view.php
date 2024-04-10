@@ -32,7 +32,7 @@
             window.location.href = "<?=ROOT?>/Driver/renewHelp";
         })
         renew_button.addEventListener('click', ()=>{
-            window.location.href = "<?=ROOT?>/Driver/renewHelp";
+            window.location.href = "<?=ROOT?>/Driver/renew1";
         })
         
     </script>
