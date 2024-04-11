@@ -109,11 +109,12 @@
                     $data['rows'][] = $rows[$i];
             }
         }
+
+        
         if ($_SERVER["REQUEST_METHOD"]=="POST")
         {
             
             $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
-            $_POST['driver_id']=4;
             $_POST['date'] = date("Y-m-d H:i:s");
             $_POST['location']=$_GET['location'];
             $_POST['l_lat']=$_GET['l_lat'];
@@ -126,8 +127,9 @@
             $_POST['distance']=$_GET['distance'];
             $_POST['fare']=500;
             $_POST['state']="Reject";
+            // show($_POST);
             $rides->insert($_POST);
-            redirect('customer/ride_step5');
+            redirect('customer/ride_step5/location='.$_GET['location'].'&l_lat='.$_GET['l_lat'].'&l_long='.$_GET['l_long'].'&driver_id='.$_POST['driver_id']);
         }
         $data['title'] = "Ride";
         $this->view('customer/ride_step4',$data);
@@ -139,6 +141,18 @@
             message('please login to view the page');
             redirect("login");
         }
+        $driver_status= new Driver_status;
+
+        $rows = $driver_status->findAll();
+        $data['rows'] = array();
+        if(isset($rows[0])){
+
+            for($i = 0;$i < count($rows); $i++)
+            {
+                    $data['rows'][] = $rows[$i];
+            }
+        }
+        redirect('customer/ride_step6/driver_id='.$_GET['driver_id']);
         $data['title'] = "Ride";
         $this->view('customer/ride_step5',$data);
     }
