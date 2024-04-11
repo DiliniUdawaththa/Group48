@@ -132,6 +132,16 @@ class Database
 
 		$this->query($query);
 
+		$query= "
+			CREATE TABLE IF NOT EXISTS `renewDriverRegistration` (
+			`email` varchar(50) NOT NULL,
+			`name` text NOT NULL,
+			`status` int(1) NOT NULL,
+		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+			";
+		
+		$this->query($query);
+
 	}
 	
 
