@@ -3,6 +3,12 @@
 <head>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/Add_Place.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
+    <!-- map  -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- //routing css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <!-- search -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <style>
         .error {
@@ -24,6 +30,11 @@
             
             
          }
+         #map{
+          display: block;
+          width: 100%;
+          height: 450px;
+         }
     </style>
 </head>
 
@@ -38,7 +49,7 @@
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/person.jpng" alt="" class="userimage">
+                <img src="<?= ROOT ?>/assets/img/person.jpg" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -73,7 +84,7 @@
           <!-- <div></div> -->
          <center>
           <div class="place_container">
-            <div class="add_form">
+            <div class="add_form" id="add_form">
               <form name="addPlaceForm" action="" method="post" onsubmit="return validateForm()">
                  <div class="place_top"><h1><i class="fa-solid fa-map-location-dot"></i> Add Place</h1></div>
                  <div class="input_box">
@@ -110,12 +121,17 @@
                           <!-- <i class="fa-solid fa-location-dot"></i> -->
                           <br>
                         </div>
+                          <i class="fa-solid fa-location-dot" id="set_location"></i>
                           <input value="<?= set_value('address') ?>" type="text" name="address" id="address" required>
                           <br>
                           <button  id="submit_btn" class="submit_btn">Submit</button>
                           <br>
                           <a href="<?=ROOT?>/customer/add_place"><small class="skip"><center>skip</center></small></a>
                   </div>
+                  <div id="map">
+
+                  </div>
+
               </form>
             </div>
            
@@ -191,3 +207,50 @@
           </script>
 
       </body>
+</html>
+<!-- leaflet js code -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+ <!-- routing js file -->
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+<!-- search -->
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script>
+           
+    // map instalizion
+    var map = L.map('map').setView([ 7.8774, 80.7003], 9);
+    // google street
+    googleStreets = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
+            maxZoom: 20,
+            subdomains:['mt0','mt1','mt2','mt3']
+        });
+    googleStreets.addTo(map)
+
+    L.Control.geocoder().addTo(map);
+
+
+    // on click show marker---------------------------------------------------
+    var currentMarker = null;
+    function onMarkerClick(e) {
+        if (currentMarker !== null) {
+            map.removeLayer(currentMarker);
+        }
+        var newMarker = L.marker(e.latlng).addTo(map);
+        var destinationName = '';
+
+        //get the place name-------------------------------------------------------
+        fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&apiKey=${apiKey}`, requestOptions)
+              .then(response => response.json())
+              .then(result => {
+              destinationName = result.features[0].properties.formatted;
+                })
+              .catch(error => console.log('error', error));
+
+              console.log(destinationName)
+
+         newMarker.bindPopup(destinationName).openPopup();
+        console.log("Latitude: " + e.latlng.lat + ", Longitude: " + e.latlng.lng);
+        currentMarker = newMarker;
+    }
+
+    map.on('click', onMarkerClick);
+  </script>

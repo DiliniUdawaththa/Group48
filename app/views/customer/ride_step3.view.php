@@ -90,7 +90,7 @@
 
                     </div>
                     <form action="" method="POST">
-                   <input type="text" name="vehicle" id="vehicle" value="" >
+                   <input type="text" name="vehicle" id="vehicle" value="" class="fetch_data" >
                     <a href="<?=ROOT?>/customer/ride_step4" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
                     </form>
                    

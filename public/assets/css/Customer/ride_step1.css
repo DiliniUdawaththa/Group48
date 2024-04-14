@@ -10,7 +10,7 @@ body{
     /* overflow: hidden; */
 }
 .main{
-    background-color: #D9D9D9;
+    background-color: aliceblue;
     display: flex;
     /* flex-direction: row; */
     
@@ -50,7 +50,6 @@ body{
    flex-direction: column;
    width:48%;
    background-image: linear-gradient(to right, white, #84D7EB);
-
    padding: 40px;
    /* box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3); */
   }
@@ -138,7 +137,7 @@ body{
     cursor: pointer;
     font-size: 15px;
     border: solid #111827;
-    /* text-decoration: none; */
+    /*  */
   }
 
   

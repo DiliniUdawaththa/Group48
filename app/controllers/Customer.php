@@ -152,7 +152,7 @@
                     $data['rows'][] = $rows[$i];
             }
         }
-        redirect('customer/ride_step6/driver_id='.$_GET['driver_id']);
+        // redirect('customer/ride_step6/driver_id='.$_GET['driver_id']);
         $data['title'] = "Ride";
         $this->view('customer/ride_step5',$data);
     }

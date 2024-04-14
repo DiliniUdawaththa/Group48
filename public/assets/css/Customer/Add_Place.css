@@ -262,7 +262,6 @@ body{
     width:60%;
     /* border: solid; */
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
-
 }
 .place_top{
     background-color:#162938;
@@ -278,6 +277,7 @@ body{
     display: flex;
     flex-direction: column;
     text-align: left;
+    display: none;
 }
 .input_box input{
    padding-left: 10px;
@@ -298,6 +298,29 @@ body{
     /* float: left; */
    
 }
+
+#address{
+    display: none;
+}
+#set_location{
+    font-size: 5vh;
+    margin: 1vh auto;
+    border:solid #111827;
+    padding: 6px;
+    border-radius: 10px;
+    animation: pulse 1s infinite alternate;
+    cursor: pointer;
+
+}
+/* //beat the icon */
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+  }
 
 /* .address{
     display: flex;
@@ -322,6 +345,7 @@ body{
     background-color: #162938;
     border: none;
     color: #D9D9D9;
+    display: none;
 }
 .submit_btn:hover{
     background-color: #1f3648;
@@ -331,6 +355,7 @@ body{
     color: #162938  ;
     margin: 0;
     text-decoration: none;
+    display: none;
 }
 .skip:hover{
     text-decoration: underline;

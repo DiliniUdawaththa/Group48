@@ -25,6 +25,9 @@
         small{
             color: red;
         }
+        .coodinates{
+            display: none;
+        }
     </style>
 </head>
 <body id="body">
@@ -67,7 +70,7 @@
                     </div>                
                 </div>
 
-                <input type="text" name="l_lat" id="l.lat" value="0.000" ><input type="text" name="l_long"  id="l.long" value="0.000" >
+                <input type="text" name="l_lat" id="l.lat" value="0.000" class="coodinates"><input type="text" name="l_long"  id="l.long" value="0.000" class="coodinates" >
 
                 <div class="search-box">
 
@@ -81,7 +84,7 @@
                     </div>
                 </div>
                
-                <input type="text" name="d_lat" id="d.lat" value="0.000"><input type="text" name="d_long"  id="d.long"  value="0.000">
+                <input type="text" name="d_lat" id="d.lat" value="0.000" class="coodinates"><input type="text" name="d_long"  id="d.long"  value="0.000" class="coodinates">
 
                 <a href="<?=ROOT?>/customer/ride_step2" class="golink"><button id="Go" class="go" onclick="sendDataToPHP()"><b>Go</b></button></a>
                 
@@ -157,7 +160,9 @@
                     
                     }
                     var marker,circle;
-
+                    if (!markers.length == 0) {
+                             deleteAllMarkers();
+                         }
 
                     function getPosition(position){
                         console.log(position)  
@@ -174,6 +179,7 @@
 
                         marker=L.marker([lat,long])
                         map.removeLayer(marker);
+                        markers.push(marker)
                         // marker.addTo(map)
                         circle =L.circle([lat,long],{radius:accuracy})
 

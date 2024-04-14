@@ -46,8 +46,8 @@
                    
                     <form method="POST">
                         <a href="<?=ROOT?>/customer/ride_step3" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
-                        <input type="text" id="time" name="time">
-                        <input type="text" id="distance" name="distance">
+                        <input type="text" id="time" name="time" class="fetch_data">
+                        <input type="text" id="distance" name="distance" class="fetch_data">
                     </form>
                     <a href="<?=ROOT?>/customer/ride_step1" class="refresh">Refresh</a>
 
