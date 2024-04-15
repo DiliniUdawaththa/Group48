@@ -1,0 +1,172 @@
+*{
+    /* margin: 0; */
+    padding: 0;
+    font-family: 'Poppins',sans-serif;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center; 
+    overflow: hidden;
+
+}
+header{
+    position:fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+/*----------------------------------------------------------*/
+.outer-box{
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    height: 550px;
+    border: 2px solid rgba(255,255,255,.5);
+    border-radius: 20px;
+    background-color: rgb(237, 234, 251);
+    align-items: center;
+    padding: 50px 50px 50px 50px;
+}
+.outer-box h2{
+    color: #162938;
+}
+.renew_form{
+    display: block;
+    height: 55000;
+    width:600px;
+    align-items: center;
+}
+.renew_box{
+    width:100%;
+    height: 100%;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    margin-top: 30px 30px;
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.renew_box input{
+    padding-left: 10px;
+    font-size: 17px;
+    color:#194672;
+    width: 100%;
+    height: 42px;
+    margin-bottom: 10px;
+    margin-top: 7px;
+    border-radius: 8px;
+    border: none;
+}
+.label{
+    color: #162938;
+    font-size: 20px;
+    text-align: left;
+    
+    /* float: left; */
+   
+}
+.btn{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 60px;
+    padding-left: 60px;
+}
+.submit_btn{
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 17px;
+    margin:  0 35% ;
+    background-color: #162938;
+    border: none;
+    color: #D9D9D9;
+}
+.submit_btn:hover{
+    background-color: #1f3648;
+}
+.cancel_btn{
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 17px;
+    margin:  0 35% ;
+    background-color: #162938;
+    border: none;
+    color: #D9D9D9;
+}
+.explanation{
+    color: #656262;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    height: 350px;
+    border: 2px solid rgba(255,255,255,.5);
+    border-radius: 20px;
+    background-color: rgb(237, 234, 251);
+    align-items: center;
+    padding: 50px 50px 50px 50px;
+}
+.container h3{
+    color: brown;
+}
+.ok-btn{
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 17px;
+    margin:  0 35% ;
+    background-color: #2cbf08;
+    border: none;
+    color: #D9D9D9;
+}
+
+/* For screens smaller than 600px (typical smartphones) */
+@media only screen and (max-width: 600px) {
+    body {
+        overflow: auto; /* Revert overflow to auto for scrolling */
+    }
+
+    header {
+        padding: 10px; /* Adjust header padding for smaller screens */
+    }
+
+    .outer-box {
+        width: 90%; /* Adjust the width of the outer box for smaller screens */
+        height: auto; /* Let the height adjust automatically */
+    }
+
+    .renew_form {
+        width: 90%; /* Adjust the width of the form for smaller screens */
+    }
+
+    .renew_box {
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    .label {
+        font-size: 16px; /* Decrease font size for labels */
+    }
+
+    .btn {
+        padding-right: 20px; /* Adjust button padding for smaller screens */
+        padding-left: 20px;
+    }
+
+    .submit_btn,
+    .cancel_btn {
+        margin: 10px auto; /* Center buttons */
+    }
+}
