@@ -1,5 +1,7 @@
 <?php
- class officer extends Controller{
+require_once __DIR__ . '/../configs/config.php';
+
+class officer extends Controller{
     public function index(){
         if(!Auth::logged_in())
         {
@@ -330,6 +332,73 @@
         $add_OfficerDriver->delete_driver($id);
         
         redirect('officer/driver');
+    }
+
+    /*------------------------------------Renewal of driver registration---------------------------------------*/
+
+    public function renewRegistration(){
+        // if(!Auth::logged_in())
+        // {
+        //     message('please login to view the Officer section');
+        //     redirect("login");
+        // }
+
+        $renew_driver = new renewRegistration($GLOBALS['pdo']);
+
+        $data = [
+            'status' => 0
+        ];
+
+        $rows = $renew_driver->where($data);
+        $data['rows'] = array();
+
+        if(isset($rows[0])){
+            for($i = 0;$i < count($rows); $i++)
+            {
+                $data['rows'][] = $rows[$i];
+            }
+
+        $this->view('officer/driverRegistrationRenew',$data);
+        }
+    }
+
+    public function openSlip($email){
+        $pdfFileName = './assets/documents/paymentSlips/' . $email . 'slip.pdf';
+
+        if (file_exists($pdfFileName)) {
+            // Set the appropriate headers for PDF file
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename="' . $email . '.pdf"');
+            header('Content-Length: ' . filesize($pdfFileName));
+
+            // Output the PDF file
+            readfile($pdfFileName);
+            exit;
+        } else {
+            // PDF file not found, handle error accordingly
+            echo "PDF file not found for email: $email";
+        }
+    }
+
+    public function renewAccept($email){
+        $renew_driver = new renewRegistration($GLOBALS['pdo']);
+
+        $email = $email;
+        $renew_driver->updateStatus($email);
+        $renew_driver->updateRegDate($email);
+        $renew_driver->confirmEmail($email);
+
+        redirect('officer/renewRegistration');
+
+    }
+
+    public function renewReject($email){
+        $renew_driver = new renewRegistration($GLOBALS['pdo']);
+
+        $renew_driver->rejectEmail($email);
+        $renew_driver->deleteRequest($email);
+
+        redirect('officer/renewRegistration');
     }
 
 }
