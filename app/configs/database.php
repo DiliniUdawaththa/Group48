@@ -55,7 +55,7 @@ class Database
 			 `email` varchar(100) NOT NULL,
 			 `password` varchar(255) NOT NULL,
 			 `role` varchar(20) NOT NULL,
-			 `empID` int(10),
+			 `empID` int(10) NOT NULL ,
 			 `date` date DEFAULT NULL,
 			 PRIMARY KEY (`id`),
 			 KEY `email` (`email`),
@@ -87,7 +87,6 @@ class Database
 			`name` text NOT NULL,
 			`email` text NOT NULL,
 			`phone` text NOT NULL,
-			`password` varchar(255) NOT NULL,
 			 PRIMARY KEY (`empID`)
 		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 		   
@@ -131,6 +130,17 @@ class Database
 		)ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 		";
 
+		$this->query($query);
+
+		$query= "
+			CREATE TABLE IF NOT EXISTS `renewregistration` (
+			`email` varchar(50) NOT NULL,
+			`name` text NOT NULL,
+			`status` int(2) NOT NULL,
+			PRIMARY KEY (`email`)
+		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+			";
+		
 		$this->query($query);
 
 	}
