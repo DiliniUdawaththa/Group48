@@ -134,42 +134,50 @@
                 window.location.href = "<?=ROOT?>/logout";
             });
 
-        const accept_buttons = document.querySelectorAll('.accept_btn');
-        const reject_buttons = document.querySelectorAll('.reject_btn');
-        const accept_container = document.querySelector('.accept-container');
-        const reject_container = document.querySelector('.reject-container');
+            const accept_buttons = document.querySelectorAll('.accept_btn');
+            const reject_buttons = document.querySelectorAll('.reject_btn');
+            const accept_container = document.querySelector('.accept-container');
+            const reject_container = document.querySelector('.reject-container');
+            const cancel_accept_button = document.querySelector('.cancel-accept-btn');
+            const cancel_reject_button = document.querySelector('.cancel-reject-btn');
 
-        accept_buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                const email = button.getAttribute('data-email');
-                accept_container.style.display = 'block';
-                document.querySelector('.ok-btn').addEventListener('click', () => {
-                    window.location.href = "<?=ROOT?>/officer/renewAccept/" + encodeURIComponent(email);
+            accept_buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const email = button.getAttribute('data-email');
+                    accept_container.style.display = 'block';
+                    document.querySelector('.ok-btn').addEventListener('click', () => {
+                        window.location.href = "<?=ROOT?>/officer/renewAccept/" + encodeURIComponent(email);
+                    });
                 });
             });
-        });
+            cancel_accept_button.addEventListener('click', () => {
+                    accept_container.style.display = 'none';
+            });
 
-        reject_buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                const email = button.getAttribute('data-email');
-                reject_container.style.display = 'block';
-                document.querySelector('.reject-btn').addEventListener('click', () => {
-                    window.location.href = "<?=ROOT?>/officer/renewReject/" + encodeURIComponent(email);
+            reject_buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const email = button.getAttribute('data-email');
+                    reject_container.style.display = 'block';
+                    document.querySelector('.reject-btn').addEventListener('click', () => {
+                        window.location.href = "<?=ROOT?>/officer/renewReject/" + encodeURIComponent(email);
+                    });
                 });
             });
-        });
-
-        document.querySelectorAll('.slip-btn').forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default link behavior
-
-                // Get the href attribute of the clicked link
-                const href = this.parentElement.getAttribute('href');
-
-                // Open the PDF file in a new tab/window
-                window.open(href, '_blank');
+            cancel_reject_button.addEventListener('click', () => {
+                    reject_container.style.display = 'none';
             });
-        }); 
+
+            document.querySelectorAll('.slip-btn').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default link behavior
+
+                    // Get the href attribute of the clicked link
+                    const href = this.parentElement.getAttribute('href');
+
+                    // Open the PDF file in a new tab/window
+                    window.open(href, '_blank');
+                });
+            }); 
     });
     </script>
 
