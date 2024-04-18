@@ -266,6 +266,7 @@
             redirect("login");
         }
         $data['errors'] = [];
+        // show($_POST);
         $add_place = new Add_Place();
 		if($_SERVER['REQUEST_METHOD'] == "POST")
 		{
@@ -275,8 +276,9 @@
                 $_POST['icon'] =$add_place->icon;
                 $_POST['date'] = date("Y-m-d H:i:s");
                 $add_place->insert($_POST);
+                show($_POST);
                 // message("Successfully Add Place");
-				redirect('customer/add_place');
+				 redirect('customer/add_place');
             }
            
         }

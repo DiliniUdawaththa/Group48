@@ -10,32 +10,6 @@
     <!-- search -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
-    <style>
-        .error {
-            border: 1px solid red;
-            color: red;
-        }
-        .message{
-            /* margin-top:; */
-            height: 50px;
-            width: 100%;
-            margin-bottom: 10px;
-            
-         }
-         .message p{
-            padding: 10px;
-            font-size: 1em;
-            color: #026334;
-            background-color: #a7cfbc;
-            
-            
-         }
-         #map{
-          display: block;
-          width: 100%;
-          height: 450px;
-         }
-    </style>
 </head>
 
 <body>
@@ -85,12 +59,10 @@
          <center>
           <div class="place_container">
             <div class="add_form" id="add_form">
-              <form name="addPlaceForm" action="" method="post" onsubmit="return validateForm()">
+              
                  <div class="place_top"><h1><i class="fa-solid fa-map-location-dot"></i> Add Place</h1></div>
-                 <div class="input_box">
-
-                       
-
+                 <form name="addPlaceForm" action="" method="POST" >
+                 <div class="input_box" id="input_box"> 
                       <div>
                           <label for="name" class="label">Placename</label><br>
                         </div>
@@ -122,17 +94,23 @@
                           <br>
                         </div>
                           <i class="fa-solid fa-location-dot" id="set_location"></i>
-                          <input value="<?= set_value('address') ?>" type="text" name="address" id="address" required>
-                          <br>
+                          <input type="text" id="location_name" name="location" value="<?= set_value('address') ?>">
+                          <input type="text" id="lat" name="lat">
+                          <input type="text" id="long" name="lng">
                           <button  id="submit_btn" class="submit_btn">Submit</button>
                           <br>
                           <a href="<?=ROOT?>/customer/add_place"><small class="skip"><center>skip</center></small></a>
                   </div>
-                  <div id="map">
-
-                  </div>
-
               </form>
+              <div class="map_point" id="map_point">
+                    <div id="map">
+                    </div>
+                    <div class="set_cancle" id="set_cancle">
+                      <button class="cancle_button" id="cancle">cancle</button>
+                      <button class="set_button" id="set">set</button>
+                    </div>
+                    <div class="text_select" id="text_select"><p>You should Point the map</p></div>
+                  </div>
             </div>
            
            
@@ -208,6 +186,7 @@
 
       </body>
 </html>
+
 <!-- leaflet js code -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
  <!-- routing js file -->
@@ -217,7 +196,7 @@
 <script>
            
     // map instalizion
-    var map = L.map('map').setView([ 7.8774, 80.7003], 9);
+    var map = L.map('map').setView([ 6.863695780668124,79.90294212928187], 12);
     // google street
     googleStreets = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
             maxZoom: 20,
@@ -227,30 +206,78 @@
 
     L.Control.geocoder().addTo(map);
 
+    // marker click---------------------------------------------------
+     var set_location=document.getElementById("set_location");
+     var map_point=document.getElementById("map_point");
+     var input_box=document.getElementById("input_box");
+     set_location.addEventListener('click',()=>{
+           input_box.style.display = 'none';
+           map_point.style.display = 'block';
+           
+         })
 
-    // on click show marker---------------------------------------------------
+
+    // map on click show marker---------------------------------------------------
     var currentMarker = null;
+    var locationName;
+    var apiKey = '2688fa5aa40a47f5a9854c202549d631';
+
+    var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+            };
+   
     function onMarkerClick(e) {
         if (currentMarker !== null) {
             map.removeLayer(currentMarker);
         }
         var newMarker = L.marker(e.latlng).addTo(map);
-        var destinationName = '';
 
         //get the place name-------------------------------------------------------
         fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&apiKey=${apiKey}`, requestOptions)
               .then(response => response.json())
               .then(result => {
-              destinationName = result.features[0].properties.formatted;
+              locationName = result.features[0].properties.formatted;
+              newMarker.bindPopup(locationName).openPopup();
+              var location = locationName.split(',');
+             document.getElementById("location_name").value=locationName;
                 })
               .catch(error => console.log('error', error));
 
-              console.log(destinationName)
-
-         newMarker.bindPopup(destinationName).openPopup();
-        console.log("Latitude: " + e.latlng.lat + ", Longitude: " + e.latlng.lng);
+         newMarker.bindPopup(locationName).openPopup();
+         document.getElementById("lat").value=e.latlng.lat;
+         document.getElementById("long").value=e.latlng.lng;
         currentMarker = newMarker;
+
+        //----------------------------------------on click set & cancle button show---------------------------------------------------
+        var text=document.getElementById("text_select");
+        text.style.display = 'none';
+        var buttons = document.getElementById("set_cancle");
+        buttons.style.display = 'block';
+           console.log('hi');
     }
 
     map.on('click', onMarkerClick);
+
+      var set=document.getElementById("set");
+      var cancle=document.getElementById("cancle");
+      var map_point=document.getElementById("map_point");
+      var input_box=document.getElementById("input_box");
+      var set_location=document.getElementById("set_location");
+      var location_name=document.getElementById("location_name");
+      var submit_btn=document.getElementById("submit_btn");
+
+      set.addEventListener('click',()=>{
+           input_box.style.display = 'block';
+           map_point.style.display = 'none';
+           set_location.style.display='none';
+           location_name.style.display='block';
+           submit_btn.style.display="block";
+           
+         })
+      cancel.addEventListener('click',()=>{
+          input_box.style.display = 'block';
+          map_point.style.display = 'none';
+
+         })
   </script>
