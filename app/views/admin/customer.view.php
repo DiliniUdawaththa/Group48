@@ -68,30 +68,26 @@
             </div>
 
             <div class="table1">
-                <?php if ($noMatchFound): ?>
-                    <center><h3 style="color: red;">No matching customers found.</h3></center>
-                <?php else: ?>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Name</td>
-                                <td>Email</td>
-                                <td>Mobile</td>
-                                <td>More</td>
-                            </tr>
-                        </thead>
-                        <?php foreach ($rows as $row) : ?>
-                            <tr class="data">
-                                <td class="td_name"><?= $row->name; ?></td>
-                                <td class="td_email"><?= $row->email; ?></td>
-                                <td class="td_mobile"><?= $row->phone; ?></td>
-                                <td class="td_button">
-                                    <a href="<?=ROOT?>/admin/customer/"><button class="detail_btn"><i class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </table>
-                <?php endif; ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Email</td>
+                            <td>Mobile</td>
+                            <td>More</td>
+                        </tr>
+                    </thead>
+                    <?php foreach ($rows as $row) : ?>
+                        <tr class="data">
+                            <td class="td_name"><?= $row->name; ?></td>
+                            <td class="td_email"><?= $row->email; ?></td>
+                            <td class="td_mobile"><?= $row->phone; ?></td>
+                            <td class="td_button">
+                                <a href="<?=ROOT?>/admin/customer/"><button class="detail_btn"><i class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
             </div>
     <!-- </div> -->
 
