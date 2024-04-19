@@ -62,7 +62,7 @@ class Database
 			 KEY `name` (`email`),
 			 KEY `phone` (`email`),
 			 KEY `date` (`date`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 			INSERT INTO `users` (`id`, `name`, `phone`, `email`, `password`, `role`, `date`) VALUES
 			(1001, 'shanthos', '0770000001', 'shanthos@gmail.com', '$2y$10$89s0w3Dnk4.XX4t9VJ3BBeGSSnzauy6tk1rxPBa9RhIky4AlcfEnq', 'driver', '2024-04-09'),

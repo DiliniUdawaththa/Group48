@@ -49,8 +49,8 @@ body{
    display: flex;
    flex-direction: column;
    width:48%;
-   background-image: linear-gradient(to right, white, #84D7EB);
-   padding: 40px;
+   background-image: linear-gradient(to right, white, #84D7EB);  
+   padding: 60px 40px 40px 40px;
    /* box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3); */
   }
 
@@ -124,7 +124,6 @@ body{
   }
 
   .go{
-    margin: 90px auto;
     padding: 8px 40px;
     width: 50px;
     font-style: bold;
@@ -132,13 +131,23 @@ body{
     justify-content: center;
     border-radius: 10px;
     border-color: white;
-    background-color:white ;
-    color: #111827;
+    background-color: #111827;
+    color: white;
     cursor: pointer;
     font-size: 15px;
-    border: solid #111827;
+    animation: pulse 1s infinite alternate;
+    text-align: center;
+    margin: 80px auto;
     /*  */
   }
+  @keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
 
   
 

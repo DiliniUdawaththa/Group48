@@ -2,7 +2,7 @@
 <html>
 <head>
 <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_step2.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_step7.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css">   
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -35,73 +35,121 @@
    <?php include 'ride_side.php'; ?>
 
 <!-- ---------------------------------------------------------------------------------- -->
-<div class="activity">
-        <div class="box">
-            <div class="contant" >
-                <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
-                <center>
-                    <img src="<?= ROOT ?>/assets/img/customer/gif.gif" alt="">
-                    <h2>Select the alternative path <br>
-                    click the map</h2>
-                   
-                    <a href="<?=ROOT?>/customer/ride_step3" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
-                    <a href="<?=ROOT?>/customer/ride_step2" class="refresh">Refresh</a>
-
-                </center>
-                
-                
+   <div class="activity">
+    <form action="" method="POST">
+<!-- -----------------------------Rating part------------------------------------------------------------------ -->
+        <div class="box1">
+            <div>
+                <h1>Rating</h1>
             </div>
-            <div id="map" > </div>
-        </div>
+             <div >
+                <img id="driver_photo" src="<?= ROOT ?>/assets/img/person.jpg" alt="">
+                <h3>Mr.S.Makesh</h3>
+                <div class="staricon">
+                  <i class="fa-solid fa-star" id="star1"></i>
+                  <i class="fa-solid fa-star" id="star2"></i>
+                  <i class="fa-solid fa-star" id="star3"></i>
+                  <i class="fa-solid fa-star" id="star4"></i>
+                  <i class="fa-solid fa-star" id="star5"></i>
+                </div>
+                <input type="text" name='star' id="star" value=0>
+               </div>   
+               <div class="report_submit">
+                  <button>Submit</button>
+                  <a href="<?=ROOT?>/Customer/ride_step1">skip</a>
+               </div> 
+         </div>
+<!-- //------------------------------Reporting part------------------------------------------------------ -->
+         <div class="box2">
+            <div>
+                <h1>Reporting</h1>
+            </div>
+             <div id="freport">
+                  <div class="reportform">
+                  <div class="reportlist">
+                    <div class="relist">
+                     <div><input type="checkbox" name="report1"  value="Cheating"><label >Cheating</label></div>
+                     <div><input type="checkbox" name="report2"  value="Bad behavior"><label >Bad behavior</label></div>
+                     <div><input type="checkbox" name="report3" value="Driver drinking"><label >Driver drinking</label></div>
+                     <div><input type="checkbox" name="report4" value="Over Speed"><label >Over Speed</label></div>
+                     <div><input type="checkbox" name="report5" value="Ride slow"><label >Ride slow</label></div>
+                     <div><input type="checkbox" name="report6" value="Damage vehiles"><label >Damage vehiles</label></div>
+                     <div><input type="checkbox" name="report7" value="Traffic signal not flow"><label >Traffic signal not flow</label></div>
+                     </div>
+                     <div class="relist">
+                     <div><input type="checkbox" name="report8" value="Honesty"><label >Honesty</label></div>
+                     <div><input type="checkbox" name="report9" value="Responsibility"><label >Responsibility</label></div>
+                     <div><input type="checkbox" name="report10" value="Alertness"><label >Alertness</label></div>
+                     <div><input type="checkbox" name="report11" value="Knowledge"><label >Knowledge</label></div>
+                     <div><input type="checkbox" name="report12" value="Patience"><label >Patience</label></div>
+                     <div><input type="checkbox" name="report13" value="Independence"><label >Independence</label></div>
+                     <div><input type="checkbox" name="report14" value="Self-discipline"><label >Self-discipline</label></div>
+                     </div>
+                  </div>
+                  <div class="reporttext">
+                     <textarea type="text" placeholder="any note" name="other" value='' > </textarea>
+                  </div>   
+         </div>
+        </form>
     </div>       
         
     </body>
 </html>
 <script>
-    // button movment
-    function toggleBeat() {
-    var button = document.getElementById("sizeButton");
-    button.classList.toggle("beating");
-   }
+    // star----------------------------------------------------------------------------------------------
+            const star1 = document.getElementById('star1');
+            const star2 = document.getElementById('star2');
+            const star3 = document.getElementById('star3');
+            const star4 = document.getElementById('star4');
+            const star5 = document.getElementById('star5');
+            document.getElementById('star').style.display= "none";
+
+                star1.addEventListener('click', () => {
+                      star1.style.color = '#D1B000';
+                      star2.style.color = 'black';
+                      star3.style.color = 'black';
+                      star4.style.color = 'black';
+                      star5.style.color = 'black';
+                      document.getElementById('star').value=1;
+
+                    });
+                
+                star2.addEventListener('click', () => {
+                      star1.style.color = '#D1B000';
+                      star2.style.color = '#D1B000';
+                      star3.style.color = 'black';
+                      star4.style.color = 'black';
+                      star5.style.color = 'black';
+                      document.getElementById('star').value=2;
+                    });
+
+                star3.addEventListener('click', () => {
+                      star1.style.color = '#D1B000';
+                      star2.style.color = '#D1B000';
+                      star3.style.color = '#D1B000';
+                      star4.style.color = 'black';
+                      star5.style.color = 'black';
+                      document.getElementById('star').value=3;
+                    });
+
+                star4.addEventListener('click', () => {
+                      star1.style.color = '#D1B000';
+                      star2.style.color = '#D1B000';
+                      star3.style.color = '#D1B000';
+                      star4.style.color = '#D1B000';
+                      star5.style.color = 'black';
+                      document.getElementById('star').value=4;
+                    });
+
+                star5.addEventListener('click', () => {
+                      star1.style.color = '#D1B000';
+                      star2.style.color = '#D1B000';
+                      star3.style.color = '#D1B000';
+                      star4.style.color = '#D1B000';
+                      star5.style.color = '#D1B000';
+                      document.getElementById('star').value=5;
+                    });
 </script>
 
 
-<!-- leaflet js code -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
- <!-- routing js file -->
-<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-<!-- search -->
-<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-<script>
-           
-    // map instalizion
-    var map = L.map('map').setView([ 7.8774, 80.7003], 9);
-    // google street
-    googleStreets = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
-            maxZoom: 20,
-            subdomains:['mt0','mt1','mt2','mt3']
-        });
-    googleStreets.addTo(map)
 
-    var Routing;
-    var lat=6.901963
-    var long=80.861292
-    var lat1=6.901963
-    var lon1=79.861292
-    Routing = L.Routing.control({
-        waypoints: [
-            L.latLng(lat,long),
-            L.latLng(lat1,lon1)
-        ]
-    });
-
-    Routing.addTo(map);
-    var lat2=(lat1+lat)/2
-    var lon2=(lon1+long)/2
-    map.flyTo([lat2,lon2], 14)
-    const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
-    popupElement.classList.add('leaflet-routing-container-hide');
-   
-           
-        
-    </script>

@@ -17,7 +17,7 @@ body{
 }
 /* ------------------------------------------------------------------- */
 .activity{
-    background-color:#D9D9D9;
+    background-color: aliceblue;
     width:80.4%;
     height: 100vh;
     display: flex;
@@ -32,23 +32,25 @@ body{
     margin: 40px;
     width: 100%;
     display: flex;
-    
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    border-radius:  50px 0px 0  50px;
   }
   
 
   .contant{
-   display: flex;
-   flex-direction: column;
-   width:50%;
-   background-color: #111827;
-   padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width:50%;
+    background-image: linear-gradient(to right, white, #84D7EB);
+    padding: 40px;
+    border-radius:  50px 0px 0  50px;
   }
   #back{
     font-size: 30px;
-    color: #D9D9D9;
+    color: black;
   }
   .contant h2{
-    color: #D9D9D9;
+    color: black;
     margin-top: 10px;
     margin-bottom: 30px;
   }
@@ -61,18 +63,19 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color:#9f9f9f;
+    background-color:aliceblue;
     border-radius: 10px;
     cursor: pointer;
     padding: 2px;
+    border: solid #84D7EB;
 }
 .driverlist:hover{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     padding: 4px;
 }
 .highlighted {
-   background-color: greenyellow;
-   opacity: 0.8;
+   background-color: #84D7EB;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     /* filter: brightness(0.8); */
   }
 .driverlist i{
@@ -133,6 +136,9 @@ body{
     justify-content: center;
     text-decoration: none;
     margin-top: 20px;
+  }
+  #Driver_Id{
+    display: none;
   }
   .go{
     display: none;

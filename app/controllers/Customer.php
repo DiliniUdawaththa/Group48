@@ -20,12 +20,12 @@
         if ($_SERVER["REQUEST_METHOD"]=="POST") {
               $location=$_POST["location"];
               $destination=$_POST["destination"];
-              if(!empty($location) &&  !empty($destination))
+              $l_lat=$_POST["l_lat"];
+              $l_long=$_POST["l_long"];
+              $d_lat=$_POST["d_lat"];
+              $d_long=$_POST["d_long"];
+              if(!empty($location) &&  !empty($destination) &&  $l_lat!=='0.000' &&  $d_lat!=='0.000' &&  $l_long!=='0.000' &&  $d_long!=='0.000')
               {
-                $l_lat=$_POST["l_lat"];
-                $l_long=$_POST["l_long"];
-                $d_lat=$_POST["d_lat"];
-                $d_long=$_POST["d_long"];
                  redirect('customer/ride_step2/.php?location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long);
               }
               else{
@@ -173,6 +173,43 @@
             message('please login to view the page');
             redirect("login");
         }
+        $complaint = new Complaint();
+        $rating = new Rating();
+
+        $sample = array();   // sample is complaint data store array
+        $sample1= array();   // sample1 is rating data story array
+
+        $sample['complaint'] = '';
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+           // complaint part insert data---------------------------------------------------
+                for ($i = 1; $i < 15; $i++) {
+                    if (isset($_POST['report'.$i]) && $_POST['report'.$i] !== null) {
+                        $sample['complaint'] .= $_POST['report'.$i] . ' , ';
+                    }
+                }
+                $sample['complaint'] .= $_POST['other'] ;
+                $sample['complaint'] = rtrim($sample['complaint'], ', ');  //tail trim
+            
+                $sample['passenger_id']=$_SESSION['USER_DATA']->id;
+                $sample['driver_id']=3;
+                $sample['complainant']='Passenger';
+                $sample['datetime'] = date("Y-m-d H:i:s");
+                if (!empty($sample['complaint'])){
+                    // show($sample);
+                    $complaint->insert($sample);
+                }
+
+                // rating part insert data--------------------------------------------------
+                $sample1["role_id"]=3;
+                $sample1['role']='Driver';
+                $sample1['rate']=$_POST['star'];
+
+                if($_POST['star']!=='0'){
+                    $rating->insert($sample1);
+                }
+                redirect('customer/ride_step1');
+
+            }
         $data['title'] = "Ride";
         $this->view('customer/ride_step7',$data);
     }
