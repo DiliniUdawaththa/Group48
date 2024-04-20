@@ -198,6 +198,7 @@ class Database
 		  
 
 			";
+			$this->query($query);
 		
 		$query="
 			CREATE TABLE IF NOT EXISTS `standardFare` (
@@ -209,6 +210,36 @@ class Database
 			`date`datetime NOT NULL,
 			PRIMARY KEY (`id`)
 		)ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+		";
+
+		$this->query($query);
+
+		$query="
+		DROP TABLE IF EXISTS `complaint`;
+		CREATE TABLE IF NOT EXISTS `complaint` (
+		  `cmt_id` int(11) NOT NULL AUTO_INCREMENT,
+		  `complainant` text NOT NULL,
+		  `passenger_id` int(11) NOT NULL,
+		  `driver_id` int(11) NOT NULL,
+		  `datetime` datetime NOT NULL,
+		  `complaint` text NOT NULL,
+		  `status_check` tinyint(1) NOT NULL DEFAULT '0',
+		  PRIMARY KEY (`cmt_id`)
+		) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+		
+		";
+
+		$this->query($query);
+
+		$query="
+		DROP TABLE IF EXISTS `rating`;
+		CREATE TABLE IF NOT EXISTS `rating` (
+		`rate_id` int(11) NOT NULL AUTO_INCREMENT,
+		`role_id` int(11) NOT NULL,
+		`role` varchar(20) NOT NULL,
+		`rate` int(11) NOT NULL,
+		PRIMARY KEY (`rate_id`)
+		) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;	
 		";
 
 		$this->query($query);

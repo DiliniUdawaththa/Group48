@@ -55,7 +55,7 @@
                                     <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
                                 </span></div>
                                 <div class="name">Mr.S.Makesh</div>
-                                <div class="fare">Fare<br><b>500/-</b></div>
+                                <div class="fare"><b>500/-</b></div>
                                 <div class="nrbutton">
                                 <button class="Negotiate">Negotiate</button>
                                 <button class="Request">Select</button>
@@ -70,8 +70,15 @@
                       </form>
                 </center>
                 
-                
+                <div class="message_popup">
+                    <div class="message_topbar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                    <textarea name="message_text" id="message_text" cols="50" rows="10"></textarea>
+                    <button>Send</button>
+                </div>
             </div>
+
             <div id="map" > </div>
         </div>
     </div>       

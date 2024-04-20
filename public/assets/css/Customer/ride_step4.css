@@ -44,6 +44,7 @@ body{
     background-image: linear-gradient(to right, white, #84D7EB);
     padding: 40px;
     border-radius:  50px 0px 0  50px;
+    position: relative;
   }
   #back{
     font-size: 30px;
@@ -161,5 +162,32 @@ body{
         transform: scale(1.1);
     }
   }
+
+  .message_popup{
+    position: absolute;
+    top: 40%;
+    right: 20%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+  }
+  .message_topbar{
+    background-color: #84D7EB;
+    text-align: right;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid black;
+  }
+  .message_topbar i{
+    background-color: red;
+    color: white;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  .message_popup button{
+    
+  }
+
+
   
 
