@@ -20,3 +20,14 @@ if($_SERVER['SERVER_NAME'] == 'localhost')
     define('DBDRIVER','mysql');
     define('ROOT',$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].'/FAREFLEX/public');
 }
+
+try {
+    $pdo = new PDO(DBDRIVER . ':host=' . DBHOST . ';dbname=' . DBNAME, DBUSER, DBPASS);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+global $pdo;
+
+?>
