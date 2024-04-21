@@ -98,10 +98,10 @@
         }
         $rides = new Rides();
         $driver_staus= new Driver_status;
+        $message= new Message();
 
         $rows = $driver_staus->findAll();
         $data['rows'] = array();
-       
         if(isset($rows[0])){
 
             for($i = 0;$i < count($rows); $i++)
@@ -109,28 +109,52 @@
                     $data['rows'][] = $rows[$i];
             }
         }
+        
+        $rows1 = $message->findAll();
+        $data['rows1'] = array();
+       
+        if(isset($rows1[0])){
 
+            for($i = 0;$i < count($rows1); $i++)
+            {
+                    $data['rows1'][] = $rows1[$i];
+            }
+        }
         
         if ($_SERVER["REQUEST_METHOD"]=="POST")
         {
-            
-            $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
-            $_POST['date'] = date("Y-m-d H:i:s");
-            $_POST['location']=$_GET['location'];
-            $_POST['l_lat']=$_GET['l_lat'];
-            $_POST['l_long']=$_GET['l_long'];
-            $_POST['destination']=$_GET['destination'];
-            $_POST['d_lat']=$_GET['d_lat'];
-            $_POST['d_long']=$_GET['d_long'];
-            $_POST['vehicle']=$_GET['vehicle'];
-            $_POST['time']=$_GET['time'];
-            $_POST['distance']=$_GET['distance'];
-            $_POST['fare']=500;
-            $_POST['state']="Reject";
-            // show($_POST);
-            $rides->insert($_POST);
-            redirect('customer/ride_step5/location='.$_GET['location'].'&l_lat='.$_GET['l_lat'].'&l_long='.$_GET['l_long'].'&driver_id='.$_POST['driver_id']);
+            if(isset($_POST['message_text']) && $_POST['message_text']!=="")
+            {
+                 $chat = array();
+                 $chat['sender']='Passenger';
+                 $chat['passenger_id']=$_SESSION['USER_DATA']->id;
+                 $chat['driver_id']=$_POST['Driver_id'];
+                 $chat['message']=$_POST['message_text'];
+                 $chat['ride_id'] = $_SESSION['USER_DATA']->id+$_POST['Driver_id'];
+                $message->insert($chat);
+            }
+            if(isset($_POST['driver_id']))
+            {
+                $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
+                $_POST['date'] = date("Y-m-d H:i:s");
+                $_POST['location']=$_GET['location'];
+                $_POST['l_lat']=$_GET['l_lat'];
+                $_POST['l_long']=$_GET['l_long'];
+                $_POST['destination']=$_GET['destination'];
+                $_POST['d_lat']=$_GET['d_lat'];
+                $_POST['d_long']=$_GET['d_long'];
+                $_POST['vehicle']=$_GET['vehicle'];
+                $_POST['time']=$_GET['time'];
+                $_POST['distance']=$_GET['distance'];
+                $_POST['fare']=500;
+                $_POST['state']="Reject";
+                 $rides->insert($_POST);
+                redirect('customer/ride_step5/location='.$_GET['location'].'&l_lat='.$_GET['l_lat'].'&l_long='.$_GET['l_long'].'&driver_id='.$_POST['driver_id']);
+            }
         }
+        // if ($_SERVER["REQUEST_METHOD"]=="SENT"){
+        //       show('hi');
+        // }
         $data['title'] = "Ride";
         $this->view('customer/ride_step4',$data);
     }

@@ -169,8 +169,7 @@ body{
     right: 20%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border: 1px solid black;
-    display: flex;
-    flex-direction: column;
+    display: none;
   }
   .message_topbar{
     background-color: #84D7EB;
@@ -184,8 +183,15 @@ body{
     padding: 3px;
     border: 1px solid black;
   }
+  .message_view{
+    background-color: white;
+  }
   .message_popup button{
-    
+       
+  }
+  .message_input{
+    display: flex;
+    flex-direction: column;
   }
 
 

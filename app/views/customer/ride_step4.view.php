@@ -1,3 +1,4 @@
+<?php $driver_id=0 ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,7 @@
 <!-- ---------------------------------------------------------------------------------- -->
 <div class="activity">
         <div class="mainbox">
-            <div class="contant" >
+            <div class="contant" id="contant" >
                 <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
                 <center>
                     
@@ -57,26 +58,38 @@
                                 <div class="name">Mr.S.Makesh</div>
                                 <div class="fare"><b>500/-</b></div>
                                 <div class="nrbutton">
-                                <button class="Negotiate">Negotiate</button>
-                                <button class="Request">Select</button>
+                                <button class="Negotiate" id="Negotiate_<?=$row->driver_id?>">Negotiate</button>
+                                <!-- <button class="Request">Select</button> -->
                                 </div>
                             </div>
+                            <?php $driver_id=$row->driver_id?>
                          <?php } ?>
                       <?php endforeach; ?>
 
                       <form action="" method="POST">
-                           <input type="text" value='' name='driver_id' id='Driver_Id'>
+                           <input type="text" value='0' name='driver_id' id='Driver_Id'>
                            <a href="<?=ROOT?>/customer/ride_step5" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
                       </form>
                 </center>
-                
-                <div class="message_popup">
+                <form action="" method="POST">
+                <div class="message_popup" id="message_popup">
                     <div class="message_topbar">
-                        <i class="fa-solid fa-xmark"></i>
+                        <i class="fa-solid fa-xmark" id="close"></i>
                     </div>
-                    <textarea name="message_text" id="message_text" cols="50" rows="10"></textarea>
-                    <button>Send</button>
+                    <div class="message_view">
+                    <?php  foreach ($rows1 as $row) :  ?>
+                        <?php if($row->ride_id == $driver_id+$_SESSION['USER_DATA']->id){?>
+                        <div><?=$row->sender?> : <?=$row->message?></div>
+                        <?php }?>
+                    <?php endforeach; ?>
+                    </div>
+                    <div class="message_input">
+                      <textarea name="message_text" id="message_text" cols="50" rows="3" value=""></textarea>
+                      <input type="text"  name='Driver_id' id='driverId' style="display:none;">
+                      <button>Send</button>
+                    </div>
                 </div>
+                </form>
             </div>
 
             <div id="map" > </div>
@@ -131,6 +144,26 @@
         <?php endforeach; ?>
 
         }
+        //---------------------------------------------------------------------------------------------------------------
+        <?php  foreach ($rows as $row) :  ?>
+             <?php if($row->vehicle == $_GET['vehicle']){  ?>
+                
+                var negotiate = document.getElementById('Negotiate_<?=$row->driver_id?>');
+                var messagebox=document.getElementById('message_popup');
+                var contant=document.getElementById('contant');
+                var close=document.getElementById('close')
+
+                negotiate.addEventListener('click', () => {
+                    messagebox.style.display="block";
+                    document.getElementById('driverId').value=<?=$row->driver_id?>;
+                    
+                })
+                close.addEventListener('click', () => {
+                    messagebox.style.display="none";
+                })
+                <?php } ?>
+        <?php endforeach; ?>
+
        
 </script>
 

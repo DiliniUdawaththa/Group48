@@ -240,7 +240,13 @@
               locationName = result.features[0].properties.formatted;
               newMarker.bindPopup(locationName).openPopup();
               var location = locationName.split(',');
-             document.getElementById("location_name").value=locationName;
+              console.log(location.length);
+              if(location.length<4){
+                   document.getElementById("location_name").value=locationName;
+              }
+              else{
+                  document.getElementById("location_name").value=location[0]+','+location[1]+','+location[2];
+              }
                 })
               .catch(error => console.log('error', error));
 

@@ -3,15 +3,17 @@
 /**
  * users model
  */
-class Add_Place extends Model
+class Message extends Model
 {
 	
 	public $errors = [];
 	protected $table = "message";
 
 	protected $allowedColumns = [
-        'id',
-        'role',
+        'ride_id',
+        'sender',
+		'passenger_id',
+		'driver_id',
         'message',
 	];
 
