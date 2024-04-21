@@ -6,7 +6,51 @@
             message('please login to view the admin section');
             redirect("login");
         }
-        $data['title'] = "Dashboard";
+
+        $model = new AdminDashboard();
+        $roleCounts = $model->getRoleCounts();
+
+        // $usersData = $model->countUsersByMonth();
+        // $driversData = $model->countDriversByMonth();
+
+        // $userRegistrationData = [];
+        // $driverRegistrationData = [];
+
+        // // Loop through the user data and organize it by month
+        // foreach ($usersData as $userData) {
+        //     $userRegistrationData[$userData['month']] = $userData['user_count'];
+        // }
+
+        // // Loop through the driver data and organize it by month
+        // foreach ($driversData as $driverData) {
+        //     $driverRegistrationData[$driverData['month']] = $driverData['driver_count'];
+        // }
+
+        // // Fill in any missing months with 0 registrations
+        // for ($i = 1; $i <= 12; $i++) {
+        //     if (!isset($userRegistrationData[$i])) {
+        //         $userRegistrationData[$i] = 0;
+        //     }
+        //     if (!isset($driverRegistrationData[$i])) {
+        //         $driverRegistrationData[$i] = 0;
+        //     }
+        // }
+
+        // // Sort the data by month
+        // ksort($userRegistrationData);
+        // ksort($driverRegistrationData);
+
+        // // Combine user and driver data into a single array
+        // $registrationData = [
+        //     'users' => array_values($userRegistrationData),
+        //     'drivers' => array_values($driverRegistrationData)
+        // ];
+
+        $data = [
+            'title' => "Dashboard",
+            'roleCounts' => $roleCounts,
+            // 'registrationData' => $registrationData
+        ];
         $this->view('admin/dashboard',$data);
     }
 
@@ -50,13 +94,7 @@
             'role' => 'user',
         ];
     
-        if ($searchTerm !== null) {
-            // If a search term is provided, perform a search
-            $rows = $add_customer->where1($data, $searchTerm);
-        } else {
-            // Otherwise, retrieve all customers
-            $rows = $add_customer->where($data);
-        }
+        $rows = $add_customer->where($data);
     
         $data['rows'] = is_array($rows) ? $rows : [];
     
@@ -249,23 +287,72 @@
         $this->view('admin/profile',$data);
     }
 
-    // Searchbar
+    // Searchbar in customer page
     public function search() {
+
+        $noMatchFound = false;
+
         if (isset($_GET['search'])) {
             $searchTerm = $_GET['search'];
-            $model = new AdminCustomer();
-            // $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
-    
+            $add_customer = new AdminCustomer();
             $data = [
-                'role' => 'customer',
+                'role' => 'user',
+                'name' => strtolower($searchTerm)
             ];
-            $data = $model->where1($data, $searchTerm);
-            include 'customer.view.php';
-        } else {
-            // Redirect or handle the absence of search term
+    
+            if ($searchTerm !== '') {
+                $rows = $add_customer->whereLike($data, $searchTerm);
+            } else {
+                unset($data['name']);
+                $rows = $add_customer->where($data);
+            }
+    
+            $data['rows'] = is_array($rows) ? $rows : [];
+
+            if (empty($data['rows'])) {
+                $noMatchFound = true;
+            }
+    
+    
+            $data['title'] = "Customer";
+            $data['noMatchFound'] = $noMatchFound;
+            $this->view('admin/customer_search', $data);
         }
     }
 
+    // Searchbar in driver page
+    public function searchDriver() {
+
+        $noMatchFound = false;
+
+        if (isset($_GET['search'])) {
+            $searchTerm = $_GET['search'];
+            $add_driver = new AdminDriver();
+            $data = [
+                'role' => 'driver',
+                'name' => strtolower($searchTerm)
+            ];
+    
+            if ($searchTerm !== '') {
+                $rows = $add_driver->whereLike($data, $searchTerm);
+            } else {
+                unset($data['name']);
+                $rows = $add_driver->where($data);
+            }
+    
+            $data['rows'] = is_array($rows) ? $rows : [];
+
+            if (empty($data['rows'])) {
+                $noMatchFound = true;
+            }
+    
+    
+            $data['title'] = "Customer";
+            $data['noMatchFound'] = $noMatchFound;
+            $this->view('admin/driver_search', $data);
+        }
+    }
+    
     // public function mail(){
     //     $newMail = new reminderMail();
     //     $newMail->selectDriver();
