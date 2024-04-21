@@ -68,9 +68,9 @@ body{
     display: flex;
     align-items: center;
     width: 92%;
-    /* background-color: #84D7EB; */
-    background-image: linear-gradient(to right,#84D7EB, #C1EBF5, #84D7EB);
-    /* box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3); */
+    background-color: white;
+    /* background-image: linear-gradient(to right,#84D7EB, #C1EBF5, #84D7EB); */
+    box-shadow: 1px 1px 15px rgba(132,215,235, 0.3);
     height: 40px;
     padding: 10px 30px;
     color:#111827;

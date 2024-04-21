@@ -31,14 +31,14 @@
     </style>
 </head>
 <body id="body">
-   <div class="topbar" id="topbar">
+   <!-- <div class="topbar" id="topbar">
       <div class="topbarin">
          <div>
             <i class="fa-solid fa-bars" onclick="openNav()" id="menu"></i>
             <img src="<?= ROOT ?>/assets/img/logo_name.png" alt="">
          </div>
          <div><img src="<?= ROOT ?>/assets/img/person.jpg" alt="" class="person"></div>
-   </div>
+   </div> -->
 
    <?php include 'ride_side.php'; ?>
 

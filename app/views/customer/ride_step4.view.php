@@ -24,14 +24,7 @@
     </style>
 </head>
 <body id="body">
-   <div class="topbar" id="topbar">
-      <div class="topbarin">
-         <div>
-            <i class="fa-solid fa-bars" onclick="openNav()" id="menu"></i>
-            <img src="<?= ROOT ?>/assets/img/logo_name.png" alt="">
-         </div>
-         <div><img src="<?= ROOT ?>/assets/img/person.jpg" alt="" class="person"></div>
-   </div>
+   
 
    <?php include 'ride_side.php'; ?>
 
@@ -47,7 +40,7 @@
                     <?php  foreach ($rows as $row) :  ?>
                         <?php if($row->vehicle == $_GET['vehicle']){  ?>
                             <div class="driverlist" id="list_<?=$row->driver_id?>" onclick="highlightBox('list_<?=$row->driver_id?>')">
-                                <div class="imgstar"><img src="<?= ROOT ?>/assets/img/customer/person.jpg" alt="">
+                                <div class="imgstar"><img src="<?= ROOT ?>/assets/img/customer/person.png" alt="">
                                 <span>
                                     <i class="fa-solid fa-star" style="color: #D1B000;"></i>
                                     <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -136,7 +129,7 @@
                         iconSize: [38, 38]
                     });
                     var singlemarker=L.marker([<?=$row->lat?>,<?=$row->long?>],{icon: myIcon}).addTo(map); 
-                    var contant = "<img src='<?= ROOT ?>/assets/img/customer/person.jpg' alt='Your Image' style='width: 100px; height: auto;'><br><b>Hello world!</b><br>This is a popup.";
+                    var contant = "<center><img src='<?= ROOT ?>/assets/img/customer/person.png' alt='Your Image' style='width: 100px; height: auto; '><br><b style='color:red;'>2314B (RED)</b><br>I am waiting for you.</center>";
                     var popup = singlemarker.bindPopup(contant)
                     singlemarker.openPopup();
                     }
