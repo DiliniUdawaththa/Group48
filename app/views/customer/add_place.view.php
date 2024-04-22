@@ -39,7 +39,7 @@
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/person.png" alt="" class="userimage">
+                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -55,6 +55,7 @@
                 <a href="<?= ROOT ?>/customer" class="link2"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
                 <a href="<?= ROOT ?>/customer/add_place" class="link"><div class="linkbutton1"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
                 <a href="<?= ROOT ?>/customer/activity" class="link2"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="<?=ROOT?>/customer/profile" class="link2"><div class="linkbutton"><i class="fa-solid fa-user"></i>Profile</div></a>
                 <a href="<?= ROOT ?>/customer/help" class="link2"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
                 <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
              </div>
@@ -89,75 +90,95 @@
                       <td class="td_name"><?= $row->name; ?></td>
                       <td class="td_address"><?= $row->location; ?></td>
                       <td class="td_button">
-                     <a href="<?=ROOT?>/customer/add_place_update/<?=$row->id?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: #407217;"></i></i></button></a>
-                      <a href="<?=ROOT?>/customer/add_place_delete/<?=$row->id?>"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: #7b1417;"></i></button></a>
+                       <a href="<?=ROOT?>/customer/add_place_update/<?=$row->id?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: #407217;"></i></i></button></a>
+                       <button class="delete_btn" id="delete_<?=$row->id?>" onclick="delete_line('delete_<?=$row->id?>')"><i class="fa-solid fa-trash" style="color: #7b1417;"></i></button>
                       </td>
                      </tr>
-                 <?php endforeach; ?>
+                    
+                     <!-- // delete container---------------------------------------------- -->
+                    <div class="delete-container" id="delete-container_<?=$row->id?>">
+                      <h2><i class="<?= $row->icon; ?>"></i> <?= $row->name; ?></h2>
+                      <p class="delete-text">Are you sure you want to delete?</p>
+                      <div class="cancel-delete"  >
+                        <button class="cancel-btn-delete" id="cancel-btn-delete_<?=$row->id?>">Cancel</button>
+                         <button class="delete-btn" id="delete-btn_<?=$row->id?>">Delete</button>
+                      </div>
+                    </div>
+                    <!-- //------------------------------------------------------------------------ -->
                   
+                    <?php endforeach; ?>
                 </table>
                 <a href="<?=ROOT?>/customer/add_place_insert"><i class="fa-solid fa-square-plus"  id="plus"></i></a>
             </div>
+                
+               
+
+                
            
           </div>
          </center>
          </div>
 
          <script>
+
+          function delete_line(data)
+          {
+            
+            //  const place=document.querySelector('.data');
+             const plus=document.getElementById('plus');
+            <?php foreach ($rows as $row) : ?>
+              if(data=="delete_<?=$row->id?>"){ 
+                  const delete_container= document.getElementById('delete-container_<?=$row->id?>') 
+                  const cancel_delete_button = document.getElementById('cancel-btn-delete_<?=$row->id?>')
+                  const delete_button = document.getElementById('delete-btn_<?=$row->id?>')
+                  delete_container.style.display = 'block'
+                  plus.style.display="none";
+                  // place.style.display="none";
+
+                    cancel_delete_button.addEventListener('click', ()=>{
+                      window.location.href ="<?=ROOT?>/customer/add_place";
+                    })
+                    delete_button.addEventListener('click', ()=>{
+                        window.location.href ="<?=ROOT?>/customer/add_place_delete/<?=$row->id?>";
+                    })
+              }
+              <?php endforeach; ?>
+          }
+              
+          
+            //  ------------------------------------------------------------------------------------------------------------------------ 
             const logout_option = document.querySelector('.linkbutton2')
             const logout_container = document.querySelector('.logout-container')
             const cancel_button = document.querySelector('.cancel-btn')
            const logout_button = document.querySelector('.logout-btn')
-                logout_option.addEventListener('click',()=>{
-                    logout_container.style.display = 'block'
-                    })
+           const plus=document.getElementById('plus');
+                   logout_option.addEventListener('click',()=>{
+                      logout_container.style.display = 'block'
+                      plus.style.display="none";
+                      })
 
                     cancel_button.addEventListener('click', ()=>{
-                    logout_container.style.display = 'none'
-                    })
+                      window.location.href ="<?=ROOT?>/customer/add_place";
+                      })
                     logout_button.addEventListener('click', ()=>{
                         window.location.href = "<?=ROOT?>/logout";
                     })
-
-                    // --------------------------------------------------------------------------------------------
-
-            //   const table = document.querySelector('.add_table')
-            //   const form = document.querySelector('.add_form')
-            //   const skip = document.querySelector('.skip')
-            //   const plus = document.getElementById('plus')
-             
-
-            // plus.addEventListener('click',()=>{
-            //     form.style.display = 'block'
-            //     table.style.display = 'none'
-            //   })
-
-            //   skip.addEventListener('click',()=>{
-            //     form.style.display = 'none'
-            //     table.style.display = 'block'
-            //   })
-              // ------------------------------------------------------
-
-          
-
-
-            //  ------------------------------------------------------------------------------------------------------------------------ 
             // categery list part 
-            const categoryInput = document.getElementById('categoryInput');
+            // const categoryInput = document.getElementById('categoryInput');
 
-                      categoryInput.addEventListener('input', function () {
-                          const enteredValue = this.value;
-                          const options = document.getElementById('categorys').getElementsByTagName('option');
-                          let validOption = false;
+            //           categoryInput.addEventListener('input', function () {
+            //               const enteredValue = this.value;
+            //               const options = document.getElementById('categorys').getElementsByTagName('option');
+            //               let validOption = false;
 
-                          for (let i = 0; i < options.length; i++) {
-                              if (options[i].value === enteredValue) {
-                                  validOption = true;
-                                  break;
-                              }
-                          }
+            //               for (let i = 0; i < options.length; i++) {
+            //                   if (options[i].value === enteredValue) {
+            //                       validOption = true;
+            //                       break;
+            //                   }
+            //               }
 
-                      });
+            //           });
 
       // --------------------------------------------------------------------------------------------------------------------------------------------------------------------
     

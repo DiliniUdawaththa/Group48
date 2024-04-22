@@ -8,7 +8,7 @@
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/person.png" alt="" class="userimage">
+                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -24,6 +24,7 @@
                 <a href="<?=ROOT?>/customer/ride" class="link"><div class="linkbutton1"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
                 <a href="<?=ROOT?>/customer/add_place" class="link2"><div class="linkbutton"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
                 <a href="<?=ROOT?>/customer/activity" class="link2"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="<?=ROOT?>/customer/profile" class="link2"><div class="linkbutton"><i class="fa-solid fa-user"></i>Profile</div></a>
                 <a href="<?=ROOT?>/customer/help" class="link2"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
                 <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
              </div>
@@ -36,3 +37,4 @@
            
              
         </div>
+        

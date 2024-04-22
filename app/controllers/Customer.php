@@ -17,6 +17,15 @@
             message('please login to view the page');
             redirect("login");
         }
+        $add_place = new Add_Place();
+        $rows = $add_place->findAll();
+        $data['rows'] = array();
+        if(isset($rows[0])){
+            for($i = 0;$i < count($rows); $i++)
+            {
+                    $data['rows'][] = $rows[$i];
+            }
+        }
         if ($_SERVER["REQUEST_METHOD"]=="POST") {
               $location=$_POST["location"];
               $destination=$_POST["destination"];
@@ -380,6 +389,80 @@
         $this->view('customer/activity',$data);
     }
 
+        public function Profile(){
+            if(!Auth::logged_in())
+            {
+                message('please login to view the page');
+                redirect("login");
+            }
+            $user =new User();
+
+           
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+                $targetDir = "C://wamp64/www/FAREFLEX/public/assets/img/customer/profile/"; // Folder to upload the image
+                $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+                $uploadOk = 1;
+                $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+                $newFileName =  $_SESSION['USER_DATA']->id.'.'. $imageFileType; // New filename with the same extension
+                $targetFile = $targetDir . $newFileName;
+                $check = getimagesize($_FILES["image"]["tmp_name"]);
+                        if($check !== false) {
+                            // show("File is an image - " . $check["mime"] . ".");
+                            $uploadOk = 1;
+                        } else {
+                            show("File is not an image.");
+                            $uploadOk = 0;
+                        }
+
+
+                        // Check file size
+                        if ($_FILES["image"]["size"] > 500000) {
+                            show("Sorry, your file is too large.");
+                            $uploadOk = 0;
+                        }
+
+                        // Allow certain file formats
+                        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                        && $imageFileType != "gif" ) {
+                            show("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+                            $uploadOk = 0;
+                        }
+
+                         // Check if file already exists
+                        if (file_exists($targetFile)) {
+                            // Delete the existing file
+                            unlink($targetFile);
+                            // show("Existing file deleted.");
+                        }
+
+                        // Check if $uploadOk is set to 0 by an error
+                        if ($uploadOk == 0) {
+                            show("Sorry, your file was not uploaded.");
+                        // if everything is ok, try to upload file
+                        } else {
+                            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                                // show ("The file ". basename( $_FILES["image"]["name"]). " has been uploaded.");
+
+                                // Store the image path in the database
+                                $imagePath = $targetFile;
+                                $arr = array();
+                                $arr["img_path"]=$newFileName;
+                                // show($arr);
+                                $user->update($_SESSION['USER_DATA']->id,$arr);
+
+                            }
+                        }
+
+
+                }
+                
+            
+
+            
+            
+            $data['title'] = "Help";
+            $this->view('customer/profile',$data);
+        }
     public function Help(){
         if(!Auth::logged_in())
         {

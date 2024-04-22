@@ -29,6 +29,7 @@ class User extends Model
 		// 'term2',	
 		'role',
 		'date',
+        'img_path',
 	];
 
 	public function validate($data)

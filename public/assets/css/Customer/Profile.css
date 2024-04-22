@@ -1,0 +1,45 @@
+*{
+
+    font-family: 'Poppins',sans-serif;
+    /* box-sizing: border-box; */
+}
+body{
+    margin: 0;
+    width: 100vw;
+    font-family: 'Poppins',sans-serif;
+    overflow-x: hidden;
+}
+.main{
+    background-color: aliceblue;
+    display: flex;
+    overflow-y: hidden;
+    /* flex-direction: row; */
+   
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+
+.container{
+    margin-left: 300px;
+    /* width: 70vw; */
+    overflow-x: hidden;
+    height: 100vh;
+}
+.h1{
+    background-image: linear-gradient(to right,#194672, #42678B, #194672);
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    width: 78vw;
+    
+}
+.h1 h1{
+    /* margin-left: 40px; */
+    margin: 0px;
+    padding: 15px;
+    color: white;
+   
+}

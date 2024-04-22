@@ -21,7 +21,7 @@ body{
 /* container part in profile------------------------------------------------------------------------------- */
 .container_part{
     background-color: aliceblue;
-    width: 80%;
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -29,75 +29,126 @@ body{
     margin-left: 300px;
 }
 .place_container{
-    /* border: solid #162938; */
-    /* box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3); */
-    height:80vh;
-    width: 70vw;
-    /* margin-top: 60px; */
-    background-color: aliceblue;
+    height:90vh;
+    width: 90%;
+    /* background-image: linear-gradient(to top, white, #84D7EB);   */
     display: flex;
     justify-content: center;
+    border-radius: 60px;
+
 }
 .add_table{
-    display: block;
-    height: 100%;
     width:100%;
-    /* border: solid; */
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 60px;
 
 }
 .add_table table{
-    /* position: relative; */
+    border-radius: 100px;
     width: 100%;
-    /* border: solid; */
+    border-collapse: collapse;
+    border: none;
 }
 .title{
-    border: none;
-    background-color: #162938;
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
     height: 60px;
-    
+    background-image: linear-gradient(to right,#194672, #42678B, #194672);
+}
+tr th:first-child {
+    border-top-left-radius: 10px; 
+    border-bottom-left-radius: 10px; 
+}
+
+tr th:last-child {
+    border-top-right-radius: 10px; 
+    border-bottom-right-radius: 10px; 
 }
 .title th{
-    color:#D9D9D9;
+    color: white;
+    border: none;
+    padding: 30px;
+    /* text-align: left; */
 }
 .data{
-    background-color: #D9D9D9;
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
-    height: 40px;
+    box-shadow: 0px 8px 6px -6px rgba(0, 0, 0, 0.3),
+                0px -8px 6px -6px rgba(0, 0, 0, 0.3);
+    height: 70px;
+    
 }
 .update_btn{
-    border: none;
+    border: solid #194672;
     font-size: 20px;
     padding: 4px 8px;
-    background-color: #D9D9D9;
     cursor: pointer;
-    /* background-color:green ; */
+   border-radius: 15px;
 }
 .update_btn:hover{
-    /* background-color: #ffffff; */
     font-size: 25px;
 }
 .delete_btn{
-    border: none;
+    border: solid #194672;
     font-size: 20px;
     padding: 4px 9px;
-    background-color: #D9D9D9;
     cursor: pointer;
+    border-radius: 15px;
 }
 .delete_btn:hover{
-    /* background-color: #ffffff; */
     font-size: 25px;
+}
+.delete-container{
+    padding:30px;
+    width: 50%;
+    height: 200px;
+    display: none;
+    text-align: center;
+    color: black;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+.delete-container button{
+    height:40px;
+    width:150px;
+    border: 0px;
+    cursor: pointer;
+}
+.delete-btn{
+    background-color: #194672;
+    color:white;
+}
+.delete-btn:hover{
+    background-color: rgb(207, 207, 207);
+    color:black;
+}
+.cancel-delete{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.delete-text{
+    margin-top: 10px;
+    display: block;
+    font-size: 16px;
 }
 
 #plus{
-  /* position: fixed; */
+  margin-top:10px;
   font-size: 50px;
-  color: #162938;
+  color:#194672;
   cursor: pointer;
+  animation: pulse 1s infinite alternate;
 }
-#plus:hover{
-    color:#1f3648;
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
 }
 .th1{
     width: 5%;
@@ -129,36 +180,45 @@ body{
 }
 /* form inner input and buttons--  add place form ---------------------------------------------- */
 .add_form{
-    display: block;
     height: 100%;
-    width:60%;
-    /* border: solid; */
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
-    
+    width:100%; 
 }
 .place_top{
-    background-image: linear-gradient(to bottom, white, #84D7EB);
-    color:black;
+    background-image: linear-gradient(to right,#194672, #42678B, #194672);
+    color:white;
     padding: 1px;
+    border-radius: 20px;
+}
+.form_map{
+    display: flex;
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+form{
+    width:51%;
+    height: 70vh;
 }
 .input_box{
-    width:70%;
-    height: 100%;
+    width:90%;
+    height: 89%;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
     margin-top: 30px;
-    padding: 30px;
     display: flex;
     flex-direction: column;
     text-align: left;
+    padding: 5%;
+    border-radius: 20px 0px 0px 20px;
+    background-image: linear-gradient(to right, white, #84D7EB);  
 }
 .input_box input{
    padding-left: 10px;
    font-size: 17px;
    color:#194672;
-    width: 100%;
+    /* width: 100%; */
     height: 42px;
-    margin-bottom: 10px;
-    margin-top: 7px;
+    margin: 15px;
+    /* margin-top: 7px; */
     border-radius: 8px;
     border: none;
 }
@@ -166,27 +226,10 @@ body{
     color: #162938;
     font-size: 20px;
     text-align: left;
-    
-    /* float: left; */
-   
-}
-
-#address{
-    display: none;
-}
-#set_location{
-    font-size: 5vh;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin: 1vh auto;
-    border:solid #111827;
-    padding: 6px;
-    border-radius: 10px;
-    animation: pulse 1s infinite alternate;
-    cursor: pointer;
+    margin-left: 15px;
 
 }
+
 /* //beat the icon */
 @keyframes pulse {
     from {
@@ -197,19 +240,20 @@ body{
     }
   }
 
-  #lat,#long,#location_name {
+  #lat,#long {
     display: none;
   }
 .submit_btn{
+    /* margin-top: 30px; */
     cursor: pointer;
     padding: 12px 16px;
     border-radius: 8px;
     font-size: 17px;
-    margin:  0 35% ;
+    margin:  40px 35%  10px 35%;
     background-color: #162938;
     border: none;
     color: #D9D9D9;
-    display: none;
+    animation: pulse 1s infinite alternate;
 }
 .submit_btn:hover{
     background-color: #1f3648;
@@ -219,66 +263,24 @@ body{
     color: #162938  ;
     margin: 0;
     text-decoration: none;
-    display: none;
 }
 .skip:hover{
     text-decoration: underline;
     color: #194672;
 }
-
+/* //------------------------------------------------------------------------------------------------ */
 .map_point{
-    display: none;
-    width: 100%;
-    height:100%; 
+    width: 50%;
+    height: 100%;
 }
 
 #map{
-    width: 300px;
-    height:450px;
+    margin-top: 30px;
+    width: 100%;
+    height: 70vh;
    }
- 
-.set_cancle{
-    display: flex;
-    justify-content: right;
-    text-align: right;
-    background-image: linear-gradient(to top, white, #84D7EB);
-    display: none;
-}
 
-.set_button{
-    font-size: 1em;
-    padding: 5px 15px;
-    border-radius: 10px;
-    margin: 10px 10px;
-    background-color: black;
-    color: white;
-    border: solid black;
-    cursor: pointer;
-    animation: pulse 1s infinite alternate;
-}
 
-.cancle_button{
-    font-size: 1em;
-    padding: 5px 10px;
-    border-radius: 10px;
-    margin: 10px 0;
-    cursor: pointer;
-    border: solid black;
-    background-color: none;
-}
-
-.text_select{
-    font-size: 1.3em;
-    background-image: linear-gradient(to top, white, #84D7EB);
-    height: 50px;
-    padding: 4px;
-    display: block;
-}
-.text_select p{
-    display: flex;
-    justify-content: center;
-    
-}
 /* error & message */
 .error {
     border: 1px solid red;
@@ -297,10 +299,4 @@ body{
     background-color: #a7cfbc;
     
     
- }
- #map{
-  display: block;
-  width: 100%;
-  height:450px;
-  display: relative;
  }
