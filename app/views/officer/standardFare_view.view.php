@@ -99,15 +99,26 @@
                     <div class="officer_box">
 
                         <?php foreach ($rows as $row) : ?>
-                        <?php if ($row->Fid == $Fid) : ?>
+
+
                         <h3> Vehicle Type : <?= $row->vehicletype; ?></h3>
 
-                        <h3> Fare Type: <?= $row->faretype; ?></h3>
-                        <h3> Fare per Km: <?= $row->fare; ?></h3>
-                        <h3> Updated Officer Email Address: <?= $row->updatedby; ?></h3>
-                        <h3>Updated Date: <?= $row->date; ?></h3>
-                        <?php endif; ?>
+                        <h3> Fare Type:
+                            <?= $row->faretype; ?>
+                        </h3>
+                        <h3> Fare per Km:
+                            <?= $row->fare; ?>
+                        </h3>
+                        <h3> Updated Officer Email Address:
+                            <?= $row->updatedby; ?>
+                        </h3>
+                        <h3>Updated Date:
+                            <?= $row->date; ?>
+                        </h3>
+
                         <?php endforeach; ?>
+
+
                     </div>
 
                 </div>

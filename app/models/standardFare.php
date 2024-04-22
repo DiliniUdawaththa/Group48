@@ -75,4 +75,11 @@ class standardFare extends Model
             
     }
 
+    public function view_standardFare($Fid)
+    {
+        $query = "SELECT * from $this->table where Fid = :Fid;";
+
+        return $this->query($query,['Fid' => $Fid]);
+    }
+
 }
