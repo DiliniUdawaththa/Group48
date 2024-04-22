@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/Add_Place.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <style>
@@ -33,7 +34,7 @@
         <div class="sidebar">
 
              <div class="barimagetag">
-                <img src="<?= ROOT ?>/assets/img/logoname.png" alt="" class="barimage">
+                <img src="<?= ROOT ?>/assets/img/logonamenw.png" alt="" class="barimage">
              </div>
 
 
@@ -51,11 +52,11 @@
              
 
              <div class="linktag">
-                <a href="<?= ROOT ?>/customer" class="link"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
+                <a href="<?= ROOT ?>/customer" class="link2"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
                 <a href="<?= ROOT ?>/customer/add_place" class="link"><div class="linkbutton1"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
-                <a href="<?= ROOT ?>/customer/activity" class="link"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
-                <a href="<?= ROOT ?>/customer/help" class="link"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
-                <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
+                <a href="<?= ROOT ?>/customer/activity" class="link2"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="<?= ROOT ?>/customer/help" class="link2"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
+                <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
              </div>
       
              <div class="logout-container">
@@ -86,7 +87,7 @@
                     <tr class="data"> 
                       <td class="td_i"><i class="<?= $row->icon; ?>"></i></td>
                       <td class="td_name"><?= $row->name; ?></td>
-                      <td class="td_address"><?= $row->address; ?></td>
+                      <td class="td_address"><?= $row->location; ?></td>
                       <td class="td_button">
                      <a href="<?=ROOT?>/customer/add_place_update/<?=$row->id?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: #407217;"></i></i></button></a>
                       <a href="<?=ROOT?>/customer/add_place_delete/<?=$row->id?>"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: #7b1417;"></i></button></a>
