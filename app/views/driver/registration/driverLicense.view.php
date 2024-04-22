@@ -16,10 +16,18 @@
         <div class="upload-container">
         <div style="margin-top:60px;"></div>
             <p class="upload">Upload a picture of your Driver License</p>
-
-            <div class="image-container"><img class="license-pic" id="license" src="<?= ROOT?>/assets/img/images/License.png"></div>
-            <button class="upload-btn" id="upload-profile-pic">Upload Photo</button>
-            <input type="file" name="photo" id="photoInput" style="display: none;">
+            
+                <div class="image-container">
+                    <img class="license-pic" id="license" src="<?= ROOT?>/assets/img/images/License.png">
+                </div>
+                <form action="" method="post" enctype="multipart/form-data">
+                <div class="buttons">
+                    <button type="button" class="upload-btn" id="upload-profile-pic">Upload Photo</button>
+                    <button type="button" onclick="done_upload()" class="done-btn" id="upload-profile-pic">Done</button>
+                    <input type="submit" name="done" id="sbmt-btn" style="display:none">
+                <div>
+                <input onchange="load_image(this.files[0])" type="file" name="photoInput" id="photoInput" style="display: none;">
+                </form>
         </div>
         
         <div class ="help" id="help">
@@ -29,25 +37,47 @@
                 <li>Click Open</li></ul>
         </div>
         <script>
+            var uploadedFlag = 0;
             document.getElementById('upload-profile-pic').addEventListener('click', function() {
+                console.log("Hello");
                 document.getElementById('photoInput').click();
+                
             });
 
-            document.getElementById('photoInput').addEventListener('change', function() {
-            const selectedFile = this.files[0];
-            if (selectedFile) {
-                const imagePathElement = document.getElementById('license');
-                console.log(selectedFile);
-                imagePathElement.src = selectedFile.name;
-            }
-        });
-
-        document.getElementById('help-btn').addEventListener('click', function() {
+        //     document.getElementById('photoInput').addEventListener('change', function() {
+        //     const selectedFile = this.files[0];
+        //     if (selectedFile) {
+        //         const imagePathElement = document.getElementById('license');
+        //         console.log("Hi");
+        //         console.log(selectedFile);
+                
+        //         var mylink = window.URL.createObjectURL(selectedFile);
+        //         imagePathElement.src = mylink;
+        //     }
+        // });
+            
+            document.getElementById('help-btn').addEventListener('click', function() {
                     document.getElementById('help').style.display = 'flex';
             });
             document.getElementById('close').addEventListener('click', function() {
                     document.getElementById('help').style.display = 'none';
             });
+
+
+            function load_image(file){
+                var mylink = window.URL.createObjectURL(file);
+                console.log(mylink);
+                document.querySelector(".license-pic").src = mylink;
+                uploadedFlag = 1;
+                console.log(uploadedFlag);
+            }
+            function done_upload(){
+                if(uploadedFlag == 1){
+                    // document.location.href = "<?=ROOT?>/driver/registration";
+                    console.log("Works");
+                    document.getElementById('sbmt-btn').click();
+                }
+            }
         </script>
     </body>
 </html>

@@ -106,6 +106,24 @@
         $driverreg = new Driverregistration();
 
             $this->view('driver/registration/driverLicense',$data);
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+                if(isset($_POST['done'])){
+                    $allowed = ['image/jpeg','image/png','image/jpg'];
+                    if(!empty($_FILES['photoInput']['name'])){
+                        if($_FILES['photoInput']['error'] == 0){
+                            if(in_array($_FILES['photoInput']['type'],$allowed)){
+                                move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
+                            }
+                            else {
+                                echo "wrong type";
+                            }
+                        }
+                    }
+                    show($_FILES['photoInput']);die; //name of the input
+                    // redirect('driver/registration');
+                }
+                // echo $_POST['photoInput'];
+            }
         
     }
 
