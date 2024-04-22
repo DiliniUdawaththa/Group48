@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/help.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
 </head>
@@ -12,7 +13,7 @@
         <div class="sidebar">
 
              <div class="barimagetag">
-                <img src="<?= ROOT ?>/assets/img/logoname.png" alt="" class="barimage">
+                <img src="<?= ROOT ?>/assets/img/logonamenw.png" alt="" class="barimage">
              </div>
 
 
@@ -30,11 +31,11 @@
              
 
              <div class="linktag">
-                <a href="<?= ROOT ?>/customer/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
-                <a href="<?= ROOT ?>/customer/add_place" class="link"><div class="linkbutton"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
-                <a href="<?= ROOT ?>/customer/activity" class="link"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="<?= ROOT ?>/customer/ride" class="link2"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
+                <a href="<?= ROOT ?>/customer/add_place" class="link2"><div class="linkbutton"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
+                <a href="<?= ROOT ?>/customer/activity" class="link2"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
                 <a href="<?= ROOT ?>/customer/help" class="link"><div class="linkbutton1"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
-                <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
+                <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
              </div>
       
              <div class="logout-container">
@@ -47,7 +48,41 @@
         </div>
          <div class="container">
 
-            <div class="h1"><h1>How to Request the Ride</h1></div>
+            <div class="h1"><center><h1>How to Request the Ride</h1></center></div>
+            <!-- --------------------------slideshow-container--------------------------------------------------------------------------------------- -->
+            <div class="slideshow-container">
+
+              <div class="mySlides fade">               
+                <img src="<?=ROOT?>/assets/img/customer/help/1.png" style="width:100%">  
+                <div class="text">Step 1 <br><center><h3>slelect the location and destination</h3></center></div>  
+              </div>
+
+              <div class="mySlides fade">  
+                <img src="<?=ROOT?>/assets/img/customer/help/2.png" style="width:100%">
+                <div class="text">Step 2 <br><center><h3>slelect the althernative path</h3></center></div>    
+              </div>
+
+              <div class="mySlides fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/3.png" style="width:100%">
+                <div class="text">Step 3 <br><center><h3>slelect the vehicle</h3></center></div>    
+              </div>
+
+              <div class="mySlides fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/4.png" style="width:100%">
+                <div class="text">Step 4 <br><center><h3>slelect the driver & negotiate</h3></center></div>      
+              </div>
+
+            </div>
+              <br>
+
+              <div style="text-align:center">
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+              </div>
+
+            <!-- -------------------------------------------------------------------------------------------------------------------- -->
             <div class="img"><center><img src="<?=ROOT?>/assets/img/help.jpg" alt=""></center></div>
             <div class="p">
                   <p>
@@ -86,6 +121,29 @@
 
         </div>
         <script>
+  //   --------slide show--------------------------------------------------------------------
+            let slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+              let i;
+              let slides = document.getElementsByClassName("mySlides");
+              let dots = document.getElementsByClassName("dot");
+              for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+              }
+              slideIndex++;
+              if (slideIndex > slides.length) {slideIndex = 1}    
+              for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+              }
+              slides[slideIndex-1].style.display = "block";  
+              dots[slideIndex-1].className += " active";
+              setTimeout(showSlides, 2000); // Change image every 2 seconds
+            }
+
+//------------------------logout---------------------------------------------
+
             const logout_option = document.querySelector('.linkbutton2')
             const logout_container = document.querySelector('.logout-container')
             const cancel_button = document.querySelector('.cancel-btn')

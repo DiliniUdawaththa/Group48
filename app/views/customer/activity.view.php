@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/Activity.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
 </head>
@@ -9,7 +10,7 @@
     <div class="sidebar">
 
         <div class="barimagetag">
-           <img src="<?= ROOT ?>/assets/img/logoname.png" alt="" class="barimage">
+           <img src="<?= ROOT ?>/assets/img/logonamenw.png" alt="" class="barimage">
         </div>
 
 
@@ -27,11 +28,11 @@
         
 
         <div class="linktag">
-           <a href="<?= ROOT ?>/customer/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
-           <a href="<?= ROOT ?>/customer/add_place" class="link"><div class="linkbutton"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
+           <a href="<?= ROOT ?>/customer/ride" class="link2"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
+           <a href="<?= ROOT ?>/customer/add_place" class="link2"><div class="linkbutton"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
            <a href="<?= ROOT ?>/customer/activity" class="link"><div class="linkbutton1"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
-           <a href="<?= ROOT ?>/customer/help" class="link"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
-           <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
+           <a href="<?= ROOT ?>/customer/help" class="link2"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
+           <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
         </div>
  
         <div class="logout-container">
@@ -62,6 +63,37 @@
 
         <div class="activity">
             <div class="heading">
+                <div class="date">Date & Time</div>
+                <div class="name">Name</div>
+                <div class="location"> Location</div>
+                <div class="location">Destination</div>
+                <div class="vehicle">Vehicle</div>
+                <div class="fare">Distance</div>  
+                <div class="fare">Fare</div>            
+            </div>
+            <?php foreach ($rows as $row) :  ?>
+            <?php if($row->state == 'Success') { ?>
+                <div class="data">
+                    <div class="date"><?= $row->date; ?></div>
+                    <div class="name">Mr.
+                        <?php
+                           foreach ($rows2 as $row2) : 
+                             if($row2->id == $row->driver_id)
+                             {
+                                echo $row2->name;
+                             }
+                            endforeach; 
+                         ?>
+                    </div>                  
+                    <div class="location"><?= $row->location; ?></div>
+                    <div class="location"><?= $row->destination; ?></div>
+                    <div class="vehicle"><?= $row->vehicle; ?></div>
+                    <div class="fare"><?= $row->distance; ?> Km</div> 
+                    <div class="fare"><?= $row->fare; ?></div>
+                </div>
+           <?php } ?>
+            <?php endforeach; ?>
+            <!-- <div class="data">
                 <div class="date">Date</div>
                 <div class="time">Time</div>
                 <div class="name">Name</div>
@@ -70,29 +102,13 @@
                 <div class="fare">Fare</div>
             </div>
             <div class="data">
-                <div class="date">12/7/2022</div>
-                <div class="time">09:31PM</div>
-                <div class="name">Mr.Ravi</div>
-                <div class="location">Fortcity</div>
-                <div class="location">Location</div>
-                <div class="fare">Fare</div>
-            </div>
-            <div class="data">
                 <div class="date">Date</div>
                 <div class="time">Time</div>
                 <div class="name">Name</div>
                 <div class="location">Location</div>
                 <div class="location">Location</div>
                 <div class="fare">Fare</div>
-            </div>
-            <div class="data">
-                <div class="date">Date</div>
-                <div class="time">Time</div>
-                <div class="name">Name</div>
-                <div class="location">Location</div>
-                <div class="location">Location</div>
-                <div class="fare">Fare</div>
-            </div>
+            </div> -->
 
         </div>
 </body>

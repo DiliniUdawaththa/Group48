@@ -11,12 +11,13 @@ class Add_Place extends Model
 
 	protected $allowedColumns = [
         'id',
-
 		'name',
 		'category',
-		'icon',
-		'address',
+		'location',
+        'lat',
+        'lng',
 		'date',
+        'icon',
 	];
 
     public function validate($data)
