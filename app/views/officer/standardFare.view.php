@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Officer.css">
     <style>
-    6 .error {
+    .error {
         border: 1px solid red;
         color: red;
     }

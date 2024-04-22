@@ -43,7 +43,7 @@
         $this->view('Officer/standardFare',$data);
         } */
     }
-    public function complains(){
+    /*public function complains(){
         if(!Auth::logged_in())
         {
             message('please login to view the page');
@@ -51,7 +51,7 @@
         }
         $data['title'] = "Officer";
         $this->view('Officer/complains',$data);
-    }
+    }*/
 
     //Standard Fare
     public function standardFare(){
@@ -170,7 +170,7 @@
     }
 
 
-    public function standardFare_view($Fid){
+    public function standardFare_view($Fid = NULL){
         if(!Auth::logged_in())
         {
             message('please login to view the page');
@@ -188,6 +188,7 @@
         {
             $data['rows'][] = $rows[$i];
         }
+
 
         $data['title'] = "standardFare";
         $this->view('Officer/standardFare_view',$data);
@@ -220,15 +221,77 @@
         $this->view('officer/driver',$data);
     }*/
 
-
-    public function customer_complain(){
+    public function complains(){
         if(!Auth::logged_in()) 
         {
             message('please login to view the page');
             redirect("login");
         }
+        $data['errors'] = [];
+
+        $add_complain = new complain();
+
+        $rows = $add_complain->getcomplaindetails();
+        $data['rows'] = array();
+
+        /*if(isset($rows[0])){
+        for($i = 0;$i < count($rows); $i++)
+        {
+            $data['rows'][] = $rows[$i];
+        }*/
+
         $data['title'] = "Officer";
-        $this->view('Officer/customer_complain',$data);
+        $this->view('Officer/complains',$data);
+        
+    }
+
+
+    
+
+
+
+        /*if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        $data['errors'] = [];
+
+        $add_standardFare = new standardFare();
+
+        $rows = $add_standardFare->findAll();
+        $data['rows'] = array();
+
+        if(isset($rows[0])){
+        for($i = 0;$i < count($rows); $i++)
+        {
+            $data['rows'][] = $rows[$i];
+        }
+
+        $data['title'] = "standardFare";
+        $this->view('Officer/standardFare_view',$data);
+        }*/
+    
+
+    /*public function handleComplaint($passenger_id) {
+        // Instantiate the Complain model
+        $complainModel = new Complain();
+
+        // Get passenger name from the model
+        $passengerName = $complainModel->getpassengername($passenger_id);
+    }*/
+
+    
+    public function customer_complain($passenger_id){
+        if(!Auth::logged_in()) 
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        
+
+        $data['title'] = "Officer";
+        $this->view('Officer/customer_complains',$data);
     }
 
     public function driver_complain(){

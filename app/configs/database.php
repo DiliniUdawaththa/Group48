@@ -133,6 +133,8 @@ class Database
 
 		$this->query($query);
 
+
+
 	}
 	
 
