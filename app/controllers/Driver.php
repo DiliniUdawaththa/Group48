@@ -1,5 +1,7 @@
 <?php
- class Driver extends Controller{
+require_once __DIR__ . '/../configs/config.php';
+
+class Driver extends Controller{
     public function index(){
         if(!Auth::logged_in())
         {
@@ -185,27 +187,27 @@
 
     public function renew_insert(){
         $data['errors'] = [];
-        $renew_driver = new renewRegistration();
+        $renew_driver = new renewRegistration($GLOBALS['pdo']);
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
-            // $_POST['email'] =$renew_driver->email;
-            // $_POST['name'] =$renew_driver->name;
-            $_POST['email'] = $_POST['email'];
-            $_POST['name'] = $_POST['name'];
-            $_POST['status'] = 0;
+                // $_POST['email'] =$renew_driver->email;
+                // $_POST['name'] =$renew_driver->name;
+                $_POST['email'] = $_POST['email'];
+                $_POST['name'] = $_POST['name'];
+                $_POST['status'] = 0;
 
-            $file_name = $_FILES['pdf_file']['name'];
-            $file_tmp = $_FILES['pdf_file']['tmp_name'];
-            $file_type = $_FILES['pdf_file']['type'];
-            $file_size = $_FILES['pdf_file']['size'];
+                $file_name = $_FILES['pdf_file']['name'];
+                $file_tmp = $_FILES['pdf_file']['tmp_name'];
+                $file_type = $_FILES['pdf_file']['type'];
+                $file_size = $_FILES['pdf_file']['size'];
 
-            $mail = $_POST['email'];
-            $upload_directory = "./assets/documents/paymentSlips/$mail";
-            $upload_path = $upload_directory . $file_name;
-            move_uploaded_file($file_tmp, $upload_path);
+                $mail = $_POST['email'];
+                $upload_directory = "./assets/documents/paymentSlips/$mail";
+                $upload_path = $upload_directory . $file_name;
+                move_uploaded_file($file_tmp, $upload_path);
 
-            $renew_driver->insert($_POST);
-            redirect('driver/renew3');
+                $renew_driver->insert($_POST);
+                redirect('driver/renew3');
         }
     }
 
