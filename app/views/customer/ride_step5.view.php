@@ -27,14 +27,7 @@
     </style>
 </head>
 <body id="body">
-   <div class="topbar" id="topbar">
-      <div class="topbarin">
-         <div>
-            <i class="fa-solid fa-bars" onclick="openNav()" id="menu"></i>
-            <img src="<?= ROOT ?>/assets/img/logo_name.png" alt="">
-         </div>
-         <div><img src="<?= ROOT ?>/assets/img/person.jpg" alt="" class="person"></div>
-   </div>
+ 
 
    <?php include 'ride_side.php'; ?>
 
@@ -102,13 +95,47 @@
         });
     googleStreets.addTo(map)
 
-    
+    var lat=<?php echo isset($_GET['l_lat']) ? json_encode($_GET['l_lat']) : 'null'; ?>;
+    var long=<?php echo isset($_GET['l_long']) ? json_encode($_GET['l_long']) : 'null'; ?>;
+    <?php  foreach ($rows as $row) :  ?>
+        <?php if($row->driver_id == $_GET['driver_id']){  ?>  
+            Routing = L.Routing.control({
+                waypoints: [
+                    L.latLng(lat,long),
+                    L.latLng(<?=$row->lat?>,<?=$row->long?>)
+                ]
+            });
+            // console.log(lat,long);
+        //    Routing.addTo(map);
 
-    
-            
+        // real time tracking
+            var taxiIcon = L.icon({
+                    iconUrl: '<?= ROOT ?>/assets/img/customer/<?=$row->vehicle?>.png',
+                    iconSize: [50, 40]
+                })
+                var marker = L.marker([<?=$row->lat?>, <?=$row->long?>], { icon: taxiIcon }).addTo(map);
+                    L.Routing.control({
+                        waypoints: [
+                            L.latLng(<?=$row->lat?>, <?=$row->long?>),
+                            L.latLng(lat,long)
+                        ]
+                    }).on('routesfound', function (e) {
+                        var routes = e.routes;
+
+                        e.routes[0].coordinates.forEach(function (coord, index) {
+                            setTimeout(function () {
+                                marker.setLatLng([coord.lat, coord.lng]);
+                            }, 200* index)
+                        })
+
+                     }).addTo(map); 
+                     const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
+                    popupElement.classList.add('leaflet-routing-container-hide');
+        <?php } ?>
+    <?php endforeach; ?>               
            
         
-    </script>
+</script>
 
 
 <!-- chat box -->

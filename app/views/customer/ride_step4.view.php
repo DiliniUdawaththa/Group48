@@ -1,3 +1,4 @@
+<?php $driver_id=0 ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,101 +24,67 @@
     </style>
 </head>
 <body id="body">
-   <div class="topbar" id="topbar">
-      <div class="topbarin">
-         <div>
-            <i class="fa-solid fa-bars" onclick="openNav()" id="menu"></i>
-            <img src="<?= ROOT ?>/assets/img/logo_name.png" alt="">
-         </div>
-         <div><img src="<?= ROOT ?>/assets/img/person.jpg" alt="" class="person"></div>
-   </div>
+   
 
    <?php include 'ride_side.php'; ?>
 
 <!-- ---------------------------------------------------------------------------------- -->
 <div class="activity">
         <div class="mainbox">
-            <div class="contant" >
+            <div class="contant" id="contant" >
                 <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
                 <center>
                     
                     <h2>Select the Driver</h2>
                    
-                    <div class="driverlist" id="list1" onclick="highlightBox('list1')">
-                        <div class="imgstar"><img src="<?= ROOT ?>/assets/img/customer/person.jpg" alt="">
-                           <span>
-                              <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                              <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
-                           </span></div>
-                        <div class="name">Mr.S.Makesh</div>
-                        <div class="fare">Fare<br><b>500/-</b></div>
-                        <div class="nrbutton">
-                           <button class="Negotiate">Negotiate</button>
-                           <button class="Request">Select</button>
-                        </div>
-                      </div>
+                    <?php  foreach ($rows as $row) :  ?>
+                        <?php if($row->vehicle == $_GET['vehicle']){  ?>
+                            <div class="driverlist" id="list_<?=$row->driver_id?>" onclick="highlightBox('list_<?=$row->driver_id?>')">
+                                <div class="imgstar"><img src="<?= ROOT ?>/assets/img/customer/person.png" alt="">
+                                <span>
+                                    <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                                    <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                                    <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
+                                    <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
+                                    <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
+                                </span></div>
+                                <div class="name">Mr.S.Makesh</div>
+                                <div class="fare"><b>500/-</b></div>
+                                <div class="nrbutton">
+                                <button class="Negotiate" id="Negotiate_<?=$row->driver_id?>">Negotiate</button>
+                                <!-- <button class="Request">Select</button> -->
+                                </div>
+                            </div>
+                            <?php $driver_id=$row->driver_id?>
+                         <?php } ?>
+                      <?php endforeach; ?>
 
-                      <div class="driverlist" id="list2" onclick="highlightBox('list2')">
-                        <div class="imgstar"><img src="<?= ROOT ?>/assets/img/customer/person.jpg" alt="">
-                           <span>
-                              <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                              <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
-                           </span></div>
-                        <div class="name">Mr.S.Makesh</div>
-                        <div class="fare">Fare<br><b>500/-</b></div>
-                        <div class="nrbutton">
-                           <button class="Negotiate">Negotiate</button>
-                           <button class="Request">Select</button>
-                        </div>
-                      </div>
-
-                      <div class="driverlist" id="list3" onclick="highlightBox('list3')">
-                        <div class="imgstar"><img src="<?= ROOT ?>/assets/img/customer/person.jpg" alt="">
-                           <span>
-                              <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                              <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
-                           </span></div>
-                        <div class="name">Mr.S.Makesh</div>
-                        <div class="fare">Fare<br><b>500/-</b></div>
-                        <div class="nrbutton">
-                           <button class="Negotiate">Negotiate</button>
-                           <button class="Request">Select</button>
-                        </div>
-                      </div>
-
-                      <div class="driverlist" id="list4" onclick="highlightBox('list4')">
-                        <div class="imgstar"><img src="<?= ROOT ?>/assets/img/customer/person.jpg" alt="">
-                           <span>
-                              <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                              <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
-                              <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
-                           </span></div>
-                        <div class="name">Mr.S.Makesh</div>
-                        <div class="fare">Fare<br><b>500/-</b></div>
-                        <div class="nrbutton">
-                           <button class="Negotiate">Negotiate</button>
-                           <button class="Request">Select</button>
-                        </div>
-                      </div>
                       <form action="" method="POST">
-                   <!-- <input type="text" value='' name='Driver_Id' id='Driver_Id'> -->
-                    <a href="<?=ROOT?>/customer/ride_step5" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
-                    </form>
+                           <input type="text" value='0' name='driver_id' id='Driver_Id'>
+                           <a href="<?=ROOT?>/customer/ride_step5" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
+                      </form>
                 </center>
-                
-                
+                <form action="" method="POST">
+                <div class="message_popup" id="message_popup">
+                    <div class="message_topbar">
+                        <i class="fa-solid fa-xmark" id="close"></i>
+                    </div>
+                    <div class="message_view">
+                    <?php  foreach ($rows1 as $row) :  ?>
+                        <?php if($row->ride_id == $driver_id+$_SESSION['USER_DATA']->id){?>
+                        <div><?=$row->sender?> : <?=$row->message?></div>
+                        <?php }?>
+                    <?php endforeach; ?>
+                    </div>
+                    <div class="message_input">
+                      <textarea name="message_text" id="message_text" cols="50" rows="3" value=""></textarea>
+                      <input type="text"  name='Driver_id' id='driverId' style="display:none;">
+                      <button>Send</button>
+                    </div>
+                </div>
+                </form>
             </div>
+
             <div id="map" > </div>
         </div>
     </div>       
@@ -140,6 +107,8 @@
         var lists = document.querySelectorAll('.driverlist');
         lists.forEach(function(list) {
             list.classList.remove('highlighted');
+            var Id = listId.split('_')
+            document.getElementById('Driver_Id').value=Id[1]
         });
         
         // Add border to the clicked box
@@ -149,55 +118,46 @@
         // Show the button container
         var buttonContainer = document.getElementById('sizeButton');
         buttonContainer.style.display = 'block';
+        
+        //show drivers
+        <?php  foreach ($rows as $row) :  ?>
+             <?php if($row->vehicle == $_GET['vehicle']){  ?>
+                if(listId=="list_<?=$row->driver_id?>"){
+                    map.flyTo([ <?=$row->lat?>,<?=$row->long?>], 16)
+                    var myIcon = L.icon({
+                        iconUrl: '<?= ROOT ?>/assets/img/customer/dod.png',
+                        iconSize: [38, 38]
+                    });
+                    var singlemarker=L.marker([<?=$row->lat?>,<?=$row->long?>],{icon: myIcon}).addTo(map); 
+                    var contant = "<center><img src='<?= ROOT ?>/assets/img/customer/person.png' alt='Your Image' style='width: 100px; height: auto; '><br><b style='color:red;'>2314B (RED)</b><br>I am waiting for you.</center>";
+                    var popup = singlemarker.bindPopup(contant)
+                    singlemarker.openPopup();
+                    }
+            <?php } ?>
+        <?php endforeach; ?>
 
-        if(listId=="list1"){
-            map.flyTo([ 6.903528493716559,79.86255888285733], 16)
-            var myIcon = L.icon({
-                iconUrl: '<?= ROOT ?>/assets/img/customer/dod.png',
-                iconSize: [38, 38]
-              });
-              var singlemarker=L.marker([6.903528493716559,79.86255888285733],{icon: myIcon}).addTo(map); 
-              var contant = "<img src='<?= ROOT ?>/assets/img/customer/person.jpg' alt='Your Image' style='width: 100px; height: auto;'><br><b>Hello world!</b><br>This is a popup.";
-             var popup = singlemarker.bindPopup(contant)
-              singlemarker.openPopup();
+        }
+        //---------------------------------------------------------------------------------------------------------------
+        <?php  foreach ($rows as $row) :  ?>
+             <?php if($row->vehicle == $_GET['vehicle']){  ?>
+                
+                var negotiate = document.getElementById('Negotiate_<?=$row->driver_id?>');
+                var messagebox=document.getElementById('message_popup');
+                var contant=document.getElementById('contant');
+                var close=document.getElementById('close')
 
-        }else  if(listId=="list2"){
-            map.flyTo([6.90578774905135,79.85891096002354], 16)
-            var myIcon = L.icon({
-                iconUrl: '<?= ROOT ?>/assets/img/customer/dod.png',
-                iconSize: [38, 38]
-              });
-              var singlemarker=L.marker([6.90578774905135,79.85891096002354],{icon: myIcon}).addTo(map); 
-              var contant = "<img src='<?= ROOT ?>/assets/img/customer/person.jpg' alt='Your Image' style='width: 100px; height: auto;'><br><b>Hello world!</b><br>This is a popup.";
-             var popup = singlemarker.bindPopup(contant)
-              singlemarker.openPopup();
-
-        } else  if(listId=="list3"){
-            map.flyTo([6.90259068644725,79.85790241665184], 16)
-            var myIcon = L.icon({
-                iconUrl: '<?= ROOT ?>/assets/img/customer/dod.png',
-                iconSize: [38, 38]
-              });
-              var singlemarker=L.marker([6.90259068644725,79.85790241665184],{icon: myIcon}).addTo(map); 
-              var contant = "<img src='<?= ROOT ?>/assets/img/customer/person.jpg' alt='Your Image' style='width: 100px; height: auto;'><br><b>Hello world!</b><br>This is a popup.";
-             var popup = singlemarker.bindPopup(contant)
-              singlemarker.openPopup();
-
-        } else  if(listId=="list4"){
-            map.flyTo([6.908217502180756,79.85777366643418], 16)
-            var myIcon = L.icon({
-                iconUrl: '<?= ROOT ?>/assets/img/customer/dod.png',
-                iconSize: [38, 38]
-              });
-              var singlemarker=L.marker([6.908217502180756,79.85777366643418],{icon: myIcon}).addTo(map); 
-              var contant = "<img src='<?= ROOT ?>/assets/img/customer/person.jpg' alt='Your Image' style='width: 100px; height: auto;'><br><b>Hello world!</b><br>This is a popup.";
-             var popup = singlemarker.bindPopup(contant)
-              singlemarker.openPopup();
-        } 
-
+                negotiate.addEventListener('click', () => {
+                    messagebox.style.display="block";
+                    document.getElementById('driverId').value=<?=$row->driver_id?>;
+                    
+                })
+                close.addEventListener('click', () => {
+                    messagebox.style.display="none";
+                })
+                <?php } ?>
+        <?php endforeach; ?>
 
        
-    }
 </script>
 
 
@@ -247,27 +207,25 @@
                     iconUrl : '<?= ROOT ?>/assets/img/customer/'+vehicle+'.png',
                     iconSize:[50,30]
                 })     
-            coords=[[ 6.903528493716559,79.86255888285733],[6.90578774905135,79.85891096002354],[6.90259068644725,79.85790241665184],[ 6.908217502180756,79.85777366643418]]
-            let l =coords.length;
-            if(markers.length!=0){
             
-            }
+            
             map.flyTo([lat,long], 15)
-            for(let i=0; i<l; i++){
-                // console.log('Marker position updated to:', [newLat, newLng]);
-                var x = (coords[i][0]-newLat)*(coords[i][0]-newLat)
-                var y =(coords[i][1]-newLng)*(coords[i][1]-newLng)
-                var z = x+y;
-                var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
-                var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
-                var z1 = 5*(x1+y1);
-                var marker1 = L.marker(coords[i],{icon :  vehicle})
-                if(z<z1){
-                    marker1.addTo(map)
-                    markers.push(marker1);
-                }
-        
-            }
+              <?php foreach ($rows as $row) :  ?>
+                   <?php if($row->vehicle == $_GET['vehicle']){?>
+                        var x = (<?=$row->lat?>-newLat)*(<?=$row->lat?>-newLat)
+                        var y =(<?=$row->long?>-newLng)*(<?=$row->long?>-newLng)
+                        var z = x+y;
+                        var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
+                        var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
+                        var z1 = 6*(x1+y1);
+                        var marker1 = L.marker([<?=$row->lat?>,<?=$row->long?>],{icon :  vehicle})
+                        if(z<z1){
+                            marker1.addTo(map)
+                            markers.push(marker1);
+                        }
+                   <?php } ?>
+            <?php endforeach; ?>
+          
             
         function deleteAllMarkers() {
             for (var i = 0; i < markers.length; i++) {

@@ -10,14 +10,14 @@ body{
     /* overflow: hidden; */
 }
 .main{
-    background-color: #D9D9D9;
+    background-color: aliceblue;
     display: flex;
     /* flex-direction: row; */
     
 }
 /* ------------------------------------------------------------------- */
 .activity{
-    background-color:#D9D9D9;
+    background-color:aliceblue;
     width:80.4%;
     height: 100vh;
     display: flex;
@@ -32,7 +32,9 @@ body{
     margin: 40px;
     width: 100%;
     display: flex;
-    
+    border-radius: 25px;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    border-radius:  50px 0px 0  50px; 
   }
   
 
@@ -40,15 +42,16 @@ body{
    display: flex;
    flex-direction: column;
    width:50%;
-   background-color: #111827;
-   padding: 20px;
+   background-image: linear-gradient(to right, white, #84D7EB);
+   padding: 40px;
+   border-radius:  50px 0px 0  50px; 
   }
   #back{
     font-size: 30px;
-    color: #D9D9D9;
+    color: black;
   }
   .contant h2{
-    color: #D9D9D9;
+    color: black;
     margin-top: 10px;
     margin-bottom: 30px;
   }
@@ -104,6 +107,10 @@ body{
         left: 4px;
         display: none;
         }
+
+    .fetch_data{
+      display: none;
+    }
        
   .golink{
     display: flex;

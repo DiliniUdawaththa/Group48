@@ -23,14 +23,6 @@
     </style>
 </head>
 <body id="body">
-   <div class="topbar" id="topbar">
-      <div class="topbarin">
-         <div>
-            <i class="fa-solid fa-bars" onclick="openNav()" id="menu"></i>
-            <img src="<?= ROOT ?>/assets/img/logo_name.png" alt="">
-         </div>
-         <div><img src="<?= ROOT ?>/assets/img/person.jpg" alt="" class="person"></div>
-   </div>
 
    <?php include 'ride_side.php'; ?>
 
@@ -90,7 +82,7 @@
 
                     </div>
                     <form action="" method="POST">
-                   <input type="text" name="vehicle" id="vehicle" value="" >
+                   <input type="text" name="vehicle" id="vehicle" value="" class="fetch_data" >
                     <a href="<?=ROOT?>/customer/ride_step4" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
                     </form>
                    

@@ -170,6 +170,7 @@ class Model extends Database
 // ------------------------------------------------------------------------------------------------------------------------------
 	public function update($id, $data)
 	{
+		// show($data);
 		if (!empty($this->allowedColumns)) {
 			foreach ($data as $key => $value) {
 				if (!in_array($key, $this->allowedColumns)) {
@@ -180,13 +181,13 @@ class Model extends Database
 
 		$keys = array_keys($data);
 		// $id = array_search($id, $data);
-
+        // show($data);
 		$query = "update " . $this->table . " set ";
 		foreach ($keys as $key) {
-			$query .= $key . "=:" . $key . ",";
+			$query .= $key . "= :" . $key . ",";
 		}
 		$query = trim($query, ",");
-		$query .= " where id = :id";
+		$query .= " where id =".$id;
 		// print_r($query);	
 
 
@@ -197,6 +198,68 @@ class Model extends Database
 		$query = "select * from $this->table;";
 		return $this->query($query);
 	}
+
+	public function generatePassword() {
+        // Define the character set to be used in the password
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+';
+    
+        // Get the total number of characters in the character set
+        $charLength = strlen($chars);
+    
+        // Initialize the password variable
+        $password = '';
+    
+        // Generate random characters until the password reaches the desired length
+        for ($i = 0; $i < 8; $i++) {
+            // Generate a random index within the character set
+            $randomIndex = mt_rand(0, $charLength - 1);
+    
+            // Append the randomly selected character to the password
+            $password .= $chars[$randomIndex];
+        }
+    
+        // Return the generated password
+        return $password;
+    }
+
+    public function delete_addofficer($empID = null)
+    {
+        $query = "delete from $this->table where empID = :empID;";
+
+        return $this->query($query,['empID' => $empID]);
+    }
+
+    public function update_addofficer($empID, $data)
+    {
+        // $query = $this->update($empID, $data);
+        // $conditions = ['empID' => $empID];
+        // $query = $this->update($conditions, $data);
+        // return $query;
+        
+        if (!empty($this->allowedColumns)) {
+            foreach ($data as $key => $value) {
+                if (!in_array($key, $this->allowedColumns)) {
+                    unset($data[$key]);
+                }
+            }
+        }
+    
+        $keys = array_keys($data);
+        // $id = array_search($id, $data);
+    
+        $query = "update " . $this->table . " set ";
+        foreach ($keys as $key) {
+            $query .= $key . "=:" . $key . ",";
+        }
+        $query = trim($query, ",");
+        $query .= " where empID = :empID";
+        // print_r($query);	
+    
+    
+        $this->query($query, $data);
+        
+    }
+	
 	
 
 	public function officerupdate($Fidd, $data)

@@ -1,105 +1,4 @@
 
-/* -----------------------------------mobile top bar----------------------------------- */
-.topbar{
-    display: none;
-    background-color:#162938;
-    height: 10vh;
-}
-.topbarin{
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    align-items: center;
-}
-.topbar img{
-    margin-left: 11vw;
-    height: 10vh;
-}
-.topbar .person{
-    border-radius: 80px;
-    height: 6.5vh;
-    width: 6.5vh;
-    margin-right: 30px;
-}
-#menu{
-    display: flex;
-    font-size: 5.5vh;
-    color: #D9D9D9;
-    position: absolute;
-    top: 2.25vh;
-    left: 30px;
-}
-
-/* ------------------------------------side open bar--------------------------- */
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color:#162938;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
-  
-  .sidenav a {
-    padding: 15px 8px 15px 32px;
-    text-decoration: none;
-    font-size: 40px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
-  
-  .sidenav a:hover {
-    color: white;
-  }
-  
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 70px;
-    margin-left: 50px;
-  }
-
-.sidenav img{
-    margin-top: 80px;
-    height: 170px;
-    width: 170px;
-    border-radius: 100px;
-}
-.sidenav h3{
-    color: #D9D9D9;
-    font-size: 30px;
-    margin-bottom: 0;
-
-}
-.sidenav .sideprofile{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-}
-.sidenav .sideprofile i{
-    font-size: 30px;
-    margin: 0;
-}
-
-
-
-
-.ride{
-    background-color: #D9D9D9;
-    display: flex;
-    
-}
-
-
-
-
 
 /* -----------------------sidebar------------------------------------------ */
 .sidebar{
@@ -247,5 +146,25 @@
      font-size: 16px;
  }
  
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* mobile base bottom and top bar------------------------------------------ */
+#opensidebar{
+    width: 200px;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: -200px; /* Initially hide the sidebar */
+    transition: left 0.3s ease;
+}
+.sidebar-open {
+    left: 0; /* Show the sidebar when .sidebar-open class is applied */
+}
 
-/* -------------------------ridemain-------------------------------- */
+@media only screen and (max-width: 1000px) {
+    .sidebar{
+        display: none;
+    }
+
+}
