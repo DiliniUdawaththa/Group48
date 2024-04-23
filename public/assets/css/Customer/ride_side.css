@@ -146,5 +146,25 @@
      font-size: 16px;
  }
  
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* mobile base bottom and top bar------------------------------------------ */
+#opensidebar{
+    width: 200px;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: -200px; /* Initially hide the sidebar */
+    transition: left 0.3s ease;
+}
+.sidebar-open {
+    left: 0; /* Show the sidebar when .sidebar-open class is applied */
+}
 
-/* -------------------------ridemain-------------------------------- */
+@media only screen and (max-width: 1000px) {
+    .sidebar{
+        display: none;
+    }
+
+}
