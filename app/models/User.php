@@ -30,6 +30,9 @@ class User extends Model
 		'role',
 		'date',
         'img_path',
+        'address',
+        'nic',
+        'dob',
 	];
 
 	public function validate($data)

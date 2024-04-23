@@ -53,11 +53,51 @@
            <div class="h1"><center><h1>Profile</h1></center></div>
 
            <form  method="post" enctype="multipart/form-data">
-                <input type="file" name="image">
-                <input type="submit" name="submit" value="Upload">
+               <div class="main_box">
+                 <div class="image_box">
+                    <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="">
+                    <input type="file" name="image">
+                 </div>
+                 <div class="input_box">
+                    <label for="">Name</label><br>
+                    <input type="text" name="name" value="<?=$_SESSION['USER_DATA']->name;?>" readonly><br>
+                    <label for="">E-Mail Address</label><br>
+                    <input type="text" name="email" value="<?=$_SESSION['USER_DATA']->email;?>" readonly><br>
+                    <label for="">Mobile Number</label><br>
+                    <input type="text" name="phone" value="<?=$_SESSION['USER_DATA']->phone;?>" readonly><br>
+                    <label for="" >Address</label><br>
+                    <input type="text" value="<?=$_SESSION['USER_DATA']->address;?>" name="address"><br>
+                    <label for="">NIC No</label><br>
+                    <input type="text" value="<?=$_SESSION['USER_DATA']->nic;?>" name="nic"><br>
+                    <label for="">DOB</label><br>
+                    <input type="text" value="<?=$_SESSION['USER_DATA']->dob;?>" name="dob"><br>
+                 </div>
+                 </div>
+                <input type="submit" name="submit" value="Upload" class="upload">
             </form>
         </div>
 
 </div>
 </body>
 </html>
+<script>
+    //------------------------logout---------------------------------------------
+
+    const container=document.querySelector('.container')
+            const logout_option = document.querySelector('.linkbutton2')
+            const logout_container = document.querySelector('.logout-container')
+            const cancel_button = document.querySelector('.cancel-btn')
+            const logout_button = document.querySelector('.logout-btn')
+                  
+                   logout_option.addEventListener('click',()=>{
+                    logout_container.style.display = 'block'
+                    container.style.display="none";
+                    })
+
+                    cancel_button.addEventListener('click', ()=>{
+                     window.location.href ="<?=ROOT?>/customer/Profile";
+                    })
+                    logout_button.addEventListener('click', ()=>{
+                        window.location.href = "<?=ROOT?>/logout";
+                    })
+</script>

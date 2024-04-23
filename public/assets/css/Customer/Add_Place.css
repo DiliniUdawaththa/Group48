@@ -250,7 +250,7 @@ form{
     border-radius: 8px;
     font-size: 17px;
     margin:  40px 35%  10px 35%;
-    background-color: #162938;
+    background-image: linear-gradient(to right,#194672, #42678B, #194672);
     border: none;
     color: #D9D9D9;
     animation: pulse 1s infinite alternate;
