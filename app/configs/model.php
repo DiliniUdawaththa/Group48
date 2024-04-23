@@ -170,6 +170,7 @@ class Model extends Database
 // ------------------------------------------------------------------------------------------------------------------------------
 	public function update($id, $data)
 	{
+		// show($data);
 		if (!empty($this->allowedColumns)) {
 			foreach ($data as $key => $value) {
 				if (!in_array($key, $this->allowedColumns)) {
@@ -180,13 +181,13 @@ class Model extends Database
 
 		$keys = array_keys($data);
 		// $id = array_search($id, $data);
-
+        // show($data);
 		$query = "update " . $this->table . " set ";
 		foreach ($keys as $key) {
-			$query .= $key . "=:" . $key . ",";
+			$query .= $key . "= :" . $key . ",";
 		}
 		$query = trim($query, ",");
-		$query .= " where id = :id";
+		$query .= " where id =".$id;
 		// print_r($query);	
 
 
