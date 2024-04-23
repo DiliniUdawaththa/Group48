@@ -18,11 +18,15 @@ body{
 
 /* ------------------------side bar----------------- */
 .sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 300px;
     color: #D9D9D9;
     background-color:#111827;
     height: 100vh;
     overflow: hidden;
+    z-index: 1000;
  }
 .logo{
     text-align: center;
@@ -113,7 +117,6 @@ body{
     transform: translate(-50%, -50%);
     border-radius: 10px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-    z-index: 9999; 
 
 }
 .logout-container button{
@@ -144,54 +147,44 @@ body{
 }
 /*-----------------------interface-----------------------*/
 .interface{
-    width: 80%;
+    width: calc(100% - 300px);
     height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: 60px;
+    padding-left: 300px;
+    padding-right: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
     /* justify-content: center; */
 }
 .navi{
+    position: fixed;
+    top: 0;
+    left: 300px;
+    right: 5px;
+    width: calc(100% - 300px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #111827;
-    padding: 5px 15px 5px 15px;
-    /* border-left: 4px;
+    background: #fff;
+    padding-right: 20px;
+    padding: 15px 50px 15px 10px;
+    border-left: 4px;
     border-right: 4px;
-    border-top: 4px; */
-    /* border-radius: 6px; */
-    border: solid 4px #fff;
+    border-top: 4px;
+    border-radius: 6px;
 }
-
 .navi .navi1 {
     justify-content: flex-start;
     align-items: center;
     padding: 10px 14px;
-    color: #fff;
+    color: #111827;
 }
-/*-------------------Weekly rides bar chart------------------ */
-.chart_phase{
-    display: flex;
-    flex-direction: row;
-    height: 50%;
-    /* width: 100%; */
-    border: solid 4px #fff;
-    background-color: #D9D9D9;
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
-}
-#chart{
-    display: flex;
-    width: 50%;
-    padding: 10px 10px;
-}
-#chart1{
-    display: flex;
-    width: 50%;
-    padding: 10px 10px;
-}
+
 /*-------------------------table------------------------------*/
 .table1{
-    padding: 30px 30px;
+    padding: 70px 30px;
 }
 table {
 	border-collapse: collapse;
@@ -221,7 +214,125 @@ table tbody tr {
 table tbody tr:nth-child(odd) {
 	background-color: #ffffff;
 }
+.slip-btn{
+    background-color: rgb(155, 149, 168);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
 .td_button{
     display: flex;
-    align-content: center;
+    /* align-items: center; */
+    justify-content: space-around;
+}
+.accept_btn{
+    background-color: green;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.reject_btn{
+    background-color: red;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/*Accept part-------------------------------------------------------------------------- */
+.accept-container{
+    padding:30px;
+    width: 50%;
+    height: 200px;
+    display: none;
+    text-align: center;
+    color: black;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+}
+.accept-container button{
+    height:40px;
+    width:150px;
+    border: 0px;
+    cursor: pointer;
+}
+.ok-btn{
+    background-color: #194672;
+    color:white;
+}
+.ok-btn:hover{
+    background-color: rgb(207, 207, 207);
+    color:black;
+}
+.btn{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.accept-text{
+    margin-top: 10px;
+    display: block;
+    font-size: 16px;
+    color: crimson;
+}
+
+/* Reject part-------------------------------------------------------------------------- */
+.reject-container{
+    padding:30px;
+    width: 50%;
+    height: 200px;
+    display: none;
+    text-align: center;
+    color: black;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+}
+.reject-container button{
+    height:40px;
+    width:150px;
+    border: 0px;
+    cursor: pointer;
+}
+.reject-btn{
+    background-color: #194672;
+    color:white;
+}
+.reject-btn:hover{
+    background-color: rgb(207, 207, 207);
+    color:black;
+}
+.btn{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.reject-text{
+    margin-top: 10px;
+    display: block;
+    font-size: 16px;
+    color: crimson;
 }
