@@ -10,48 +10,64 @@
         $model = new AdminDashboard();
         $roleCounts = $model->getRoleCounts();
 
-        // $usersData = $model->countUsersByMonth();
-        // $driversData = $model->countDriversByMonth();
+        $userRegistrationData = $model->countUsersByMonth();
+        $driverRegistrationData = $model->countDriversByMonth();
 
-        // $userRegistrationData = [];
-        // $driverRegistrationData = [];
+        // Merge the counts by month
+        $registrationData = [];
+        foreach ($userRegistrationData as $month => $userCount) {
+            $registrationData[$month]['users'] = $userCount;
+        }
+        foreach ($driverRegistrationData as $month => $driverCount) {
+            if (!isset($registrationData[$month])) {
+                $registrationData[$month] = [];
+            }
+            $registrationData[$month]['drivers'] = $driverCount;
+        }
 
-        // // Loop through the user data and organize it by month
-        // foreach ($usersData as $userData) {
-        //     $userRegistrationData[$userData['month']] = $userData['user_count'];
-        // }
+        // Fill in any missing months with 0 registrations
+        for ($i = 1; $i <= 12; $i++) {
+            if (!isset($registrationData[$i])) {
+                $registrationData[$i] = ['users' => 0, 'drivers' => 0];
+            }
+        }
 
-        // // Loop through the driver data and organize it by month
-        // foreach ($driversData as $driverData) {
-        //     $driverRegistrationData[$driverData['month']] = $driverData['driver_count'];
-        // }
-
-        // // Fill in any missing months with 0 registrations
-        // for ($i = 1; $i <= 12; $i++) {
-        //     if (!isset($userRegistrationData[$i])) {
-        //         $userRegistrationData[$i] = 0;
-        //     }
-        //     if (!isset($driverRegistrationData[$i])) {
-        //         $driverRegistrationData[$i] = 0;
-        //     }
-        // }
-
-        // // Sort the data by month
-        // ksort($userRegistrationData);
-        // ksort($driverRegistrationData);
-
-        // // Combine user and driver data into a single array
-        // $registrationData = [
-        //     'users' => array_values($userRegistrationData),
-        //     'drivers' => array_values($driverRegistrationData)
-        // ];
+        // Sort the data by month
+        ksort($registrationData);
 
         $data = [
             'title' => "Dashboard",
             'roleCounts' => $roleCounts,
-            // 'registrationData' => $registrationData
+            'registrationData' => $registrationData
         ];
+
         $this->view('admin/dashboard',$data);
+    }
+
+    // Reports profile controller
+     public function report(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $add_report = new AdminDashboard();
+
+        // $data = [
+        //     'role' => "customer"
+        // ];
+
+        // $rows = $add_customer->where($data);
+        // $data['rows'] = array();
+
+        // for($i = 0;$i < count($rows); $i++)
+        // {
+        //     $data['rows'][] = $rows[$i];
+        // }
+
+        $data['title'] = "Report";
+        $this->view('admin/report',$data);
     }
 
     // customer profile controller
