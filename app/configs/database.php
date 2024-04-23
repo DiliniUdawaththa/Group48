@@ -128,13 +128,31 @@ class Database
 		
 		$this->query($query);
 
+		// $query= "
+		// 	CREATE TABLE IF NOT EXISTS `driverregistration` (
+		// 	`email` varchar(50) NOT NULL,
+		// 	`profileimg` varchar(50),
+		// 	`driverlicenseimg` varchar(50),
+		// 	`revenuelicenseimg` varchar(50),
+		// 	`vehregistrationimg` varchar(50),
+		// 	`vehinsuranceimg` varchar(50),
+		// 	`status` int(2) NOT NULL,
+		// 	PRIMARY KEY (`email`)
+		//    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+		// 	";
+		
 		$query= "
-			CREATE TABLE IF NOT EXISTS `driverregistration` (
+			CREATE TABLE `driverregistration` (
 			`email` varchar(50) NOT NULL,
-			`status` int(2) NOT NULL,
-			PRIMARY KEY (`email`)
-		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
-			";
+			`profileimg` varchar(100) NOT NULL,
+			`driverlicenseimg` varchar(100) DEFAULT NULL,
+			`revenuelicenseimg` varchar(100) DEFAULT NULL,
+			`vehregistrationimg` varchar(100) DEFAULT NULL,
+			`vehinsuranceimg` varchar(100) DEFAULT NULL,
+			`status` int(2) NOT NULL
+		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+		";
+		
 		
 		$this->query($query);
 
