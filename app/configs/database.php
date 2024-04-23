@@ -272,6 +272,30 @@ class Database
 
 		$this->query($query);
 
+		$query="
+		DROP TABLE IF EXISTS `current_rides`;
+		CREATE TABLE IF NOT EXISTS `current_rides` (
+		`id` int(10) NOT NULL AUTO_INCREMENT,
+		`passenger_id` int(10) NOT NULL,
+		`location` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+		`l_lat` float NOT NULL,
+		`l_long` float NOT NULL,
+		`destination` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+		`d_lat` float NOT NULL,
+		`d_long` float NOT NULL,
+		`vehicle` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
+		PRIMARY KEY (`id`),
+		KEY `fk_passenger` (`passenger_id`)
+		) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+
+
+		INSERT INTO `current_rides` (`id`, `passenger_id`, `location`, `l_lat`, `l_long`, `destination`, `d_lat`, `d_long`, `vehicle`) VALUES
+		(14, 1017, ' Kandoori', 6.87848, 79.8581, ' My Home', 6.87313, 79.868, 'auto');
+		COMMIT;
+
+		";
+
+		$this->query($query);
 	}
 	
 

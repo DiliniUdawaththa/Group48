@@ -81,6 +81,9 @@
             message('please login to view the page');
             redirect("login");
         }
+        $current_ride = new Current_rides();
+        $arr =array();
+
             $location=$_GET['location'];
             $l_lat=$_GET['l_lat'];
             $l_long=$_GET['l_long'];
@@ -93,6 +96,19 @@
         if ($_SERVER["REQUEST_METHOD"]=="POST")
         {
             $vehicle=$_POST['vehicle'];
+
+            $arr['passenger_id']=$_SESSION['USER_DATA']->id;
+            $arr['location']=$location;
+            $arr['l_lat']=$l_lat;
+            $arr['l_long']=$l_long;
+            $arr['destination']=$destination;
+            $arr['d_lat']=$d_lat;
+            $arr['d_long']=$d_long;
+            $arr['vehicle']=$vehicle;
+
+            $current_ride->insert($arr);
+
+
             redirect('customer/ride_step4/.php?time='.$time.'&distance='.$distance.'&location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long.'&vehicle='.$vehicle);
         }
         $data['title'] = "Ride";
