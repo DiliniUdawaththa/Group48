@@ -159,7 +159,7 @@
                 // show($_POST);
                 $_POST['Fid']=$Fid; 
                 // show($_POST);           
-                $add_standardFare->officerupdate($Fid, $_POST);
+                $add_standardFare->update_standardFare($Fid, $_POST);
                 redirect('officer/standardFare');
             }
            
@@ -170,7 +170,7 @@
     }
 
 
-    public function standardFare_view($Fid = NULL){
+   public function standardFare_view($Fid){
         if(!Auth::logged_in())
         {
             message('please login to view the page');
@@ -180,7 +180,7 @@
 
         $add_standardFare = new standardFare();
 
-        $rows = $add_standardFare->findAll();
+        $rows = $add_standardFare->view_standardFare($Fid);
         $data['rows'] = array();
 
         if(isset($rows[0])){
@@ -188,12 +188,31 @@
         {
             $data['rows'][] = $rows[$i];
         }
+    }
+
+        /*if($_SERVER['REQUEST_METHOD'] == "POST")
+		{
+            
+			if($add_standardFare->validate($_POST))
+			{    
+                // show($_POST);
+                $_POST['Fid']=$Fid; 
+                // show($_POST);           
+                $add_standardFare->view_standardFare($Fid);
+                redirect('officer/standardFare');
+            }
+           
+        }*/
 
 
         $data['title'] = "standardFare";
         $this->view('Officer/standardFare_view',$data);
-        }
-    }
+        /*}*/
+    } 
+
+
+    
+/*----------------------------------*/
 
 
     /*     public function driver(){
@@ -393,6 +412,54 @@
         $add_OfficerDriver->delete_driver($id);
         
         redirect('officer/driver');
+    }
+
+    public function search() {
+        if (isset($_GET['search'])) {
+            $searchTerm = $_GET['search'];
+            $model = new OfficerDriver();
+            // $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+    
+            $data = [
+                'role' => 'driver',
+            ];
+            $data = $model->where1($data, $searchTerm);
+            include 'driver.view.php';
+        } else {
+            // Redirect or handle the absence of search term
+        }
+    }
+
+    public function searchDriver() {
+
+        $noMatchFound = false;
+
+        if (isset($_GET['search'])) {
+            $searchTerm = $_GET['search'];
+            $add_driver = new OfficerDriver();
+            $data = [
+                'role' => 'driver',
+                'name' => strtolower($searchTerm)
+            ];
+    
+            if ($searchTerm !== '') {
+                $rows = $add_driver->whereLike($data, $searchTerm);
+            } else {
+                unset($data['name']);
+                $rows = $add_driver->where($data);
+            }
+    
+            $data['rows'] = is_array($rows) ? $rows : [];
+
+            if (empty($data['rows'])) {
+                $noMatchFound = true;
+            }
+    
+    
+            $data['title'] = "driver";
+            $data['noMatchFound'] = $noMatchFound;
+            $this->view('officer/driverSearch', $data);
+        }
     }
 
 }

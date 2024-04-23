@@ -70,16 +70,43 @@ class standardFare extends Model
     }
 
     public function update_standardFare($Fid, $data)
-    {
-        $this->update($Fid, $data);
-            
-    }
+	{
+		if (!empty($this->allowedColumns)) {
+			foreach ($data as $key => $value) {
+				if (!in_array($key, $this->allowedColumns)) {
+					unset($data[$key]);
+				}
+			}
+		}
+
+		$keys = array_keys($data);
+		// $Fid = array_search($Fid, $data);
+
+		$query = "update " . $this->table . " set ";
+		foreach ($keys as $key) {
+			$query .= $key . "=:" . $key . ",";
+		}
+		$query = trim($query, ",");
+		$query .= " where Fid = :Fid";
+		// print_r($query);	
+
+
+		$this->query($query, $data);
+	}
 
     public function view_standardFare($Fid)
     {
-        $query = "SELECT * from $this->table where Fid = :Fid;";
+       
+        
+        $query = "SELECT * FROM " . $this->table . " where Fid = :Fid";
+        $params = array(":Fid" => $Fid);
+        
 
-        return $this->query($query,['Fid' => $Fid]);
+        $result = $this->query($query, $params);
+
+        return $result;
+        
+    
     }
 
 }
