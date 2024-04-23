@@ -16,6 +16,10 @@
         <div class="upload-container">
         <div style="margin-top:60px;"></div>
             <p class="upload">Upload a picture of your Driver License</p>
+            <?php if(!empty($data['errors'])):?>
+                <p class="upload" style="color:red;margin-top:10px;"><?php echo $data['errors'][0]; ?></p>
+            <?php endif;?>
+            
             
                 <div class="image-container">
                     <img class="license-pic" id="license" src="<?= ROOT?>/assets/img/images/License.png">
@@ -76,6 +80,8 @@
                     // document.location.href = "<?=ROOT?>/driver/registration";
                     console.log("Works");
                     document.getElementById('sbmt-btn').click();
+                }else{
+                    alert("Please upload an image");
                 }
             }
         </script>

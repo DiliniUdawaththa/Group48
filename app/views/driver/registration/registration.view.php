@@ -22,23 +22,74 @@
             <div class="inner-container">
                 <div class="setup-options" id="op1">
                     <div><img class="document_icon" src="<?= ROOT?>/assets/img/images/document_icon.png"></div>
-                    <div><div class="setup-options-inner"><a class="profile" href="<?=ROOT?>/driver/profilePicture">Profile photo</a><img class="arrow" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png"></div><img  class="line" src="<?= ROOT?>/assets/img/images/Line.png"></div>
+                    <div>
+                        <div class="setup-options-inner">
+                            <a class="profile" href="<?=ROOT?>/driver/profilePicture">Profile photo</a>
+                            <?php if($_SESSION['regitems']['profileimg']=='0'):?>
+                                <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png">
+                            <?php else: ?>
+                                <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Tick.png">
+                            <?php endif;?>
+                        </div>
+                        <img  class="line" src="<?= ROOT?>/assets/img/images/Line.png">
+                    </div>
                 </div>
                 <div class="setup-options">
                     <div><img class="document_icon" src="<?= ROOT?>/assets/img/images/document_icon.png"></div>
-                    <div><div class="setup-options-inner"><a class="d-license" href="<?=ROOT?>/driver/driverLicense">Driving License</a><img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png"></div><img  class="line" src="<?= ROOT?>/assets/img/images/Line.png"></div>
+                    <div>
+                        <div class="setup-options-inner">
+                            <a class="d-license" href="<?=ROOT?>/driver/driverLicense">Driving License</a>
+                            <?php if($_SESSION['regitems']['driverlicenseimg']=='0'):?>
+                                <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png">
+                            <?php else: ?>
+                                <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Tick.png">
+                            <?php endif;?>
+
+                        </div>
+                        <img  class="line" src="<?= ROOT?>/assets/img/images/Line.png">
+                    </div>
                 </div>
                 <div class="setup-options">
                     <div><img class="document_icon" src="<?= ROOT?>/assets/img/images/document_icon.png"></div>
-                    <div><div class="setup-options-inner"><a class="r-license" href="<?=ROOT?>/driver/revenueLicense">Revenue License</a><img class="arrow" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png"></div><img  class="line" src="<?= ROOT?>/assets/img/images/Line.png"></div>
+                    <div>
+                        <div class="setup-options-inner">
+                            <a class="r-license" href="<?=ROOT?>/driver/revenueLicense">Revenue License</a>
+                            <?php if($_SESSION['regitems']['revenuelicenseimg']=='0'):?>
+                                <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png">
+                            <?php else: ?>
+                                <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Tick.png">
+                            <?php endif;?>
+                        </div>
+                        <img  class="line" src="<?= ROOT?>/assets/img/images/Line.png">
+                    </div>
                 </div>
                 <div class="setup-options">
                     <div><img class="document_icon" src="<?= ROOT?>/assets/img/images/document_icon.png"></div>
-                    <div><div class="setup-options-inner"><a class="v-reg" href="<?=ROOT?>/driver/vehicleRegistration">Vehicle Registration Document</a><img class="arrow" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png"></div><img  class="line" src="<?= ROOT?>/assets/img/images/Line.png"></div>
+                    <div>
+                        <div class="setup-options-inner">
+                            <a class="v-reg" href="<?=ROOT?>/driver/vehicleRegistration">Vehicle Registration Document</a>
+                            <?php if($_SESSION['regitems']['vehregistrationimg']=='0'):?>
+                                <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png">
+                            <?php else: ?>
+                                <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Tick.png">
+                            <?php endif;?>
+                        </div>
+                        <img  class="line" src="<?= ROOT?>/assets/img/images/Line.png">
+                    </div>
                 </div>
                 <div class="setup-options">
                     <div><img class="document_icon" src="<?= ROOT?>/assets/img/images/document_icon.png"></div>
-                    <div><div class="setup-options-inner"><a class="v-insurance" href="<?=ROOT?>/driver/vehicleInsurance">Vehicle Insuarance</a><img class="arrow" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png"></div><img  class="line" src="<?= ROOT?>/assets/img/images/Line.png"></div>
+                    <div>
+                        <div class="setup-options-inner">
+                            <a class="v-insurance" href="<?=ROOT?>/driver/vehicleInsurance">Vehicle Insuarance</a>
+                            <?php if($_SESSION['regitems']['vehinsuranceimg']=='0'):?>
+                                <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png">
+                            <?php else: ?>
+                                <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Tick.png">
+                            <?php endif;?>
+                        </div>
+                        <img  class="line" src="<?= ROOT?>/assets/img/images/Line.png">
+                    </div>
                 </div>
                 <form method="post"><input type="submit" class="submit-btn" value="Submit" name="registration"></form>
             </div>

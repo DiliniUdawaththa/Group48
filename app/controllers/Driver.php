@@ -20,7 +20,19 @@ class Driver extends Controller{
             "email"=> $_SESSION['USER_DATA']->email,
         ]);
         if(!isset($row1[0])){
+            $registrationitems = array (
+                'profileimg' => '0',
+                'driverlicenseimg' => '0',
+                'revenuelicenseimg' => '0',
+                'vehregistrationimg' => '0',
+                'vehinsuranceimg' => '0',
+            );
+
+            $_SESSION['regitems'] = $registrationitems;
+            
+
             redirect('driver/registration');
+
         }
         
 
@@ -85,6 +97,9 @@ class Driver extends Controller{
         $row1 = $driverreg->where([
             "email"=> $_SESSION['USER_DATA']->email,
         ]);
+
+        
+
         if(isset($row1[0])){
             redirect('driver/ride');
         }
@@ -92,6 +107,11 @@ class Driver extends Controller{
             if($_SERVER['REQUEST_METHOD'] == "POST"){
                 if(isset($_POST['registration'])){
                     $Registerdata['email'] = $_SESSION['USER_DATA']->email;
+                    $Registerdata['profileimg'] = $_SESSION['regitems']['profileimg'];
+                    $Registerdata['driverlicenseimg'] =  $_SESSION['regitems']['driverlicenseimg'];
+                    $Registerdata['revenuelicenseimg'] =  $_SESSION['regitems']['revenuelicenseimg'];
+                    $Registerdata['vehregistrationimg'] =  $_SESSION['regitems']['vehregistrationimg'];
+                    $Registerdata['vehinsuranceimg'] =  $_SESSION['regitems']['vehinsuranceimg'];
                     $Registerdata['status'] = 1;
                     $driverreg->insert($Registerdata);
                     redirect('driver/ride');
@@ -99,7 +119,7 @@ class Driver extends Controller{
 
             }
             $this->view('driver/registration/registration',$data);
-        
+            show($_SESSION['regitems']);
     }
 
     public function driverLicense(){
@@ -107,32 +127,93 @@ class Driver extends Controller{
 
         $driverreg = new Driverregistration();
 
-            $this->view('driver/registration/driverLicense',$data);
+            
             if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+                $folder = "uploads/images/";
+                if(!file_exists($folder)){
+                    mkdir($folder,0777,true);
+                    file_put_contents($folder.'index.php', "<?php //Silence");
+                    file_put_contents('uploads/index.php', "<?php //Silence");
+                }
+
                 if(isset($_POST['done'])){
                     $allowed = ['image/jpeg','image/png','image/jpg'];
                     if(!empty($_FILES['photoInput']['name'])){
                         if($_FILES['photoInput']['error'] == 0){
                             if(in_array($_FILES['photoInput']['type'],$allowed)){
+                                $destination = $folder.time().$_FILES['photoInput']['name'];
                                 move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
+                                show($_FILES['photoInput']);
+                                $_SESSION['regitems']['driverlicenseimg']=$destination;
+                                $_POST['image'] = $destination;
+                                $data['errors']= [];
+                                redirect('driver/registration');
+                                
                             }
                             else {
-                                echo "wrong type";
+                                $data['errors'][0] = "File should be a png,jpeg or jpg";
+                                
                             }
                         }
                     }
-                    show($_FILES['photoInput']);die; //name of the input
+                    else{
+                        $data['errors'][0] = "Upload an image";
+                    }
+                    // echo $data['errors'][0];
+                    // show($_FILES['photoInput']); //name of the input
                     // redirect('driver/registration');
                 }
-                // echo $_POST['photoInput'];
+                
             }
-        
+        $this->view('driver/registration/driverLicense',$data);
     }
 
     public function profilePicture(){
         $data['errors'] = [];
 
         $driverreg = new Driverregistration();
+
+        
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            $folder = "uploads/images/";
+            if(!file_exists($folder)){
+                mkdir($folder,0777,true);
+                file_put_contents($folder.'index.php', "<?php //Silence");
+                file_put_contents('uploads/index.php', "<?php //Silence");
+            }
+
+            if(isset($_POST['done'])){
+                $allowed = ['image/jpeg','image/png','image/jpg'];
+                if(!empty($_FILES['photoInput']['name'])){
+                    if($_FILES['photoInput']['error'] == 0){
+                        if(in_array($_FILES['photoInput']['type'],$allowed)){
+                            $destination = $folder.time().$_FILES['photoInput']['name'];
+                            move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
+                            show($_FILES['photoInput']);
+                            $_SESSION['regitems']['profileimg']=$destination;
+                            $_POST['image'] = $destination;
+                            $data['errors']= [];
+                            redirect('driver/registration');
+                            
+                        }
+                        else {
+                            $data['errors'][0] = "File should be a png,jpeg or jpg";
+                            
+                        }
+                    }
+                }
+                else{
+                    $data['errors'][0] = "Upload an image";
+                }
+                // echo $data['errors'][0];
+                // show($_FILES['photoInput']); //name of the input
+                // redirect('driver/registration');
+            }
+            
+        }
+
 
             $this->view('driver/registration/profilePicture',$data);
         
@@ -143,6 +224,45 @@ class Driver extends Controller{
 
         $driverreg = new Driverregistration();
 
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            $folder = "uploads/images/";
+            if(!file_exists($folder)){
+                mkdir($folder,0777,true);
+                file_put_contents($folder.'index.php', "<?php //Silence");
+                file_put_contents('uploads/index.php', "<?php //Silence");
+            }
+
+            if(isset($_POST['done'])){
+                $allowed = ['image/jpeg','image/png','image/jpg'];
+                if(!empty($_FILES['photoInput']['name'])){
+                    if($_FILES['photoInput']['error'] == 0){
+                        if(in_array($_FILES['photoInput']['type'],$allowed)){
+                            $destination = $folder.time().$_FILES['photoInput']['name'];
+                            move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
+                            show($_FILES['photoInput']);
+                            $_SESSION['regitems']['revenuelicenseimg']=$destination;
+                            $_POST['image'] = $destination;
+                            $data['errors']= [];
+                            redirect('driver/registration');
+                            
+                        }
+                        else {
+                            $data['errors'][0] = "File should be a png,jpeg or jpg";
+                            
+                        }
+                    }
+                }
+                else{
+                    $data['errors'][0] = "Upload an image";
+                }
+                // echo $data['errors'][0];
+                // show($_FILES['photoInput']); //name of the input
+                // redirect('driver/registration');
+            }
+            
+        }
+
             $this->view('driver/registration/revenueLicense',$data);
         
     }
@@ -152,6 +272,45 @@ class Driver extends Controller{
 
         $driverreg = new Driverregistration();
 
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            $folder = "uploads/images/";
+            if(!file_exists($folder)){
+                mkdir($folder,0777,true);
+                file_put_contents($folder.'index.php', "<?php //Silence");
+                file_put_contents('uploads/index.php', "<?php //Silence");
+            }
+
+            if(isset($_POST['done'])){
+                $allowed = ['image/jpeg','image/png','image/jpg'];
+                if(!empty($_FILES['photoInput']['name'])){
+                    if($_FILES['photoInput']['error'] == 0){
+                        if(in_array($_FILES['photoInput']['type'],$allowed)){
+                            $destination = $folder.time().$_FILES['photoInput']['name'];
+                            move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
+                            show($_FILES['photoInput']);
+                            $_SESSION['regitems']['vehinsuranceimg']=$destination;
+                            $_POST['image'] = $destination;
+                            $data['errors']= [];
+                            redirect('driver/registration');
+                            
+                        }
+                        else {
+                            $data['errors'][0] = "File should be a png,jpeg or jpg";
+                            
+                        }
+                    }
+                }
+                else{
+                    $data['errors'][0] = "Upload an image";
+                }
+                // echo $data['errors'][0];
+                // show($_FILES['photoInput']); //name of the input
+                // redirect('driver/registration');
+            }
+            
+        }
+
             $this->view('driver/registration/vehicleInsurance',$data);
         
     }
@@ -160,6 +319,45 @@ class Driver extends Controller{
         $data['errors'] = [];
 
         $driverreg = new Driverregistration();
+
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            $folder = "uploads/images/";
+            if(!file_exists($folder)){
+                mkdir($folder,0777,true);
+                file_put_contents($folder.'index.php', "<?php //Silence");
+                file_put_contents('uploads/index.php', "<?php //Silence");
+            }
+
+            if(isset($_POST['done'])){
+                $allowed = ['image/jpeg','image/png','image/jpg'];
+                if(!empty($_FILES['photoInput']['name'])){
+                    if($_FILES['photoInput']['error'] == 0){
+                        if(in_array($_FILES['photoInput']['type'],$allowed)){
+                            $destination = $folder.time().$_FILES['photoInput']['name'];
+                            move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
+                            show($_FILES['photoInput']);
+                            $_SESSION['regitems']['vehregistrationimg']=$destination;
+                            $_POST['image'] = $destination;
+                            $data['errors']= [];
+                            redirect('driver/registration');
+                            
+                        }
+                        else {
+                            $data['errors'][0] = "File should be a png,jpeg or jpg";
+                            
+                        }
+                    }
+                }
+                else{
+                    $data['errors'][0] = "Upload an image";
+                }
+                // echo $data['errors'][0];
+                // show($_FILES['photoInput']); //name of the input
+                // redirect('driver/registration');
+            }
+            
+        }
 
             $this->view('driver/registration/vehicleRegistration',$data);
         
