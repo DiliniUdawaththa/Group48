@@ -16,10 +16,19 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_standardFare = new standardFare();
+        $add_standardFare = new Driverregistration();
+        $rows = $add_standardFare->findAll();
+        $data['rows'] = array();
+
+        if(isset($rows[0])){
+        for($i = 0;$i < count($rows); $i++)
+        {
+            $data['rows'][] = $rows[$i];
+        }
 
         $data['title'] = "Officer";
         $this->view('Officer/officerdriverRegistration',$data);
+    }
 
         /* if(!Auth::logged_in())
         {
