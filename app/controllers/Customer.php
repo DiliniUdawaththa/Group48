@@ -334,6 +334,7 @@
                 $add_place->fit_icon($_POST);
                 $_POST['icon']= $add_place ->icon;
                 $_POST['id']=$id;
+                $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
                 $add_place->update($id,$_POST);
 				redirect('customer/add_place');
             }
@@ -361,6 +362,7 @@
                 $add_place->fit_icon($_POST);
                 $_POST['icon'] =$add_place->icon;
                 $_POST['date'] = date("Y-m-d H:i:s");
+                $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
                 $add_place->insert($_POST);
                 show($_POST);
                 // message("Successfully Add Place");

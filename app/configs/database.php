@@ -296,6 +296,40 @@ class Database
 		";
 
 		$this->query($query);
+
+		$query="
+		DROP TABLE IF EXISTS `message`;
+		CREATE TABLE IF NOT EXISTS `message` (
+		`message_id` int(11) NOT NULL AUTO_INCREMENT,
+		`ride_id` int(11) NOT NULL,
+		`sender` varchar(10) NOT NULL,
+		`passenger_id` int(11) NOT NULL,
+		`driver_id` int(11) NOT NULL,
+		`message` varchar(255) NOT NULL,
+		PRIMARY KEY (`message_id`)
+		) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+		COMMIT;
+	
+		";
+
+		$this->query($query);
+
+		$query="
+		DROP TABLE IF EXISTS `message`;
+		CREATE TABLE IF NOT EXISTS `message` (
+		`message_id` int(11) NOT NULL AUTO_INCREMENT,
+		`ride_id` int(11) NOT NULL,
+		`sender` varchar(10) NOT NULL,
+		`passenger_id` int(11) NOT NULL,
+		`driver_id` int(11) NOT NULL,
+		`message` varchar(255) NOT NULL,
+		PRIMARY KEY (`message_id`)
+		) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+		COMMIT;
+	
+		";
+
+		$this->query($query);
 	}
 	
 

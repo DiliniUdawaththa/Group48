@@ -18,10 +18,7 @@
             margin: 0;
             padding: 0;
         }
-        #map{
-            width: 50%;
-            height: 90vh;
-        }
+       
         small{
             color: red;
         }
@@ -87,7 +84,7 @@
                 </form>
                
             </div>
-            <div id="map" > </div>
+            <div id="map" class="map" > </div>
         </div>
     </div>
     <script>
@@ -344,16 +341,18 @@
                    
 
     </script>
-      <div class="toggleicon" id="toggleSidebar">
+      <div class="toggleicon" id="toggleSidebar" onclick="side_open()">
              <i class="fa-solid fa-bars"></i>
       </div>
       <script>
-        function w3_open() {
+        function side_open() {
         document.getElementById("mySidebar").style.display = "block";
+        document.querySelector('.activity').style.opacity= '0.5';
         }
 
-        function w3_close() {
+        function side_close() {
         document.getElementById("mySidebar").style.display = "none";
+        document.querySelector('.activity').style.opacity= '1';
         }
       </script>
 </body>
