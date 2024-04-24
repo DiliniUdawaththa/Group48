@@ -18,7 +18,7 @@
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/person.png" alt="" class="userimage">
+                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -34,6 +34,7 @@
                 <a href="<?= ROOT ?>/customer/ride" class="link2"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
                 <a href="<?= ROOT ?>/customer/add_place" class="link2"><div class="linkbutton"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
                 <a href="<?= ROOT ?>/customer/activity" class="link2"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="<?=ROOT?>/customer/profile" class="link2"><div class="linkbutton"><i class="fa-solid fa-user"></i>Profile</div></a>
                 <a href="<?= ROOT ?>/customer/help" class="link"><div class="linkbutton1"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
                 <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
              </div>
@@ -83,6 +84,7 @@
               </div>
 
             <!-- -------------------------------------------------------------------------------------------------------------------- -->
+            <div class="h1"><center><h1>How to Add Place</h1></center></div>
             <div class="img"><center><img src="<?=ROOT?>/assets/img/help.jpg" alt=""></center></div>
             <div class="p">
                   <p>
@@ -144,6 +146,7 @@
 
 //------------------------logout---------------------------------------------
 
+            const container=document.querySelector('.container')
             const logout_option = document.querySelector('.linkbutton2')
             const logout_container = document.querySelector('.logout-container')
             const cancel_button = document.querySelector('.cancel-btn')
@@ -151,10 +154,11 @@
                   
                    logout_option.addEventListener('click',()=>{
                     logout_container.style.display = 'block'
+                    container.style.display="none";
                     })
 
                     cancel_button.addEventListener('click', ()=>{
-                    logout_container.style.display = 'none'
+                     window.location.href ="<?=ROOT?>/customer/help";
                     })
                     logout_button.addEventListener('click', ()=>{
                         window.location.href = "<?=ROOT?>/logout";

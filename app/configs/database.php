@@ -128,13 +128,31 @@ class Database
 		
 		$this->query($query);
 
+		// $query= "
+		// 	CREATE TABLE IF NOT EXISTS `driverregistration` (
+		// 	`email` varchar(50) NOT NULL,
+		// 	`profileimg` varchar(50),
+		// 	`driverlicenseimg` varchar(50),
+		// 	`revenuelicenseimg` varchar(50),
+		// 	`vehregistrationimg` varchar(50),
+		// 	`vehinsuranceimg` varchar(50),
+		// 	`status` int(2) NOT NULL,
+		// 	PRIMARY KEY (`email`)
+		//    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+		// 	";
+		
 		$query= "
-			CREATE TABLE IF NOT EXISTS `driverregistration` (
+			CREATE TABLE `driverregistration` (
 			`email` varchar(50) NOT NULL,
-			`status` int(2) NOT NULL,
-			PRIMARY KEY (`email`)
-		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
-			";
+			`profileimg` varchar(100) NOT NULL,
+			`driverlicenseimg` varchar(100) DEFAULT NULL,
+			`revenuelicenseimg` varchar(100) DEFAULT NULL,
+			`vehregistrationimg` varchar(100) DEFAULT NULL,
+			`vehinsuranceimg` varchar(100) DEFAULT NULL,
+			`status` int(2) NOT NULL
+		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+		";
+		
 		
 		$this->query($query);
 
@@ -254,6 +272,30 @@ class Database
 
 		$this->query($query);
 
+		$query="
+		DROP TABLE IF EXISTS `current_rides`;
+		CREATE TABLE IF NOT EXISTS `current_rides` (
+		`id` int(10) NOT NULL AUTO_INCREMENT,
+		`passenger_id` int(10) NOT NULL,
+		`location` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+		`l_lat` float NOT NULL,
+		`l_long` float NOT NULL,
+		`destination` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+		`d_lat` float NOT NULL,
+		`d_long` float NOT NULL,
+		`vehicle` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
+		PRIMARY KEY (`id`),
+		KEY `fk_passenger` (`passenger_id`)
+		) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+
+
+		INSERT INTO `current_rides` (`id`, `passenger_id`, `location`, `l_lat`, `l_long`, `destination`, `d_lat`, `d_long`, `vehicle`) VALUES
+		(14, 1017, ' Kandoori', 6.87848, 79.8581, ' My Home', 6.87313, 79.868, 'auto');
+		COMMIT;
+
+		";
+
+		$this->query($query);
 	}
 	
 
