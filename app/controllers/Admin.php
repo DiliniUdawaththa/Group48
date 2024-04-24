@@ -6,8 +6,78 @@
             message('please login to view the admin section');
             redirect("login");
         }
-        $data['title'] = "Dashboard";
+
+        $model = new AdminDashboard();
+        $roleCounts = $model->getRoleCounts();
+
+        $model1 = new AdminRide();
+        $rideCountsByDay = $model1->countRidesByDay();
+        $rideCountsByMorning = $model1->countRidesByMorning();
+        $rideCountsByNight = $model1->countRidesByNight();
+        $rideCount = $model1->countRide();
+
+        $userRegistrationData = $model->countUsersByMonth();
+        $driverRegistrationData = $model->countDriversByMonth();
+
+        // Merge the counts by month
+        $registrationData = [];
+        foreach ($userRegistrationData as $month => $userCount) {
+            $registrationData[$month]['users'] = $userCount;
+        }
+        foreach ($driverRegistrationData as $month => $driverCount) {
+            if (!isset($registrationData[$month])) {
+                $registrationData[$month] = [];
+            }
+            $registrationData[$month]['drivers'] = $driverCount;
+        }
+
+        // Fill in any missing months with 0 registrations
+        for ($i = 1; $i <= 12; $i++) {
+            if (!isset($registrationData[$i])) {
+                $registrationData[$i] = ['users' => 0, 'drivers' => 0];
+            }
+        }
+
+        // Sort the data by month
+        ksort($registrationData);
+
+        $data = [
+            'title' => "Dashboard",
+            'roleCounts' => $roleCounts,
+            'registrationData' => $registrationData,
+            'rideCountsByDay' => $rideCountsByDay,
+            'rideCountsByMorning' => $rideCountsByMorning,
+            'rideCountsByNight' => $rideCountsByNight,
+            'rideCount' => $rideCount
+        ];
+
         $this->view('admin/dashboard',$data);
+    }
+
+    // Reports profile controller
+     public function report(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $add_report = new AdminDashboard();
+
+        // $data = [
+        //     'role' => "customer"
+        // ];
+
+        // $rows = $add_customer->where($data);
+        // $data['rows'] = array();
+
+        // for($i = 0;$i < count($rows); $i++)
+        // {
+        //     $data['rows'][] = $rows[$i];
+        // }
+
+        $data['title'] = "Report";
+        $this->view('admin/report',$data);
     }
 
     // customer profile controller
@@ -50,13 +120,7 @@
             'role' => 'user',
         ];
     
-        if ($searchTerm !== null) {
-            // If a search term is provided, perform a search
-            $rows = $add_customer->where1($data, $searchTerm);
-        } else {
-            // Otherwise, retrieve all customers
-            $rows = $add_customer->where($data);
-        }
+        $rows = $add_customer->where($data);
     
         $data['rows'] = is_array($rows) ? $rows : [];
     
@@ -72,6 +136,16 @@
             message('please login to view the admin section');
             redirect("login");
         }
+
+        $model = new AdminRide();
+        $rows = $model->findAll();
+        $data['rows'] = array();
+
+        for($i = 0;$i < count($rows); $i++)
+        {
+            $data['rows'][] = $rows[$i];
+        }
+
         $data['title'] = "Rides";
         $this->view('admin/ride',$data);
     }
@@ -111,7 +185,7 @@
             redirect("login");
         }
         // $data['errors'] = [];
-        $add_officer = new AdminOfficer();
+        $add_officer = new User();
 
         $data = [
             'role' => "officer"
@@ -140,11 +214,12 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_officer = new AdminOfficer();
+        $add_officer1 = new AdminOfficer();
+        $add_officer = new User();
         if($_SERVER['REQUEST_METHOD'] == "POST")
 		{
             
-			if($add_officer->validate($_POST))
+			if($add_officer->validate_officer($_POST))
 			{
                 //  show($add_officer->Name);
                 $_POST['empID'] =$add_officer->empID;
@@ -158,9 +233,13 @@
                     $_POST['password'] = password_hash($p_word,PASSWORD_DEFAULT);
                 }
 
-                // $_POST['password'] = password_hash($p_word,PASSWORD_DEFAULT);
                 $_POST['date'] = date("Y-m-d H:i:s");
                 $add_officer->insert($_POST);
+
+                //add officer detail to the addofficer table
+                if($add_officer1->addOfficerTable($_POST)){
+                    $add_officer1->insert($_POST);
+                }
                 // message("Your profile was sucessfuly created. please login");
 				redirect('admin/officer');
             }
@@ -178,7 +257,7 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_officer = new AdminOfficer();
+        $add_officer = new User();
 
         $rows = $add_officer->findAll();
         $data['rows'] = array();
@@ -200,7 +279,7 @@
             redirect("login");
         }
         $data['errors'] = [];
-        $add_officer = new AdminOfficer();
+        $add_officer = new User();
         $rows = $add_officer->findAll();
         $data['rows'] = array();
 
@@ -244,22 +323,147 @@
         $this->view('admin/profile',$data);
     }
 
-    // Searchbar
+    // Searchbar in customer page
     public function search() {
+
+        $noMatchFound = false;
+
         if (isset($_GET['search'])) {
             $searchTerm = $_GET['search'];
-            $model = new AdminCustomer();
-            // $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
-    
+            $add_customer = new AdminCustomer();
             $data = [
-                'role' => 'customer',
+                'role' => 'user',
+                'name' => strtolower($searchTerm)
             ];
-            $data = $model->where1($data, $searchTerm);
-            include 'customer.view.php';
-        } else {
-            // Redirect or handle the absence of search term
+    
+            if ($searchTerm !== '') {
+                $rows = $add_customer->whereLike($data, $searchTerm);
+            } else {
+                unset($data['name']);
+                $rows = $add_customer->where($data);
+            }
+    
+            $data['rows'] = is_array($rows) ? $rows : [];
+
+            if (empty($data['rows'])) {
+                $noMatchFound = true;
+            }
+    
+    
+            $data['title'] = "Customer";
+            $data['noMatchFound'] = $noMatchFound;
+            $this->view('admin/customer_search', $data);
         }
     }
+
+    // Searchbar in driver page
+    public function searchDriver() {
+
+        $noMatchFound = false;
+
+        if (isset($_GET['search'])) {
+            $searchTerm = $_GET['search'];
+            $add_driver = new AdminDriver();
+            $data = [
+                'role' => 'driver',
+                'name' => strtolower($searchTerm)
+            ];
+    
+            if ($searchTerm !== '') {
+                $rows = $add_driver->whereLike($data, $searchTerm);
+            } else {
+                unset($data['name']);
+                $rows = $add_driver->where($data);
+            }
+    
+            $data['rows'] = is_array($rows) ? $rows : [];
+
+            if (empty($data['rows'])) {
+                $noMatchFound = true;
+            }
+    
+    
+            $data['title'] = "Customer";
+            $data['noMatchFound'] = $noMatchFound;
+            $this->view('admin/driver_search', $data);
+        }
+    }
+
+    public function searchRide(){
+        $noMatchFound = false;
+        if($_SERVER["REQUEST_METHOD"] == "GET"){
+            if(isset($_GET['search'])){
+                $searchTerm = $_GET['search'];
+                
+                $ride = new AdminRide();
+                if ($searchTerm !== '') {
+                    $rows = $ride->searchRides($searchTerm);
+                } else {
+                    $rows = $ride->findAll();
+                }
+
+                $data['rows'] = is_array($rows) ? $rows : [];
+
+                if (empty($data['rows'])) {
+                    $noMatchFound = true;
+                }
+
+                $data['title'] = "Ride";
+                $data['noMatchFound'] = $noMatchFound;
+                $this->view('admin/ride_search', $data);
+            }
+        }
+    }
+
+    public function rideMore($id){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $ride = new AdminRide();
+        $user = new User();
+
+        $data = [
+            'id' => $id
+        ];
+        $rows = $ride->where($data);
+        $row = (object) $rows[0];
+
+        $customer = $row->passenger_id;
+        $data1 = [
+            'id' => $customer
+        ];
+        $rows1 = $user->where($data1);
+        $row1 = null;
+        if (is_array($rows1) && count($rows1) > 0) {
+            $row1 = (object) $rows1[0];
+        }
+
+        $driver = $row->driver_id;
+        $data2 = [
+            'id' => $driver
+        ];
+        $rows2 = $user->where($data2);
+        $row2 = null;
+        if (is_array($rows2) && count($rows2) > 0) {
+            $row2 = (object) $rows2[0];
+        }
+
+        $data = [
+            'title' => "Rides",
+            'row' => $row,
+            'row1' => $row1,
+            'row2' => $row2,
+        ];
+
+        $this->view('admin/rideMore',$data);
+    }
+    
+    // public function mail(){
+    //     $newMail = new reminderMail();
+    //     $newMail->selectDriver();
+    // }
 
 
  }

@@ -84,7 +84,7 @@
                             <td class="td_mobile"><?= $row->phone; ?></td>
                             <td class="td_button">
                             <a href="<?=ROOT?>/admin/officer_update/<?=$row->empID?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: black;"></i></i></button></a>
-                            <a href="<?=ROOT?>/admin/officer_delete/<?=$row->empID?>"><div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: black;"></i></div></button>
+                            <button class="delete_btn" data-email="<?= $row->empID ?>"><i class="fa-solid fa-trash" style="color: black;"></i></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -102,52 +102,70 @@
 
    
     <script>
-        const logout_option = document.querySelector('.linkbutton2')
-        const logout_container = document.querySelector('.logout-container')
-        const cancel_button = document.querySelector('.cancel-btn')
-            const logout_button = document.querySelector('.logout-btn')
-                logout_option.addEventListener('click',()=>{
-                    logout_container.style.display = 'block'
-                    })
-
-                    cancel_button.addEventListener('click', ()=>{
-                    logout_container.style.display = 'none'
-                    })
-
-                        logout_button.addEventListener('click', ()=>{
-                        window.location.href = "<?=ROOT?>/logout";
+        document.addEventListener('DOMContentLoaded', function() {
+            const logout_option = document.querySelector('.linkbutton2')
+            const logout_container = document.querySelector('.logout-container')
+            const cancel_button = document.querySelector('.cancel-btn')
+                const logout_button = document.querySelector('.logout-btn')
+                    logout_option.addEventListener('click',()=>{
+                        logout_container.style.display = 'block'
                         })
 
-        const delete_option = document.querySelector('.dltbutton')
-        const delete_container = document.querySelector('.delete-container')
-        const cancel_button1 = document.querySelector('.cancel-btn1')
-            const delete_button = document.querySelector('.dlt-btn')
-                delete_option.addEventListener('click',()=>{
-                    delete_container.style.display = 'block'
-                    })
-
-                    cancel_button1.addEventListener('click', ()=>{
-                        delete_container.style.display = 'none'
+                        cancel_button.addEventListener('click', ()=>{
+                        logout_container.style.display = 'none'
                         })
 
-                        delete_button.addEventListener('click', ()=>{
-                        window.location.href = "<?=ROOT?>/admin/officer_delete/<?=$row->empID?>";
-                        })
+                            logout_button.addEventListener('click', ()=>{
+                            window.location.href = "<?=ROOT?>/logout";
+                            })
 
-        //...................................................
-        const table = document.querySelector('.table1')
-        const form = document.querySelector('.officer_form')
-        // const skip = document.querySelector('.skip')
-        const operation = document.getElementById('plus')
+            const delete_buttons = document.querySelectorAll('.delete_btn');
+            const delete_container = document.querySelector('.delete-container');
+            const cancel_delete_button = document.querySelector('.cancel-btn1')
+            delete_buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const empID = button.getAttribute('data-email');
+                    delete_container.style.display = 'block';
+                    document.querySelector('.dlt-btn').addEventListener('click', () => {
+                        window.location.href = "<?=ROOT?>/admin/officer_delete/" + encodeURIComponent(empID);
+                    });
+                });
+            });
+            cancel_delete_button.addEventListener('click', ()=>{
+                delete_container.style.display = 'none'
+            })
 
-        // plus.addEventListener('click',()=>{
-        //     form.style.display = 'block'
-        //     table.style.display = 'none'
-        // })
+            // const delete_option = document.querySelector('.dltbutton')
+            // const delete_container = document.querySelector('.delete-container')
+            // const cancel_button1 = document.querySelector('.cancel-btn1')
+            //     const delete_button = document.querySelector('.dlt-btn')
+            //         delete_option.addEventListener('click',()=>{
+            //             delete_container.style.display = 'block'
+            //             })
 
-        // skip.addEventListener('click',()=>{
-        //     form.style.display = 'none'
-        //     table.style.display = 'block'
-        // })
+            //             cancel_button1.addEventListener('click', ()=>{
+            //                 delete_container.style.display = 'none'
+            //                 })
+
+            //                 delete_button.addEventListener('click', ()=>{
+            //                 window.location.href = "<?=ROOT?>/admin/officer_delete/<?=$row->empID?>";
+            //                 })
+
+            //...................................................
+            const table = document.querySelector('.table1')
+            const form = document.querySelector('.officer_form')
+            // const skip = document.querySelector('.skip')
+            const operation = document.getElementById('plus')
+
+            // plus.addEventListener('click',()=>{
+            //     form.style.display = 'block'
+            //     table.style.display = 'none'
+            // })
+
+            // skip.addEventListener('click',()=>{
+            //     form.style.display = 'none'
+            //     table.style.display = 'block'
+            // })
+        });
     </script>
 </body>

@@ -59,6 +59,13 @@
                 <div class="navi1">
                     <h2>DRIVERS</h2>
                 </div>
+
+                <div class="search">
+                <form action="<?= ROOT ?>/admin/searchDriver" method="GET">
+                    <input type="text" name="search" placeholder="Search for customers">
+                    <input type="submit" value="Search" class="srch">
+                </form>
+                </div>
             </div>
 
             <div class="table1">
@@ -77,7 +84,7 @@
                             <td class="td_email"><?= $row->email; ?></td>
                             <td class="td_mobile"><?= $row->phone; ?></td>
                             <td class="td_button">
-                            <a href="<?=ROOT?>/admin/driver/"><button class="detail_btn"><i class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
+                                <a href="<?=ROOT?>/admin/driver/"><button class="detail_btn"><i class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -104,5 +111,8 @@
                     logout_button.addEventListener('click', ()=>{
                     window.location.href = "<?=ROOT?>/logout";
                     })
+
+        const table = document.querySelector('.table1')
+        const search = document.querySelector('.srch')
     </script>
 </body>

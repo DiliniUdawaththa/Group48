@@ -43,6 +43,7 @@
                 <a href="<?=ROOT?>/admin/driver" class="link"><div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div></a>
                 <a href="<?=ROOT?>/admin/officer" class="link"><div class="linkbutton"><i class="fa-solid fa-user-tie"></i>Officer</div></a>
                 <a href="<?=ROOT?>/admin/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-taxi"></i>Rides</div></a>
+                <a href="<?=ROOT?>/admin/report" class="link"><div class="linkbutton"><i class="fa-solid fa-list"></i>Reports</div></a>
                 <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>Logout</div></a>
             </div>
 
@@ -60,21 +61,19 @@
                     <div class="navi1">
                         <h2>Admin Dashboard</h2>
                     </div>
-
-                <div class="operation">
-                    <i class="fa-solid fa-bell"></i>
-                </div>
             </div>
 
             <div class="values">
+            <?php foreach ($roleCounts as $role => $count): ?>
                 <div class="val-box">
                     <i class="fa-solid fa-users"></i>
                     <div>
-                        <span>Customers</span>
-                        <h3>1000</h3>
+                        <span><h3><?= ucfirst($role) ?></h3></span>
+                        <center><h3><?= $count ?></h3></center>
                     </div>   
                 </div>
-                <div class="val-box">
+            <?php endforeach; ?> 
+                <!-- <div class="val-box">
                     <i class="fa-solid fa-user-group"></i>
                     <div>
                         <span>Drivers</span>
@@ -87,14 +86,18 @@
                         <span>Officers</span>
                         <h3>4</h3>
                     </div>
-                </div>
+                </div>-->
                 <div class="val-box">
                     <i class="fa-solid fa-taxi"></i>
                     <div>
-                        <span>Rides</span>
-                        <h3>400</h3>
+                        <span><h3>Rides</h3></span>
+                        <center><h3><?php echo $rideCount; ?></h3></center>
                     </div>
-                </div>
+
+                </div> 
+
+                <!-- </div> --> 
+
             </div>
             <div class = "chart_phase">
                 <div class="chart_des">
@@ -103,37 +106,47 @@
                 <div id="chart1" style="height: 80%; width:100%;">
                     <!-- <h2>Weekly rides</h2> -->
                 </div>
-            </div>       
+            </div>
+
+            <div class = "chart_phase1">
+                <div id="chart" style="height: 80%; width:50%;">
+                </div>
+                <div id="chart2" style="height: 80%; width:50%;">
+                </div>
+            </div>
+
         </div>        
     </div>
 
        
     <script>
-        const logout_option = document.querySelector('.linkbutton2')
-        const logout_container = document.querySelector('.logout-container')
-        const cancel_button = document.querySelector('.cancel-btn')
-            const logout_button = document.querySelector('.logout-btn')
-                logout_option.addEventListener('click',()=>{
-                    logout_container.style.display = 'block'
-                    })
+        document.addEventListener('DOMContentLoaded', function() {
+          const logout_option = document.querySelector('.linkbutton2')
+          const logout_container = document.querySelector('.logout-container')
+          const cancel_button = document.querySelector('.cancel-btn')
+              const logout_button = document.querySelector('.logout-btn')
+                  logout_option.addEventListener('click',()=>{
+                      logout_container.style.display = 'block'
+                      })
 
-                    cancel_button.addEventListener('click', ()=>{
-                    logout_container.style.display = 'none'
-                    })
+                      cancel_button.addEventListener('click', ()=>{
+                      logout_container.style.display = 'none'
+                      })
 
-                        logout_button.addEventListener('click', ()=>{
-                        window.location.href = "<?=ROOT?>/logout";
-                        })
+                          logout_button.addEventListener('click', ()=>{
+                          window.location.href = "<?=ROOT?>/logout";
+                          })          
+        });
 
         var options1 = {
           series: [{
           name: 'Customers',
           type: 'column',
-          data: [200, 250, 100, 159, 167, 132, 165, 154, 143, 200, 154, 176]
+          data: [<?= implode(',', array_column($registrationData, 'users')) ?>]
         }, {
           name: 'Drivers',
           type: 'column',
-          data: [100, 133, 148, 98, 165, 95, 129, 87, 98, 81, 90, 99]
+          data: [<?= implode(',', array_column($registrationData, 'drivers')) ?>]
         }],
           chart: {
           height: '100%',
@@ -213,6 +226,66 @@
 
         var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
         chart1.render();
+
+        const rideCountsByDay = <?= json_encode($rideCountsByDay) ?>;
+        const rideCountsByMorning = <?= json_encode($rideCountsByMorning) ?>;
+        const rideCountsByNight = <?= json_encode($rideCountsByNight) ?>;
+
+        // Prepare data for the chart
+        const rideCountsData = Object.values(rideCountsByDay);
+        const rideCountsMorningData = Object.values(rideCountsByMorning);
+        const rideCountsNightData = Object.values(rideCountsByNight);
+        const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        var options = {
+            chart: {
+                type: 'bar',
+                width: '90%',
+                height: '90%'
+            },
+            series: [{
+                name: 'Rides',
+                data: rideCountsData
+            }],
+            title: {
+                text: 'Weekly Rides',
+                align: 'left',
+                offsetX: 110
+            },
+            xaxis: {
+                categories: weekdays
+            }
+        }
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+        var options2 = {
+            chart: {
+                type: 'line',
+                width: '90%',
+                height: '90%'
+            },
+            series: [{
+                name: 'Day',
+                data: rideCountsMorningData
+            },
+            {
+                name: 'Night',
+                data: rideCountsNightData
+            }],
+            title: {
+                text: 'Weekly Rides',
+                align: 'left',
+                offsetX: 110
+            },
+            xaxis: {
+                categories: weekdays
+            }
+        }
+
+        var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+        chart2.render();
     </script>
 
 </body>

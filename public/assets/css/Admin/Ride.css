@@ -12,12 +12,17 @@ body{
 .main{
     background-color: #D9D9D9;
     display: flex;
+    overflow-y: hidden;
+    overflow-x: hidden;
     /* flex-direction: row; */
     
 }
 
 /* ------------------------side bar----------------- */
 .sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 300px;
     color: #D9D9D9;
     background-color:#111827;
@@ -113,6 +118,7 @@ body{
     transform: translate(-50%, -50%);
     border-radius: 10px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    z-index: 9999; 
 
 }
 .logout-container button{
@@ -143,31 +149,57 @@ body{
 }
 /*-----------------------interface-----------------------*/
 .interface{
-    width: 80%;
+    width: calc(100% - 300px);
+    margin-left: 300px;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    margin-top: 50px;
     /* justify-content: center; */
 }
 .navi{
+    position: fixed;
+    top: 0;
+    left: 300px; /* Width of the sidebar */
+    width: calc(100% - 300px); /* Adjusting width for the remaining space */
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #111827;
-    padding: 5px 15px 5px 15px;
-    /* border-left: 4px;
+    background: #fff;
+    padding: 15px 15px;
+    border-left: 4px;
     border-right: 4px;
-    border-top: 4px; */
-    /* border-radius: 6px; */
-    border: solid 4px #fff;
+    border-top: 4px;
+    border-radius: 6px;
 }
 
 .navi .navi1 {
     justify-content: flex-start;
     align-items: center;
     padding: 10px 14px;
-    color: #fff;
+    color: #111827;
 }
+/*-------------------------Search Bar------------------------------*/
+.search{
+    padding: 30px 40px;
+}
+.inpuut-val{
+    color: #111827;
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+}
+.srch{
+    background-color: #111827;
+    color: #ffffff;
+	/* font-weight: bold;
+	font-size: 10px;
+	border: 1px solid #54585d; */
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+} 
 /*-------------------Weekly rides bar chart------------------ */
 .chart_phase{
     display: flex;
@@ -190,7 +222,10 @@ body{
 }
 /*-------------------------table------------------------------*/
 .table1{
-    padding: 30px 30px;
+    padding: 30px 30px 30px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: calc(100vh - 150px);
+    margin-top: 80px;
 }
 table {
 	border-collapse: collapse;
@@ -198,10 +233,19 @@ table {
     width: 100%;
     table-layout: auto;
 }
+table thead {
+    /* position: sticky; */
+    top: 0;
+    z-index: 999;
+    background-color: #111827;
+}
 table td {
 	padding: 15px;
 }
 table thead td {
+    /* position: sticky; */
+    top: 0;
+    z-index: 999;
 	background-color: #111827;
 	color: #ffffff;
 	font-weight: bold;
@@ -220,7 +264,12 @@ table tbody tr {
 table tbody tr:nth-child(odd) {
 	background-color: #ffffff;
 }
-.td_button{
-    display: flex;
-    align-content: center;
+.detail_btn{
+    background-color: rgb(82, 41, 194);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
 }
