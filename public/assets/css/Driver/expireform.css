@@ -1,0 +1,328 @@
+*{
+    /* margin: 0; */
+    padding: 0;
+    font-family: 'Poppins',sans-serif;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('../img/2.jpg' ) no-repeat;
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(5px); 
+    overflow: hidden;
+
+}
+header{
+    position:fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    /* background: red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+/*-------------------------------------------------------------------*/
+.outer{
+    width: 700px;
+    height: 450px;
+    border: 2px solid rgba(255,255,255,.5);
+    border-radius: 20px;
+    background-color: rgb(250, 142, 164);
+    align-content: center;
+    padding: 50px 50px 50px 50px;
+}
+.wrapper{
+    position: relative;
+    width: 600px;
+    height: 350px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.5);
+    border-radius: 20px;
+    background-color: #f3efef;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0,0,0,.5);
+    padding: 40px 40px 40px 40px;
+    overflow: hidden;
+    border-color: crimson;
+}
+.wrapper .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #162938;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+.close:hover{
+    background: #b81a28;
+}
+.wrapper-header{
+    display: flex;
+    justify-content: space-around;
+    /* background-color: crimson; */
+
+}
+.image{
+    align-content: center;
+    width: 50%;
+}
+.image img{
+    width: 200px;
+    height: 200px;
+}
+.topic{
+    width: 50%;
+}
+.topic h2{
+    font-size: 2em;
+    color: #f1192b;
+    text-align: center;
+    font-style: oblique;
+}
+.topic p{
+    text-align: center;
+}
+.help-btn{
+    margin-top: 20px;
+    width: 40%;
+    height: 45px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+.renew-btn{
+    margin-top: 20px;
+    width: 40%;
+    height: 45px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.ok{
+    display: flex;
+    justify-content: space-around;
+}
+
+/*----------------------help.view.php--------------------------*/
+.outer-box{
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    height: 500px;
+    border: 2px solid rgba(255,255,255,.5);
+    border-radius: 20px;
+    background-color: rgb(237, 234, 251);
+    align-content: center;
+    padding: 50px 50px 50px 50px;
+}
+.wrapper-box{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 600px;
+    height: 400px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.5);
+    border-radius: 20px;
+    background-color: #f3efef;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0,0,0,.5);
+    padding: 40px 40px 40px 40px;
+    overflow: hidden;
+    border-color: rgb(5, 1, 19);
+}
+.wrapper-hdr h2{
+    font-size: 1.5em;
+    color: #162938;
+    text-align: center;
+}
+.content ol{
+    align-items: center;
+}
+.back-btn{
+    margin-top: 20px;
+    width: 40%;
+    height: 45px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+.bttn{
+    display: flex;
+    justify-content: space-around;
+}
+
+/*------------------------Making mobile responsive-----------------------------*/
+/* Desktop styles */
+@media (min-width: 768px) {
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: url('../img/2.jpg') no-repeat;
+        background-size: cover;
+        background-position: center;
+        backdrop-filter: blur(5px);
+        overflow: hidden;
+    }
+
+    .outer {
+        width: 700px;
+        height: 450px;
+    }
+
+    .wrapper {
+        width: 600px;
+        height: 350px;
+    }
+
+    .wrapper .close {
+        width: 45px;
+        height: 45px;
+        font-size: 2em;
+    }
+
+    .image img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .outer-box {
+        display: flex;
+        flex-direction: column;
+        width: 700px;
+        height: 500px;
+        padding: 50px;
+    }
+
+    .wrapper-box {
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        height: 400px;
+        padding: 40px;
+    }
+
+    .wrapper-hdr h2 {
+        font-size: 1.5em;
+        color: #162938;
+        text-align: center;
+    }
+
+    .content ol {
+        align-items: center;
+    }
+
+    .bttn {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .back-btn,
+    .help-btn,
+    .renew-btn {
+        width: 40%;
+        height: 45px;
+        font-size: 1em;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+    body {
+        padding: 20px;
+    }
+
+    .outer {
+        width: auto;
+        max-width: calc(100vw - 40px);
+        height: auto;
+    }
+
+    .wrapper {
+        width: auto;
+        max-width: calc(100vw - 80px);
+        height: auto;
+    }
+
+    .wrapper .close {
+        width: 35px;
+        height: 35px;
+        font-size: 1.5em;
+    }
+
+    .image img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .topic h2 {
+        font-size: 1.5em;
+    }
+
+    .outer-box {
+        padding: 20px;
+    }
+
+    .wrapper-box {
+        width: auto;
+        max-width: calc(100vw - 40px);
+        height: auto;
+        padding: 20px;
+    }
+
+    .wrapper-hdr h2 {
+        font-size: 1.2em;
+    }
+
+    .content ol {
+        align-items: flex-start;
+    }
+
+    .bttn {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .back-btn,
+    .help-btn,
+    .renew-btn {
+        width: 45%;
+        height: 40px;
+        font-size: 0.9em;
+    }
+}
+

@@ -178,6 +178,12 @@
                             <button id="add-veh-btn" onclick="addVehicle()">Add Vehicle</button>
                             <div class="add-vehicle">
                                 <form action="" method="post">
+                                    <!-- <button type="button" onclick="test()">Hi</button>
+                                    <script>
+                                        function test(){
+                                            console.log("Test1")
+                                        }
+                                    </script> -->
                                     <table>
                                         <tr><td class="veh-attribute">
                                             <label for="licenseplate">License Plate number</label></td>

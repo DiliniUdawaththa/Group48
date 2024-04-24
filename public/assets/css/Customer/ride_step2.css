@@ -1,0 +1,97 @@
+*{
+
+    font-family: 'Poppins',sans-serif;
+    /* box-sizing: border-box; */
+}
+body{
+    margin: 0;
+    width: 100vw;
+    font-family: 'Poppins',sans-serif;
+    /* overflow: hidden; */
+}
+.main{
+   background-color: aliceblue;
+    display: flex;
+    /* flex-direction: row; */
+    
+}
+/* ------------------------------------------------------------------- */
+.activity{
+    background-color: aliceblue; 
+    width:80.4%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    margin-left: 300px;
+    position:relative;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+
+  .box{
+    margin: 40px;
+    width: 100%;
+    display: flex;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    border-radius:  50px 0px 0  50px;
+  }
+  
+
+  .contant{
+   display: flex;
+   flex-direction: column;
+   width:50%;
+   background-image: linear-gradient(to right, white, #84D7EB);
+   padding: 40px;
+   border-radius:  50px 0px 0  50px;
+  }
+  #back{
+    font-size: 30px;
+    color: black;
+  }
+  .contant h2{
+    color: black;
+  }
+  .contant center{
+    margin: auto;
+  }
+  .fetch_data{
+    display: none;
+  }
+  .contant img{
+      width: 200px;
+      height: 200px;
+      border-radius: 20px;
+  }
+  .golink{
+    margin: auto;
+    text-decoration: none;
+  }
+  .go{
+    padding: 8px 40px;
+    width: 50px;
+    font-style: bold;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    border-color: white;
+    background-color: #111827;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    animation: pulse 1s infinite alternate;
+  }
+  /* //beat the button */
+  @keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+  }
+  .refresh{
+    color: black;
+    font-size: 13px;
+    margin: 0;
+  }

@@ -1,5 +1,7 @@
 <?php
- class officer extends Controller{
+require_once __DIR__ . '/../configs/config.php';
+
+class officer extends Controller{
     public function index(){
         if(!Auth::logged_in())
         {
