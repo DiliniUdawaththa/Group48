@@ -50,7 +50,7 @@ class Add_Place extends Model
         }elseif($data["category"]== "Education"){
             $this->icon= "fa-solid fa-graduation-cap";
         }else if($data['category']=="Religion"){
-            $this->icon= "<fa-solid fa-hands-praying";
+            $this->icon= "fa-solid fa-hands-praying";
         }elseif($data["category"]== "Hotels & lodging"){
             $this->icon= "fa-solid fa-hotel";
         }else if($data['category']=="Hospital"){
@@ -73,9 +73,34 @@ class Add_Place extends Model
 
     public function update_addplace($id, $data)
     {
-        $query = $this->update($id, $data);
+        $query = $this->update1($id, $data);
         return $query;
         
     }
+    //---------------------------------------
+    public function update1($id, $data)
+	{
+		if (!empty($this->allowedColumns)) {
+			foreach ($data as $key => $value) {
+				if (!in_array($key, $this->allowedColumns)) {
+					unset($data[$key]);
+				}
+			}
+		}
+
+		$keys = array_keys($data);
+		// $id = array_search($id, $data);
+
+		$query = "update " . $this->table . " set ";
+		foreach ($keys as $key) {
+			$query .= $key . "=:" . $key . ",";
+		}
+		$query = trim($query, ",");
+		$query .= " where id = :id";
+		print_r($query);	
+
+
+		$this->query($query, $data);
+	}
 
 }

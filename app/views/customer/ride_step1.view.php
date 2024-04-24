@@ -31,16 +31,9 @@
     </style>
 </head>
 <body id="body">
-   <!-- <div class="topbar" id="topbar">
-      <div class="topbarin">
-         <div>
-            <i class="fa-solid fa-bars" onclick="openNav()" id="menu"></i>
-            <img src="<?= ROOT ?>/assets/img/logo_name.png" alt="">
-         </div>
-         <div><img src="<?= ROOT ?>/assets/img/person.jpg" alt="" class="person"></div>
-   </div> -->
 
    <?php include 'ride_side.php'; ?>
+   
 
 <!-- ---------------------------------------------------------------------------------- -->
 <div class="activity">
@@ -65,8 +58,10 @@
                     <i  class="fa-regular fa-circle" id="searchicon"></i>
                     <div class="dropdown-list" id="dropdownList1">
                         <div class="dropdown-list-item" onclick="selectItem(this, 1)"><i class="fa-solid fa-location-crosshairs"></i> Live location</div>
-                        <div class="dropdown-list-item" onclick="selectItem(this, 1)">Petta</div>
                         <div class="dropdown-list-item" onclick="selectItem(this, 1)"><i class="fa-solid fa-map-pin"></i> Set Location</div>
+                        <?php foreach ($rows as $row) : ?>
+                            <div class="dropdown-list-item" onclick="selectItem(this, 1)"><i class="<?= $row->icon; ?>"></i> <?= $row->name; ?></div>
+                        <?php endforeach; ?>
                     </div>                
                 </div>
 
@@ -79,8 +74,9 @@
                     <i class="fa-solid fa-circle" id="searchicon"></i>
                     <div class="dropdown-list" id="dropdownList2">
                         <div class="dropdown-list-item" onclick="selectItem(this, 2)"><i class="fa-solid fa-map-pin"></i> Set Location</div>
-                        <div class="dropdown-list-item" onclick="selectItem(this, 2)">UCSC</div>
-                        <div class="dropdown-list-item" onclick="selectItem(this, 2)">Option 3</div>
+                        <?php foreach ($rows as $row) : ?>
+                            <div class="dropdown-list-item" onclick="selectItem(this, 2)"><i class="<?= $row->icon; ?>"></i> <?= $row->name; ?></div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                
@@ -94,7 +90,24 @@
             <div id="map" > </div>
         </div>
     </div>
-   
+    <script>
+            const logout_option = document.querySelector('.linkbutton2')
+            const logout_container = document.querySelector('.logout-container')
+            const cancel_button = document.querySelector('.cancel-btn')
+           const logout_button = document.querySelector('.logout-btn')
+           const plus=document.getElementById('plus');
+                   logout_option.addEventListener('click',()=>{
+                      logout_container.style.display = 'block'
+                      plus.style.display="none";
+                      })
+
+                    cancel_button.addEventListener('click', ()=>{
+                      window.location.href ="<?=ROOT?>/customer/add_place";
+                      })
+                    logout_button.addEventListener('click', ()=>{
+                        window.location.href = "<?=ROOT?>/logout";
+                    })
+        </script>
     <script>
         var lat,long,lat1,lon1;
         var markers=[];
@@ -204,21 +217,7 @@
                         // map.setView(marker, 18);
                     }
                  } 
-//----------------------------------------------------------------------------------------------------------------------------------
-                    else if (selectedValue === "Petta" && index===1) {
-       
-                        if (!markers.length == 0) {
-                             deleteAllMarkers();
-                         }
-                        var marker=L.marker([6.901963,80.861292])
-                        markers.push(marker)
-                        marker.addTo(map);
-                        map.flyTo([6.901963,80.861292], 14)
-                        lat=6.901963;
-                        long=80.861292;
-                        document.getElementById("l.lat").value=lat;
-                         document.getElementById("l.long").value=long;
-                          }
+
 //--------------------------------set location ------------------------------------------------------------------------------
                           else if (selectedValue === " Set Location" && index===1) {
                               if (!markers.length == 0) {
@@ -258,6 +257,23 @@
                                     })
                                     .catch(error => console.log('error', error));
                           }
+
+//----------------------------------------------------------------------------------------------------------------------------------
+               <?php foreach ($rows as $row) : ?>
+                        else if (selectedValue === " <?= $row->name; ?>" && index===1) {
+       
+                            if (!markers.length == 0) {
+                                    deleteAllMarkers();
+                                }
+                            var marker=L.marker([<?= $row->lat; ?>,<?= $row->lng; ?>])
+                            markers.push(marker)
+                            marker.addTo(map);
+                            map.flyTo([<?= $row->lat; ?>,<?= $row->lng; ?>], 14)
+
+                            document.getElementById("l.lat").value=<?= $row->lat; ?>;
+                                document.getElementById("l.long").value=<?= $row->lng; ?>;
+                                }
+                      <?php endforeach; ?>
 //-------------------------------------------------------------------------------------------------------------------------------------                       }
                         else if (selectedValue === " Set Location" && index===2) {
                               if (!markers.length == 0) {
@@ -299,24 +315,21 @@
                                         .catch(error => console.log('error', error));
                           }
 //---------------------------------------------------------------------------------------------------------------------------------------------
-                          else if (selectedValue === "UCSC" && index===2) {
-                       
-                                if (!markers.length == 0) {
-                                        deleteAllMarkers();
-                                    }
+                     <?php foreach ($rows as $row) : ?>
+                        else if (selectedValue === " <?= $row->name; ?>" && index===2) {
+       
+                            if (!markers.length == 0) {
+                                    deleteAllMarkers();
+                                }
+                            var marker=L.marker([<?= $row->lat; ?>,<?= $row->lng; ?>])
+                            markers.push(marker)
+                            marker.addTo(map);
+                            map.flyTo([<?= $row->lat; ?>,<?= $row->lng; ?>], 14)
 
-                                var marker2=L.marker([6.901963,79.861292])
-                                markers.push(marker2)
-                                
-                                marker2.addTo(map);
-                                        lat1=6.901963;
-                                        long1=79.861292;
-                                
-                                    map.flyTo([lat1,long1], 16)
-                                    document.getElementById("d.lat").value=lat1;
-                                    document.getElementById("d.long").value=long1;
-
-                         }
+                            document.getElementById("d.lat").value=<?= $row->lat; ?>;
+                                document.getElementById("d.long").value=<?= $row->lng; ?>;
+                                }
+                      <?php endforeach; ?>
                          
                         
 
@@ -331,8 +344,18 @@
                    
 
     </script>
-      
-        
+      <div class="toggleicon" id="toggleSidebar">
+             <i class="fa-solid fa-bars"></i>
+      </div>
+      <script>
+        function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        }
+
+        function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        }
+      </script>
 </body>
 </html>
 

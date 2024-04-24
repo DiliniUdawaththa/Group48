@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/Add_Place.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
     <!-- map  -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -18,12 +19,12 @@
         <div class="sidebar">
 
              <div class="barimagetag">
-                <img src="<?= ROOT ?>/assets/img/logoname.png" alt="" class="barimage">
+                <img src="<?= ROOT ?>/assets/img/logonamenw.png" alt="" class="barimage">
              </div>
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/person.jpg" alt="" class="userimage">
+                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -36,11 +37,12 @@
              
 
              <div class="linktag">
-                <a href="<?= ROOT ?>/customer/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
+                <a href="<?= ROOT ?>/customer/ride" class="link2"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
                 <a href="<?= ROOT ?>/customer/add_place" class="link"><div class="linkbutton1"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
-                <a href="<?= ROOT ?>/customer/activity" class="link"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
-                <a href="<?= ROOT ?>/customer/help" class="link"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
-                <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
+                <a href="<?= ROOT ?>/customer/activity" class="link2"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="<?=ROOT?>/customer/profile" class="link2"><div class="linkbutton"><i class="fa-solid fa-user"></i>Profile</div></a>
+                <a href="<?= ROOT ?>/customer/help" class="link2"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
+                <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
              </div>
       
              <div class="logout-container">
@@ -61,12 +63,13 @@
             <div class="add_form" id="add_form">
               
                  <div class="place_top"><h1><i class="fa-solid fa-map-location-dot"></i> Add Place</h1></div>
+                 <div class="form_map">
                  <form name="addPlaceForm" action="" method="POST" >
                  <div class="input_box" id="input_box"> 
                       <div>
-                          <label for="name" class="label">Placename</label><br>
+                          <label for="name" class="label" >Placename</label><br>
                         </div>
-                          <input value="<?= set_value('name') ?>" type="text" name="name" id="name" class="<?=!empty($errors['name']) ? 'error':'';?>" required>
+                          <input value="<?= set_value('name') ?>" type="text" name="name" id="name" class="<?=!empty($errors['name']) ? 'error':'';?>" >
                           <?php if(!empty($errors['name'])):?>
                              <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['name']?> </small>
                            <?php endif;?>
@@ -74,7 +77,7 @@
                        <div>
                           <label for="category" class="label" >Category</label><br>
                         </div>
-                          <input value="<?= set_value('category') ?>" list="categorys" name="category" id="categoryInput" required>
+                          <input value="<?= set_value('category') ?>" list="categorys" name="category" id="categoryInput" >
                               <datalist id="categorys">
                                 <option value="Home">
                                 <option value="Food & Drink">
@@ -89,30 +92,24 @@
                               </datalist>
                               <br>
                          <div class="address">
-                          <label for="address" class="label">Address</label>
-                          <!-- <i class="fa-solid fa-location-dot"></i> -->
+                          <label for="address" class="label">Address</label><br>
+                          </div>
+                          <input type="text" id="location_name" name="location" value="<?= set_value('location') ?>" >
                           <br>
-                        </div>
-                          <i class="fa-solid fa-location-dot" id="set_location"></i>
-                          <input type="text" id="location_name" name="location" value="<?= set_value('address') ?>">
+                        
                           <input type="text" id="lat" name="lat">
                           <input type="text" id="long" name="lng">
                           <button  id="submit_btn" class="submit_btn">Submit</button>
-                          <br>
+                          
                           <a href="<?=ROOT?>/customer/add_place"><small class="skip"><center>skip</center></small></a>
                   </div>
               </form>
               <div class="map_point" id="map_point">
-                    <div id="map">
-                    </div>
-                    <div class="set_cancle" id="set_cancle">
-                      <button class="cancle_button" id="cancle">cancle</button>
-                      <button class="set_button" id="set">set</button>
-                    </div>
-                    <div class="text_select" id="text_select"><p>You should Point the map</p></div>
+                    <div id="map"></div>
                   </div>
             </div>
            
+          </div>
            
           </div>
          </center>
@@ -133,27 +130,6 @@
                     logout_button.addEventListener('click', ()=>{
                         window.location.href = "<?=ROOT?>/logout";
                     })
-
-                    // --------------------------------------------------------------------------------------------
-
-              const table = document.querySelector('.add_table')
-              const form = document.querySelector('.add_form')
-              const skip = document.querySelector('.skip')
-              const plus = document.getElementById('plus')
-             
-
-            // plus.addEventListener('click',()=>{
-            //     form.style.display = 'block'
-            //     table.style.display = 'none'
-            //   })
-
-            //   skip.addEventListener('click',()=>{
-            //     form.style.display = 'none'
-            //     table.style.display = 'block'
-            //   })
-              // ------------------------------------------------------
-
-          
 
 
             //  ------------------------------------------------------------------------------------------------------------------------ 
@@ -180,7 +156,6 @@
 
       // --------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
-        // ------------------------------------------------------------------------------------------------------------------------
 
           </script>
 
@@ -206,15 +181,6 @@
 
     L.Control.geocoder().addTo(map);
 
-    // marker click---------------------------------------------------
-     var set_location=document.getElementById("set_location");
-     var map_point=document.getElementById("map_point");
-     var input_box=document.getElementById("input_box");
-     set_location.addEventListener('click',()=>{
-           input_box.style.display = 'none';
-           map_point.style.display = 'block';
-           
-         })
 
 
     // map on click show marker---------------------------------------------------
@@ -255,35 +221,9 @@
          document.getElementById("long").value=e.latlng.lng;
         currentMarker = newMarker;
 
-        //----------------------------------------on click set & cancle button show---------------------------------------------------
-        var text=document.getElementById("text_select");
-        text.style.display = 'none';
-        var buttons = document.getElementById("set_cancle");
-        buttons.style.display = 'block';
-           console.log('hi');
     }
 
     map.on('click', onMarkerClick);
 
-      var set=document.getElementById("set");
-      var cancle=document.getElementById("cancle");
-      var map_point=document.getElementById("map_point");
-      var input_box=document.getElementById("input_box");
-      var set_location=document.getElementById("set_location");
-      var location_name=document.getElementById("location_name");
-      var submit_btn=document.getElementById("submit_btn");
 
-      set.addEventListener('click',()=>{
-           input_box.style.display = 'block';
-           map_point.style.display = 'none';
-           set_location.style.display='none';
-           location_name.style.display='block';
-           submit_btn.style.display="block";
-           
-         })
-      cancel.addEventListener('click',()=>{
-          input_box.style.display = 'block';
-          map_point.style.display = 'none';
-
-         })
   </script>

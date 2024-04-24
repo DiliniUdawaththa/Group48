@@ -93,7 +93,11 @@
                         <span><h3>Rides</h3></span>
                         <center><h3><?php echo $rideCount; ?></h3></center>
                     </div>
+
                 </div> 
+
+                </div> -->
+
             </div>
             <div class = "chart_phase">
                 <div class="chart_des">
@@ -103,12 +107,14 @@
                     <!-- <h2>Weekly rides</h2> -->
                 </div>
             </div>
+
             <div class = "chart_phase1">
                 <div id="chart" style="height: 80%; width:50%;">
                 </div>
                 <div id="chart2" style="height: 80%; width:50%;">
                 </div>
             </div>
+
         </div>        
     </div>
 

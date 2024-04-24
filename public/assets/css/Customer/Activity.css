@@ -37,7 +37,7 @@ body{
     height: 40px;
     padding: 20px 30px;
     color: #D9D9D9;
-    margin-top: 8px;
+    margin-top: 25px;
     border-radius: 10px;
     
 }
@@ -68,15 +68,14 @@ body{
     display: flex;
     align-items: center;
     width: 92%;
-    background-color: white;
-    /* background-image: linear-gradient(to right,#84D7EB, #C1EBF5, #84D7EB); */
-    box-shadow: 1px 1px 15px rgba(132,215,235, 0.3);
     height: 40px;
     padding: 10px 30px;
     color:#111827;
     margin-top: 8px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     cursor: pointer;
+    box-shadow: 0px 8px 6px -6px rgba(0, 0, 0, 0.3),
+    0px -8px 6px -6px rgba(0, 0, 0, 0.3);
 }
 /* .data:hover{
     border: solid #162938;
