@@ -2,6 +2,12 @@
 
 class OfficerDriver extends Model{
     protected $table = "users";
+
+    public function getDriverCount() {
+        $results = $this->query("SELECT COUNT(*) as count FROM users WHERE role = 'driver';");
+    
+        return $results[0]->count;
+    }
     
     public function delete_driver($id = null)
     {

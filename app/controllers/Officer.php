@@ -30,6 +30,10 @@
         $this->view('Officer/officerdriverRegistration',$data);
     }
 
+
+    
+
+    
         /* if(!Auth::logged_in())
         {
             message('please login to view the page');
@@ -61,6 +65,9 @@
         $data['title'] = "Officer";
         $this->view('Officer/complains',$data);
     }*/
+
+
+
 
     //Standard Fare
     public function standardFare(){
