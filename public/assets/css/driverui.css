@@ -192,7 +192,7 @@ a{
 /*-------------------------Notification Container---------------------*/
 
 .analytics-container{
-    display:block;
+    display:none;
 }
 
 .t-topic{
@@ -247,7 +247,7 @@ a{
 /*-------------------------Activity Container---------------------*/
 
 .activity-container{
-    display: none;
+    display: block;
 }
 .status-container{
     width: 90%;

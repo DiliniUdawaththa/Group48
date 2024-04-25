@@ -12,7 +12,7 @@ body{
 .main{
     background-color: #D9D9D9;
     display: flex;
-    /* flex-direction: row; */
+    /* flex-direction: row;*/
     
 }
 
@@ -64,6 +64,22 @@ body{
     display: flex;
     width: 10%;
 }
+.h1{
+    background-image: linear-gradient(to right,#194672, #42678B, #194672);
+    margin: 20px 20px 40px 20px;
+    display: none;
+    justify-content: center;
+    border-radius: 20px;
+    width: 78vw;
+    
+}
+.h1 h1{
+    /* margin-left: 40px; */
+    margin: 0px;
+    padding: 15px;
+    color: white;
+   
+}
 .data {
     display: flex;
     align-items: center;
@@ -84,6 +100,9 @@ body{
 .data div{
     pad: 10px;
 }
+.data span{
+    display: none;
+}
 .data .date{
     display: flex;
     width: 10%;
@@ -103,4 +122,66 @@ body{
 .data .fare{
     display: flex;
     width: 10%;
+}
+
+/* //------------------------------------------mobile---------------- */
+@media only screen and (max-width: 1000px) {
+    body{
+        overflow-x: hidden;
+    }
+    .activity{
+     margin-left: 0px;
+     width:100vw;
+    }
+  }
+  @media only screen and (max-width: 1000px) {
+    .activity{
+     margin: 0px;
+     width:100%;
+     height: 100%;
+     padding: 0;
+     /* padding-top:0px; */
+    }
+    .heading{
+        display: none;
+    }
+    .data{
+        display: block;
+        height: auto; 
+        /* font-size: 1.5em;    */
+    }
+    .data .date{
+        display: flex;
+        width: 50%;
+        float: right;
+    }
+    .data .name{
+        display: flex;
+        width: 50%;
+        float: left;
+    }
+    .data .vehicle{
+        display: flex;
+        width: 30%;
+        float: left;
+    }
+    
+    .data .location{
+        display: flex;
+        width: 50%;
+        clear: both;
+        margin-top: 10px;
+    }
+    .data .fare{
+        display: flex;
+        width: 30%;
+        float: right;
+    }
+    .h1{
+        display: flex;
+    }
+    .data span{
+        display: block;
+        font-weight: 600;
+    }
 }
