@@ -170,5 +170,118 @@ class AdminRide extends Model{
             return 0;
         }
     }
+
+    public function dayRideCount($date){
+        $dayStart = '06:00:00';
+        $dayEnd = '18:00:00';
+
+        $result = $this->query("SELECT COUNT(*) as ride_count FROM rides WHERE DATE(date) = :date 
+                                AND TIME(date) BETWEEN :dayStart AND :dayEnd", 
+                                array(':date' => $date, ':dayStart' => $dayStart, ':dayEnd' => $dayEnd));
+
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function nightRideCount($date){
+        $nightStart = '18:00:01';
+        $nightEnd = '23:59:59';
+        $midStart = '00:00:00';
+        $midEnd = '05:59:59';
+
+        $result = $this->query("SELECT COUNT(*) as ride_count 
+                        FROM rides 
+                        WHERE DATE(date) = :date 
+                        AND ((TIME(date) BETWEEN :nightStart AND :nightEnd) OR 
+                             (TIME(date) BETWEEN :midStart AND :midEnd))", 
+                        array(
+                            ':date' => $date, 
+                            ':nightStart' => $nightStart, 
+                            ':nightEnd' => $nightEnd,
+                            ':midStart' => $midStart, 
+                            ':midEnd' => $midEnd
+                        ));
+        
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+                return 0;
+        }
+
+    }
+
+    public function countRidesByDate($startDate,$endDate) {
+        $result = $this->query( "SELECT COUNT(*) as ride_count  
+                  FROM rides 
+                  WHERE date >= :startDate AND date <= :endDate",
+                  array(
+                            ':startDate' => $startDate, 
+                            ':endDate' => $endDate
+                    ));
+                if ($result && isset($result[0]->ride_count)) {
+                    return $result[0]->ride_count;
+                } else {
+                    return 0;
+                }
+    }
+
+    public function searchRidesForRange($startDate,$endDate) {
+        $result = $this->query( "SELECT * FROM rides
+                    WHERE DATE(date) >= :startDate AND DATE(date) <= :endDate",
+                    array(
+                            ':startDate' => $startDate, 
+                            ':endDate' => $endDate
+                    ));
+
+        if ($result) {
+            return $result;
+        } else {
+            return []; 
+        }
+    }
+
+    public function dayRidesCount($startDate,$endDate){
+        $dayStart = '06:00:00';
+        $dayEnd = '18:00:00';
+
+        $result = $this->query("SELECT COUNT(*) as ride_count FROM rides WHERE date >= :startDate AND date <= :endDate 
+                                AND TIME(date) BETWEEN :dayStart AND :dayEnd", 
+                                array(':startDate' => $startDate, ':endDate' => $endDate,':dayStart' => $dayStart, ':dayEnd' => $dayEnd));
+
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function nightRidesCount($startDate,$endDate){
+        $nightStart = '18:00:01';
+        $nightEnd = '23:59:59';
+        $midStart = '00:00:00';
+        $midEnd = '05:59:59';
+
+        $result = $this->query("SELECT COUNT(*) as ride_count FROM rides WHERE date >= :startDate AND date <= :endDate  
+                        AND ((TIME(date) BETWEEN :nightStart AND :nightEnd) OR 
+                             (TIME(date) BETWEEN :midStart AND :midEnd))", 
+                        array(
+                            ':startDate' => $startDate,
+                            ':endDate' => $endDate, 
+                            ':nightStart' => $nightStart, 
+                            ':nightEnd' => $nightEnd,
+                            ':midStart' => $midStart, 
+                            ':midEnd' => $midEnd
+                        ));
+        
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+                return 0;
+        }
+
+    }
            
 }
