@@ -60,36 +60,43 @@
                 <div class="navi1">
                     <h2>RIDES</h2>
                 </div>
-            </div>
-            <div class = "chart_phase">
-                <div id="chart" style="height: 80%;">
-                </div>
-                <div id="chart1" style="height: 80%;">
+                <div class="search">
+                <form action="<?=ROOT?>/admin/searchRide" method="GET">
+                    <!-- <select name="searchBy">
+                        <option value="date">Date</option>
+                        <option value="driver_id">Driver ID</option>
+                        <option value="passenger_id">Customer ID</option>
+                    </select> -->
+                    <input type="date" name="search" placeholder="Search rides by date" class="input-val">
+                    <input type="submit" value="Search" class="srch">
+                </form>
                 </div>
             </div>
             <div class="table1">
                 <table>
                     <thead>
                         <tr>
-                            <td>rideID</td>
-                            <td>custID</td>
-                            <td>driverID</td>
-                            <!-- <td>Mobile</td>
-                            <td>Option</td> -->
+                            <td>RideID</td>
+                            <td>CustomerID</td>
+                            <td>DriverID</td>
+                            <td>Taxi type</td>
+                            <td>Date</td>
+                            <td>More</td>
+                            <!-- <td>Option</td> -->
                         </tr>
                     </thead>
-                    <!-- <?php foreach ($rows as $row) : ?>
+                    <?php foreach ($rows as $row) : ?>
                         <tr class="data">
-                            <td class="td_empID"><?= $row->empID; ?></td>
-                            <td class="td_name"><?= $row->Name; ?></td>
-                            <td class="td_email"><?= $row->Email; ?></td>
-                            <td class="td_mobile"><?= $row->Mobile; ?></td>
+                            <td class="td_rideID"><?= $row->id; ?></td>
+                            <td class="td_custID"><?= $row->passenger_id; ?></td>
+                            <td class="td_driverID"><?= $row->driver_id; ?></td>
+                            <td class="td_taxi"><?= $row->vehicle; ?></td>
+                            <td class="td_taxi"><?= $row->date; ?></td>
                             <td class="td_button">
-                            <a href="<?=ROOT?>/admin/officer_update/<?=$row->empID?>"><button class="update_btn"><i class="fa-solid fa-pen-to-square" style="color: black;"></i></i></button></a>
-                            <a href="<?=ROOT?>/admin/officer_delete/<?=$row->empID?>"><div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash" style="color: black;"></i></div></button>
+                                <a href="<?=ROOT?>/admin/rideMore/<?= urlencode($row->id) ?>"><button class="detail_btn" data-id="<?= $row->id; ?>"><i class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
                             </td>
                         </tr>
-                    <?php endforeach; ?> -->
+                    <?php endforeach; ?>
                 </table>
             </div>
         </div>
@@ -97,73 +104,37 @@
 
    
     <script>
-        const logout_option = document.querySelector('.linkbutton2')
-        const logout_container = document.querySelector('.logout-container')
-        const cancel_button = document.querySelector('.cancel-btn')
-            const logout_button = document.querySelector('.logout-btn')
-                logout_option.addEventListener('click',()=>{
-                    logout_container.style.display = 'block'
-                    })
+        document.addEventListener('DOMContentLoaded', function() {
+            const logout_option = document.querySelector('.linkbutton2')
+            const logout_container = document.querySelector('.logout-container')
+            const cancel_button = document.querySelector('.cancel-btn')
+                const logout_button = document.querySelector('.logout-btn')
+                    logout_option.addEventListener('click',()=>{
+                        logout_container.style.display = 'block'
+                        })
 
-                    cancel_button.addEventListener('click', ()=>{
-                    logout_container.style.display = 'none'
-                    })
+                        cancel_button.addEventListener('click', ()=>{
+                        logout_container.style.display = 'none'
+                        })
 
-                    logout_button.addEventListener('click', ()=>{
-                    window.location.href = "<?=ROOT?>/logout";
-                    })
-                    
-        const table = document.querySelector('.table1')
+                        logout_button.addEventListener('click', ()=>{
+                        window.location.href = "<?=ROOT?>/logout";
+                        })
+                        
+            const table = document.querySelector('.table1')
 
-        var options = {
-            chart: {
-                type: 'bar',
-                width: '90%',
-                height: '90%'
-            },
-            series: [{
-                name: 'Rides',
-                data: [30,40,35,50,49,60,54]
-            }],
-            title: {
-                text: 'Weekly Rides',
-                align: 'left',
-                offsetX: 110
-            },
-            xaxis: {
-                categories: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-            }
-        }
+            // document.getElementById('searchBy').addEventListener('change', function() {
+            //     console.log('Search By changed:', this.value);
+            //     var selectedOption = this.value;
+            //     var dateField = document.getElementById('dateField');
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-
-        var options1 = {
-            chart: {
-                type: 'line',
-                width: '90%',
-                height: '90%'
-            },
-            series: [{
-                name: 'Day',
-                data: [30,40,35,50,49,60,54]
-            },
-            {
-                name: 'Night',
-                data: [10,12,18,23,34,12,28]
-            }],
-            title: {
-                text: 'Weekly Rides',
-                align: 'left',
-                offsetX: 110
-            },
-            xaxis: {
-                categories: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-            }
-        }
-
-        var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
-        chart1.render();
+            //     if (selectedOption === 'date') {
+            //         dateField.style.display = 'block';
+            //     } else {
+            //         dateField.style.display = 'none';
+            //     }
+            // });
+        });
 
     </script>
 </body>

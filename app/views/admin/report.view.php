@@ -65,7 +65,7 @@
             <div class='report'>
                 <div class='report-box'>
                     <a href="#" class="report-link"><div class="linkbtn-user">User statistics<i class="fa fa-hand-o-right" aria-hidden="true"></i></div></a>
-                    <a href="#" class="report-link"><div class="linkbtn">Ride statistics<i class="fa fa-hand-o-right" aria-hidden="true"></i></div></a>
+                    <a href="<?=ROOT?>/admin/rideReport" class="report-link"><div class="linkbtn">Ride statistics<i class="fa fa-hand-o-right" aria-hidden="true"></i></div></a>
                     <a href="#" class="report-link"><div class="linkbtn">Customer reports<i class="fa fa-hand-o-right" aria-hidden="true"></i></div></a>
                     <a href="#" class="report-link"><div class="linkbtn">Driver reports<i class="fa fa-hand-o-right" aria-hidden="true"></i></div></a>
                     <a href="#" class="report-link"><div class="linkbtn">Officer reports<i class="fa fa-hand-o-right" aria-hidden="true"></i></div></a>

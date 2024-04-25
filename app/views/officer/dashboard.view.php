@@ -7,7 +7,7 @@
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Dashboard.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/dashboard.css">
     <style>
     .error {
         border: 1px solid red;
@@ -99,74 +99,14 @@
 
         </div>
 
-        <div class="interface">
-            <div class="navi">
-                <div class="navi1">
+        <div class="container1">
+            <div class="header">
+                <div class="nav">
                     <h2>Officer Dashboard</h2>
                 </div>
             </div>
 
-
-
-            <!-- <div class="operation">
-                <i class="fa-solid fa-bell"></i>
-            </div>
-        </div>
-
-        <div class="values">
-            <div class="val-box">
-                <i class="fa-solid fa-users"></i>
-                <div>
-                    <span>Customers</span>
-                    <h3>1000</h3>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fa-solid fa-user-group"></i>
-                <div>
-                    <span>Drivers</span>
-                    <h3>100</h3>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fa-solid fa-user-tie"></i>
-                <div>
-                    <span>Officers</span>
-                    <h3>4</h3>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fa-solid fa-taxi"></i>
-                <div>
-                    <span>Rides</span>
-                    <h3>400</h3>
-                </div>
-            </div>
-        </div>-->
-
-
-            <!--div class="chart-container">
-            <div class="chart-box">
-                <div id="chart1" class="chart"></div>
-                <div class="chart-label">
-
-                </div>
-            </div>
-            <div class="chart-box">
-                <div id="chart2" class="chart"></div>
-                <div class="chart-label">
-
-                </div>
-            </div>
-            <div class="chart-box">
-                <div id="chart3" class="chart"></div>
-                <div class="chart-label">
-
-                </div>
-            </div>
-        </div>-->
-
-            <div class="main-div">
+            <!--<div class="main-div">
                 <div class="box1">
                     <a class="none-dec" href="<?=ROOT?>/officer/driver">
                         <div class="con-button">Drivers</div>
@@ -184,13 +124,122 @@
                         <div class="con-button">Standard Fare</div>
                     </a>
                 </div>
+            </div>-->
+
+            <div class="content">
+                <div class="cards">
+                    <div class="card">
+                        <div class="box">
+                            <?php $model = new OfficerDriver();
+                        $count = $model->getDriverCount();
+                            echo "<h1>$count</h1>"; 
+                            ?>
+                            <h3>Drivers</h3>
+                        </div>
+                        <div class="val-box">
+                            <img src="<?= ROOT ?>/assets/img/officer_images/drivers.png" alt=""
+                                style="width: 75px; height:75px;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="box">
+                            <h1>53</h1>
+                            <h3>Suspenders</h3>
+                        </div>
+                        <div class="val-box">
+                            <img src="<?= ROOT ?>/assets/img/officer_images/ban.png" alt=""
+                                style="width: 75px; height:75px;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="box">
+                            <h1>5</h1>
+                            <h3>Complaints</h3>
+                        </div>
+                        <div class="val-box">
+                            <img src="<?= ROOT ?>/assets/img/officer_images/complaints.png" alt=""
+                                style="width: 75px; height:75px;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="box">
+                            <h1>350000</h1>
+                            <h3>Standard Fare</h3>
+                        </div>
+                        <div class="val-box">
+                            <img src="<?= ROOT ?>/assets/img/officer_images/standardfare.png" alt=""
+                                style="width: 75px; height:75px;">
+                        </div>
+                    </div>
+
+                    <div class="content-2">
+                        <div class="recent-payments">
+                            <div class="title">
+                                <h2>Driver Registration</h2>
+                                <a href="<?=ROOT?>/officer/officerdriverRegistration" class="btn1">View All</a>
+                            </div>
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Contact Number</th>
+                                    <th>Option</th>
+                                </tr>
+                                <?php 
+                                $driver_registration = new Driverregistration();
+                                $top_5 = $driver_registration->findTop5();
+                                foreach ($top_5 as $row) {
+                                echo "<tr>";
+                                echo "<td>" . $row->driverName ."</td>";
+                                echo "<td>" . $row->email ."</td>";
+                                echo "<td>" . $row->contactNumber ."</td>";
+                                echo "<td><a href='<?=ROOT?>/officer/view_record" . $row->reg_id ."'
+                                class='btn1'>View</a></td>";
+                                echo "</tr>";
+                                }
+                                ?>
+                            </table>
+                        </div>
+                        <div class="new-students">
+                            <div class="title">
+                                <h2>Complaints</h2>
+                                <a href="#" class="btn1">View All</a>
+                            </div>
+                            <table>
+                                <tr>
+                                    <th>Complainant</th>
+                                    <th>Driver Name</th>
+                                    <th>option</th>
+                                </tr>
+                                <tr>
+                                    <td>Passenger</td>
+                                    <td>John Steve Doe</td>
+                                    <td><img src="info.png" alt=""></td>
+                                </tr>
+                                <tr>
+                                    <td>Passenger</td>
+                                    <td>John Steve Doe</td>
+                                    <td><img src="info.png" alt=""></td>
+                                </tr>
+                                <tr>
+                                    <td>Passenger</td>
+                                    <td>John Steve Doe</td>
+                                    <td><img src="info.png" alt=""></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
-
-
-
         </div>
+
+
+
+
+
+
+
     </div>
 
 
