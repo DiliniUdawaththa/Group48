@@ -108,5 +108,6 @@ class standardFare extends Model
         
     
     }
+    
 
 }

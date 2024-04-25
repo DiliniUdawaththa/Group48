@@ -48,21 +48,26 @@ class Database
 		//users table
 		$query = "
 
-			CREATE TABLE IF NOT EXISTS `users` (
-			 `id` int(11) NOT NULL AUTO_INCREMENT,
-			 `name` varchar(100) NOT NULL,
-			 `phone` varchar(30) NOT NULL,
-			 `email` varchar(100) NOT NULL,
-			 `password` varchar(255) NOT NULL,
-			 `role` varchar(20) NOT NULL,
-			 `empID` int(10) NOT NULL ,
-			 `date` date DEFAULT NULL,
-			 PRIMARY KEY (`id`),
-			 KEY `email` (`email`),
-			 KEY `name` (`email`),
-			 KEY `phone` (`email`),
-			 KEY `date` (`date`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+		DROP TABLE IF EXISTS `users`;
+		CREATE TABLE IF NOT EXISTS `users` (
+		  `id` int(11) NOT NULL AUTO_INCREMENT,
+		  `name` varchar(100) NOT NULL,
+		  `phone` varchar(30) NOT NULL,
+		  `email` varchar(100) NOT NULL,
+		  `password` varchar(255) NOT NULL,
+		  `role` varchar(20) NOT NULL,
+		  `date` date DEFAULT NULL,
+		  `img_path` varchar(70) NOT NULL DEFAULT 'person.jpg',
+		  `address` varchar(100) NOT NULL DEFAULT '',
+		  `nic` varchar(12) NOT NULL DEFAULT '',
+		  `dob` varchar(16) NOT NULL DEFAULT '',
+		  PRIMARY KEY (`id`),
+		  KEY `email` (`email`),
+		  KEY `name` (`email`),
+		  KEY `phone` (`email`),
+		  KEY `date` (`date`)
+		) ENGINE=InnoDB AUTO_INCREMENT=1019 DEFAULT CHARSET=utf8mb4;
+		
 
 			INSERT INTO `users` (`id`, `name`, `phone`, `email`, `password`, `role`, `date`) VALUES
 			(1001, 'shanthos', '0770000001', 'shanthos@gmail.com', '$2y$10$89s0w3Dnk4.XX4t9VJ3BBeGSSnzauy6tk1rxPBa9RhIky4AlcfEnq', 'driver', '2024-04-09'),
@@ -115,15 +120,20 @@ class Database
 
 
 	    $query= "
-			CREATE TABLE IF NOT EXISTS `addplace` (
-			`id` int(255) NOT NULL AUTO_INCREMENT,
-			`name` varchar(100) NOT NULL,
-			`category` varchar(100) NOT NULL,
-			`icon` varchar(100) NOT NULL,
-			`address` varchar(255) NOT NULL,
-			`date` datetime NOT NULL,
-			PRIMARY KEY (`id`)
-			) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+		DROP TABLE IF EXISTS `addplace`;
+		CREATE TABLE IF NOT EXISTS `addplace` (
+		  `id` int(255) NOT NULL AUTO_INCREMENT,
+		  `passenger_id` int(11) DEFAULT NULL,
+		  `name` varchar(100) NOT NULL,
+		  `category` varchar(100) NOT NULL,
+		  `icon` varchar(100) NOT NULL,
+		  `location` varchar(255) NOT NULL,
+		  `lat` double NOT NULL,
+		  `lng` double NOT NULL,
+		  `date` datetime NOT NULL,
+		  PRIMARY KEY (`id`)
+		) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+		
 			";
 		
 		$this->query($query);
@@ -191,28 +201,31 @@ class Database
 		$this->query($query);
 
 		$query= "
+		DROP TABLE IF EXISTS `rides`;
 		CREATE TABLE IF NOT EXISTS `rides` (
-			`id` int(10) NOT NULL AUTO_INCREMENT,
-			`passenger_id` int(10) NOT NULL,
-			`driver_id` int(10) NOT NULL,
-			`date` datetime NOT NULL,
-			`location` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-			`l_lat` float NOT NULL,
-			`l_long` float NOT NULL,
-			`destination` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-			`d_lat` float NOT NULL,
-			`d_long` float NOT NULL,
-			`vehicle` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
-			`time` varchar(20) NOT NULL,
-			`distance` varchar(20) NOT NULL,
-			`fare` float NOT NULL,
-			`state` varchar(10) NOT NULL,
-			PRIMARY KEY (`id`),
-			KEY `fk_passenger` (`passenger_id`),
-			KEY `fk_driver` (`driver_id`)
-		  ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
-		  
-		  
+		`id` int(10) NOT NULL AUTO_INCREMENT,
+		`passenger_id` int(10) NOT NULL,
+		`driver_id` int(10) NOT NULL,
+		`date` datetime NOT NULL,
+		`location` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+		`l_lat` float NOT NULL,
+		`l_long` float NOT NULL,
+		`destination` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+		`d_lat` float NOT NULL,
+		`d_long` float NOT NULL,
+		`m_lat` float DEFAULT NULL,
+		`m_long` float DEFAULT NULL,
+		`vehicle` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
+		`time` varchar(20) NOT NULL,
+		`distance` varchar(20) NOT NULL,
+		`fare` float NOT NULL,
+		`ride_start` tinyint(1) NOT NULL DEFAULT '0',
+		`state` varchar(10) NOT NULL,
+		PRIMARY KEY (`id`),
+		KEY `fk_passenger` (`passenger_id`),
+		KEY `fk_driver` (`driver_id`)
+		) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+
 
 			";
 			$this->query($query);
@@ -227,6 +240,14 @@ class Database
 			`date`datetime NOT NULL,
 			PRIMARY KEY (`id`)
 		)ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+
+		INSERT INTO `standardfare` (`id`, `faretype`, `vehicletype`, `fare`, `updatedby`, `date`) VALUES
+		(1, 'Std', 'bike', 70, 'thusi', '2024-04-24 19:03:19'),
+		(2, 'Std', 'auto', 100, 'thusi', '2024-04-24 19:04:59'),
+		(3, 'std', 'car', 150, 'thusi', '2024-04-24 19:05:31'),
+		(4, 'Std', 'Ac-car', 170, 'thusi', '2024-04-24 19:06:10');
+		COMMIT;
+
 		";
 
 		$this->query($query);
@@ -283,11 +304,12 @@ class Database
 		`destination` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
 		`d_lat` float NOT NULL,
 		`d_long` float NOT NULL,
+		`m_lat` float DEFAULT NULL,
+		`m_long` float DEFAULT NULL,
 		`vehicle` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
 		PRIMARY KEY (`id`),
 		KEY `fk_passenger` (`passenger_id`)
-		) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
-
+		) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 		INSERT INTO `current_rides` (`id`, `passenger_id`, `location`, `l_lat`, `l_long`, `destination`, `d_lat`, `d_long`, `vehicle`) VALUES
 		(14, 1017, ' Kandoori', 6.87848, 79.8581, ' My Home', 6.87313, 79.868, 'auto');
@@ -296,6 +318,25 @@ class Database
 		";
 
 		$this->query($query);
+
+		$query="
+		DROP TABLE IF EXISTS `message`;
+		CREATE TABLE IF NOT EXISTS `message` (
+		`message_id` int(11) NOT NULL AUTO_INCREMENT,
+		`ride_id` int(11) NOT NULL,
+		`sender` varchar(10) NOT NULL,
+		`passenger_id` int(11) NOT NULL,
+		`driver_id` int(11) NOT NULL,
+		`message` varchar(255) NOT NULL,
+		PRIMARY KEY (`message_id`)
+		) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+		COMMIT;
+	
+		";
+
+		$this->query($query);
+
+		
 	}
 	
 

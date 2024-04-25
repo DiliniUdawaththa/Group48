@@ -12,10 +12,14 @@
 
     // step1 stage-----------------------------------------------------------------------------------------------------------------
     public function index(){
-        if(!Auth::logged_in())
+        if(!Auth::logged_in() )
         {
             message('please login to view the page');
-            redirect("login");
+            redirect('login');
+        }
+        else if($_SESSION['USER_DATA']->role!=='user'){
+            message('please login to view the page');
+            redirect('login');
         }
         $add_place = new Add_Place();
         $rows = $add_place->findAll();
@@ -52,9 +56,13 @@
         {
             message('please login to view the page');
             redirect("login");
+
+        }
+        if(empty($_GET['location'])){
+            redirect("customer/ride_step1");
         }
         if ($_SERVER["REQUEST_METHOD"]=="POST") {
-            show($_POST);
+            // show($_POST);
             if(!empty($_GET))
             {
                 $location=$_GET['location'];
@@ -66,8 +74,10 @@
 
                 $time= $_POST['time'];
                 $distance=$_POST['distance'];
+                $m_lat=$_POST['m_lat'];
+                $m_long=$_POST['m_long'];
 
-                redirect('customer/ride_step3/.php?time='.$time.'&distance='.$distance.'&location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long);
+                 redirect('customer/ride_step3/.php?time='.$time.'&distance='.$distance.'&location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long.'&m_lat='.$m_lat.'&m_long='.$m_long);
 
             }
         }
@@ -82,7 +92,29 @@
             redirect("login");
         }
         $current_ride = new Current_rides();
+        $standardfare = new standardFare();
+        $driver_status = new Driver_status();
         $arr =array();
+
+        $rows = $standardfare->findAll();
+        $data['rows'] = array();
+        if(isset($rows[0])){
+
+            for($i = 0;$i < count($rows); $i++)
+            {
+                    $data['rows'][] = $rows[$i];
+            }
+        }
+        $rows2 = $driver_status->findAll();
+        $data['rows2'] = array();
+        if(isset($rows2[0])){
+
+            for($i = 0;$i < count($rows2); $i++)
+            {
+                    $data['rows2'][] = $rows2[$i];
+            }
+        }
+        // show($data['rows2']);
 
             $location=$_GET['location'];
             $l_lat=$_GET['l_lat'];
@@ -92,6 +124,8 @@
             $d_long=$_GET['d_long'];
             $time= $_GET['time'];
             $distance=$_GET['distance'];
+            $m_lat=$_GET['m_lat'];
+            $m_long=$_GET['m_long'];
 
         if ($_SERVER["REQUEST_METHOD"]=="POST")
         {
@@ -105,11 +139,13 @@
             $arr['d_lat']=$d_lat;
             $arr['d_long']=$d_long;
             $arr['vehicle']=$vehicle;
-
+            $arr['m_lat']=$m_lat;
+            $arr['m_long']=$m_long;
+        //    show($arr);
             $current_ride->insert($arr);
 
 
-            redirect('customer/ride_step4/.php?time='.$time.'&distance='.$distance.'&location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long.'&vehicle='.$vehicle);
+             redirect('customer/ride_step4/.php?time='.$time.'&distance='.$distance.'&location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long.'&vehicle='.$vehicle.'&m_lat='.$m_lat.'&m_long='.$m_long);
         }
         $data['title'] = "Ride";
         $this->view('customer/ride_step3',$data);
@@ -168,6 +204,8 @@
                 $_POST['destination']=$_GET['destination'];
                 $_POST['d_lat']=$_GET['d_lat'];
                 $_POST['d_long']=$_GET['d_long'];
+                $_POST['m_lat']=$_GET['m_lat'];
+                $_POST['m_long']=$_GET['m_long'];
                 $_POST['vehicle']=$_GET['vehicle'];
                 $_POST['time']=$_GET['time'];
                 $_POST['distance']=$_GET['distance'];
@@ -334,6 +372,7 @@
                 $add_place->fit_icon($_POST);
                 $_POST['icon']= $add_place ->icon;
                 $_POST['id']=$id;
+                $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
                 $add_place->update($id,$_POST);
 				redirect('customer/add_place');
             }
@@ -361,6 +400,7 @@
                 $add_place->fit_icon($_POST);
                 $_POST['icon'] =$add_place->icon;
                 $_POST['date'] = date("Y-m-d H:i:s");
+                $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
                 $add_place->insert($_POST);
                 show($_POST);
                 // message("Successfully Add Place");
@@ -413,6 +453,15 @@
             }
             $user =new User();
             $arr = array();
+            $data['rows'] = array();
+
+            $rows = $user->findAll();
+            if(isset($rows[0])){
+                for($i = count($rows)-1;$i >= 0; $i--)
+                {
+                        $data['rows'][] = $rows[$i];
+                }
+            }
            
             if($_SERVER['REQUEST_METHOD'] == "POST"){
                 $targetDir = "C://wamp64/www/FAREFLEX/public/assets/img/customer/profile/"; // Folder to upload the image
@@ -428,21 +477,21 @@
                                 // show("File is an image - " . $check["mime"] . ".");
                                 $uploadOk = 1;
                             } else {
-                                show("File is not an image.");
+                                // show("File is not an image.");
                                 $uploadOk = 0;
                             }
 
 
                             // Check file size
                             if ($_FILES["image"]["size"] > 500000) {
-                                show("Sorry, your file is too large.");
+                                message("Sorry, your file is too large.");
                                 $uploadOk = 0;
                             }
 
                             // Allow certain file formats
                             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                             && $imageFileType != "gif" ) {
-                                show("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+                                message("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
                                 $uploadOk = 0;
                             }
 
@@ -455,18 +504,24 @@
 
                             // Check if $uploadOk is set to 0 by an error
                             if ($uploadOk == 0) {
-                                show("Sorry, your file was not uploaded.");
+                                message("Sorry, your file was not uploaded.");
                             // if everything is ok, try to upload file
                             } else {
                                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
                                     // show ("The file ". basename( $_FILES["image"]["name"]). " has been uploaded.");
 
                                     $arr["img_path"]=$newFileName;
+                                    if (!isset($_SESSION['img_path']) || $_SESSION['img_path'] !== $newFileName) {
+                                        // Update session data
+                                        $_SESSION['img_path'] = $newFileName;
+                                        // $_SESSION['img_data'] = 'data'; // Update this with your image data
+                                    }
+                                    
 
                                 }
                             }
                        }
-                            
+                            // $arr["img_path"]= $_SESSION['USER_DATA']->img_path;
                             // $arr['name']=$_POST['name'];
                             // $arr['email']=$_POST['email'];
                             // $arr['phone']=$_POST['phone'];
@@ -474,7 +529,7 @@
                             $arr['nic']=$_POST['nic'];
                             $arr['dob']=$_POST['dob'];
                             $user->update($_SESSION['USER_DATA']->id,$arr);
-                            // show($arr);
+                            //  show($arr);
                             // show($_POST);
 
                 }
