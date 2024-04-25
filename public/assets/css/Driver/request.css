@@ -1,0 +1,69 @@
+#map{
+    
+    height: 100%;
+    width: 100%;
+}
+
+.req-body{
+    margin: auto;
+    margin-top: 20px;
+    width: 80%;
+    height:80vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    border-radius:  50px 0px 0  50px;
+}
+
+.req-content{
+    padding: 20px;
+    height:100%;
+    width:100%;
+    border: 1px solid black;
+}
+
+.req-customer{
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+.req-cus-pic{
+    max-height:80px;
+    max-width: 80px;
+    border-radius: 100%;
+}
+.customer-name{
+    font-size: 23px;
+    display: block;
+    font-weight: bold;
+}
+
+.customer-rating{
+    width: 70px;
+    display: block;
+    margin-bottom: 7px;
+}
+
+.req-time{
+    display: block;
+
+}
+
+.location-destination{
+    display: block;
+    width: 100%;
+}
+.req-loc-des{
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.req-btns{
+
+}
+.req-map{
+    height:100%;
+    width:100%;
+
+}

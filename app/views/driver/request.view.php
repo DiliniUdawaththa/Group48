@@ -7,77 +7,119 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?= ROOT ?>/assets/css/driverui.css">
+        <link rel="stylesheet" href="<?= ROOT ?>/assets/css/driver/request.css">
         <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
         <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
-        <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <!-- //routing css -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+        <!-- search -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <style>
-            .opt3{
+            .opt1{
                     background-color:#194672;
                     color: white;
             }
+
+            
         </style>
     </head>
     <body>
         
-        <?php include 'driver_side.php'; ?>
+        
 
 
 
         <div class="page-container">
             <div class="body-container">
 
-                <div class="profile-container">
-                    <div class="profile-bar">
-                        <div class="propic-container">
-                            <img src="<?= ROOT ?>/assets/img/images/profilepic.png" class="propic">
-                            <button class="upload-propic"><img src="<?= ROOT ?>/assets/img/images/upload_icon.png" style="height:10px"> Upload</button>
-                        </div>
-                        <div class="detail-container">
-                            <table class="profile-details-table">
-                                <tr class="tr1">
-                                    <td class="col1">Name</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->name; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="col1">NIC</td>
-                                    <td class="col2">200143234422</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr class="tr1">
-                                    <td class="col1">Registation ID</td>
-                                    <td class="col2">1001324292d</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="col1">Email</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->email; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr class="tr1">
-                                    <td class="col1">Phone</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->phone; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="col1">Date Of Birth</td>
-                                    <td class="col2">09/20/2001</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
+
+                <div class="req-body">
+                    <div class="req-content">
+                        <div class="req-customer">
+                            <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="req-cus-pic">
+                            <div class="req-customer-details">
+                               
+                                    <p class="customer-name"><?php echo ucfirst($data['customer']->name)?></p>
+                                    <img src="<?= ROOT ?>/assets/img/images/rating.png" class="customer-rating">
+                                    <p class="req-time">2 mins ago</p>
                                 
-                            </table>
+                            </div>
+                            <div class="location-destination">
+                            <p class="req-loc-des"><b>From:</b> <?php echo $data['ride_info']->location?></p>
+                            <p class="req-loc-des"><b>To:</b> <?php echo $data['ride_info']->destination?></p>
+                            <p class="req-loc-des"><b>Distance:</b> 5.2km</p>
+                            </div>
+                            <div class="req-btns">
+                                <button>back</button>
+                                <button>Offer</button>
+                            </div>
                         </div>
+                        <h1><?php echo $data['ids']?></h1>    
+                    </div>
+                    <div class="req-map">
+                        <div id="map">
+
+                        </div>
+                        
                     </div>
                 </div>
+
+                                    
+                       
+    
+                        
+                    
+                
                 <div class="logout-container">
                     <h2>Log Out</h2>
                     <p class="logout-text">Are you sure you want to log out?</p>
                     <div class="cancel-logout"><button class="cancel-btn">Cancel</button> <button class="logout-btn" onclick = "window.location.href = '<?=ROOT?>/logout';">Log Out</button></div>
                 </div>
             </div>
-        </div>
+       </div>
+       !-- leaflet js code -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+ <!-- routing js file -->
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+<!-- search -->
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script>
+           
+    // map instalizion
+    var map = L.map('map').setView([ 7.8774, 80.7003], 9);
+    // google street
+    googleStreets = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
+            maxZoom: 20,
+            subdomains:['mt0','mt1','mt2','mt3']
+        });
+    googleStreets.addTo(map)
+
+    var Routing;
+    var lat=6.901963
+    var long=80.861292
+    var lat1=6.901963
+    var lon1=79.861292
+    Routing = L.Routing.control({
+        waypoints: [
+            L.latLng(lat,long),
+            L.latLng(lat1,lon1)
+        ],
+        addWaypoints: false // Hide the waypoints
+    });
+
+    Routing.addTo(map);
+    var lat2=(lat1+lat)/2
+    var lon2=(lon1+long)/2
+    map.flyTo([lat2,lon2], 14)
+    const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
+    popupElement.classList.add('leaflet-routing-container-hide');
+   
+           
+        
+    </script>
+                
 
         <script>
             var status = 1
@@ -88,7 +130,7 @@
             const active_btn = document.querySelector('.active');
             const inactive_btn = document.querySelector('.inactive');
             const status_icon = document.getElementById('status_icon');
-            const logout_option = document.querySelector('.opt4')
+            const logout_option = document.querySelector('.opt4');                
             const notification_container = document.querySelector('.analytics-container')
             const activity_container = document.querySelector('.activity-container')
             const vehicles_container = document.querySelector('.vehicles-container')
@@ -115,51 +157,6 @@
                 }
                 
 
-            })
-            hire_option.addEventListener('click', function (){
-                notification_container.style.display = 'none'
-                activity_container.style.display = 'block'
-                profile_container.style.display = 'none'
-                vehicles_container.style.display = 'none'
-                hire_option.style.backgroundColor = '#194672'
-                activity_option.style.backgroundColor = ''
-                profile_option.style.backgroundColor = ''
-                vehicles_option.style.backgroundColor = ''
-            })
-
-            activity_option.addEventListener('click',function (){
-                profile_container.style.display = 'none'
-                notification_container.style.display = 'block'
-                activity_container.style.display = 'none'
-                vehicles_container.style.display = 'none'
-                hire_option.style.backgroundColor = ''
-                activity_option.style.backgroundColor = '#194672'
-                profile_option.style.backgroundColor = ''
-                vehicles_option.style.backgroundColor = ''
-            })
-
-            profile_option.addEventListener('click',function (){
-                profile_container.style.display = 'block'
-                activity_container.style.display = 'none'
-                notification_container.style.display = 'none'
-                vehicles_container.style.display = 'none'
-                profile_option.style.backgroundColor = '#194672'
-                activity_option.style.backgroundColor = ''
-                vehicles_option.style.backgroundColor = ''
-                hire_option.style.backgroundColor = ''
-            })
-
-
-
-            vehicles_option.addEventListener('click',function (){
-                profile_container.style.display = 'none'
-                activity_container.style.display = 'none'
-                notification_container.style.display = 'none'
-                vehicles_container.style.display = 'block'
-                vehicles_option.style.backgroundColor = '#194672'
-                profile_option.style.backgroundColor = ''
-                activity_option.style.backgroundColor = ''
-                hire_option.style.backgroundColor = ''
             })
 
             active_btn.addEventListener('click',function (){

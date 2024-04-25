@@ -11,8 +11,7 @@ class Driver extends Controller{
         $data['errors'] = [];
         
        
-        $data['vehicles'] = 0;
-        $data['vehicledata'] = [];
+
 
         $driverreg = new Driverregistration();
 
@@ -36,6 +35,24 @@ class Driver extends Controller{
         }
         
 
+        
+        
+        
+       
+        
+       
+        
+
+            
+
+        $data['title'] = "Driver";
+        $this->view('driver/ride',$data);
+         
+        
+    }
+    public function activity(){
+        $data['errors'] = [];
+
         $vehicle = new Vehicle();
         $owner = $_SESSION['USER_DATA']->email;
         // show($_SESSION['USER_DATA']->email);
@@ -50,15 +67,52 @@ class Driver extends Controller{
             $data['vehicledata'] = $row[0];
         }
         
+
+        $current_rides = new Current_rides();
         
-        // show($row[0]);
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
+        $currides = $current_rides ->findAll();
+        
+        $data['current_rides'] = $currides;
+
+
+        $this->view('driver/activity',$data);
+    }
+
+    public function analytics(){
+        $data['errors'] = [];
+
+        $this -> view('driver/analytics',$data);
+    }
+
+    public function vehicles(){
+        $data['errors'] = [];
+
+        $data['vehicles'] = 0;
+        $data['vehicledata'] = [];
+
+        $vehicle = new Vehicle();
+        $owner = $_SESSION['USER_DATA']->email;
+        // show($_SESSION['USER_DATA']->email);
+
+        $row = $vehicle->where([
+            "owner"=> $owner,
+        ]);
+
+        if(empty($row)){
+            $data['vehicles'] = 0;
+        }else{
+            $data['vehicles'] = 1;
+            $data['vehicledata'] = $row[0];
+        }
+
+         // show($row[0]);
+         if($_SERVER['REQUEST_METHOD'] == "POST"){
 
             if(isset($row[0])){
                 if(isset($_POST['delete'])){
                     $record = (array)$row[0];
                     $vehicle->delete($record);
-                    redirect('driver/ride');
+                    redirect('driver/vehicles');
                 }
 
                 if(isset($_POST['save'])){
@@ -78,14 +132,35 @@ class Driver extends Controller{
                 
                 // show($_POST);
                 $vehicle->insert($_POST);
-                redirect('driver/ride');
+                redirect('driver/vehicles');
             }
         }
 
-            
 
-        $data['title'] = "Driver";
-        $this->view('driver/ride',$data);
+        $this ->view('driver/vehicles',$data);
+    }
+
+    public function request($id = null, $passenger_id = null){
+        $data['error'] = [];
+        $data['ids'] = $passenger_id;
+
+        $cust = new User();
+
+        $current_rides = new Current_rides();
+        $row3 = $current_rides->first([
+            "id"=> $id,
+        ]);
+
+        $data['ride_info'] = $row3;
+
+        $row4 = $cust->first([
+            "id"=> $passenger_id,
+        ]);
+        $data['customer'] = $row4;
+
+
+
+        $this-> view('driver/request',$data);
         
     }
 
@@ -119,9 +194,10 @@ class Driver extends Controller{
 
             }
             $this->view('driver/registration/registration',$data);
-            show($_SESSION['regitems']);
+            
     }
 
+    
     public function driverLicense(){
         $data['errors'] = [];
 
