@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Officer.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Officer.css">
+
     <style>
     .error {
         border: 1px solid red;
@@ -111,6 +112,9 @@
         logout_button.addEventListener('click', () => {
             window.location.href = "<?=ROOT?>/logout";
         })
+
+        const table = document.querySelector('.table1')
+        const search = document.querySelector('.srch')
         </script>
 
         <div class="interface">
@@ -119,7 +123,7 @@
                     <h2>DRIVERS</h2>
                 </div>
                 <div class="search">
-                    <form action="<?= ROOT ?>/officer/driver" method="GET">
+                    <form action="<?= ROOT ?>/officer/searchDriver" method="GET">
                         <input type="text" name="search" placeholder="Search for driver">
                         <input type="submit" value="Search" class="srch">
                     </form>

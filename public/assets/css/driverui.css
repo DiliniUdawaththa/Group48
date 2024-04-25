@@ -185,7 +185,7 @@ div.nosubmit {
 /*-------------------------Notification Container---------------------*/
 
 .analytics-container{
-    display:block;
+    display:none;
 }
 
 .t-topic{
@@ -240,7 +240,7 @@ div.nosubmit {
 /*-------------------------Activity Container---------------------*/
 
 .activity-container{
-    display: none;
+    display: block;
 }
 .status-container{
     width: 90%;

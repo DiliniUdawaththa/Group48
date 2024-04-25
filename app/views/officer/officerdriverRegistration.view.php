@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Dashboard.css">
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Officer.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Officer.css">
     <style>
     .error {
         border: 1px solid red;
@@ -126,20 +125,43 @@
                     <h2>DRIVER REGISTRATION</h2>
                 </div>
             </div>
-            <div class="table1">
-                <table>
-                    <thead>
-                        <tr>
-                            <!--<td>ID</td>-->
-                            <td>Driver Name</td>
-                            <td>Vehicle Type</td>
-                            <td>Vehicle Number</td>
-                            <td>Contact Details</td>
-                            <td>Option</td>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="table1">
+                    <table>
+                        <thead>
+                            <tr>
+                                <!--<td>ID</td>-->
+                                <td>Driver Name</td>
+                                <td>email</td>
+                                <td>Contact Details</td>
+                                <td>NIC</td>
+                                <td>Licence</td>
+                                <td>Option</td>
+                            </tr>
+                        </thead>
+                        <?php foreach ($rows as $row) : ?>
+                        <tr class="data">
+                            <td class="driveName"><?= $row->driverName; ?></td>
+                            <td class="td_email"><?= $row->email; ?></td>
+                            <td class="td_contact"><?= $row->contactNumber; ?></td>
+                            <td><?php echo'<img src="data:nicCopy;base64,'.base64_encode($row->nicCopy).'" alt="Image" style="width: 100px; height:100px;">';?>
+                            </td>
+                            <td><?php echo'<img src="data:licenceCopy;base64,'.base64_encode($row->licenceCopy).'" alt="Image" style="width: 100px; height:100px;">';?>
+                            </td>
+
+
+
+                            <td class="td_button">
+                                <div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash"
+                                            style="color: black;"></i></div></button>
+                                <a href="<?=ROOT?>/officer/standardFare_view/"><button class="detail_btn"><i
+                                            class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
+                            </td>
                         </tr>
-                    </thead>
-                </table>
-            </div>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </form>
 
 
         </div>

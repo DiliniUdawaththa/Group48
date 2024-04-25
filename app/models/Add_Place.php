@@ -11,6 +11,7 @@ class Add_Place extends Model
 
 	protected $allowedColumns = [
         'id',
+        'passenger_id',
 		'name',
 		'category',
 		'location',

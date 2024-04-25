@@ -85,6 +85,7 @@
                     <th class="th4"></th>
                   </tr>
                   <?php foreach ($rows as $row) : ?>
+                    <?php if($row->passenger_id==$_SESSION['USER_DATA']->id) { ?>
                     <tr class="data"> 
                       <td class="td_i"><i class="<?= $row->icon; ?>"></i></td>
                       <td class="td_name"><?= $row->name; ?></td>
@@ -105,7 +106,7 @@
                       </div>
                     </div>
                     <!-- //------------------------------------------------------------------------ -->
-                  
+                   <?php }?>
                     <?php endforeach; ?>
                 </table>
                 <a href="<?=ROOT?>/customer/add_place_insert"><i class="fa-solid fa-square-plus"  id="plus"></i></a>
