@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Ride.css">
     <style>
         .error{
@@ -66,14 +65,21 @@
                         <option value="date">Date</option>
                         <option value="driver_id">Driver ID</option>
                         <option value="passenger_id">Customer ID</option>
-                    </select> -->
-                    <input type="date" name="search" placeholder="Search rides by date" class="input-val">
+                    </select>
+                    <div id="dateField" style="display:none;">
+                        <input type="date" name="date" placeholder="Select Date">
+                    </div> -->
+                    <input type="date" name="search" placeholder="Search for rides">
                     <input type="submit" value="Search" class="srch">
                 </form>
                 </div>
             </div>
+
             <div class="table1">
-                <table>
+                <?php if ($noMatchFound): ?>
+                    <center><h3 style="color: red;">No rides found.</h3></center>
+                <?php else: ?>
+                    <table>
                     <thead>
                         <tr>
                             <td>RideID</td>
@@ -93,48 +99,34 @@
                             <td class="td_taxi"><?= $row->vehicle; ?></td>
                             <td class="td_taxi"><?= $row->date; ?></td>
                             <td class="td_button">
-                                <a href="<?=ROOT?>/admin/rideMore/<?= urlencode($row->id) ?>"><button class="detail_btn" data-id="<?= $row->id; ?>"><i class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
+                                <a href="#"><button class="detail_btn"><i class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
+                <?php endif; ?>
             </div>
-        </div>
-    </div>
+    <!-- </div> -->
 
    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const logout_option = document.querySelector('.linkbutton2')
-            const logout_container = document.querySelector('.logout-container')
-            const cancel_button = document.querySelector('.cancel-btn')
-                const logout_button = document.querySelector('.logout-btn')
-                    logout_option.addEventListener('click',()=>{
-                        logout_container.style.display = 'block'
-                        })
+        const logout_option = document.querySelector('.linkbutton2')
+        const logout_container = document.querySelector('.logout-container')
+        const cancel_button = document.querySelector('.cancel-btn')
+            const logout_button = document.querySelector('.logout-btn')
+                logout_option.addEventListener('click',()=>{
+                    logout_container.style.display = 'block'
+                    })
 
-                        cancel_button.addEventListener('click', ()=>{
-                        logout_container.style.display = 'none'
-                        })
+                    cancel_button.addEventListener('click', ()=>{
+                    logout_container.style.display = 'none'
+                    })
 
-                        logout_button.addEventListener('click', ()=>{
-                        window.location.href = "<?=ROOT?>/logout";
-                        })
-                        
-            const table = document.querySelector('.table1')
+                    logout_button.addEventListener('click', ()=>{
+                    window.location.href = "<?=ROOT?>/logout";
+                    })
 
-            // document.getElementById('searchBy').addEventListener('change', function() {
-            //     console.log('Search By changed:', this.value);
-            //     var selectedOption = this.value;
-            //     var dateField = document.getElementById('dateField');
-
-            //     if (selectedOption === 'date') {
-            //         dateField.style.display = 'block';
-            //     } else {
-            //         dateField.style.display = 'none';
-            //     }
-            // });
-        });
-
+        const table = document.querySelector('.table1')
+        const search = document.querySelector('.srch')
     </script>
 </body>
