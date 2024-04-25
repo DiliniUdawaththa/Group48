@@ -26,7 +26,7 @@
                 <a href="<?=ROOT?>/customer/activity" class="link2"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
                 <a href="<?=ROOT?>/customer/profile" class="link2"><div class="linkbutton"><i class="fa-solid fa-user"></i>Profile</div></a>
                 <a href="<?=ROOT?>/customer/help" class="link2"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
-                <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
+                <a href="#" class="link2"><div class="linkbutton2" onclick="log_out()"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
              </div>
       
              <div class="logout-container">
@@ -68,10 +68,7 @@
                 <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
              </div>
       
-             <div class="logout-container">
-              <h2>Log Out</h2>
-              <p class="logout-text">Are you sure you want to log out?</p>
-              <div class="cancel-logout"><button class="cancel-btn">Cancel</button> <button class="logout-btn">Log Out</button></div>
-             </div>
+             
           </div>
+          
                

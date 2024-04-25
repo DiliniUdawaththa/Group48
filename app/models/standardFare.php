@@ -74,5 +74,6 @@ class standardFare extends Model
         $this->update($Fid, $data);
             
     }
+    
 
 }

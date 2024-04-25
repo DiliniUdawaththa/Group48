@@ -31,7 +31,6 @@
 
    <?php include 'ride_side.php'; ?>
    
-
 <!-- ---------------------------------------------------------------------------------- -->
 <div class="activity">
         <div class="searchbox">
@@ -50,14 +49,16 @@
                          <center><small id="Firstname-error" class="signup-error" > <?=$errors['location']?></small></center>
                     <?php endif;?>
                 <div class="search-box">
-                    <input type="text" name="location" class="search-input" id="searchInput1" placeholder="Enter location..." onfocus="showDropdown(1)" oninput="filterItems(this.value, 1)">
+                    <input type="text" name="location" class="search-input" id="searchInput1"  placeholder="Enter location..." onfocus="showDropdown(1)" oninput="filterItems(this.value, 1)" >
                     <i class="search-icon" onclick="toggleDropdown(1)">🔍</i>
                     <i  class="fa-regular fa-circle" id="searchicon"></i>
                     <div class="dropdown-list" id="dropdownList1">
                         <div class="dropdown-list-item" onclick="selectItem(this, 1)"><i class="fa-solid fa-location-crosshairs"></i> Live location</div>
                         <div class="dropdown-list-item" onclick="selectItem(this, 1)"><i class="fa-solid fa-map-pin"></i> Set Location</div>
                         <?php foreach ($rows as $row) : ?>
+                            <?php if($row->passenger_id==$_SESSION['USER_DATA']->id) { ?>
                             <div class="dropdown-list-item" onclick="selectItem(this, 1)"><i class="<?= $row->icon; ?>"></i> <?= $row->name; ?></div>
+                            <?php }?>
                         <?php endforeach; ?>
                     </div>                
                 </div>
@@ -72,7 +73,9 @@
                     <div class="dropdown-list" id="dropdownList2">
                         <div class="dropdown-list-item" onclick="selectItem(this, 2)"><i class="fa-solid fa-map-pin"></i> Set Location</div>
                         <?php foreach ($rows as $row) : ?>
+                            <?php if($row->passenger_id==$_SESSION['USER_DATA']->id) { ?>
                             <div class="dropdown-list-item" onclick="selectItem(this, 2)"><i class="<?= $row->icon; ?>"></i> <?= $row->name; ?></div>
+                            <?php }?>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -87,24 +90,7 @@
             <div id="map" class="map" > </div>
         </div>
     </div>
-    <script>
-            const logout_option = document.querySelector('.linkbutton2')
-            const logout_container = document.querySelector('.logout-container')
-            const cancel_button = document.querySelector('.cancel-btn')
-           const logout_button = document.querySelector('.logout-btn')
-           const plus=document.getElementById('plus');
-                   logout_option.addEventListener('click',()=>{
-                      logout_container.style.display = 'block'
-                      plus.style.display="none";
-                      })
-
-                    cancel_button.addEventListener('click', ()=>{
-                      window.location.href ="<?=ROOT?>/customer/add_place";
-                      })
-                    logout_button.addEventListener('click', ()=>{
-                        window.location.href = "<?=ROOT?>/logout";
-                    })
-        </script>
+    
     <script>
         var lat,long,lat1,lon1;
         var markers=[];
@@ -149,6 +135,7 @@
                 }
             }
         }
+        
     
         function selectItem(item, index) {
             const searchInput = document.getElementById("searchInput" + index);
@@ -213,6 +200,8 @@
                    
                         // map.setView(marker, 18);
                     }
+
+
                  } 
 
 //--------------------------------set location ------------------------------------------------------------------------------
@@ -257,8 +246,9 @@
 
 //----------------------------------------------------------------------------------------------------------------------------------
                <?php foreach ($rows as $row) : ?>
+                    <?php if($row->passenger_id==$_SESSION['USER_DATA']->id) { ?>
                         else if (selectedValue === " <?= $row->name; ?>" && index===1) {
-       
+        
                             if (!markers.length == 0) {
                                     deleteAllMarkers();
                                 }
@@ -270,6 +260,7 @@
                             document.getElementById("l.lat").value=<?= $row->lat; ?>;
                                 document.getElementById("l.long").value=<?= $row->lng; ?>;
                                 }
+                                <?php }?>
                       <?php endforeach; ?>
 //-------------------------------------------------------------------------------------------------------------------------------------                       }
                         else if (selectedValue === " Set Location" && index===2) {
@@ -313,6 +304,7 @@
                           }
 //---------------------------------------------------------------------------------------------------------------------------------------------
                      <?php foreach ($rows as $row) : ?>
+                        <?php if($row->passenger_id==$_SESSION['USER_DATA']->id) { ?>
                         else if (selectedValue === " <?= $row->name; ?>" && index===2) {
        
                             if (!markers.length == 0) {
@@ -326,6 +318,7 @@
                             document.getElementById("d.lat").value=<?= $row->lat; ?>;
                                 document.getElementById("d.long").value=<?= $row->lng; ?>;
                                 }
+                                <?php }?>
                       <?php endforeach; ?>
                          
                         
@@ -337,7 +330,7 @@
                             markers = [];}
                         }
                        
-
+           
                    
 
     </script>
@@ -354,10 +347,31 @@
         document.getElementById("mySidebar").style.display = "none";
         document.querySelector('.activity').style.opacity= '1';
         }
+        
       </script>
 </body>
 </html>
+<script>
+                 
+                 const container=document.querySelector('.activity')
+            const logout_option = document.querySelector('.linkbutton2')
+            const logout_container = document.querySelector('.logout-container')
+            const cancel_button = document.querySelector('.cancel-btn')
+            const logout_button = document.querySelector('.logout-btn')
+                  
+                   logout_option.addEventListener('click',()=>{
+                    logout_container.style.display = 'block'
+                    container.style.display="none";
+                    })
 
+                    cancel_button.addEventListener('click', ()=>{
+                     window.location.href ="<?=ROOT?>/customer/ride_step1";
+                    })
+                    logout_button.addEventListener('click', ()=>{
+                        window.location.href = "<?=ROOT?>/logout";
+                    })
+    
+</script>
 
 <!-- leaflet js code -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
