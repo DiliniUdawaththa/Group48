@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Dashboard.css">
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Officer.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Officer.css">
     <style>
     .error {
         border: 1px solid red;
@@ -126,8 +125,8 @@
                     <thead>
                         <tr>
                             <td>Complainant</td>
-                            <td>Driver Name</td>
-                            <td>Passenger Name</td>
+                            <td>Driver ID</td>
+                            <td>Passenger ID</td>
                             <td>Status</td>
                             <td>Option</td>
                         </tr>
@@ -135,17 +134,10 @@
                     <?php foreach ($rows as $row) : ?>
 
                     <tr class="data">
-                        <td class="td_complainant"><?= $row['complainant'] ?></td>
-                        <td class="td_drivername"><?= $row['driver_name'] ?></td>
-                        <td class="td_passengername"><?= $row['passenger_name'] ?></td>
-                        <td class="td_status"><?= $row['status_message'] ?></td>
-                        <td class="td_button">
-                            <div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash"
-                                        style="color: black;"></i></div></button>
-                            <a href="<?=ROOT?>/officer/standardFare_view/" <?=$row->cmt_id?>><button
-                                    class="detail_btn"><i class="fa-solid fa-circle-info"
-                                        style="color: black;"></i></button></a>
-                        </td>
+                        <td><?= $row->complainant ?></td>
+                        <td><?= $row->driver_id?></td>
+                        <td><?= $row->passenger_id ?></td>
+                        <td><?= $row->status_check ?></td>
                     </tr>
                     <?php endforeach; ?>
 

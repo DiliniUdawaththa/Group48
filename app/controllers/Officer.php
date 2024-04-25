@@ -58,16 +58,6 @@ class officer extends Controller{
         $this->view('Officer/standardFare',$data);
         } */
     }
-    /*public function complains(){
-        if(!Auth::logged_in())
-        {
-            message('please login to view the page');
-            redirect("login");
-        }
-        $data['title'] = "Officer";
-        $this->view('Officer/complains',$data);
-    }*/
-
 
 
 
@@ -258,29 +248,79 @@ class officer extends Controller{
         $this->view('officer/driver',$data);
     }*/
 
+
     public function complains(){
-        if(!Auth::logged_in()) 
+        if(!Auth::logged_in())
         {
             message('please login to view the page');
             redirect("login");
         }
         $data['errors'] = [];
 
-        $add_complain = new complain();
+        $add_complaint = new complaint();
 
-        $rows = $add_complain->getcomplaindetails();
+        $rows = $add_complaint->findAll();
         $data['rows'] = array();
 
-        /*if(isset($rows[0])){
+        if(isset($rows[0])){
         for($i = 0;$i < count($rows); $i++)
         {
             $data['rows'][] = $rows[$i];
-        }*/
+        }
 
-        $data['title'] = "Officer";
-        $this->view('Officer/complains',$data);
-        
+        $data['title'] = "complains";
+        $this->view('officer/complains',$data);
+        }
     }
+
+
+
+    public function complainView($cmt_id){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $complaint = new Complaint();
+        $user = new User();
+
+        $data = [
+            'cmt_id' => $cmt_id
+        ];
+        $rows = $complaint->where($data);
+        $row = (object) $rows[0];
+
+        $customer = $row->passenger_id;
+        $data1 = [
+            'cmt_id' => $customer
+        ];
+        $rows1 = $user->where($data1);
+        $row1 = null;
+        if (is_array($rows1) && count($rows1) > 0) {
+            $row1 = (object) $rows1[0];
+        }
+
+        $driver = $row->driver_id;
+        $data2 = [
+            'cmt_id' => $driver
+        ];
+        $rows2 = $user->where($data2);
+        $row2 = null;
+        if (is_array($rows2) && count($rows2) > 0) {
+            $row2 = (object) $rows2[0];
+        }
+
+        $data = [
+            'title' => "complaint",
+            'row' => $row,
+            'row1' => $row1,
+            'row2' => $row2,
+        ];
+
+        $this->view('officer/complaintview',$data);
+    }
+
+
 
 
     
@@ -479,6 +519,8 @@ class officer extends Controller{
             $this->view('officer/driverSearch', $data);
         }
     }
+
+    
 
 }
 

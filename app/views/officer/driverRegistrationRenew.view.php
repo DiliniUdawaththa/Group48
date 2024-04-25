@@ -47,6 +47,11 @@
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration</div>
                 </a>
+
+                <a href="<?=ROOT?>/officer/driverRegistrationRenew" class="link">
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration Renewal</div>
+                </a>
+
                 <a href="<?=ROOT?>/officer/complains" class="link">
                     <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
                 </a>
@@ -62,7 +67,8 @@
             <div class="logout-container">
                 <h2>Log Out</h2>
                 <p class="logout-text">Are you sure you want to log out?</p>
-                <div class="cancel-logout"><button class="cancel-btn">Cancel</button> <button class="logout-btn">Log Out</button></div>
+                <div class="cancel-logout"><button class="cancel-btn">Cancel</button> <button class="logout-btn">Log
+                        Out</button></div>
             </div>
 
         </div>
@@ -86,17 +92,19 @@
                         </tr>
                     </thead>
                     <?php foreach ($rows as $row) : ?>
-                        <tr class="data">
-                            <td class="td_name"><?= $row->name; ?></td>
-                            <td class="td_email"><?= $row->email; ?></td>
-                            <td class="td_slip">
-                            <a href="<?=ROOT?>/officer/openSlip/<?= urlencode($row->email) ?>"><button class='slip-btn'>Open slip <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button></a>
-                            </td>
-                            <td class="td_button">
+                    <tr class="data">
+                        <td class="td_name"><?= $row->name; ?></td>
+                        <td class="td_email"><?= $row->email; ?></td>
+                        <td class="td_slip">
+                            <a href="<?=ROOT?>/officer/openSlip/<?= urlencode($row->email) ?>"><button
+                                    class='slip-btn'>Open slip <i class="fa fa-file-pdf-o"
+                                        aria-hidden="true"></i></button></a>
+                        </td>
+                        <td class="td_button">
                             <button class="accept_btn" data-email="<?= $row->email ?>">ACCEPT</button>
                             <button class="reject_btn" data-email="<?= $row->email ?>">REJECT</button>
-                            </td>
-                        </tr>
+                        </td>
+                    </tr>
                     <?php endforeach; ?>
                 </table>
             </div>
@@ -104,82 +112,86 @@
             <div class="accept-container">
                 <h2>Approve renewal of driver registration</h2>
                 <p class="accept-text">Are you sure you want to approve this renewal?</p>
-                <div class="btn"><button class="cancel-accept-btn">Cancel</button> <button class="ok-btn">Approve</button></div>
+                <div class="btn"><button class="cancel-accept-btn">Cancel</button> <button
+                        class="ok-btn">Approve</button></div>
             </div>
 
             <div class="reject-container">
                 <h2>Reject renewal of driver registration</h2>
                 <p class="reject-text">Are you sure you want to reject this renewal?</p>
-                <div class="btn"><button class="cancel-reject-btn">Cancel</button> <button class="reject-btn">Reject</button></div>
+                <div class="btn"><button class="cancel-reject-btn">Cancel</button> <button
+                        class="reject-btn">Reject</button></div>
             </div>
-    <!-- </div> -->
+            <!-- </div> -->
 
-   
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const logout_option = document.querySelector('.linkbutton2');
-            const logout_container = document.querySelector('.logout-container');
-            const cancel_logout_button = document.querySelector('.cancel-btn');
-            const logout_button = document.querySelector('.logout-btn');
 
-            logout_option.addEventListener('click', () => {
-                logout_container.style.display = 'block';
-            });
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const logout_option = document.querySelector('.linkbutton2');
+                const logout_container = document.querySelector('.logout-container');
+                const cancel_logout_button = document.querySelector('.cancel-btn');
+                const logout_button = document.querySelector('.logout-btn');
 
-            cancel_logout_button.addEventListener('click', () => {
-                logout_container.style.display = 'none';
-            });
+                logout_option.addEventListener('click', () => {
+                    logout_container.style.display = 'block';
+                });
 
-            logout_button.addEventListener('click', () => {
-                window.location.href = "<?=ROOT?>/logout";
-            });
+                cancel_logout_button.addEventListener('click', () => {
+                    logout_container.style.display = 'none';
+                });
 
-            const accept_buttons = document.querySelectorAll('.accept_btn');
-            const reject_buttons = document.querySelectorAll('.reject_btn');
-            const accept_container = document.querySelector('.accept-container');
-            const reject_container = document.querySelector('.reject-container');
-            const cancel_accept_button = document.querySelector('.cancel-accept-btn');
-            const cancel_reject_button = document.querySelector('.cancel-reject-btn');
+                logout_button.addEventListener('click', () => {
+                    window.location.href = "<?=ROOT?>/logout";
+                });
 
-            accept_buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const email = button.getAttribute('data-email');
-                    accept_container.style.display = 'block';
-                    document.querySelector('.ok-btn').addEventListener('click', () => {
-                        window.location.href = "<?=ROOT?>/officer/renewAccept/" + encodeURIComponent(email);
+                const accept_buttons = document.querySelectorAll('.accept_btn');
+                const reject_buttons = document.querySelectorAll('.reject_btn');
+                const accept_container = document.querySelector('.accept-container');
+                const reject_container = document.querySelector('.reject-container');
+                const cancel_accept_button = document.querySelector('.cancel-accept-btn');
+                const cancel_reject_button = document.querySelector('.cancel-reject-btn');
+
+                accept_buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const email = button.getAttribute('data-email');
+                        accept_container.style.display = 'block';
+                        document.querySelector('.ok-btn').addEventListener('click', () => {
+                            window.location.href = "<?=ROOT?>/officer/renewAccept/" +
+                                encodeURIComponent(email);
+                        });
                     });
                 });
-            });
-            cancel_accept_button.addEventListener('click', () => {
+                cancel_accept_button.addEventListener('click', () => {
                     accept_container.style.display = 'none';
-            });
+                });
 
-            reject_buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const email = button.getAttribute('data-email');
-                    reject_container.style.display = 'block';
-                    document.querySelector('.reject-btn').addEventListener('click', () => {
-                        window.location.href = "<?=ROOT?>/officer/renewReject/" + encodeURIComponent(email);
+                reject_buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const email = button.getAttribute('data-email');
+                        reject_container.style.display = 'block';
+                        document.querySelector('.reject-btn').addEventListener('click', () => {
+                            window.location.href = "<?=ROOT?>/officer/renewReject/" +
+                                encodeURIComponent(email);
+                        });
+                    });
+                });
+                cancel_reject_button.addEventListener('click', () => {
+                    reject_container.style.display = 'none';
+                });
+
+                document.querySelectorAll('.slip-btn').forEach(button => {
+                    button.addEventListener('click', function(event) {
+                        event.preventDefault(); // Prevent default link behavior
+
+                        // Get the href attribute of the clicked link
+                        const href = this.parentElement.getAttribute('href');
+
+                        // Open the PDF file in a new tab/window
+                        window.open(href, '_blank');
                     });
                 });
             });
-            cancel_reject_button.addEventListener('click', () => {
-                    reject_container.style.display = 'none';
-            });
-
-            document.querySelectorAll('.slip-btn').forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent default link behavior
-
-                    // Get the href attribute of the clicked link
-                    const href = this.parentElement.getAttribute('href');
-
-                    // Open the PDF file in a new tab/window
-                    window.open(href, '_blank');
-                });
-            }); 
-    });
-    </script>
+            </script>
 
 
 </body>
