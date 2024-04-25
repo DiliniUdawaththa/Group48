@@ -16,10 +16,7 @@
             margin: 0;
             padding: 0;
         }
-        #map{
-            width: 50%;
-            height: 90vh;
-        }
+       
     </style>
 </head>
 <body id="body">
@@ -39,8 +36,10 @@
                         <a href="<?=ROOT?>/customer/ride_step3" class="golink"><button class="go" id="sizeButton">Go</button></a><br>
                         <input type="text" id="time" name="time" class="fetch_data">
                         <input type="text" id="distance" name="distance" class="fetch_data">
+                        <input type="text" id="m_lat" name="m_lat" class="fetch_data">
+                        <input type="text" id="m_long" name="m_long" class="fetch_data">
                     </form>
-                    <a href="<?=ROOT?>/customer/ride_step1" class="refresh">Refresh</a>
+                    <a href="#" class="refresh" onclick="refreshPage()">Refresh</a>
 
                 </center>
                 
@@ -49,8 +48,23 @@
             <div id="map" > </div>
         </div>
     </div>       
+    <div class="toggleicon" id="toggleSidebar" onclick="side_open()">
+             <i class="fa-solid fa-bars"></i>
+      </div>
+      <script>
+        function side_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.querySelector('.activity').style.opacity= '0.5';
+        }
+
+        function side_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.querySelector('.activity').style.opacity= '1';
+        }
         
+      </script>
     </body>
+
 </html>
 <script>
     // button movment
@@ -58,6 +72,10 @@
     var button = document.getElementById("sizeButton");
     button.classList.toggle("beating");
    }
+
+   function refreshPage() {
+    location.reload(true);
+  }
 </script>
 
 
@@ -78,6 +96,28 @@
         });
     googleStreets.addTo(map)
 
+    var marker = null;
+    var lat3=0;
+    var long3=0;
+    var onetime =0;
+
+
+//------------------------------------------------------------------------
+
+
+    map.on('click', function(e) {
+        if (marker !== null) {
+            map.removeLayer(marker);
+        }
+    if(onetime==0){
+        onetime=1;
+        lat3 = e.latlng.lat;
+        long3 = e.latlng.lng;
+        marker = L.marker(e.latlng).addTo(map);
+      
+        document.getElementById('m_lat').value=lat3;
+        document.getElementById('m_long').value=long3;
+
     var Routing;
     var lat=<?php echo isset($_GET['l_lat']) ? json_encode($_GET['l_lat']) : 'null'; ?>;
     var long=<?php echo isset($_GET['l_long']) ? json_encode($_GET['l_long']) : 'null'; ?>;
@@ -86,11 +126,16 @@
     Routing = L.Routing.control({
         waypoints: [
             L.latLng(lat,long),
+            L.latLng(lat3,long3),
             L.latLng(lat1,lon1)
-        ]
+           
+        ],routeWhileDragging: true
+      
     }); 
+    
 
-Routing.on('routesfound', function(e) {
+
+ Routing.on('routesfound', function(e) {
     var route = e.routes[0];
     var distance = route.summary.totalDistance; // Distance in meters
     var time = route.summary.totalTime; // Time in seconds
@@ -102,11 +147,60 @@ Routing.on('routesfound', function(e) {
 });
 
     Routing.addTo(map);
+    const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[1];
+    popupElement.classList.add('leaflet-routing-container-hide');
+
+    var lat2=(lat1+lat)/2
+    var lon2=(lon1+long)/2
+    map.flyTo([lat2,lon2], 14)
+    
+    
+    
+    }
+});
+
+
+
+
+// -------------------------------------------------------------------------------------------------------
+
+if(lat3==0 && long3==0){
+    var Routing;
+    var lat=<?php echo isset($_GET['l_lat']) ? json_encode($_GET['l_lat']) : 'null'; ?>;
+    var long=<?php echo isset($_GET['l_long']) ? json_encode($_GET['l_long']) : 'null'; ?>;
+    var lat1=<?php echo isset($_GET['d_lat']) ? json_encode($_GET['d_lat']) : 'null'; ?>;
+    var lon1=<?php echo isset($_GET['d_long']) ? json_encode($_GET['d_long']) : 'null'; ?>;
+    Routing = L.Routing.control({
+        waypoints: [
+            L.latLng(lat,long),
+            L.latLng(lat1,lon1)
+        ],  lineOptions: {
+        styles: [{color: 'black', opacity: 0.6, weight: 4}]
+    }
+    }); 
+
+    
+
+ Routing.on('routesfound', function(e) {
+    var route = e.routes[0];
+    var distance = route.summary.totalDistance; // Distance in meters
+    var time = route.summary.totalTime; // Time in seconds
+
+
+    document.getElementById("time").value='0'+Math.floor(time/3600) + ':'+Math.floor((time%3600)/60);
+    document.getElementById("distance").value=(distance/1000).toFixed(2);
+    
+});
+
+    Routing.addTo(map);
+    const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
+    popupElement.classList.add('leaflet-routing-container-hide');
     
     var lat2=(lat1+lat)/2
     var lon2=(lon1+long)/2
     map.flyTo([lat2,lon2], 14)
-    const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
-    popupElement.classList.add('leaflet-routing-container-hide');
+    
+}
+   
      
     </script>

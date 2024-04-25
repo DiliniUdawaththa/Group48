@@ -86,14 +86,18 @@
                         <span>Officers</span>
                         <h3>4</h3>
                     </div>
-                </div>
+                </div>-->
                 <div class="val-box">
                     <i class="fa-solid fa-taxi"></i>
                     <div>
-                        <span>Rides</span>
-                        <h3>400</h3>
+                        <span><h3>Rides</h3></span>
+                        <center><h3><?php echo $rideCount; ?></h3></center>
                     </div>
-                </div> -->
+
+                </div> 
+
+                <!-- </div> --> 
+
             </div>
             <div class = "chart_phase">
                 <div class="chart_des">
@@ -103,6 +107,14 @@
                     <!-- <h2>Weekly rides</h2> -->
                 </div>
             </div>
+
+            <div class = "chart_phase1">
+                <div id="chart" style="height: 80%; width:50%;">
+                </div>
+                <div id="chart2" style="height: 80%; width:50%;">
+                </div>
+            </div>
+
         </div>        
     </div>
 
@@ -214,6 +226,66 @@
 
         var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
         chart1.render();
+
+        const rideCountsByDay = <?= json_encode($rideCountsByDay) ?>;
+        const rideCountsByMorning = <?= json_encode($rideCountsByMorning) ?>;
+        const rideCountsByNight = <?= json_encode($rideCountsByNight) ?>;
+
+        // Prepare data for the chart
+        const rideCountsData = Object.values(rideCountsByDay);
+        const rideCountsMorningData = Object.values(rideCountsByMorning);
+        const rideCountsNightData = Object.values(rideCountsByNight);
+        const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        var options = {
+            chart: {
+                type: 'bar',
+                width: '90%',
+                height: '90%'
+            },
+            series: [{
+                name: 'Rides',
+                data: rideCountsData
+            }],
+            title: {
+                text: 'Weekly Rides',
+                align: 'left',
+                offsetX: 110
+            },
+            xaxis: {
+                categories: weekdays
+            }
+        }
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+        var options2 = {
+            chart: {
+                type: 'line',
+                width: '90%',
+                height: '90%'
+            },
+            series: [{
+                name: 'Day',
+                data: rideCountsMorningData
+            },
+            {
+                name: 'Night',
+                data: rideCountsNightData
+            }],
+            title: {
+                text: 'Weekly Rides',
+                align: 'left',
+                offsetX: 110
+            },
+            xaxis: {
+                categories: weekdays
+            }
+        }
+
+        var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+        chart2.render();
     </script>
 
 </body>

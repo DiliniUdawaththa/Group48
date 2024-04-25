@@ -47,6 +47,44 @@
            
              
         </div>
+        
+      <!-- //------------------------------------------mobile bar----------------------------------- -->
+      <div class="open-sidebar open-bar-block open-border-right" style="display:none" id="mySidebar">
+            <button onclick="side_close()" class="sidebar_close_button"><i class="fa-solid fa-circle-left fa-fade"></i></button>
+               <div class="barimagetag">
+                <img src="<?= ROOT ?>/assets/img/logonamenw.png" alt=" " class="barimage">
+             </div>
+
+
+             <div class="profile">
+                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="" class="userimage">
+                <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
+                <h6>
+                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                  <i class="fa-solid fa-star" ></i>
+                  <i class="fa-solid fa-star" ></i>
+                </h6>
+             </div>
+             
+
+             <div class="linktag">
+                <a href="<?= ROOT ?>/customer/ride" class="link2"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
+                <a href="<?= ROOT ?>/customer/add_place" class="link2"><div class="linkbutton"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
+                <a href="<?= ROOT ?>/customer/activity" class="link2"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="<?=ROOT?>/customer/profile" class="link2"><div class="linkbutton"><i class="fa-solid fa-user"></i>Profile</div></a>
+                <a href="<?= ROOT ?>/customer/help" class="link"><div class="linkbutton1"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
+                <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
+             </div>
+      
+             <div class="logout-container">
+              <h2>Log Out</h2>
+              <p class="logout-text">Are you sure you want to log out?</p>
+              <div class="cancel-logout"><button class="cancel-btn">Cancel</button> <button class="logout-btn">Log Out</button></div>
+             </div>
+          </div>
+          <!-- ------------------------------------------------------------------------ -->
          <div class="container">
 
             <div class="h1"><center><h1>How to Request the Ride</h1></center></div>
@@ -163,6 +201,20 @@
                     logout_button.addEventListener('click', ()=>{
                         window.location.href = "<?=ROOT?>/logout";
                     })
+        </script>
+        <div class="toggleicon" id="toggleSidebar" onclick="side_open()">
+             <i class="fa-solid fa-bars"></i>
+        </div>
+        <script>
+          function side_open() {
+          document.getElementById("mySidebar").style.display = "block";
+          document.querySelector('.container').style.opacity= '0.5';
+          }
+
+          function side_close() {
+          document.getElementById("mySidebar").style.display = "none";
+          document.querySelector('.container').style.opacity= '1';
+          }
         </script>
         </body>
         </html>

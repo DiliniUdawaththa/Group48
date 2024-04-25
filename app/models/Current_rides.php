@@ -18,6 +18,8 @@ class Current_rides extends Model
 		'destination',
         'd_lat',
         'd_long',
+		'm_lat',
+		'm_long',
         'vehicle',
 	];
 
