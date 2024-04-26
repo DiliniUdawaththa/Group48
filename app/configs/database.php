@@ -47,8 +47,6 @@ class Database
 	{
 		//users table
 		$query = "
-
-		DROP TABLE IF EXISTS `users`;
 		CREATE TABLE IF NOT EXISTS `users` (
 		  `id` int(11) NOT NULL AUTO_INCREMENT,
 		  `name` varchar(100) NOT NULL,
@@ -120,7 +118,6 @@ class Database
 
 
 	    $query= "
-		DROP TABLE IF EXISTS `addplace`;
 		CREATE TABLE IF NOT EXISTS `addplace` (
 		  `id` int(255) NOT NULL AUTO_INCREMENT,
 		  `passenger_id` int(11) DEFAULT NULL,
@@ -167,7 +164,6 @@ class Database
 		$this->query($query);
 
 		$query= "
-		  DROP TABLE IF EXISTS `driver_status`;
 		  CREATE TABLE IF NOT EXISTS `driver_status` (
 			`driver_id` int(11) NOT NULL,
 			`vehicle` varchar(10) NOT NULL,
@@ -201,7 +197,6 @@ class Database
 		$this->query($query);
 
 		$query= "
-		DROP TABLE IF EXISTS `rides`;
 		CREATE TABLE IF NOT EXISTS `rides` (
 		`id` int(10) NOT NULL AUTO_INCREMENT,
 		`passenger_id` int(10) NOT NULL,
@@ -264,7 +259,6 @@ class Database
 		$this->query($query);
 
 		$query="
-		DROP TABLE IF EXISTS `complaint`;
 		CREATE TABLE IF NOT EXISTS `complaint` (
 		  `cmt_id` int(11) NOT NULL AUTO_INCREMENT,
 		  `complainant` text NOT NULL,
@@ -281,7 +275,6 @@ class Database
 		$this->query($query);
 
 		$query="
-		DROP TABLE IF EXISTS `rating`;
 		CREATE TABLE IF NOT EXISTS `rating` (
 		`rate_id` int(11) NOT NULL AUTO_INCREMENT,
 		`role_id` int(11) NOT NULL,
@@ -294,7 +287,6 @@ class Database
 		$this->query($query);
 
 		$query="
-		DROP TABLE IF EXISTS `current_rides`;
 		CREATE TABLE IF NOT EXISTS `current_rides` (
 		`id` int(10) NOT NULL AUTO_INCREMENT,
 		`passenger_id` int(10) NOT NULL,
@@ -320,7 +312,6 @@ class Database
 		$this->query($query);
 
 		$query="
-		DROP TABLE IF EXISTS `message`;
 		CREATE TABLE IF NOT EXISTS `message` (
 		`message_id` int(11) NOT NULL AUTO_INCREMENT,
 		`ride_id` int(11) NOT NULL,

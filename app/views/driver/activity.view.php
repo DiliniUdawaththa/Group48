@@ -13,7 +13,7 @@
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> -->
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <style>
-            .opt3{
+            .opt1{
                     background-color:#194672;
                     color: white;
             }
@@ -27,47 +27,72 @@
 
         <div class="page-container">
             <div class="body-container">
-
-                <div class="profile-container">
-                    <div class="profile-bar">
-                        <div class="propic-container">
-                            <img src="<?= ROOT ?>/assets/img/images/profilepic.png" class="propic">
-                            <button class="upload-propic"><img src="<?= ROOT ?>/assets/img/images/upload_icon.png" style="height:10px"> Upload</button>
+                
+                <div class="activity-container" style="display:block">
+                    <div class="status-container">
+                        <h2>Hello, <?php echo $_SESSION['USER_DATA']->name; ?></h2>
+                        
+                        <div class="select-status">
+                            <div><p>Active status:</p></div>
+                            <div class="active">
+                                <p>Available</p>
+                            </div>
+                            <div class="inactive">
+                                <p>Unavailable</p>
+                            </div>
+                            
                         </div>
-                        <div class="detail-container">
-                            <table class="profile-details-table">
-                                <tr class="tr1">
-                                    <td class="col1">Name</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->name; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="col1">NIC</td>
-                                    <td class="col2">200143234422</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr class="tr1">
-                                    <td class="col1">Registation ID</td>
-                                    <td class="col2">1001324292d</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="col1">Email</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->email; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr class="tr1">
-                                    <td class="col1">Phone</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->phone; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="col1">Date Of Birth</td>
-                                    <td class="col2">09/20/2001</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                
-                            </table>
+                    </div>
+
+                    <div class="request-container">
+                        <h2>Request for ride</h2>
+                        <?php foreach ($data['current_rides'] as $rides) : ?>
+                                <div class="request-box">
+                                    <div>
+                                        <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="request-customer-pic">
+                                        <img src="<?= ROOT ?>/assets/img/images/rating.png" style="height: 10px;display: block;">
+                                    </div>
+                                    <div class="destination">
+                                        <p style="display: block;margin: 5px;">From: <?php echo $rides -> location; ?></p>
+                                        <p style="display: block;margin: 5px;">To: <?php echo $rides -> destination; ?></p>
+                                    </div>
+                                    <div style="width: 100px;"> 
+                                        <?php if($data['vehicles']==0):?>
+                                            <p style="color:brown">Add your vehicle first to send offers!</p>
+                                        <?php endif;?>
+                                        <?php if($data['vehicles']>0):?>
+                                            <button onclick="map_view()" class="map-view-btn">Map View</button>
+                                            <button class="accept-btn" id="proceed_<?=$rides->id?>" onclick="delete_line('proceed_<?=$rides->id?>')">Proceed</button> 
+                                        <?php endif;?>
+                                    </div>
+                                </div>
+                        <?php endforeach; ?>
+                        <?php if(count($data['current_rides'])==0):?>
+                            <h2>No rides</h2>
+                        <? else: ?>
+                            
+
+                            <h2></h2>
+                        <?php endif;?>
+                        
+                        
+                        <div class="map-route">
+                            <button onclick="close_map()" class="close-map">X</button>
+                            <div id="map">
+
+
+                            </div>
+                         </div>
+    
+                        <div class="offer-container">
+                            <button class="close-offer">X</button>
+                            <div style="text-align: center;">
+                                <table class="offer-table">
+                                    <tr><td rowspan="2" style="vertical-align: top;padding-right: 10px;font-size: 25px;">Your Fare(Rs):</td><td style="text-align: left;"><input type="number" id="fare-amount"></td></tr>
+                                    <tr><td style="text-align: left;"><input type="checkbox" id="std-fare"> Standard fare</td></tr>
+                                </table>
+                                <button class="send-offer">Send Offer</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,8 +101,9 @@
                     <p class="logout-text">Are you sure you want to log out?</p>
                     <div class="cancel-logout"><button class="cancel-btn">Cancel</button> <button class="logout-btn" onclick = "window.location.href = '<?=ROOT?>/logout';">Log Out</button></div>
                 </div>
-            </div>
         </div>
+
+                
 
         <script>
             var status = 1
@@ -88,7 +114,7 @@
             const active_btn = document.querySelector('.active');
             const inactive_btn = document.querySelector('.inactive');
             const status_icon = document.getElementById('status_icon');
-            const logout_option = document.querySelector('.opt4')
+            const logout_option = document.querySelector('.opt4');                
             const notification_container = document.querySelector('.analytics-container')
             const activity_container = document.querySelector('.activity-container')
             const vehicles_container = document.querySelector('.vehicles-container')
@@ -116,51 +142,6 @@
                 
 
             })
-            hire_option.addEventListener('click', function (){
-                notification_container.style.display = 'none'
-                activity_container.style.display = 'block'
-                profile_container.style.display = 'none'
-                vehicles_container.style.display = 'none'
-                hire_option.style.backgroundColor = '#194672'
-                activity_option.style.backgroundColor = ''
-                profile_option.style.backgroundColor = ''
-                vehicles_option.style.backgroundColor = ''
-            })
-
-            activity_option.addEventListener('click',function (){
-                profile_container.style.display = 'none'
-                notification_container.style.display = 'block'
-                activity_container.style.display = 'none'
-                vehicles_container.style.display = 'none'
-                hire_option.style.backgroundColor = ''
-                activity_option.style.backgroundColor = '#194672'
-                profile_option.style.backgroundColor = ''
-                vehicles_option.style.backgroundColor = ''
-            })
-
-            profile_option.addEventListener('click',function (){
-                profile_container.style.display = 'block'
-                activity_container.style.display = 'none'
-                notification_container.style.display = 'none'
-                vehicles_container.style.display = 'none'
-                profile_option.style.backgroundColor = '#194672'
-                activity_option.style.backgroundColor = ''
-                vehicles_option.style.backgroundColor = ''
-                hire_option.style.backgroundColor = ''
-            })
-
-
-
-            vehicles_option.addEventListener('click',function (){
-                profile_container.style.display = 'none'
-                activity_container.style.display = 'none'
-                notification_container.style.display = 'none'
-                vehicles_container.style.display = 'block'
-                vehicles_option.style.backgroundColor = '#194672'
-                profile_option.style.backgroundColor = ''
-                activity_option.style.backgroundColor = ''
-                hire_option.style.backgroundColor = ''
-            })
 
             active_btn.addEventListener('click',function (){
                 status = 1
@@ -187,10 +168,6 @@
                 document.querySelector('.map-route').style.display = 'none';
             }
 
-
-            document.querySelector('.accept-btn').addEventListener('click', function(){
-                document.querySelector('.offer-container').style.display = 'block'
-            })
 
             document.querySelector('.accept-btn1').addEventListener('click', function(){
                 document.querySelector('.offer-container').style.display = 'block'
@@ -223,6 +200,14 @@
                 document.querySelector('.update-veh1').style.display = 'none'
             })
 
+            function delete_line(data)
+          {
+                <?php foreach ($data['current_rides'] as $rides) : ?>
+                if(data=="proceed_<?=$rides->id?>"){ 
+                    window.location.href ="<?=ROOT?>/driver/request/<?=$rides->id?>/<?=$rides->passenger_id?>"
+                }
+                <?php endforeach; ?>
+          }
 
         </script>
     </body>
