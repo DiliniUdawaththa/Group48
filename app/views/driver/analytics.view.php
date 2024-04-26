@@ -13,7 +13,7 @@
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> -->
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <style>
-            .opt3{
+            .opt2{
                     background-color:#194672;
                     color: white;
             }
@@ -27,57 +27,65 @@
 
         <div class="page-container">
             <div class="body-container">
+            <div class="analytics-container">
+                    <div class="today-analytics">
+                        <div class="t-topic"><h3>Today's Performance</h3> </div>
+                        <div class="t-body">
+                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/coin.png" class="performance-img"> <p class="p-stat">LKR 2,000</p></div>
+                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/clock.png" class="performance-img"><p class="p-stat">126 Mins</p></div>
+                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/bar-chart.png" class="performance-img"> <p class="p-stat">13  Rides</p></div>       
 
-                <div class="profile-container">
-                    <div class="profile-bar">
-                        <div class="propic-container">
-                            <img src="<?= ROOT ?>/assets/img/images/profilepic.png" class="propic">
-                            <button class="upload-propic"><img src="<?= ROOT ?>/assets/img/images/upload_icon.png" style="height:10px"> Upload</button>
+
                         </div>
-                        <div class="detail-container">
-                            <table class="profile-details-table">
-                                <tr class="tr1">
-                                    <td class="col1">Name</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->name; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="col1">NIC</td>
-                                    <td class="col2">200143234422</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr class="tr1">
-                                    <td class="col1">Registation ID</td>
-                                    <td class="col2">1001324292d</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="col1">Email</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->email; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr class="tr1">
-                                    <td class="col1">Phone</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->phone; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="col1">Date Of Birth</td>
-                                    <td class="col2">09/20/2001</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                
-                            </table>
+
+                    </div>
+                    <div class="charts-container">
+                        <div class="chart">
+                            <h3 style="text-align: center;">Daily Rides</h3>
+                            <div id="chart1">
+                            </div>
                         </div>
+
+                        <div class="chart">
+                            <div id="chart2">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+                
+                <script>
+
+                var options = {
+                chart: {
+                    type: 'line',
+                    width: 600 ,
+                },
+                series: [{
+                    name: 'sales',
+                    data: [27,23,18,19,17,13,25,19,22]
+                }],
+                xaxis: {
+                    categories: ["Feb 14","Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22"]
+                }
+                }
+                var chart = new ApexCharts(document.querySelector("#chart1"), options);
+                chart.render();
+
+                var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
+                chart2.render();
+
+                </script>
+                
                 <div class="logout-container">
                     <h2>Log Out</h2>
                     <p class="logout-text">Are you sure you want to log out?</p>
                     <div class="cancel-logout"><button class="cancel-btn">Cancel</button> <button class="logout-btn" onclick = "window.location.href = '<?=ROOT?>/logout';">Log Out</button></div>
                 </div>
-            </div>
         </div>
+</div>
+
+                
 
         <script>
             var status = 1
@@ -88,7 +96,7 @@
             const active_btn = document.querySelector('.active');
             const inactive_btn = document.querySelector('.inactive');
             const status_icon = document.getElementById('status_icon');
-            const logout_option = document.querySelector('.opt4')
+            const logout_option = document.querySelector('.opt4');    
             const notification_container = document.querySelector('.analytics-container')
             const activity_container = document.querySelector('.activity-container')
             const vehicles_container = document.querySelector('.vehicles-container')
@@ -115,51 +123,6 @@
                 }
                 
 
-            })
-            hire_option.addEventListener('click', function (){
-                notification_container.style.display = 'none'
-                activity_container.style.display = 'block'
-                profile_container.style.display = 'none'
-                vehicles_container.style.display = 'none'
-                hire_option.style.backgroundColor = '#194672'
-                activity_option.style.backgroundColor = ''
-                profile_option.style.backgroundColor = ''
-                vehicles_option.style.backgroundColor = ''
-            })
-
-            activity_option.addEventListener('click',function (){
-                profile_container.style.display = 'none'
-                notification_container.style.display = 'block'
-                activity_container.style.display = 'none'
-                vehicles_container.style.display = 'none'
-                hire_option.style.backgroundColor = ''
-                activity_option.style.backgroundColor = '#194672'
-                profile_option.style.backgroundColor = ''
-                vehicles_option.style.backgroundColor = ''
-            })
-
-            profile_option.addEventListener('click',function (){
-                profile_container.style.display = 'block'
-                activity_container.style.display = 'none'
-                notification_container.style.display = 'none'
-                vehicles_container.style.display = 'none'
-                profile_option.style.backgroundColor = '#194672'
-                activity_option.style.backgroundColor = ''
-                vehicles_option.style.backgroundColor = ''
-                hire_option.style.backgroundColor = ''
-            })
-
-
-
-            vehicles_option.addEventListener('click',function (){
-                profile_container.style.display = 'none'
-                activity_container.style.display = 'none'
-                notification_container.style.display = 'none'
-                vehicles_container.style.display = 'block'
-                vehicles_option.style.backgroundColor = '#194672'
-                profile_option.style.backgroundColor = ''
-                activity_option.style.backgroundColor = ''
-                hire_option.style.backgroundColor = ''
             })
 
             active_btn.addEventListener('click',function (){
