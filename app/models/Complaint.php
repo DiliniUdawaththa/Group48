@@ -22,4 +22,9 @@ class Complaint extends Model
 
     }
 
+    public function findTop5() {
+      $sql = "SELECT * FROM $this->table ORDER BY cmt_id DESC LIMIT 3";
+      return $this->query($sql);
+    }
+
 }

@@ -64,6 +64,9 @@ class Database
 			 KEY `date` (`date`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+			ALTER TABLE 'users'
+				ADD COLUMN `status` int(2) DEFAULT 0 NOT NULL;
+			
 			INSERT INTO `users` (`id`, `name`, `phone`, `email`, `password`, `role`, `date`) VALUES
 			(1001, 'shanthos', '0770000001', 'shanthos@gmail.com', '$2y$10$89s0w3Dnk4.XX4t9VJ3BBeGSSnzauy6tk1rxPBa9RhIky4AlcfEnq', 'driver', '2024-04-09'),
 		    (1002, 'kokul', '0770000002', 'kokul@gmail.com', '$2y$10$?TWlA8AuYDOwNjmtTnBpTruXovf/HMphxKyWNdEw6bynXh1VcReb96', 'driver', '2024-04-09'),
@@ -156,6 +159,14 @@ class Database
 		
 		$this->query($query);
 
+		$query = "
+		CREATE TABLE IF NOT EXISTS 'driver' (
+			`driver_id` int(11) NOT NULL,
+			`status` tinyint(1) NOT NULL DEFAULT '0',
+			PRIMARY KEY (`cmt_id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+		";
+
 		$query= "
 		  DROP TABLE IF EXISTS `driver_status`;
 		  CREATE TABLE IF NOT EXISTS `driver_status` (
@@ -243,7 +254,6 @@ class Database
 		$this->query($query);
 
 		$query="
-		DROP TABLE IF EXISTS `complaint`;
 		CREATE TABLE IF NOT EXISTS `complaint` (
 		  `cmt_id` int(11) NOT NULL AUTO_INCREMENT,
 		  `complainant` text NOT NULL,

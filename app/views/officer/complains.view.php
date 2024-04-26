@@ -125,8 +125,7 @@
                     <thead>
                         <tr>
                             <td>Complainant</td>
-                            <td>Driver ID</td>
-                            <td>Passenger ID</td>
+                            <td>Complaint</td>
                             <td>Status</td>
                             <td>Option</td>
                         </tr>
@@ -135,9 +134,26 @@
 
                     <tr class="data">
                         <td><?= $row->complainant ?></td>
-                        <td><?= $row->driver_id?></td>
-                        <td><?= $row->passenger_id ?></td>
-                        <td><?= $row->status_check ?></td>
+                        <td><?= $row->complaint?></td>
+                        <td><?php if ($row->status_check == 0) {
+                            echo 'Pending';
+                        } elseif ($row->status_check == 1) {
+                            echo 'Investigated';
+                            } ?></td>
+                        <td class="td_button1">
+                            <a href="<?=ROOT?>/officer/complainView/"><button class="detail_btn1">
+                                    <!--<i
+                                        class="fa-solid fa-circle-info" style="color: black;">--></i>
+                                    DETAILS
+                                </button></a>
+                            <a href="<?=ROOT?>/officer/complaint_view/"><button class="detail_btn1">
+                                    <!--<i
+                                        class="fa-solid fa-circle-info" style="color: black;">--></i>
+                                    Investigated
+                                </button></a>
+
+                        </td>
+                        <td></td>
                     </tr>
                     <?php endforeach; ?>
 

@@ -1,7 +1,12 @@
 <?php
 
+
 class OfficerDriver extends Model{
+    public $errors = [];
+
     protected $table = "users";
+
+   
 
     public function getDriverCount() {
         $results = $this->query("SELECT COUNT(*) as count FROM users WHERE role = 'driver';");
@@ -42,5 +47,7 @@ class OfficerDriver extends Model{
 
         //echo "No matching results found.." ;
     }
+
+  
 
 }

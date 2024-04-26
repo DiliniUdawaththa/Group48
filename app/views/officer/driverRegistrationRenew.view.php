@@ -48,7 +48,7 @@
                     <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration</div>
                 </a>
 
-                <a href="<?=ROOT?>/officer/driverRegistrationRenew" class="link">
+                <a href="<?=ROOT?>/officer/driverRegistrationRenew.view" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration Renewal</div>
                 </a>
 
