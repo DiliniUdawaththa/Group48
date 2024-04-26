@@ -22,8 +22,8 @@
                     color: white;
             }
 
-            
-        </style>
+
+</style>
     </head>
     <body>
         
@@ -38,8 +38,8 @@
 
                 <div class="req-body">
                     <div class="req-content">
-                        <button class="req-back-btn"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                        <div class="req-customer">
+            
+                        <div class="req-customer" style="padding-top:20px">
                             <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="req-cus-pic">
                             <div class="req-customer-details">
                                
@@ -48,25 +48,16 @@
                                     <p class="req-time">2 mins ago</p>
                                 
                             </div>
-                       </div>
+                        </div>
                         <div class="location-destination">
                             <p class="req-loc-des"><b>From:</b> <?php echo $data['ride_info']->location?></p>
                             <p class="req-loc-des"><b>To:</b> <?php echo $data['ride_info']->destination?></p>
                             <p class="req-loc-des"><b>Distance:</b> 5.2km</p>
                             <p class="req-loc-des"><b>Vehicle</b> Three Wheeler</p>
+                            <p class="req-loc-des"><b>Offer sent:</b> Rs 600</p>
                         </div>
-                        <form method="post">
-                        <div class="offer-btn">
-                            
-                            <div class="offer-div">
-                                <p class="enter-offer-txt">Enter your offer:</p>
-                                <input type="number" id='offer-price' name="offer_price">
-                                <p style="font-size:13px;margin-top:2px;margin-left:10px;"><input type="checkbox" id="std-fare">Standard fare</p>
-                            </div>
-                            <input type="submit" name="offer" class="req-offer-btn" value="Offer">
-        
-                        </div>
-                        </form>
+                        <div style="display:flex;justify-content:space-around;"><p>Waiting for customer<div class="loader"></div></p></div>
+                        <button class="cancel-offer-btn">Cancel</button>
                            
                         
                     </div>

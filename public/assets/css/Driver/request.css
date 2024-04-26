@@ -13,13 +13,18 @@
     grid-template-columns: 1fr 1fr;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
     border-radius:  50px 0px 0  50px;
+    background-color: white;
 }
 
 .req-content{
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    padding: 10px 40px 40px 40px;
     height:100%;
     width:100%;
-    border: 1px solid black;
+    overflow: hidden;
 }
 
 .req-customer{
@@ -50,8 +55,8 @@
 
 .location-destination{
     display: block;
-    width: 100%;
 }
+
 .req-loc-des{
     display: block;
     margin-top: 10px;
@@ -59,11 +64,94 @@
     width: 100%;
 }
 
-.req-btns{
+.offer-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    bottom: 0;
+    margin-top: 20px;
+    position: relative;
 
+}
+
+.offer-div p{
+    display: block;
+}
+
+.enter-offer-txt{
+    font-size: 15px;
+    display: block;
+}
+.req-offer-btn{
+    font-size: 20px;
+    height:50px;
+    width: 100px;
+    border-radius: 5px;
+    border:0px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+.req-back-btn{
+    font-size: 20px;
+    background-color:rgb(14, 92, 141);
+    color:white;
+    border-radius: 100%;
+    width: 40px;
+    height:40px;
+    cursor: pointer;
+}
+
+
+.req-offer-btn{
+    background-color: greenyellow;
+}
+
+.req-offer-btn:active{
+    background-color: rgb(127, 200, 17);
+}
+
+
+#offer-price{
+    font-size: 20px;
+    height: 50px;
+    width: 100px;
+    margin-left: 10px;
 }
 .req-map{
     height:100%;
     width:100%;
 
+}
+
+    /* HTML: <div class="loader"></div> */
+    .loader {
+        width: 30px;
+        aspect-ratio: 2;
+        --_g: no-repeat radial-gradient(circle closest-side,#074f79 90%,#0000);
+        background: 
+          var(--_g) 0%   50%,
+          var(--_g) 50%  50%,
+          var(--_g) 100% 50%;
+        background-size: calc(100%/4) 50%;
+        animation: l3 1s infinite linear;
+      }
+      @keyframes l3 {
+          20%{background-position:0%   0%, 50%  50%,100%  50%}
+          40%{background-position:0% 100%, 50%   0%,100%  50%}
+          60%{background-position:0%  50%, 50% 100%,100%   0%}
+          80%{background-position:0%  50%, 50%  50%,100% 100%}
+      }
+.cancel-offer-btn{
+    height:50px;
+    width: 100px;
+    background-color: red;
+    color:white;
+    border-radius: 5px;
+    border: 1px;
+    cursor: pointer;
+    margin-left: 50px;
+}
+
+.cancel-offer-btn:active{
+    background-color: rgb(194, 14, 14);
 }

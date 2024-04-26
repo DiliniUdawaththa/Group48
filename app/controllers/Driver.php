@@ -27,7 +27,7 @@ class Driver extends Controller{
                 'vehinsuranceimg' => '0',
             );
 
-            $_SESSION['regitems'] = $registrationitems;
+            $_SESSION['REGISITEMS'] = $registrationitems;
             
 
             redirect('driver/registration');
@@ -143,7 +143,8 @@ class Driver extends Controller{
     public function request($id = null, $passenger_id = null){
         $data['error'] = [];
         $data['ids'] = $passenger_id;
-
+        $_SESSION['ride_id'] = $id;
+        $_SESSION['pass_id'] = $passenger_id;
         $cust = new User();
 
         $current_rides = new Current_rides();
@@ -158,10 +159,59 @@ class Driver extends Controller{
         ]);
         $data['customer'] = $row4;
 
+        $offers = new Offers();
+
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            
+            show($_SESSION);
+            $_POST['driver_id'] = $_SESSION['USER_DATA']->id;
+            $_POST['ride_id'] = $id;
+            show($_POST);
+
+            if(isset($_POST['offer_price'])){
+                $row2 = $offers->where([
+                    'driver_id' => $_SESSION['USER_DATA']->id,
+                ]);
+                if(isset($row2)){
+                    foreach($row2 as $row1){
+                        $record = (array)$row1;
+                        $offers->delete($record);
+                    }
+                }
+                $offers->insert($_POST);
+                redirect('driver/request02');
+                
+                
+                
+                
+            }
+
+        }
+
 
 
         $this-> view('driver/request',$data);
         
+    }
+
+    public function request02(){
+        $data['errors'] = [];
+
+        $cust = new User();
+
+        $row4 = $cust->first([
+            "id"=> $_SESSION['pass_id'],
+        ]);
+        $data['customer'] = $row4;
+
+        $current_rides = new Current_rides();
+        $row3 = $current_rides->first([
+            "id"=> $_SESSION['ride_id'],
+        ]);
+
+        $data['ride_info'] = $row3;
+
+        $this->view('driver/request02',$data);
     }
 
     public function registration(){
@@ -174,6 +224,7 @@ class Driver extends Controller{
         ]);
 
         
+        
 
         if(isset($row1[0])){
             redirect('driver/ride');
@@ -182,11 +233,11 @@ class Driver extends Controller{
             if($_SERVER['REQUEST_METHOD'] == "POST"){
                 if(isset($_POST['registration'])){
                     $Registerdata['email'] = $_SESSION['USER_DATA']->email;
-                    $Registerdata['profileimg'] = $_SESSION['regitems']['profileimg'];
-                    $Registerdata['driverlicenseimg'] =  $_SESSION['regitems']['driverlicenseimg'];
-                    $Registerdata['revenuelicenseimg'] =  $_SESSION['regitems']['revenuelicenseimg'];
-                    $Registerdata['vehregistrationimg'] =  $_SESSION['regitems']['vehregistrationimg'];
-                    $Registerdata['vehinsuranceimg'] =  $_SESSION['regitems']['vehinsuranceimg'];
+                    $Registerdata['profileimg'] = $_SESSION['REGISITEMS']['profileimg'];
+                    $Registerdata['driverlicenseimg'] =  $_SESSION['REGISITEMS']['driverlicenseimg'];
+                    $Registerdata['revenuelicenseimg'] =  $_SESSION['REGISITEMS']['revenuelicenseimg'];
+                    $Registerdata['vehregistrationimg'] =  $_SESSION['REGISITEMS']['vehregistrationimg'];
+                    $Registerdata['vehinsuranceimg'] =  $_SESSION['REGISITEMS']['vehinsuranceimg'];
                     $Registerdata['status'] = 1;
                     $driverreg->insert($Registerdata);
                     redirect('driver/ride');
@@ -194,6 +245,7 @@ class Driver extends Controller{
 
             }
             $this->view('driver/registration/registration',$data);
+            show([$_SESSION]);
             
     }
 
@@ -221,7 +273,7 @@ class Driver extends Controller{
                                 $destination = $folder.time().$_FILES['photoInput']['name'];
                                 move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
                                 show($_FILES['photoInput']);
-                                $_SESSION['regitems']['driverlicenseimg']=$destination;
+                                $_SESSION['REGISITEMS']['driverlicenseimg']=$destination;
                                 $_POST['image'] = $destination;
                                 $data['errors']= [];
                                 redirect('driver/registration');
@@ -268,7 +320,7 @@ class Driver extends Controller{
                             $destination = $folder.time().$_FILES['photoInput']['name'];
                             move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
                             show($_FILES['photoInput']);
-                            $_SESSION['regitems']['profileimg']=$destination;
+                            $_SESSION['REGISITEMS']['profileimg']=$destination;
                             $_POST['image'] = $destination;
                             $data['errors']= [];
                             redirect('driver/registration');
@@ -317,7 +369,7 @@ class Driver extends Controller{
                             $destination = $folder.time().$_FILES['photoInput']['name'];
                             move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
                             show($_FILES['photoInput']);
-                            $_SESSION['regitems']['revenuelicenseimg']=$destination;
+                            $_SESSION['REGISITEMS']['revenuelicenseimg']=$destination;
                             $_POST['image'] = $destination;
                             $data['errors']= [];
                             redirect('driver/registration');
@@ -365,7 +417,7 @@ class Driver extends Controller{
                             $destination = $folder.time().$_FILES['photoInput']['name'];
                             move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
                             show($_FILES['photoInput']);
-                            $_SESSION['regitems']['vehinsuranceimg']=$destination;
+                            $_SESSION['REGISITEMS']['vehinsuranceimg']=$destination;
                             $_POST['image'] = $destination;
                             $data['errors']= [];
                             redirect('driver/registration');
@@ -413,7 +465,7 @@ class Driver extends Controller{
                             $destination = $folder.time().$_FILES['photoInput']['name'];
                             move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
                             show($_FILES['photoInput']);
-                            $_SESSION['regitems']['vehregistrationimg']=$destination;
+                            $_SESSION['REGISITEMS']['vehregistrationimg']=$destination;
                             $_POST['image'] = $destination;
                             $data['errors']= [];
                             redirect('driver/registration');
