@@ -5,13 +5,18 @@ class AdminDashboard extends Model{
 
     public function getRoleCounts() {
         $results = $this->query("SELECT role, COUNT(*) as count FROM users GROUP BY role;");
-    
-        $roleCounts = [];
+        
+        $roleCounts = [
+            'admin' => 0,
+            'customer' => 0,
+            'driver' => 0,
+            'officer' => 0
+        ];
     
         foreach ($results as $result) {
             $role = $result->role;
             $count = $result->count;
-            
+    
             $roleLabels = [
                 'admin' => 'admin',
                 'user' => 'customer',

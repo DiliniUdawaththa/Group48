@@ -220,6 +220,22 @@ class Database
 		KEY `fk_passenger` (`passenger_id`),
 		KEY `fk_driver` (`driver_id`)
 		) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+		INSERT INTO `rides` (`id`, `passenger_id`, `driver_id`, `date`, `location`, `l_lat`, `l_long`, `destination`, `d_lat`, `d_long`, `vehicle`, `time`, `distance`, `fare`, `ride_start`, `state`) VALUES
+		(9, 21, 3, '2024-04-09 13:30:35', 'University of Colombo, Sri Lanka', 6.90224, 79.8614, 'Veluwanarama Flats, Sri Lanka', 6.87326, 79.868, 'bike', '00:20', '2.21', 500, 0, 'Success'),
+		(10, 21, 4, '2024-04-09 15:01:15', 'Viharamahadevi Park, Sri Lanka', 6.91291, 79.8617, 'Molpe Road, Sri Lanka', 6.79482, 79.9008, 'Ac-car', '01:12', '50.67', 500, 0, 'Success'),
+		(13, 21, 4, '2024-04-09 18:25:47', 'Veluwanarama Flats, Sri Lanka', 6.87325, 79.868, 'University of Colombo, Sri Lanka', 6.90225, 79.86, 'auto', '00:7', '4.45', 500, 0, 'Success'),
+		(14, 21, 1005, '2024-04-10 00:33:50', 'University of Colombo, Sri Lanka', 6.90123, 79.8603, 'Moratuwa - Piliyandala Road, Sri Lanka', 6.79891, 79.9166, 'auto', '00:20', '16.01', 500, 0, 'Success'),
+		(15, 21, 1008, '2024-04-10 00:48:32', 'University of Colombo, Sri Lanka', 6.90123, 79.8603, 'Moratuwa - Piliyandala Road, Sri Lanka', 6.79891, 79.9166, 'auto', '00:20', '16.01', 500, 0, 'Reject'),
+		(19, 21, 1008, '2024-04-10 02:39:27', 'University of Colombo, Sri Lanka', 6.90123, 79.8603, 'Moratuwa - Piliyandala Road, Sri Lanka', 6.79891, 79.9166, 'auto', '00:20', '16.01', 500, 0, 'Success'),
+		(20, 21, 1006, '2024-04-10 23:02:14', 'University of Colombo, Sri Lanka', 6.90123, 79.8603, 'Moratuwa - Piliyandala Road, Sri Lanka', 6.79891, 79.9166, 'auto', '00:20', '16.01', 500, 0, 'Success'),
+		(21, 21, 1006, '2024-04-10 23:03:02', 'University of Colombo, Sri Lanka', 6.90123, 79.8603, 'Moratuwa - Piliyandala Road, Sri Lanka', 6.79891, 79.9166, 'auto', '00:20', '16.01', 500, 0, 'Reject'),
+		(32, 1, 1009, '2024-04-20 20:12:28', 'Veluwanarama Flats, Sri Lanka', 6.87325, 79.868, 'Delkanda 10250, Sri Lanka', 6.8637, 79.9029, 'car', '00:9', '5.70', 500, 0, 'Reject'),
+		(33, 21, 1008, '2024-04-21 23:25:11', 'Veluwanarama Flats, Sri Lanka', 6.87325, 79.868, 'Delkanda 10250, Sri Lanka', 6.8637, 79.9029, 'auto', '00:9', '5.70', 500, 0, 'Reject'),
+		(34, 21, 1008, '2024-04-22 09:31:07', 'University of Colombo, Sri Lanka', 6.90209, 79.861, 'Delkanda 10250, Sri Lanka', 6.8637, 79.9029, 'auto', '00:15', '9.01', 500, 0, 'Reject'),
+		(35, 21, 1008, '2024-04-22 11:01:22', 'University of Colombo, Sri Lanka', 6.90226, 79.8615, 'Vihara Maha Devi Park, Sri Lanka', 6.91282, 79.8624, 'auto', '00:8', '4.47', 500, 0, 'Success'),
+		(36, 21, 1008, '2024-04-22 13:35:55', 'University of Colombo, Sri Lanka', 6.90226, 79.8614, 'Sri Jayawardenepura Kotte 10116, Sri Lanka', 6.87906, 79.9296, 'auto', '00:15', '11.39', 500, 0, 'Reject'),
+		(37, 21, 1008, '2024-04-22 18:41:53', 'University of Colombo, Sri Lanka', 6.90179, 79.8599, ' My Home', 6.87313, 79.868, 'auto', '00:7', '4.95', 500, 0, 'Reject');
+		COMMIT;
 
 
 			";

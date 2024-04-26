@@ -6,7 +6,7 @@
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/Report.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/RideReport.css">
     <style>
         .error{
             border: 1px solid red;
@@ -59,25 +59,27 @@
         <div class="interface">
             <div class="navi">
                 <div class="navi1">
-                    <center><h2>Report Categories</h2></center>
+                    <center><h2>Driver Reports</h2></center>
                 </div>
             </div>
             <div class='report'>
-                <div class='report-box'>
-                    <a href="#" class="report-link"><div class="linkbtn-user">User statistics<i class="fa fa-hand-o-right" aria-hidden="true"></i></div></a>
-                    <a href="<?=ROOT?>/admin/rideReport" class="report-link"><div class="linkbtn">Ride statistics<i class="fa fa-hand-o-right" aria-hidden="true"></i></div></a>
-                    <a href="<?=ROOT?>/admin/customerReport" class="report-link"><div class="linkbtn">Customer reports<i class="fa fa-hand-o-right" aria-hidden="true"></i></div></a>
-                    <a href="<?=ROOT?>/admin/driverReport" class="report-link"><div class="linkbtn">Driver reports<i class="fa fa-hand-o-right" aria-hidden="true"></i></div></a>
-                </div>
+                <form action="<?=ROOT?>/report/driverReport/" method="post">
+                    <label for="selectField"><h4>Select Report Type</h4></label>
+                    <select id="selectField" name="selectField" onchange="toggleFields()" required>
+                        <option value="">Select...</option>
+                        <option value="option1">Overall Driver Report</option>
+                        <option value="option2">Individual Driver Report</option>
+                    </select>
+
+                    <div id="field1" style="display: none;">
+                        <label for="field1Input">Driver ID</label>
+                        <input type="number" id="field1Input" name="field1Input">
+                    </div>
+
+                    <input type="submit" value="Submit">
+                </form>
             </div>
-            <div class="report-container">
-                <h3>Number of users have been registered with the system as on <?php echo date("Y-m-d"); ?> group by their role</h3>
-                <div class="report-select">
-                  <button class="user-btn">Preview</button> 
-                  <button class="ride-btn">Download</button>
-                  <button class="report-cancel-btn">Cancel</button>
-                </div>
-            </div>
+            
     </div>
 
        
@@ -98,26 +100,22 @@
                             logout_button.addEventListener('click', ()=>{
                             window.location.href = "<?=ROOT?>/logout";
                             })
-
-            const report_option = document.querySelector('.linkbtn-user')
-            const report_container = document.querySelector('.report-container')
-            const user_button = document.querySelector('.user-btn')
-            const ride_button = document.querySelector('.ride-btn')
-            const report_cancel_button = document.querySelector('.report-cancel-btn')
-                    report_option.addEventListener('click', ()=>{
-                        report_container.style.display = 'block'
-                    })
-                    user_button.addEventListener('click', ()=>{
-                        window.location.href = "<?=ROOT?>/report/userStatics";
-                    })
-                    ride_button.addEventListener('click', ()=>{
-                        window.location.href = "<?=ROOT?>/report/userStaticsDownload";
-                    })
-                    report_cancel_button.addEventListener('click', ()=>{
-                        report_container.style.display = 'none'
-                    })
                   
         });
+        function toggleFields() {
+            var selectedValue = document.getElementById("selectField").value;
+            var field1 = document.getElementById("field1");
+            // var field2 = document.getElementById("field2");
+            // var field3 = document.getElementById("field3");
+
+            // Show or hide fields based on the selected value
+            if (selectedValue === "option2") {
+            field1.style.display = "block";
+
+            } else {
+            field1.style.display = "none";
+            }
+        }
     </script>
 
 </body>
