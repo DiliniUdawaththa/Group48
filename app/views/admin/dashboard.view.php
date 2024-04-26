@@ -65,13 +65,15 @@
 
             <div class="values">
             <?php foreach ($roleCounts as $role => $count): ?>
-                <div class="val-box">
-                    <i class="fa-solid fa-users"></i>
-                    <div>
-                        <span><h3><?= ucfirst($role) ?></h3></span>
-                        <center><h3><?= $count ?></h3></center>
-                    </div>   
-                </div>
+                <?php if ($role !== 'admin'): ?>
+                    <div class="val-box">
+                        <i class="fa-solid fa-users"></i>
+                        <div>
+                            <span><h3><?= ucfirst($role) ?></h3></span>
+                            <center><h3><?= $count ?></h3></center>
+                        </div>   
+                    </div>
+                <?php endif; ?>
             <?php endforeach; ?> 
                 <!-- <div class="val-box">
                     <i class="fa-solid fa-user-group"></i>

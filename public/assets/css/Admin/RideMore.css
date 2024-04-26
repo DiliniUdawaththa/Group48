@@ -32,7 +32,7 @@ header{
 .outer-box{
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: 600px;
     height: 650px;
     border: 2px solid rgba(255,255,255,.5);
     border-radius: 20px;
@@ -44,7 +44,7 @@ header{
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 400px;
+    width: 500px;
     height: 600px;
     background: transparent;
     border: 2px solid rgba(255,255,255,.5);
@@ -62,8 +62,8 @@ header{
     text-align: center;
 }
 .ok-btn{
-    margin-top: 20px;
-    margin-left: 250px;
+    margin-top: 10px;
+    margin-left: 200px;
     width: 100px;
     height: 45px;
     background: #37f63d;
