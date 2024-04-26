@@ -2,6 +2,7 @@
 <html>
 <head>
 <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
+<meta http-equiv="refresh" content="15" id="refreshMeta">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_step5.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css"> 
     <!-- google font   -->
@@ -38,18 +39,21 @@
              <center>
                     <h2>Driver on the way</h2> 
                     <h6>Estimate time </h6>    
-                    <h5>5 min</h5>
+                    <h5 id='time_limit'></h5>
                     <div class="driver_profile">
-                        <img class="driver_image" src="<?= ROOT ?>/assets/img/customer/person.jpg" alt="">
+                        <img class="driver_image" src="<?= ROOT ?>/assets/img/customer/person.png" alt="">
                         <img class="driver_vehicle" src="<?= ROOT ?>/assets/img/customer/c2.jpeg" alt="">
                     </div>
             </center>
             
-
+            <button class="whatapp" onclick="openWhatsApp()">
+              <i class="fa-solid fa-phone"></i>
+              </button>
             <button class="chatbot-toggler">
                 <span class="material-symbols-rounded">chat</span>
                 <span class="material-symbols-outlined">close</span>
               </button>
+              
               <div class="chatbot">
                 <header>
                   <h2>Chatbot</h2>
@@ -74,7 +78,20 @@
             <div id="map" > </div>
         </div>
     </div>       
+    <script>
+    function openWhatsApp() {
         
+        // WhatsApp URL with phone number (replace '1234567890' with the desired phone number)
+        <?php  foreach ($rows2 as $row2) :  ?>
+               
+        num =  parseInt("<?=$row2->phone;?>");       
+         var url = 'https://wa.me/+94'+num;
+
+        // Open WhatsApp in a new tab
+        window.open(url, '_blank');
+        <?php   endforeach; ?>
+    }
+</script>
 </body>
 </html>
 
@@ -103,10 +120,10 @@
                 waypoints: [
                     L.latLng(lat,long),
                     L.latLng(<?=$row->lat?>,<?=$row->long?>)
-                ]
+                ],routeWhileDragging: true
             });
-            // console.log(lat,long);
-        //    Routing.addTo(map);
+            
+        
 
         // real time tracking
             var taxiIcon = L.icon({
@@ -121,7 +138,8 @@
                         ]
                     }).on('routesfound', function (e) {
                         var routes = e.routes;
-
+                        var time = e.routes[0].summary.totalTime; 
+                        document.getElementById("time_limit").innerText=Math.floor((time%3600)/60)+' min';
                         e.routes[0].coordinates.forEach(function (coord, index) {
                             setTimeout(function () {
                                 marker.setLatLng([coord.lat, coord.lng]);

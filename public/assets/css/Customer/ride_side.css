@@ -75,7 +75,10 @@ body{
      background-image: linear-gradient(to left, white, #1f3648);
      /* box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3); */
  }
-
+ .linkbutton i {
+    margin-right: 15px;
+    margin-left: 10px;
+}
  .linkbutton2 i {
      margin-right: 15px;
      margin-left: 10px;

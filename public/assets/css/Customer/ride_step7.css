@@ -118,8 +118,9 @@ body{
   .reporttext textarea{
     justify-content: top;
     width: 70%;
-    height: 20vh;
+    height: 15vh;
     border-radius: 10px;
+    margin-top: 3vh;
   }
 
 
