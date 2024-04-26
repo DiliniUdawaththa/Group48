@@ -119,7 +119,7 @@
             Routing = L.Routing.control({
                 waypoints: [
                     L.latLng(lat,long),
-                    L.latLng(<?=$row->lat?>,<?=$row->long?>)
+                    L.latLng(<?=$row->lat?>,<?=$row->lng?>)
                 ],routeWhileDragging: true
             });
             
@@ -130,10 +130,10 @@
                     iconUrl: '<?= ROOT ?>/assets/img/customer/<?=$row->vehicle?>.png',
                     iconSize: [50, 40]
                 })
-                var marker = L.marker([<?=$row->lat?>, <?=$row->long?>], { icon: taxiIcon }).addTo(map);
+                var marker = L.marker([<?=$row->lat?>, <?=$row->lng?>], { icon: taxiIcon }).addTo(map);
                     L.Routing.control({
                         waypoints: [
-                            L.latLng(<?=$row->lat?>, <?=$row->long?>),
+                            L.latLng(<?=$row->lat?>, <?=$row->lng?>),
                             L.latLng(lat,long)
                         ]
                     }).on('routesfound', function (e) {

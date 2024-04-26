@@ -27,8 +27,20 @@ class Add_Place extends Model
 
         if (!preg_match("/^[a-zA-Z\s]*$/", trim($data['name']))) {
             $this->errors['name'] = "name can only have letters.";
-        }elseif ($this->where(['name'=> $data['name']])) {
+        }elseif ($this->where(['passenger_id' => $_SESSION['USER_DATA']->id,'name'=> $data['name']])) {
+
             $this->errors['name'] = "name already exist.";
+        }elseif (empty($data['name'])) {
+			$this->errors['name'] = "Please enter place name";
+        }
+
+        if (empty($data['address']) && empty($data['lat'])) {
+			$this->errors['address'] = "please point the map";
+        }
+        
+
+        if (empty($data['category'])) {
+			$this->errors['category'] = "please select the category .";
         }
 
         

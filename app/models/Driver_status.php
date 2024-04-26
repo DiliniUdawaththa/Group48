@@ -13,7 +13,7 @@ class Driver_status extends Model
         'driver_id',
         'vehicle',
 		'lat',
-        'long',
+        'lng',
 		'status',
 
 	];

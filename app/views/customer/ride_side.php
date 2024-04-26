@@ -8,7 +8,7 @@
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="" class="userimage">
+                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -47,7 +47,7 @@
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="" class="userimage">
+                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>

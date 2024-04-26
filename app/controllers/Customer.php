@@ -22,6 +22,13 @@
             redirect('login');
         }
         $add_place = new Add_Place();
+        $user = new User();
+
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0];
+        // show($data);
+
         $rows = $add_place->findAll();
         $data['rows'] = array();
         if(isset($rows[0])){
@@ -30,6 +37,13 @@
                     $data['rows'][] = $rows[$i];
             }
         }
+        
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
+        // show($data['img']);
+        
+
         if ($_SERVER["REQUEST_METHOD"]=="POST") {
               $location=$_POST["location"];
               $destination=$_POST["destination"];
@@ -37,9 +51,16 @@
               $l_long=$_POST["l_long"];
               $d_lat=$_POST["d_lat"];
               $d_long=$_POST["d_long"];
-              if(!empty($location) &&  !empty($destination) &&  $l_lat!=='0.000' &&  $d_lat!=='0.000' &&  $l_long!=='0.000' &&  $d_long!=='0.000')
+            //   show($_POST);
+              if(!empty($location) &&   $l_lat!=='' &&    $l_long!==''  )
               {
-                 redirect('customer/ride_step2/.php?location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long);
+                if( !empty($destination) && $d_lat!=='' &&  $d_long!=='') 
+                {
+                    redirect('customer/ride_step2/.php?location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long);
+                }
+                else{
+                    $data['errors']['destination'] = "select the destination";
+                }
               }
               else{
                 $data['errors']['location'] = "select the pickup location";
@@ -58,6 +79,11 @@
             redirect("login");
 
         }
+        $user = new User();
+
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
         if(empty($_GET['location'])){
             redirect("customer/ride_step1");
         }
@@ -91,10 +117,15 @@
             message('please login to view the page');
             redirect("login");
         }
+        $user = new User();
         $current_ride = new Current_rides();
         $standardfare = new standardFare();
         $driver_status = new Driver_status();
         $arr =array();
+
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
 
         $rows = $standardfare->findAll();
         $data['rows'] = array();
@@ -181,6 +212,10 @@
         $user = new User();
         $current_ride = new Current_rides();
 
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
+
         $rows = $driver_staus->findAll();
         $data['rows'] = array();
         if(isset($rows[0])){
@@ -242,7 +277,8 @@
                  $chat['passenger_id']=$_SESSION['USER_DATA']->id;
                  $chat['driver_id']=$_POST['Driver_id'];
                  $chat['message']=$_POST['message_text'];
-                 $chat['ride_id'] = $_SESSION['USER_DATA']->id+$_POST['Driver_id'];
+                 $chat['ride_id'] = $_POST['ride_id'];
+                // show( $chat);
                 $message->insert($chat);
             }
             if(isset($_POST['driver_id']))
@@ -288,6 +324,9 @@
         $user = new User();
         $rides = new Rides();
 
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
 
         $rows = $driver_status->findAll();
         $data['rows'] = array();
@@ -335,6 +374,12 @@
             redirect("login");
         }
         $rides = new Rides();
+        $user = new User();
+
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
+
         $rows = $rides->findAll();
         $data['rows'] = array();
         if(isset($rows[0])){
@@ -357,6 +402,11 @@
         }
         $complaint = new Complaint();
         $rating = new Rating();
+        $user = new User();
+
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
 
         $sample = array();   // sample is complaint data store array
         $sample1= array();   // sample1 is rating data story array
@@ -368,13 +418,13 @@
                 $targetFile = $targetDir . basename($_FILES["file"]["name"]);
             
                 if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
-                    echo "The file " . basename($_FILES["file"]["name"]) . " has been uploaded.";
-                      
+                    // echo "The file " . basename($_FILES["file"]["name"]) . " has been uploaded.";
+                      $sample['file_path']=basename($_FILES["file"]["name"]);
                 } else {
-                   echo "Sorry, there was an error uploading your file.";
+                //    echo "Sorry, there was an error uploading your file.";
                 }
             } else {
-                echo "File upload error: " . $_FILES["file"]["error"];
+                // echo "File upload error: " . $_FILES["file"]["error"];
             }
             
                     
@@ -392,8 +442,8 @@
                 $sample['complainant']='Passenger';
                 $sample['datetime'] = date("Y-m-d H:i:s");
                 if (!empty($sample['complaint'])){
-                    show($sample);
-                    // $complaint->insert($sample);
+                    // show($sample);
+                    $complaint->insert($sample);
                 }
 
                 // rating part insert data--------------------------------------------------
@@ -404,7 +454,7 @@
                 if($_POST['star']!=='0'){
                     $rating->insert($sample1);
                 }
-                // redirect('customer/ride_step1');
+                redirect('customer/ride_step1');
 
             }
         $data['title'] = "Ride";
@@ -420,6 +470,11 @@
         }
         $data['errors'] = [];
         $add_place = new Add_Place();
+        $user = new User();
+
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
 		
         $rows = $add_place->findAll();
         $data['rows'] = array();
@@ -445,6 +500,12 @@
         }
         $data['errors'] = [];
         $add_place = new Add_Place();
+        $user = new User();
+
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
+
         $rows = $add_place->findAll();
         $data['rows'] = array();
 
@@ -464,6 +525,12 @@
         }
         $data['errors'] = [];
         $add_place = new Add_Place();
+        $user = new User();
+
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
+
         $rows = $add_place->findAll();
         $data['rows'] = array();
 
@@ -503,6 +570,12 @@
         $data['errors'] = [];
         // show($_POST);
         $add_place = new Add_Place();
+        $user = new User();
+
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
+
 		if($_SERVER['REQUEST_METHOD'] == "POST")
 		{
 			if($add_place->validate($_POST))
@@ -512,7 +585,7 @@
                 $_POST['date'] = date("Y-m-d H:i:s");
                 $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
                 $add_place->insert($_POST);
-                show($_POST);
+               
                 // message("Successfully Add Place");
 				 redirect('customer/add_place');
             }
@@ -533,6 +606,10 @@
         $rides = new Rides();
         $user = new User();
 		
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
+
         $rows = $rides->findAll();
         $rows2 = $user->findAll();
 
@@ -562,6 +639,10 @@
                 redirect("login");
             }
             $user =new User();
+            $img = array();
+            $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+            $data['img'] = $img[0]->img_path;
+
             $arr = array();
             $data['rows'] = array();
 
@@ -657,6 +738,12 @@
             message('please login to view the page');
             redirect("login");
         }
+        $user = new User();
+
+        $img = array();
+        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
+        $data['img'] = $img[0]->img_path;
+
         $data['title'] = "Help";
         $this->view('customer/help',$data);
     }

@@ -36,33 +36,6 @@
             <!-- Include jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- Create a div to refresh -->
-
-<!-- <script>
-    // AJAX call to refresh data
-    function fetchData() {
-        $.ajax({
-            url: "localhost/public/customer/ride_step4", // Replace Controller and Action with your controller and action names
-            type: "GET",
-            success: function(response) {
-                $('#contant').html(response); // Update the div with fetched data
-            },
-            error: function(xhr, status, error) {
-                console.error(error); // Log any errors
-            }
-        });
-    }
-
-    function refreshData(){
-        fetchData();
-        setInterval(fetchData,5000);
-    }
-    // Refresh data on page load
-    $(document).ready(function() {
-        refreshData();
-    });
-
-</script> -->
 
                 <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
                 <center>
@@ -90,7 +63,7 @@
                                             </div>
                                             <div class="fare"><b><?=$row2->offer_price?>/-</b></div>
                                             <div class="nrbutton">
-                                            <button class="Negotiate" id="Negotiate_<?=$row2->driver_id?>">Negotiate</button>
+                                            <button class="Negotiate" id="Negotiate_<?=$row2->driver_id?>" onclick="show_message('Negotiate_<?=$row2->driver_id?>')">Negotiate</button>
                                             <!-- <button class="Request">Select</button> -->
                                             </div>
                                         </div>
@@ -112,15 +85,11 @@
                         <i class="fa-solid fa-xmark" id="close"></i>
                     </div>
                     <div class="message_view">
-                    <?php  foreach ($rows1 as $row) :  ?>
-                        <?php if($row->ride_id == $driver_id+$_SESSION['USER_DATA']->id){?>
-                        <div><?=$row->sender?> : <?=$row->message?></div>
-                        <?php }?>
-                    <?php endforeach; ?>
                     </div>
                     <div class="message_input">
                       <textarea name="message_text" id="message_text" cols="50" rows="3" value=""></textarea>
                       <input type="text"  name='Driver_id' id='driverId' style="display:none;">
+                      <input type="text"  name='ride_id' id='rideid' style="display:none;">
                       <button>Send</button>
                     </div>
                 </div>
@@ -177,12 +146,12 @@
                 if(listId=="list_<?=$row->driver_id?>"){
                     document.getElementById('form_fare').value=<?=$row2->offer_price;?>;
                     document.getElementById('ride_id').value=<?=$row4->id;?>;
-                    map.flyTo([ <?=$row->lat?>,<?=$row->long?>], 16)
+                    map.flyTo([ <?=$row->lat?>,<?=$row->lng?>], 16)
                     var myIcon = L.icon({
                         iconUrl: '<?= ROOT ?>/assets/img/customer/dod.png',
                         iconSize: [38, 38]
                     });
-                    var singlemarker=L.marker([<?=$row->lat?>,<?=$row->long?>],{icon: myIcon}).addTo(map); 
+                    var singlemarker=L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon: myIcon}).addTo(map); 
                     var contant = "<center><img src='<?= ROOT ?>/assets/img/customer/person.png' alt='Your Image' style='width: 100px; height: auto; '><br><b style='color:red;'>2314B (RED)</b><br>I am waiting for you.</center>";
                     var popup = singlemarker.bindPopup(contant)
                     singlemarker.openPopup();
@@ -194,24 +163,34 @@
 
         }
         //---------------------------------------------------------------------------------------------------------------
-        <?php  foreach ($rows as $row) :  ?>
-             <?php if($row->vehicle == $_GET['vehicle']){  ?>
-                
-                var negotiate = document.getElementById('Negotiate_<?=$row->driver_id?>');
-                var messagebox=document.getElementById('message_popup');
-                var contant=document.getElementById('contant');
-                var close=document.getElementById('close')
+        function show_message(id){
+            <?php  foreach ($rows2 as $row2) :  ?>
+                if(id == 'Negotiate_<?=$row2->driver_id?>')
+                {
+                    var negotiate = document.getElementById('Negotiate_<?=$row2->driver_id?>');
+                    var messagebox=document.getElementById('message_popup');
+                    var contant=document.getElementById('contant');
+                    var close=document.getElementById('close')
 
-                negotiate.addEventListener('click', () => {
-                    messagebox.style.display="block";
-                    document.getElementById('driverId').value=<?=$row->driver_id?>;
-                    
-                })
-                close.addEventListener('click', () => {
-                    messagebox.style.display="none";
-                })
-                <?php } ?>
-        <?php endforeach; ?>
+                    negotiate.addEventListener('click', () => {
+                        messagebox.style.display="block";
+                        document.getElementById('driverId').value=<?=$row2->driver_id?>;
+                        document.getElementById('rideid').value=<?=$row2->ride_id?>;
+                        
+                    })
+                    close.addEventListener('click', () => {
+                        messagebox.style.display="none";
+                    })
+                }
+
+                <?php endforeach; ?>
+        }
+         //<!-- offer-->
+            
+                
+                
+              
+        
 
        
 </script>
@@ -282,7 +261,7 @@
                             iconUrl : '<?= ROOT ?>/assets/img/customer/<?=$row->vehicle?>.png',
                             iconSize:[50,30]
                         }) 
-                        var marker1 = L.marker([<?=$row->lat?>,<?=$row->long?>],{icon :  vehicle})
+                        var marker1 = L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon :  vehicle})
                         marker1.addTo(map)
                         markers.push(marker1);
                    <?php } ?>
