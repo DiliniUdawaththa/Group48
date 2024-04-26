@@ -7,7 +7,7 @@ class Driverregistration extends Model
 {
 	
 	public $errors = [];
-	protected $table = "driverregistrationdetails";
+	protected $table = "driverregistration";
 
 	protected $allowedColumns = [
 

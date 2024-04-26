@@ -459,6 +459,18 @@
 
         $this->view('admin/rideMore',$data);
     }
+
+    public function rideReport(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $this->view('admin/ride_report');
+
+    }
+
     
     // public function mail(){
     //     $newMail = new reminderMail();

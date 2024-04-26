@@ -149,7 +149,7 @@ class Database
 		// 	";
 		
 		$query= "
-			CREATE TABLE `driverregistration` (
+			CREATE TABLE IF NOT EXISTS `driverregistration` (
 			`email` varchar(50) NOT NULL,
 			`profileimg` varchar(100) NOT NULL,
 			`driverlicenseimg` varchar(100) DEFAULT NULL,
