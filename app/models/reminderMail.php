@@ -22,7 +22,7 @@ class reminderMail extends Model{
 		'date',
 	];
 
-    public function sendreminderEmail($email, $name, $deadline, $otp){
+    public function sendreminderEmail($email, $name, $deadline){
         $mail = new PHPMailer(true);
     
             try {
@@ -38,7 +38,7 @@ class reminderMail extends Model{
                 $mail->addAddress($email);
                 $mail->isHTML(true);
                 $mail->Subject = 'Registration renewal reminder';
-                $mail->Body =  'Hello ' . $name . '<br> Your account will be expired on : ' . $deadline . '<br> To verify use this OTP: ' . $otp ;
+                $mail->Body =  'Hello ' . $name . '<br> Your account will be expired on : ' . $deadline  . '<br> For renew <br>Go to Renew Registration in your dashboard .<br>  ';
                 // $mail->AltBody = 'Body in plain text for non-HTML mail clients';
                 
                 $mail->send();
@@ -63,24 +63,27 @@ class reminderMail extends Model{
         $data = [
             'role' => "driver"
         ];
-
+    
         $drivers = $this->where($data);
-
+    
         // Loop through each driver to calculate deadline
         foreach ($drivers as $driver){
             $deadline = $this->calculateRenewalDeadline($driver->date);
-            // calculate the reminder date
-            $reminderDate = date('Y-m-d', strtotime('-1 week', strtotime($deadline)));
-
-            if (date('Y-m-d') === $reminderDate) {
+            // Calculate the reminder date
+            $reminderDate = date('Y-m-d', strtotime('-7 days', strtotime($deadline)));
+    
+            // Check if the reminder date is within the next 7 days
+            if (strtotime($reminderDate) <= strtotime('+7 days')) {
                 // Generate OTP
-                $otp = $this->generateOTP();
+                // $otp = $this->generateOTP();
                 // Send reminder mail
-                $this->sendreminderEmail($driver->email, $driver->name, $deadline, $otp);
-            } else {
-                echo 'No reminder needed today';
-            }
+                $this->sendreminderEmail($driver->email, $driver->name, $deadline);
+            } 
+            // else {
+            //     echo 'No reminder needed today';
+            // }
         }
+        redirect('admin/driver');
     }
 
 
