@@ -50,26 +50,10 @@
                             </div>
                         </div>
                         <div class="location-destination">
-                            <p class="req-loc-des"><b>From:</b> <?php echo $data['ride_info']->location?></p>
-                            <p class="req-loc-des"><b>To:</b> <?php echo $data['ride_info']->destination?></p>
-                            <p class="req-loc-des"><b>Distance:</b> 5.2km</p>
-                            <p class="req-loc-des"><b>Vehicle</b> Three Wheeler</p>
-                            <p class="req-loc-des"><b>Offer sent:</b> Rs 600</p>
+                            <p>Mr <?php echo ucfirst($data['customer']->name)?> is waiting at his pick-up location</p>
                         </div>
-                        <div style="display:flex;justify-content:space-around;"><p>Waiting for customer<div class="loader"></div></p></div>
-                        <button class="cancel-offer-btn">Cancel</button>
+                        
                            
-                        <div class="negotiation">
-                           <h3>Negotiation request</h3>
-                           <div>
-                                <p class="req-loc-des"><b>Offered fare:</b> Rs 600</p>
-                                <p class="req-loc-des"><b>Requesting fare:</b> Rs. 500</p>
-                            </div>
-                           <div class="neg-btns">
-                                <button class="accept-neg-btn">Accept</button>
-                                <button class="decline-neg-btn">Decline</button>
-                            </div>
-                        </div>
                     </div>
                     <div class="req-map">
                         <div id="map">
