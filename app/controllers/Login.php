@@ -38,7 +38,13 @@ class Login extends Controller
                         if(!isset($row1[0])){
                             redirect('driver/registration');
                         }else{
-                            redirect('driver/ride');
+                            $driver = new User();
+                            if($driver->isExpired($_POST["email"]))
+                            {
+                                redirect('driver/expire');
+                            }else{
+                                redirect('driver/ride');
+                            }                           
                         }
 
                         
