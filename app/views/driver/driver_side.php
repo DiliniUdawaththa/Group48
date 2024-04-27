@@ -1,7 +1,7 @@
 <div class="side-nav">
                 <img src="<?= ROOT ?>/assets/img/logonamenw.png" class="logo">
                 <div>
-                    <img src="<?= ROOT ?>/assets/img/images/profilepic.png" class="profile-pic">
+                    <img src="<?= ROOT ?>/<?php echo $_SESSION['USER_DATA']->img_path; ?>" class="profile-pic">
                     
                     <h4 class="name"><?php echo $_SESSION['USER_DATA']->name; ?> - Driver<img src="<?= ROOT ?>/assets/img/images/active.png" id="status_icon" class="status-light"></h4>
                     <img src="<?= ROOT ?>/assets/img/images/rating.png" class="rating">
@@ -53,7 +53,7 @@
     });
 
     document.querySelector('.noti-1').addEventListener('click', function() {
-        window.location.href = "<?= ROOT ?>/driver/activity";
+        window.location.href = "<?= ROOT ?>/driver/renewHelp";
 
 
     });
@@ -69,6 +69,9 @@
  
     }
 
+    <?php if($_SESSION['registration-expire'] == 1): ?>
+        add_expired_notification();
+    <?php endif; ?>
 
 
 

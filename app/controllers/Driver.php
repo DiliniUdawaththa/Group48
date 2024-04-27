@@ -9,6 +9,9 @@ class Driver extends Controller{
             redirect("login");
         }
         $data['errors'] = [];
+
+        $data['registration-expire'] = 0;
+
         
        
 
@@ -18,6 +21,8 @@ class Driver extends Controller{
         $row1 = $driverreg->where([
             "id"=> $_SESSION['USER_DATA']->id,
         ]);
+
+        
         if(!isset($row1[0])){
             $registrationitems = array (
                 'profileimg' => '0',
@@ -34,18 +39,81 @@ class Driver extends Controller{
             redirect('driver/registration');
 
         }
-        
 
         
+        $user = new User();
+        $row1[0] -> date;
+        $dateFromRow = new DateTime($row1[0]->date);
+
+        // Get today's date
+        $todayDate = new DateTime();
+        $dayDifference = $todayDate->diff($dateFromRow)->days;
+        $data['dayDifference'] = $dayDifference;
+        if($dayDifference > 365){
+            $_SESSION['registration-expire'] = 1;
+        }else{
+            $_SESSION['registration-expire'] = 0;
+        }
         
-        
-       
-        
-       
-        
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $update_flag = 0;
+            $folder = "uploads/images/";
+                if(!file_exists($folder)){
+                    mkdir($folder,0777,true);
+                    file_put_contents($folder.'index.php', "<?php //Silence");
+                    file_put_contents('uploads/index.php', "<?php //Silence");
+                }
+
+                if(isset($_POST['update-pic'])){
+                    
+                    $allowed = ['image/jpeg','image/png','image/jpg'];
+                    if(!empty($_FILES['photoInput']['name'])){
+                        if($_FILES['photoInput']['error'] == 0){
+                            if(in_array($_FILES['photoInput']['type'],$allowed)){
+                                $destination = $folder.time().$_FILES['photoInput']['name'];
+                                move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
+                                $_SESSION['USER_DATA']->img_path =$destination;
+                                $update_flag = 1;
+                                
+                                
+                                
+                                
+                            }
+                            else {
+                                $data['errors'][0] = "File should be a png,jpeg or jpg";
+                                
+                            }
+                        }
+                    }
+                    else{
+                        $data['errors'][0] = "Upload an image";
+                    }
+                    // echo $data['errors'][0];
+                    // show($_FILES['photoInput']); //name of the input
+                    // redirect('driver/registration');
+                }
+
+                if(isset($_POST['update-email'])){
+                    if (filter_var($_POST['new-email'], FILTER_VALIDATE_EMAIL)) {
+                        $_SESSION['USER_DATA'] ->email = $_POST['new-email'];
+                        $update_flag = 1;
+                      }
+                }
+                if(isset($_POST['update-phone'])){
+                    if(strlen($_POST['new-phone'])==10){
+                        $_SESSION['USER_DATA'] ->phone = $_POST['new-phone'];
+                        $update_flag = 1;
+                    }
+                }
+
+                if($update_flag == 1){
+                    $user->update($_SESSION['USER_DATA']->id,(array)$_SESSION['USER_DATA']);
+                }
 
             
-
+        }
+        
+       
         $data['title'] = "Driver";
         $this->view('driver/ride',$data);
          
@@ -124,6 +192,23 @@ class Driver extends Controller{
 
     public function analytics(){
         $data['errors'] = [];
+        $dateTime = new DateTime();
+        $data['total_earned'] = 0;
+        $data['total_rides'] = 0;
+        $data['total_distance'] = 0;
+
+        $rides = new Rides();
+        $allRides = $rides->where([
+            'driver_id' => $_SESSION['USER_DATA']->id,
+        ]);
+
+        $data['current_rides'] = $allRides;
+        foreach ($allRides as $ride) {
+            $data['total_earned'] += $ride->fare;
+            $data['total_rides'] += 1;
+            $data['total_distance'] += $ride->distance;
+            $ride->date = $dateTime->format('Y-m-d');
+        }
 
         $this -> view('driver/analytics',$data);
     }
@@ -387,6 +472,7 @@ class Driver extends Controller{
         $data['errors'] = [];
 
         $driverreg = new Driverregistration();
+        $user = new User();
 
         $row1 = $driverreg->where([
             "id"=> $_SESSION['USER_DATA']->id,
@@ -410,6 +496,8 @@ class Driver extends Controller{
                     $Registerdata['vehregistrationimg'] =  $_SESSION['REGISITEMS']['vehregistrationimg'];
                     $Registerdata['vehinsuranceimg'] =  $_SESSION['REGISITEMS']['vehinsuranceimg'];
                     $Registerdata['status'] = 1;
+                    $_SESSION['USER_DATA'] -> img_path = $_SESSION['REGISITEMS']['profileimg'];
+                    $user->update($_SESSION['USER_DATA']->id,(array)$_SESSION['USER_DATA']);
                     $driverreg->insert($Registerdata);
                     redirect('driver/ride');
                 }
