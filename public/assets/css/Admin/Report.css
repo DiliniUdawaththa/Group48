@@ -63,11 +63,11 @@ body{
     font-size: 20px;
 }
 .linkbutton {
-    padding: 19px 10px;
+    padding: 17px 10px;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
 }
 .linkbutton2 {
-    padding: 19px 10px;
+    padding: 17px 10px;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
 }
 .linkbutton1{
@@ -166,7 +166,7 @@ body{
     /* display: flex; */
     align-items: center;
     /* justify-content: space-between; */
-    background: #111827;
+    background: #fff;
     padding: 5px 15px 5px 15px;
     /* border-left: 4px;
     border-right: 4px;
@@ -179,7 +179,7 @@ body{
     /* justify-content: flex-start; */
     align-items: center;
     padding: 10px 14px;
-    color: #fff;
+    color: #111827;
 }
 /* ---------------------------------report box------------------------------------- */
 .report{
