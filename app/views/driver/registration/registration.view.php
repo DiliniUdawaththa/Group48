@@ -25,7 +25,7 @@
                     <div>
                         <div class="setup-options-inner">
                             <a class="profile" href="<?=ROOT?>/driver/profilePicture">Profile photo</a>
-                            <?php if($_SESSION['regitems']['profileimg']=='0'):?>
+                            <?php if($_SESSION['REGISITEMS']['profileimg']=='0'):?>
                                 <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png">
                             <?php else: ?>
                                 <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Tick.png">
@@ -39,7 +39,7 @@
                     <div>
                         <div class="setup-options-inner">
                             <a class="d-license" href="<?=ROOT?>/driver/driverLicense">Driving License</a>
-                            <?php if($_SESSION['regitems']['driverlicenseimg']=='0'):?>
+                            <?php if($_SESSION['REGISITEMS']['driverlicenseimg']=='0'):?>
                                 <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png">
                             <?php else: ?>
                                 <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Tick.png">
@@ -54,7 +54,7 @@
                     <div>
                         <div class="setup-options-inner">
                             <a class="r-license" href="<?=ROOT?>/driver/revenueLicense">Revenue License</a>
-                            <?php if($_SESSION['regitems']['revenuelicenseimg']=='0'):?>
+                            <?php if($_SESSION['REGISITEMS']['revenuelicenseimg']=='0'):?>
                                 <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png">
                             <?php else: ?>
                                 <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Tick.png">
@@ -68,7 +68,7 @@
                     <div>
                         <div class="setup-options-inner">
                             <a class="v-reg" href="<?=ROOT?>/driver/vehicleRegistration">Vehicle Registration Document</a>
-                            <?php if($_SESSION['regitems']['vehregistrationimg']=='0'):?>
+                            <?php if($_SESSION['REGISITEMS']['vehregistrationimg']=='0'):?>
                                 <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png">
                             <?php else: ?>
                                 <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Tick.png">
@@ -82,7 +82,7 @@
                     <div>
                         <div class="setup-options-inner">
                             <a class="v-insurance" href="<?=ROOT?>/driver/vehicleInsurance">Vehicle Insuarance</a>
-                            <?php if($_SESSION['regitems']['vehinsuranceimg']=='0'):?>
+                            <?php if($_SESSION['REGISITEMS']['vehinsuranceimg']=='0'):?>
                                 <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Arrow Right.png">
                             <?php else: ?>
                                 <img class="arrow1" src="<?= ROOT?>/assets/img/images/Square Tick.png">

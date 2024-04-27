@@ -2,6 +2,7 @@
 
 class AdminRide extends Model{
     protected $table = "rides";
+    protected $table1 = "users";
 
     public function countRide(){
         $result = $this->query("SELECT COUNT(*) as ride_count FROM rides");
@@ -170,5 +171,255 @@ class AdminRide extends Model{
             return 0;
         }
     }
+
+    public function dayRideCount($date){
+        $dayStart = '06:00:00';
+        $dayEnd = '18:00:00';
+
+        $result = $this->query("SELECT COUNT(*) as ride_count FROM rides WHERE DATE(date) = :date 
+                                AND TIME(date) BETWEEN :dayStart AND :dayEnd", 
+                                array(':date' => $date, ':dayStart' => $dayStart, ':dayEnd' => $dayEnd));
+
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function nightRideCount($date){
+        $nightStart = '18:00:01';
+        $nightEnd = '23:59:59';
+        $midStart = '00:00:00';
+        $midEnd = '05:59:59';
+
+        $result = $this->query("SELECT COUNT(*) as ride_count 
+                        FROM rides 
+                        WHERE DATE(date) = :date 
+                        AND ((TIME(date) BETWEEN :nightStart AND :nightEnd) OR 
+                             (TIME(date) BETWEEN :midStart AND :midEnd))", 
+                        array(
+                            ':date' => $date, 
+                            ':nightStart' => $nightStart, 
+                            ':nightEnd' => $nightEnd,
+                            ':midStart' => $midStart, 
+                            ':midEnd' => $midEnd
+                        ));
+        
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+                return 0;
+        }
+
+    }
+
+    public function countRidesByDate($startDate, $endDate) {
+        $result = $this->query("SELECT COUNT(*) as ride_count  
+                                FROM rides 
+                                WHERE date >= :startDate AND date < :endDate",
+                                array(
+                                    ':startDate' => $startDate, 
+                                    ':endDate' => date('Y-m-d', strtotime($endDate . ' + 1 day'))
+                                ));
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+            return 0;
+        }
+    }
+    
+
+    public function searchRidesForRange($startDate,$endDate) {
+        $result = $this->query( "SELECT * FROM rides
+                    WHERE date >= :startDate AND date < :endDate",
+                    array(
+                        ':startDate' => $startDate, 
+                        ':endDate' => date('Y-m-d', strtotime($endDate . ' + 1 day'))
+                    ));
+
+        if ($result) {
+            return $result;
+        } else {
+            return []; 
+        }
+    }
+
+    public function dayRidesCount($startDate,$endDate){
+        $dayStart = '06:00:00';
+        $dayEnd = '18:00:00';
+
+        $result = $this->query("SELECT COUNT(*) as ride_count FROM rides WHERE date >= :startDate AND date < :endDate 
+                                AND TIME(date) BETWEEN :dayStart AND :dayEnd", 
+                                array(':startDate' => $startDate, ':endDate' => date('Y-m-d', strtotime($endDate . ' + 1 day')),':dayStart' => $dayStart, ':dayEnd' => $dayEnd));
+
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function nightRidesCount($startDate,$endDate){
+        $nightStart = '18:00:01';
+        $nightEnd = '23:59:59';
+        $midStart = '00:00:00';
+        $midEnd = '05:59:59';
+
+        $result = $this->query("SELECT COUNT(*) as ride_count FROM rides WHERE date >= :startDate AND date < :endDate  
+                        AND ((TIME(date) BETWEEN :nightStart AND :nightEnd) OR 
+                             (TIME(date) BETWEEN :midStart AND :midEnd))", 
+                        array(
+                            ':startDate' => $startDate,
+                            ':endDate' => date('Y-m-d', strtotime($endDate . ' + 1 day')), 
+                            ':nightStart' => $nightStart, 
+                            ':nightEnd' => $nightEnd,
+                            ':midStart' => $midStart, 
+                            ':midEnd' => $midEnd
+                        ));
+        
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+                return 0;
+        }
+
+    }
+
+    public function customers(){
+        $currentYear = date('Y');
+        $result = $this->query("SELECT * FROM users WHERE role = 'user' AND YEAR(date) = :current_year",array(':current_year' => $currentYear));
+
+        if ($result) {
+            return $result;
+        } else {
+            return []; 
+        }
+    }
+
+    public function customerByYear(){
+        $currentYear = date('Y');
+        $lastYear = $currentYear - 1;
+    
+        $result = $this->query("
+            SELECT 
+                YEAR(date) AS year, 
+                COUNT(*) AS user_count 
+            FROM 
+                users 
+            WHERE 
+                role = 'user' 
+                AND YEAR(date) IN (:current_year, :last_year)
+            GROUP BY 
+                YEAR(date)
+        ", array(
+            ':current_year' => $currentYear,
+            ':last_year' => $lastYear
+        ));
+    
+        $userCounts = [];
+        foreach ($result as $row) {
+            $rowArray = (array)$row; // Cast stdClass object to array
+            $userCounts[$rowArray['year']] = $rowArray['user_count'];
+        }
+
+        return $userCounts;
+    }
+
+    public function searchCustomer($id) {
+        $result = $this->query("SELECT * FROM users WHERE id = :id", array(':id' => $id));
+
+        if ($result) {
+            return $result;
+        } else {
+            return []; 
+        }
+    }
+
+    public function rideCountOfCustomer($id){
+        $str = "Reject";
+        $result = $this->query("SELECT COUNT(*) as ride_count FROM rides WHERE passenger_id = :id AND state = :str", array(':id' => $id, ':str' => $str));
+
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function countRideByCustomer($id){
+        $result = $this->query("SELECT COUNT(*) as ride_count FROM rides WHERE passenger_id = :id", array(':id' => $id));
+
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function drivers(){
+        $currentYear = date('Y');
+        $result = $this->query("SELECT * FROM users WHERE role = 'driver' AND YEAR(date) = :current_year",array(':current_year' => $currentYear));
+
+        if ($result) {
+            return $result;
+        } else {
+            return []; 
+        }
+    }
+
+    public function driverByYear(){
+        $currentYear = date('Y');
+        $lastYear = $currentYear - 1;
+    
+        $result = $this->query("
+            SELECT 
+                YEAR(date) AS year, 
+                COUNT(*) AS user_count 
+            FROM 
+                users 
+            WHERE 
+                role = 'driver' 
+                AND YEAR(date) IN (:current_year, :last_year)
+            GROUP BY 
+                YEAR(date)
+        ", array(
+            ':current_year' => $currentYear,
+            ':last_year' => $lastYear
+        ));
+    
+        $userCounts = [];
+        foreach ($result as $row) {
+            $rowArray = (array)$row; // Cast stdClass object to array
+            $userCounts[$rowArray['year']] = $rowArray['user_count'];
+        }
+
+        return $userCounts;
+    }
+
+    public function expiredDriverCount(){
+        $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
+
+        $result = $this->query("SELECT COUNT(*) as count FROM users WHERE role = 'driver' AND date < :oneYearAgo ",
+                                array(':oneYearAgo' => $oneYearAgo));
+
+        if ($result && isset($result[0]->count)) {
+            return $result[0]->count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function countRideByDriver($id){
+        $result = $this->query("SELECT COUNT(*) as ride_count FROM rides WHERE driver_id = :id", array(':id' => $id));
+
+        if ($result && isset($result[0]->ride_count)) {
+            return $result[0]->ride_count;
+        } else {
+            return 0;
+        }
+    }
+
+    
            
 }

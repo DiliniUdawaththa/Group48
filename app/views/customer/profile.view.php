@@ -9,7 +9,7 @@
 
 <body>
     <div class="main">
-        <!-- side bar========================= -->
+        <!-- side bar=========================  -->
         <div class="sidebar">
 
              <div class="barimagetag">
@@ -18,7 +18,7 @@
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="" class="userimage">
+                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
@@ -55,23 +55,29 @@
            <form  method="post" enctype="multipart/form-data">
                <div class="main_box">
                  <div class="image_box">
-                    <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="">
+                 <?php foreach ($rows as $row) : ?>
+                    <?php if($row->id==$_SESSION['USER_DATA']->id) { ?>
+                    <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="">
                     <input type="file" name="image">
                  </div>
+                 
+                 
                  <div class="input_box">
                     <label for="">Name</label><br>
-                    <input type="text" name="name" value="<?=$_SESSION['USER_DATA']->name;?>" readonly><br>
+                    <input type="text" name="name" value="<?=$row->name;?>" readonly><br>
                     <label for="">E-Mail Address</label><br>
-                    <input type="text" name="email" value="<?=$_SESSION['USER_DATA']->email;?>" readonly><br>
+                    <input type="text" name="email" value="<?=$row->email;?>" readonly><br>
                     <label for="">Mobile Number</label><br>
-                    <input type="text" name="phone" value="<?=$_SESSION['USER_DATA']->phone;?>" readonly><br>
+                    <input type="text" name="phone" value="<?=$row->phone;?>" readonly><br>
                     <label for="" >Address</label><br>
-                    <input type="text" value="<?=$_SESSION['USER_DATA']->address;?>" name="address"><br>
+                    <input type="text" value="<?=$row->address;?>" name="address"><br>
                     <label for="">NIC No</label><br>
-                    <input type="text" value="<?=$_SESSION['USER_DATA']->nic;?>" name="nic"><br>
+                    <input placeholder="xxxxxxxxxxxx" type="text" value="<?=$row->nic;?>" name="nic" <?php if($row->nic !== ''){echo 'readonly';}?>><br>
                     <label for="">DOB</label><br>
-                    <input type="text" value="<?=$_SESSION['USER_DATA']->dob;?>" name="dob"><br>
+                    <input placeholder="dd/mm/yyyy" type="text" value="<?=$row->dob;?>" name="dob" <?php if($row->dob !== ''){echo 'readonly';}?>><br>
                  </div>
+                    <?php }?>
+                    <?php endforeach; ?>
                  </div>
                 <input type="submit" name="submit" value="Upload" class="upload">
             </form>
@@ -83,7 +89,7 @@
 <script>
     //------------------------logout---------------------------------------------
 
-    const container=document.querySelector('.container')
+           const container=document.querySelector('.container')
             const logout_option = document.querySelector('.linkbutton2')
             const logout_container = document.querySelector('.logout-container')
             const cancel_button = document.querySelector('.cancel-btn')

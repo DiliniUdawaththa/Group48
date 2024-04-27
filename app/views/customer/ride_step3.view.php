@@ -35,23 +35,26 @@
                     
                     <h2>Select the Vehicle</h2>
                     <div class="box_row">
+                    <?php foreach ($rows as $row) : ?>
+                            <?php if($row->vehicletype =='bike') { ?>
 
                         <div class="box" id="box1" onclick="highlightBox('box1','select1')" >
                             <img src="<?= ROOT ?>/assets/img/customer/c1.png" alt="">
                             <div class="ctext">
                                <span>Moto</span>
-                               <span><b>$157.00</b></span>
+                               <span><b>Rs. <?php echo number_format($row->fare * $_GET['distance'], 2); ?></b></span>
                                <span class="no_user"><b>1</b><i class="fa-solid fa-user-group"></i></i></span>
                                <span class="select" id="select1"><i class="fa-solid fa-circle-check" style="color: #2ce86e;"></i></span>
                             </div>
                         </div>
-
+                        <?php }?>
+                        <?php if($row->vehicletype =='auto') { ?>
                         <div class="box" id="box2" onclick="highlightBox('box2','select2')">
                             <img src="<?= ROOT ?>/assets/img/customer/c2.jpeg" alt="">
                             <div class="ctext">
                               <span>Auto</span>
-                              <span><b>$200.00</b></span>
-                              <span class="no_user"><b>3</b><i class="fa-solid fa-user-group"></i></i></span>
+                              <span><b>Rs. <?php echo number_format($row->fare * $_GET['distance'], 2); ?></b></span>
+                              <span class="no_user"><b>2</b><i class="fa-solid fa-user-group"></i></i></span>
                               <span class="select" id="select2"><i class="fa-solid fa-circle-check" style="color: #2ce86e;"></i></span>
                            </div>
                         </div>
@@ -59,27 +62,30 @@
                     </div>
 
                     <div class="box_row">
-
+                    <?php }?>
+                    <?php if($row->vehicletype =='car') { ?>
                         <div class="box" id="box3" onclick="highlightBox('box3','select3')">
                             <img src="<?= ROOT ?>/assets/img/customer/c3.png" alt="">
                             <div class="ctext">
                                 <span>Car</span>
-                                <span><b>$220.00</b></span>
+                                <span><b>Rs. <?php echo number_format($row->fare * $_GET['distance'], 2); ?></b></span>
                                 <span class="no_user"><b>4</b><i class="fa-solid fa-user-group"></i></i></span>
                                 <span class="select" id="select3"><i class="fa-solid fa-circle-check" style="color: #2ce86e;"></i></span>
                             </div>
                         </div>
-
+                        <?php }?>
+                        <?php if($row->vehicletype =='Ac-car') { ?>
                         <div class="box" id="box4" onclick="highlightBox('box4','select4')">
                             <img src="<?= ROOT ?>/assets/img/customer/c3.png" alt="">
                             <div class="ctext">
                                 <span>AC-Car</span>
-                                <span><b>$250.00</b></span>
+                                <span><b>Rs. <?php echo number_format($row->fare * $_GET['distance'], 2); ?></b></span>
                                 <span class="no_user"><b>4</b><i class="fa-solid fa-user-group"></i></i></span>
                                 <span class="select" id="select4"><i class="fa-solid fa-circle-check" style="color: #2ce86e;"></i></span>
                             </div>
                         </div>
-
+                        <?php }?>
+                        <?php endforeach; ?>
                     </div>
                     <form action="" method="POST">
                    <input type="text" name="vehicle" id="vehicle" value="" class="fetch_data" >
@@ -141,27 +147,24 @@
                 iconUrl : '<?= ROOT ?>/assets/img/customer/bike.png',
                 iconSize:[30,30]
             })
-            
-            coords=[[ 6.903528493716559,79.86255888285733],[6.90578774905135,79.85891096002354],[6.90259068644725,79.85790241665184],[ 6.908217502180756,79.85777366643418]]
-            let l =coords.length;
-            if(markers.length!=0){
-            
-            }
-            for(let i=0; i<l; i++){
+
+            <?php foreach ($rows2 as $row) : ?>
+             <?php if($row->vehicle =='bike') { ?>
                 // console.log('Marker position updated to:', [newLat, newLng]);
-                var x = (coords[i][0]-newLat)*(coords[i][0]-newLat)
-                var y =(coords[i][1]-newLng)*(coords[i][1]-newLng)
+                var x = (<?=$row->lat?>-newLat)*(<?=$row->lat?>-newLat)
+                var y =(<?=$row->lng?>-newLng)*(<?=$row->lng?>-newLng)
                 var z = x+y;
                 var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
-                var marker1 = L.marker(coords[i],{icon : taxi})
-                if(z<3*z1){
+                var marker1 = L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon : taxi})
+                if(z<6*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
                 }
-        
-            }
+                <?php }?>
+            <?php endforeach; ?>
+            
             document.getElementById("vehicle").value='bike';
         }
     // auto ---------------------------------------------------------------------------------------------------------------------------------        
@@ -172,26 +175,24 @@
                 iconSize:[50,30]
             })
             
-            coords=[[ 6.90002849379999,79.86005888288888],[6.90178774900000,79.85791096000000],[6.90859068644444,79.8529024166666],[ 6.90621750218888,79.8507736664444]]
-            let l =coords.length;
-            if(markers.length!=0){
-            
-            }
-            for(let i=0; i<l; i++){
+            <?php foreach ($rows2 as $row) : ?>
+             <?php if($row->vehicle =='auto') { ?>
                 // console.log('Marker position updated to:', [newLat, newLng]);
-                var x = (coords[i][0]-newLat)*(coords[i][0]-newLat)
-                var y =(coords[i][1]-newLng)*(coords[i][1]-newLng)
+                var x = (<?=$row->lat?>-newLat)*(<?=$row->lat?>-newLat)
+                var y =(<?=$row->lng?>-newLng)*(<?=$row->lng?>-newLng)
                 var z = x+y;
                 var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
-                var marker1 = L.marker(coords[i],{icon : taxi})
-                if(z<5*z1){
+                var marker1 = L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon : taxi})
+                if(z<6*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
                 }
+                <?php }?>
+            <?php endforeach; ?>
         
-            }
+            
             document.getElementById("vehicle").value='auto';
         }
 // car---------------------------------------------------------------------------------------------------------------------------------
@@ -201,26 +202,22 @@
                 iconSize:[50,30]
             })
             
-            coords=[[ 6.905,79.865],[6.906,79.854],[6.902,79.855],[ 6.905,79.858]]
-            let l =coords.length;
-            if(markers.length!=0){
-            
-            }
-            for(let i=0; i<l; i++){
+            <?php foreach ($rows2 as $row) : ?>
+             <?php if($row->vehicle =='car') { ?>
                 // console.log('Marker position updated to:', [newLat, newLng]);
-                var x = (coords[i][0]-newLat)*(coords[i][0]-newLat)
-                var y =(coords[i][1]-newLng)*(coords[i][1]-newLng)
+                var x = (<?=$row->lat?>-newLat)*(<?=$row->lat?>-newLat)
+                var y =(<?=$row->lng?>-newLng)*(<?=$row->lng?>-newLng)
                 var z = x+y;
                 var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
-                var marker1 = L.marker(coords[i],{icon : taxi})
-                if(z<5*z1){
+                var marker1 = L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon : taxi})
+                if(z<6*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
                 }
-        
-            }
+                <?php }?>
+            <?php endforeach; ?>
             document.getElementById("vehicle").value='car';
         }
 //-Ac-car-----------------------------------------------------------------------------------------------------------------------------------
@@ -230,26 +227,22 @@
                 iconSize:[50,30]
             })
             
-            coords=[[ 6.903,79.862],[6.905,79.858],[6.902,79.857],[ 6.908,79.857]]
-            let l =coords.length;
-            if(markers.length!=0){
-            
-            }
-            for(let i=0; i<l; i++){
+            <?php foreach ($rows2 as $row) : ?>
+             <?php if($row->vehicle =='Ac-car') { ?>
                 // console.log('Marker position updated to:', [newLat, newLng]);
-                var x = (coords[i][0]-newLat)*(coords[i][0]-newLat)
-                var y =(coords[i][1]-newLng)*(coords[i][1]-newLng)
+                var x = (<?=$row->lat?>-newLat)*(<?=$row->lat?>-newLat)
+                var y =(<?=$row->lng?>-newLng)*(<?=$row->lng?>-newLng)
                 var z = x+y;
                 var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
-                var marker1 = L.marker(coords[i],{icon : taxi})
-                if(z<3*z1){
+                var marker1 = L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon : taxi})
+                if(z<6*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
                 }
-        
-            }
+                <?php }?>
+            <?php endforeach; ?>
             document.getElementById("vehicle").value='Ac-car';
         }
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -279,18 +272,35 @@
         });
     googleStreets.addTo(map)
 
+
     var Routing;
     var lat=<?php echo isset($_GET['l_lat']) ? json_encode($_GET['l_lat']) : 'null'; ?>;
     var long=<?php echo isset($_GET['l_long']) ? json_encode($_GET['l_long']) : 'null'; ?>;
     var lat1=<?php echo isset($_GET['d_lat']) ? json_encode($_GET['d_lat']) : 'null'; ?>;
     var lon1=<?php echo isset($_GET['d_long']) ? json_encode($_GET['d_long']) : 'null'; ?>;
-    Routing = L.Routing.control({
-        waypoints: [
-            L.latLng(lat,long),
-            L.latLng(lat1,lon1)
-        ]
-    });
-
+    var lat2=<?php echo isset($_GET['m_lat']) ? json_encode($_GET['m_lat']) : 'null'; ?>;
+    var lon2=<?php echo isset($_GET['m_long']) ? json_encode($_GET['m_long']) : 'null'; ?>;
+    
+    if(lat2=='' && lon2=='')
+    {
+        Routing = L.Routing.control({
+            waypoints: [
+                L.latLng(lat,long),
+                L.latLng(lat1,lon1)
+            ]
+        });
+    }
+    else
+    {
+        Routing = L.Routing.control({
+            waypoints: [
+                L.latLng(lat,long),
+                L.latLng(lat2,lon2),
+                L.latLng(lat1,lon1)
+            ]
+        });
+    }
+    console.log(lat2);
     Routing.addTo(map);
     const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
     popupElement.classList.add('leaflet-routing-container-hide');
