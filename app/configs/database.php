@@ -47,7 +47,6 @@ class Database
 	{
 		//users table
 		$query = "
-
 			CREATE TABLE IF NOT EXISTS `users` (
 			 `id` int(11) NOT NULL AUTO_INCREMENT,
 			 `name` varchar(100) NOT NULL,
@@ -264,6 +263,9 @@ class Database
 		  `status_check` tinyint(1) NOT NULL DEFAULT '0',
 		  PRIMARY KEY (`cmt_id`)
 		) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+		ALTER TABLE 'complaint'
+				ADD COLUMN `officerCmnt` text DEFAULT 'Not Yet Added' NOT NULL;
 		
 		";
 

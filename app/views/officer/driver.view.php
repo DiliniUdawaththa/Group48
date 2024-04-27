@@ -205,6 +205,8 @@
                             <td>Email</td>
                             <td>Mobile</td>
                             <td>More</td>
+                            <td>Action
+                        </tr>
 
                         </tr>
                     </thead>
@@ -231,10 +233,11 @@
 
             <div class="suspend-container">
                 <h2>Susped a Driver</h2>
-                <p class="accept-text">Are you sure you want to suspend <?php $row->name ?> driver?</p>
+                <p class="accept-text">Are you sure you want to suspend this driver?</p>
                 <div class="btn"><button class="cancel-suspend-btn">Cancel</button> <button
                         class="ok-btn">Suspend</button></div>
             </div>
+
 
         </div>
 </body>

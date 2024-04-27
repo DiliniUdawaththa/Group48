@@ -138,7 +138,7 @@
                         </thead>
                         <?php foreach ($rows as $row) : ?>
                         <tr class="data">
-                            <td><?php echo "<img src='"<?= ROOT ?>/ .$row["profileimg"] . "'alt='Profile Image'>"?></td>
+                            <td><?php echo "<img src='" .$row["profileimg"] . "'alt='Profile Image'>"?></td>
                             <img src="<?= ROOT ?>/assets/img/logoname.png" class="barimage">
                             <td class="td_email"><?= $row->email; ?></td>
                             <td class="td_contact"><?= $row->contactNumber; ?></td>

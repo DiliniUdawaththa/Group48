@@ -1,7 +1,23 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'emails/src/Exception.php';
+require 'emails/src/PHPMailer.php';
+require 'emails/src/SMTP.php';
+
 class OfficerComplaint extends Model{
+
+    public $errors = [];
+
     protected $table = "complaint";
+
+    protected $pdo; // PDO object to contact with the database directly
+
+	public function __construct(PDO $pdo) {
+        $this->pdo = $pdo;
+    }
 
     public function countcomplaint(){
         $result = $this->query("SELECT COUNT(*) as complaint_count FROM complaint");
@@ -11,6 +27,8 @@ class OfficerComplaint extends Model{
             return 0; 
         }
     }
+
+    
     
     public function countComplaintByDay() {
         $startDate = date('Y-m-d', strtotime('last sunday'));
@@ -73,5 +91,61 @@ class OfficerComplaint extends Model{
             return 0;
         }
     }
-           
+
+
+    public function updateStatus($cmt_id){
+		$sql = "UPDATE {$this->table} SET status_check = 1 WHERE cmt_id = :cmt_id";
+
+		$stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':cmt_id', $cmt_id, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            $this->errors[] = $e->getMessage();
+            return false;
+        }
+	}  
+
+    public function RejectUpdateStatus($cmt_id){
+		$sql = "UPDATE {$this->table} SET status_check = 2 WHERE cmt_id = :cmt_id";
+
+		$stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':cmt_id', $cmt_id, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            $this->errors[] = $e->getMessage();
+            return false;
+        }
+	}  
+    
+    /*public function rejectEmail($email){
+		$mail = new PHPMailer(true);
+    
+            try {
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'diliniudawaththa@gmail.com';
+                $mail->Password = 'tmsv httn hads xtwy';
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port = 465;
+    
+                $mail->setFrom('diliniudawaththa@gmail.com', 'FAREFLEX Admin User');
+                $mail->addAddress($email);
+                $mail->isHTML(true);
+                $mail->Subject = 'Complaint rejected';
+				$mail->Body = "We are sorry to inform you that your renewal request has been rejected. Make sure that you rename the payment slip as 'slip.pdf' and submit the form again.<br>Thank You.";
+                // $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                
+                $mail->send();
+                return true;
+            } catch (Exception $e) {
+                return false;
+            }
+	}*/
 }

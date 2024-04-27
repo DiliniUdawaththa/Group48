@@ -281,7 +281,7 @@ class officer extends Controller{
             message('please login to view the admin section');
             redirect("login");
         }
-        $complaint = new OfficerComplaint();
+        $complaint = new Complaint();
         $user = new User();
 
         $data = [
@@ -302,7 +302,7 @@ class officer extends Controller{
 
         $driver = $row->driver_id;
         $data2 = [
-            'cmt_id' => $driver
+            'id' => $driver
         ];
         $rows2 = $user->where($data2);
         $row2 = null;
@@ -317,8 +317,70 @@ class officer extends Controller{
             'row2' => $row2,
         ];
 
-        $this->view('officer/complaintview',$data);
+        $this->view('officer/complaint_view',$data);
     }
+
+    public function add_comment($cmt_id=null){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $data['errors'] = [];
+        $add_comment = new Complaint();
+        $rows = $add_comment->findAll();
+        $data['rows'] = array();
+
+        for($i = 0;$i < count($rows); $i++)
+        {
+            if($rows[$i]->cmt_id == $cmt_id)
+                $data['rows'][] = $rows[$i];
+        }
+        // show($_POST);
+        if($_SERVER['REQUEST_METHOD'] == "POST")
+		{
+            
+			if($add_comment->validate($_POST))
+			{    
+                // show($_POST);
+                $_POST['cmt_id']=$cmt_id; 
+                // show($_POST);           
+                $add_comment->add_comment($cmt_id, $_POST);
+                redirect('officer/complains');
+            }
+           
+        }
+
+        $data['title'] = "complaint";
+        $this->view('officer/complaint_comment',$data);
+    }
+
+    
+    public function investigate($cmt_id){
+        $investigate_complaint = new OfficerComplaint($GLOBALS['pdo']);
+
+        $cmt_id = $cmt_id;
+        $investigate_complaint->updateStatus($cmt_id);
+        
+
+        redirect('officer/complains');
+
+    }
+
+
+    public function reject($cmt_id){
+        $reject_complaint = new OfficerComplaint($GLOBALS['pdo']);
+        
+
+        $cmt_id = $cmt_id;
+        $reject_complaint->RejectUpdateStatus($cmt_id);
+        
+        
+
+        redirect('officer/complains');
+
+    }
+
 
 
 

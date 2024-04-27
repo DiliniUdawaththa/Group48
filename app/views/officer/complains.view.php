@@ -7,6 +7,7 @@
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Officer.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/renewDRegistration.css">
     <style>
     .error {
         border: 1px solid red;
@@ -112,12 +113,47 @@
         logout_button.addEventListener('click', () => {
             window.location.href = "<?=ROOT?>/logout";
         })
+
+        const accept_buttons = document.querySelectorAll('.accept_btn');
+        const reject_buttons = document.querySelectorAll('.reject_btn');
+        const accept_container = document.querySelector('.accept-container');
+        const reject_container = document.querySelector('.reject-container');
+        const cancel_accept_button = document.querySelector('.cancel-accept-btn');
+        const cancel_reject_button = document.querySelector('.cancel-reject-btn');
+
+        accept_buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const cmt_id = button.getAttribute('data-cmt_id');
+                accept_container.style.display = 'block';
+                document.querySelector('.ok-btn').addEventListener('click', () => {
+                    window.location.href = "<?=ROOT?>/officer/renewAccept/" +
+                        encodeURIComponent(cmt_id);
+                });
+            });
+        });
+        cancel_accept_button.addEventListener('click', () => {
+            accept_container.style.display = 'none';
+        });
+
+        reject_buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const cmt_id = button.getAttribute('data-cmt_id');
+                reject_container.style.display = 'block';
+                document.querySelector('.reject-btn').addEventListener('click', () => {
+                    window.location.href = "<?=ROOT?>/officer/renewReject/" +
+                        encodeURIComponent(cmt_id);
+                });
+            });
+        });
+        cancel_reject_button.addEventListener('click', () => {
+            reject_container.style.display = 'none';
+        });
         </script>
 
         <div class="interface">
             <div class="navi">
                 <div class="navi1">
-                    <h2>COMPLAINS</h2>
+                    <h2>COMPLAINTS</h2>
                 </div>
             </div>
             <div class="table1">
@@ -141,16 +177,21 @@
                             echo 'Investigated';
                             } ?></td>
                         <td class="td_button1">
-                            <a href="<?=ROOT?>/officer/complainView/"><button class="detail_btn1">
+                            <a href="<?=ROOT?>/officer/complainView/<?= urlencode($row->cmt_id) ?>"><button
+                                    class="detail_btn1">
                                     <!--<i
                                         class="fa-solid fa-circle-info" style="color: black;">--></i>
                                     DETAILS
                                 </button></a>
-                            <a href="<?=ROOT?>/officer/complaint_view/"><button class="detail_btn1">
+                            <a href="<?=ROOT?>/officer/add_comment/<?=$row->cmt_id?>"><button class="detail_btn1">
                                     <!--<i
                                         class="fa-solid fa-circle-info" style="color: black;">--></i>
-                                    Investigated
+                                    COMMENT
                                 </button></a>
+
+                            <button class="accept_btn" data-cmt_id="<?= $row->cmt_id ?>">INVESTIGATED</button>
+                            <button class="reject_btn" data-cmt_id="<?= $row->cmt_id ?>">REJECT</button>
+
 
                         </td>
                         <td></td>
@@ -161,10 +202,26 @@
             </div>
 
 
+
+        </div>
+        <div class="accept-container">
+            <h2>Investigate Complaint</h2>
+            <p class="accept-text">Are you sure you investigate this complaint?</p>
+            <div class="btn"><button class="cancel-accept-btn">NO</button> <button class="ok-btn">YES</button>
+            </div>
+        </div>
+
+        <div class="reject-container">
+            <h2>Reject Complaint</h2>
+            <p class="reject-text">Are you sure you want to reject this Complaint?</p>
+            <div class="btn"><button class="cancel-reject-btn">NO</button> <button class="reject-btn">YES</button>
+            </div>
         </div>
 
 
     </div>
+
+
 
 
 </body>

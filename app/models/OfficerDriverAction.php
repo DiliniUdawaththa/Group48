@@ -51,12 +51,12 @@ class OfficerDriverAction extends Model{
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'mihisaraniuththara@gmail.com';
+                $mail->Username = 'diliniudawaththa@gmail.com';
                 $mail->Password = 'tmsv httn hads xtwy';
                 $mail->SMTPSecure = 'ssl';
                 $mail->Port = 465;
     
-                $mail->setFrom('nwpmihisaraiuththara@gmail.com', 'FAREFLEX Officer User');
+                $mail->setFrom('diliniudawaththa@gmail.com', 'FAREFLEX Admin User');
                 $mail->addAddress($email);
                 $mail->isHTML(true);
                 $mail->Subject = 'Suspended Notice';
