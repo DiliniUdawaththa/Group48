@@ -163,11 +163,18 @@
             const logout_button = document.querySelector('.logout-btn')
 
             <?php if($data['status']==1):?>
-                status_icon.src = '<?= ROOT ?>/assets/img/images/inactive.png';
+                status_icon.src = '<?= ROOT ?>/assets/img/images/active.png';
                 inactive_btn.style.backgroundColor = '#E4E4E4'
                 inactive_btn.style.color = 'black'
                 active_btn.style.backgroundColor = '#162938'
                 active_btn.style.color = 'white'
+            <?php endif;?>
+            <?php if($data['status']==0):?>
+                status_icon.src = '<?= ROOT ?>/assets/img/images/inactive.png';
+                active_btn.style.backgroundColor = '#E4E4E4'
+                active_btn.style.color = 'black'
+                inactive_btn.style.backgroundColor = '#162938'
+                inactive_btn.style.color = 'white'
             <?php endif;?>
             
             logout_option.addEventListener('click',function (){

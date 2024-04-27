@@ -21,8 +21,56 @@
 </div>
 <div class="notification-bar">
                     <div>
-                        <i class="fa-regular fa-bell noti-icon"></i>
+                        <i class="fa-regular fa-bell noti-icon" ></i>
+                        
                         <i class="fa-regular fa-message msg-icon"></i>
+                        <p class="noti-msg-count">1</p>
+                        
                     </div>
+                    
+</div>
+<div class="notification-content">
+    <div class="noti-1">
+    <p class="exp-not">Registration has expired!</p>
+    <p class="renew-not">Click to renew your registration</p>
+    </div>
+    <div class="noti-0">
+        <p style="margin:0 auto;">No notifications</p>
+    </div>
+    
 </div>
 
+<script>
+    document.querySelector('.noti-icon').addEventListener('click', function() {
+
+            if(document.querySelector('.notification-content').style.display != 'none'){
+             document.querySelector('.notification-content').style.display = 'none';
+            }
+            else{
+                document.querySelector('.notification-content').style.display = 'block';
+            }
+    
+    });
+
+    document.querySelector('.noti-1').addEventListener('click', function() {
+        window.location.href = "<?= ROOT ?>/driver/activity";
+
+
+    });
+
+
+    
+
+    function add_expired_notification(){
+        document.querySelector('.noti-msg-count').style.display = 'block'
+        document.querySelector('.noti-1').style.display = 'block'
+        document.querySelector('.noti-icon').style.animation = 'blink 1.5s infinite';
+        document.querySelector('.noti-0').style.display = 'none'
+ 
+    }
+
+
+
+
+
+</script>

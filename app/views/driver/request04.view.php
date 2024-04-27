@@ -34,7 +34,7 @@
         <div class="page-container">
             <div class="body-container">
 
-            
+            <?php include 'driver_side.php'; ?>
 
                 <div class="req-body">
                     <div class="req-content">
@@ -45,45 +45,37 @@
                                
                                     <p class="customer-name"><?php echo ucfirst($data['customer']->name)?></p>
                                     <img src="<?= ROOT ?>/assets/img/images/rating.png" class="customer-rating">
-                                    <p class="req-time">2 mins ago</p>
+                                    <p class="req-time">On ride..</p>
                                 
                             </div>
                         </div>
                         <div class="location-destination">
-                            <p class="req-loc-des"><b>From:</b> <?php echo $data['ride_info']->location?></p>
-                            <p class="req-loc-des"><b>To:</b> <?php echo $data['ride_info']->destination?></p>
-                            <p class="req-loc-des"><b>Distance:</b> 5.2km</p>
-                            <p class="req-loc-des"><b>Vehicle</b> Three Wheeler</p>
-                            <p class="req-loc-des"><b>Offer sent:</b> Rs 600</p>
-                            <?php echo $data['negotiation_sent']?>
+                            <p class="ride-txt">Mr <?php echo ucfirst($data['customer']->name)?> is currently on your ride.</p>
+                            <p class="ride-txt"><b>Caution</b>
+                                <ul class="ride-txt">
+                                    <li>Stay alert and aware of your surroundings while in the vehicle</li>
+                                    <li>Avoid sharing personal information or engaging in inappropriate behavior</li>
+                                    <li>Follow Traffic Laws</li>
+                                    <li>Be Respectful to the Customer</li>
+                                </ul>
+                            </p>
+
+                            <p class="collect-cus-time"><b>Estimated Time:</b> 10 minutes</p>
+                            <div class="loader" style="margin:20px auto;"></div>
                         </div>
-                        <div style="display:flex;justify-content:space-around;"><p>Waiting for customer<div class="loader"></div></p></div>
-                        <form method="POST"><input type="submit" value="Cancel" class="cancel-offer-btn" name="cancel-offer"></form>
-                        <?php if($data['negotiation_sent'] == 1):?>
-                        <div class="negotiation">
+                       
+
+                        <form>
+                            <center>
+                            <input type="submit" name="end-ride" value="End Ride" class="end-ride">
+                            </center>
+                        </form>
                         
-                           <h3>Negotiation request</h3>
-                           <div>
-                                <p class="req-loc-des"><b>Offered fare:</b> Rs 600</p>
-                                <p class="req-loc-des"><b>Requesting fare:</b> Rs. 500</p>
-                            </div>
-                            <form method="POST">  
-                           <div class="neg-btns">
-                                    <input type="submit" class="accept-neg-btn" value="Accept" name="acceptneg">
-                                    <!-- <button class="accept-neg-btn">Accept</button> -->
-                                    <input type="submit" class="decline-neg-btn" value="Decline" name="declineneg">
-                                    <!-- <button class="decline-neg-btn">Decline</button> -->
-                                
-                            </div>
-                            </form>
-                        
-                        </div>
-                        <?php endif;?>
-                        
+                           
                     </div>
                     <div class="req-map">
                         <div id="map">
-                            
+
                         </div>
                         
                     </div>
@@ -104,7 +96,7 @@
                 </div>
             </div>
        </div>
-            <!-- leaflet js code -->
+            !-- leaflet js code -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <!-- routing js file -->
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
@@ -149,8 +141,6 @@
                 } else {
                 }
             });
-
-            
                 
 
             var status = 1

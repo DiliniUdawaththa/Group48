@@ -11,7 +11,8 @@ class Driverregistration extends Model
 
 	protected $allowedColumns = [
 
-		'email',
+		'id',
+		'date',
 		'profileimg',
 		'driverlicenseimg',
 		'revenuelicenseimg',

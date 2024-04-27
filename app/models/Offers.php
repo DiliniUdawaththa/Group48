@@ -12,7 +12,8 @@ class offers extends Model
         'driver_id',
         'offer_price',
         'negotiation_status',
-        'negotiation_price'
+        'negotiation_price',
+        'accept_status'
 	];
 
     public function validate($data)

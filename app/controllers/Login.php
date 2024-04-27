@@ -33,7 +33,7 @@ class Login extends Controller
                     {
                         $driverreg = new Driverregistration();
                         $row1 = $driverreg->where([
-                            "email"=> $_POST["email"],
+                            "id"=> $_POST["id"],
                         ]);
                         if(!isset($row1[0])){
                             redirect('driver/registration');

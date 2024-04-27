@@ -197,3 +197,156 @@
     border-radius: 5px;
     cursor:pointer;
 }
+
+.start-ride{
+    height:50px;
+    width: 80px;
+    background-color: greenyellow;
+    border:0px;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+.cancel-s-ride{
+    height:50px;
+    width: 80px;
+    background-color: red;
+    color: white;
+    border:0px;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+.cancel-reason1{
+    position: absolute;
+    height: 170px;
+    width: 200px;
+    background-color: aliceblue;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgb(194, 225, 252);
+    transform: translate(-50%, -50%); 
+    z-index: 999;
+    display: none;
+    justify-content: space-around;
+    flex-direction: column;
+    text-align: center;
+    
+}
+
+.submit-pop-up{
+    height:30px;
+    width: 80px;
+    background-color: red;
+    color: white;
+    border:0px;
+    border-radius: 5px;
+    cursor:pointer;
+    margin:0 auto;
+}
+
+.cancel-pop-up{
+    height:30px;
+    width: 80px;
+    background-color: rgb(189, 189, 189);
+    color: black;
+    border:0px;
+    border-radius: 5px;
+    cursor:pointer;
+    margin:0 auto;
+}
+
+#cancel-reason{
+    width: 120px;
+    margin: 0 auto;
+}
+
+.collect-cus-time{
+    font-size: 13px;
+}
+
+.end-ride{
+    height:50px;
+    width: 80px;
+    background-color: #162938;
+    color: white;
+    border:0px;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+.ride-txt{
+    display:block;
+    font-size: 13px;
+}
+
+.rating-heading{
+    font-size: 40px;
+}
+
+.staricon{
+    
+}
+#star1,#star2,#star3,#star4,#star5{
+    color:#162938;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.submit-rating{
+    display: block;
+    height:50px;
+    width: 80px;
+    background-color: #162938;
+    color: white;
+    border:0px;
+    border-radius: 5px;
+    cursor:pointer;
+}
+.skip-rating{
+    height:30px;
+    width: 60px;
+    background-color: rgb(204, 204, 204);
+    color: black;
+    border:0px;
+    border-radius: 5px;
+    cursor:pointer;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    font-weight: bold;
+}
+
+.rating-pro-pic{
+    border-radius: 10px;
+    height: 150px;
+    width: 150px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.reporting{
+    padding-left: 10px;
+    padding-bottom: 30px;
+    display:flex;
+    text-align: center;
+    justify-content: space-around;
+    flex-direction: column;
+    border-left: 1px solid black;
+}
+.reporting-categories{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+}
+
+.reporting-categories div{
+    margin-top:10px;
+
+}
+
+.report-txtarea{
+    resize: none;
+    width: 80%;
+    height: 100px;
+}
