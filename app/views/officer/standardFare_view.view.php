@@ -100,11 +100,6 @@
 
 
 
-
-
-                        <?php foreach ($rows as $row) : ?>
-
-
                         <h3> Vehicle Type : <?= $row->vehicletype; ?></h3>
 
                         <h3> Fare Type:
@@ -119,8 +114,6 @@
                         <h3>Updated Date:
                             <?= $row->date; ?>
                         </h3>
-
-                        <?php endforeach; ?>
 
 
 

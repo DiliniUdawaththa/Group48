@@ -114,6 +114,50 @@
 
         const table = document.querySelector('.table1')
         const search = document.querySelector('.srch')
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const logout_option = document.querySelector('.linkbutton2');
+            const logout_container = document.querySelector('.logout-container');
+            const cancel_logout_button = document.querySelector('.cancel-btn');
+            const logout_button = document.querySelector('.logout-btn');
+
+            logout_option.addEventListener('click', () => {
+                logout_container.style.display = 'block';
+            });
+
+            cancel_logout_button.addEventListener('click', () => {
+                logout_container.style.display = 'none';
+            });
+
+            logout_button.addEventListener('click', () => {
+                window.location.href = "<?=ROOT?>/logout";
+            });
+
+            const suspend_buttons = document.querySelectorAll('.suspend_btn');
+            //const reject_buttons = document.querySelectorAll('.reject_btn');
+            const suspend_container = document.querySelector('.suspend-container');
+            //const reject_container = document.querySelector('.reject-container');
+            const cancel_suspend_button = document.querySelector('.cancel-suspend-btn');
+            //const cancel_reject_button = document.querySelector('.cancel-reject-btn');
+
+            suspend_buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const email = button.getAttribute('data-email');
+                    suspend_container.style.display = 'block';
+                    document.querySelector('.ok-btn').addEventListener('click', () => {
+                        window.location.href = "<?=ROOT?>/officer/suspend/" +
+                            encodeURIComponent(email);
+                    });
+                });
+            });
+            cancel_suspend_button.addEventListener('click', () => {
+                suspend_container.style.display = 'none';
+            });
+
+
+
+        });
         </script>
 
         <div class="interface">
@@ -149,19 +193,26 @@
                         <td class="td_name"><?= $row->name; ?></td>
                         <td class="td_email"><?= $row->email; ?></td>
                         <td class="td_mobile"><?= $row->phone; ?></td>
-                        <td class="td_button">
-                            <a href="<?=ROOT?>/officer/driver/"><button class="detail_btn"><i
-                                        class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
-                            <a href="<?=ROOT?>/officer/driver_delete/<?=$row->id?>">
-                                <div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash"
-                                            style="color: black;"></i></div></button>
-
+                        <td class="td_button1">
+                            <a href="<?=ROOT?>/officer/driver_view/<?= urlencode($row->id) ?>"><button
+                                    class="detail_btn1">
+                                    <!--<i
+                                        class="fa-solid fa-circle-info" style="color: black;"></i>-->
+                                    DETAIL
+                                </button></a>
+                            <button class="suspend_btn" data-email="<?= $row->email ?>">SUSPEND</button>
                         </td>
                     </tr>
                     <?php endforeach; ?>
                 </table>
                 <?php endif; ?>
 
+            </div>
+            <div class="suspend-container">
+                <h2>Susped a Driver</h2>
+                <p class="accept-text">Are you sure you want to suspend this driver?</p>
+                <div class="btn"><button class="cancel-suspend-btn">Cancel</button> <button
+                        class="ok-btn">Suspend</button></div>
             </div>
 
         </div>

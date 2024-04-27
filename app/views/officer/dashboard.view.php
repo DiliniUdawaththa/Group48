@@ -183,7 +183,7 @@
                             </div>
                             <table>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Profile Picture</th>
                                     <th>Email</th>
                                     <th>Contact Number</th>
                                     <th>Option</th>
@@ -193,11 +193,8 @@
                                 $top_5 = $driver_registration->findTop5();
                                 foreach ($top_5 as $row) {
                                 echo "<tr>";
-                                echo "<td>" . $row->driver_id ."</td>";
-                                echo "<td>" . $row->passenger_id ."</td>";
-                                echo "<td>" . $row->contactNumber ."</td>";
-                                echo "<td><a href='<?=ROOT?>/officer/view_record" . $row->reg_id ."'
-                                class='btn1'>View</a></td>";
+                                echo "<td><img src='" . ROOT . "/" . $row->profileimg . "' alt='Profile Image' style='width: 100px; height: 100px;'></td>";
+                                echo "<td>" . $row->email ."</td>";
                                 echo "</tr>";
                                 }
                                 ?>
@@ -222,9 +219,8 @@
                                 echo "<tr>";
                                 echo "<td>" . $row->complainant ."</td>";
                                 echo "<td>" . $row->complaint ."</td>";
-                                echo "<td>" . $row->Status ."</td>";
-                                echo "<td><a href='<?=ROOT?>/officer/view_record" . $row->reg_id ."'
-                                class='btn1'>View</a></td>";
+                                echo "<td>" . $row->status_check ."</td>";
+                                
                                 echo "</tr>";
                                 }
                                 ?>

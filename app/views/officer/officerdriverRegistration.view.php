@@ -131,24 +131,27 @@
                         <thead>
                             <tr>
                                 <!--<td>ID</td>-->
-                                < <td>Profile</td>
-                                    <td>Email</td>
-                                    <td>Option</td>
+                                <td>Profile</td>
+                                <td>Email</td>
+                                <td>Status</td>
+                                <td>Option</td>
                             </tr>
                         </thead>
                         <?php foreach ($rows as $row) : ?>
                         <tr class="data">
-                            <td><?php echo "<img src='" .$row["profileimg"] . "'alt='Profile Image'>"?></td>
-                            <img src="<?= ROOT ?>/assets/img/logoname.png" class="barimage">
-                            <td class="td_email"><?= $row->email; ?></td>
-                            <td class="td_contact"><?= $row->contactNumber; ?></td>
-                            <td><?php echo'<img src="data:nicCopy;base64,'.base64_encode($row->nicCopy).'" alt="Image" style="width: 100px; height:100px;">';?>
+                            <td><img src="<?= ROOT . '/' . $row->profileimg ?>" alt="Profile Image"
+                                    style="width: 100px; height: 100px;"></td>
+
+                            <td><?= $row->email ?></td>
+
+                            <td class="td_button1">
+                                <a href="<?=ROOT?>/Officer/driverregistration_view/<?= urlencode($row->email) ?>"><button
+                                        class="detail_btn1">
+                                        <!--<i
+                                        class="fa-solid fa-circle-info" style="color: black;">--></i>
+                                        DETAILS
+                                    </button></a>
                             </td>
-                            <td><?php echo'<img src="data:licenceCopy;base64,'.base64_encode($row->licenceCopy).'" alt="Image" style="width: 100px; height:100px;">';?>
-                            </td>
-
-
-
                             <td class="td_button">
                                 <div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash"
                                             style="color: black;"></i></div></button>
