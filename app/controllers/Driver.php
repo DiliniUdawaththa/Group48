@@ -28,6 +28,7 @@ class Driver extends Controller{
             );
 
             $_SESSION['REGISITEMS'] = $registrationitems;
+            sleep(1);
             
 
             redirect('driver/registration');
@@ -62,10 +63,16 @@ class Driver extends Controller{
         ]);
         if(empty($row)){
             $data['vehicles'] = 0;
+            $vehicle_type = 'auto';
         }else{
             $data['vehicles'] = 1;
             $data['vehicledata'] = $row[0];
+            $vehicle_type = $row[0]->type;
+            if($vehicle_type=="threewheel"){
+                $vehicle_type="auto";
+            }
         }
+        
         
 
         $current_rides = new Current_rides();
@@ -73,6 +80,43 @@ class Driver extends Controller{
         $currides = $current_rides ->findAll();
         
         $data['current_rides'] = $currides;
+        $data['status'] = 1;
+
+        $driverst = new Driver_status();
+
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            if(isset($_POST['driver_loc'])){
+                if($_POST['driver-status']=='active'){
+                    $data['status']=1;
+                    $row5 = $driverst-> where([
+                        "driver_id" => $_SESSION['USER_DATA']->id,
+                    ]);
+                    if(!isset($row5[0])){
+                        $_POST['driver_id'] = $_SESSION['USER_DATA'] -> id;
+                        $_POST['vehicle'] = $vehicle_type;
+                        $_POST['lng'] = (float)$_POST['longitude'];
+                        $_POST['lat'] = (float)$_POST['latitude'];
+                        $_POST['status']= 1;
+                        $driverst -> insert($_POST);
+                    }
+                    
+                }
+                else{
+                    $data['status']=0;
+                    $row4 = $driverst-> where([
+                        "driver_id" => $_SESSION['USER_DATA']->id,
+                    ]);
+                    if(isset($row4[0])){
+                        $data1 = (array)$row4[0];
+                        $id = array();
+                        $id['driver_id'] = $row4[0]->driver_id;
+                        $driverst -> delete($id);
+                    }
+                    
+                }
+            }
+        }
 
 
         $this->view('driver/activity',$data);
@@ -214,6 +258,20 @@ class Driver extends Controller{
         $this->view('driver/request02',$data);
     }
 
+    public function request03(){
+        $data['errors'] = [];
+
+        $cust = new User();
+
+        $row4 = $cust->first([
+            "id"=> $_SESSION['pass_id'],
+        ]);
+        $data['customer'] = $row4;
+        
+
+        $this->view('driver/request03',$data);
+    }
+
     public function registration(){
         $data['errors'] = [];
 
@@ -343,7 +401,7 @@ class Driver extends Controller{
         }
 
 
-            $this->view('driver/registration/profilePicture',$data);
+        $this->view('driver/registration/profilePicture',$data);
         
     }
 
