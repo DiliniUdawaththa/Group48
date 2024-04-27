@@ -14,6 +14,7 @@ class Complaint extends Model
         'datetime',
         'complaint',
         'status_check',
+        'file_path',
 	];
 
     public function validate($data)

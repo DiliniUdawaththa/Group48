@@ -29,7 +29,7 @@
 
 <!-- ---------------------------------------------------------------------------------- -->
    <div class="activity">
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
 <!-- -----------------------------Rating part------------------------------------------------------------------ -->
         <div class="box1">
             <div>
@@ -78,6 +78,14 @@
                      <div><input type="checkbox" name="report13" value="Independence"><label >Independence</label></div>
                      <div><input type="checkbox" name="report14" value="Self-discipline"><label >Self-discipline</label></div>
                      </div>
+                  </div>
+                  <div>
+                  <!-- <label for="fileInput" style="cursor: pointer;">
+                    <span style="display: inline-block; width: 50px; height: 50px; padding: 5px; border: solid; border-radius: 10px;"> 
+                        Upload <i class="fas fa-upload"></i> 
+                    </span> -->
+                    <input type="file"  name="file">
+                <!-- </label> -->
                   </div>
                   <div class="reporttext">
                      <textarea type="text" placeholder="any note" name="other" value='' > </textarea>

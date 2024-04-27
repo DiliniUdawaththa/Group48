@@ -152,12 +152,12 @@
              <?php if($row->vehicle =='bike') { ?>
                 // console.log('Marker position updated to:', [newLat, newLng]);
                 var x = (<?=$row->lat?>-newLat)*(<?=$row->lat?>-newLat)
-                var y =(<?=$row->long?>-newLng)*(<?=$row->long?>-newLng)
+                var y =(<?=$row->lng?>-newLng)*(<?=$row->lng?>-newLng)
                 var z = x+y;
                 var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
-                var marker1 = L.marker([<?=$row->lat?>,<?=$row->long?>],{icon : taxi})
+                var marker1 = L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon : taxi})
                 if(z<6*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
@@ -179,12 +179,12 @@
              <?php if($row->vehicle =='auto') { ?>
                 // console.log('Marker position updated to:', [newLat, newLng]);
                 var x = (<?=$row->lat?>-newLat)*(<?=$row->lat?>-newLat)
-                var y =(<?=$row->long?>-newLng)*(<?=$row->long?>-newLng)
+                var y =(<?=$row->lng?>-newLng)*(<?=$row->lng?>-newLng)
                 var z = x+y;
                 var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
-                var marker1 = L.marker([<?=$row->lat?>,<?=$row->long?>],{icon : taxi})
+                var marker1 = L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon : taxi})
                 if(z<6*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
@@ -206,12 +206,12 @@
              <?php if($row->vehicle =='car') { ?>
                 // console.log('Marker position updated to:', [newLat, newLng]);
                 var x = (<?=$row->lat?>-newLat)*(<?=$row->lat?>-newLat)
-                var y =(<?=$row->long?>-newLng)*(<?=$row->long?>-newLng)
+                var y =(<?=$row->lng?>-newLng)*(<?=$row->lng?>-newLng)
                 var z = x+y;
                 var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
-                var marker1 = L.marker([<?=$row->lat?>,<?=$row->long?>],{icon : taxi})
+                var marker1 = L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon : taxi})
                 if(z<6*z1){
                     marker1.addTo(map)
                     markers.push(marker1);
@@ -231,12 +231,12 @@
              <?php if($row->vehicle =='Ac-car') { ?>
                 // console.log('Marker position updated to:', [newLat, newLng]);
                 var x = (<?=$row->lat?>-newLat)*(<?=$row->lat?>-newLat)
-                var y =(<?=$row->long?>-newLng)*(<?=$row->long?>-newLng)
+                var y =(<?=$row->lng?>-newLng)*(<?=$row->lng?>-newLng)
                 var z = x+y;
                 var x1 = (6.906064826793089-6.901963)*(6.906064826793089-6.901963)
                 var y1 =(79.8586320012186-79.861292)*(79.8586320012186-79.861292)
                 var z1 = x1+y1;
-                var marker1 = L.marker([<?=$row->lat?>,<?=$row->long?>],{icon : taxi})
+                var marker1 = L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon : taxi})
                 if(z<6*z1){
                     marker1.addTo(map)
                     markers.push(marker1);

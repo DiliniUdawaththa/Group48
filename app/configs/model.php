@@ -46,7 +46,7 @@ class Model extends Database
  
  		$query = trim($query,"&& ");
 		$res = $this->query($query,$data);
-
+        // show($query);
 		if(is_array($res))
 		{
 			return $res;
