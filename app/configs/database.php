@@ -163,6 +163,14 @@ class Database
 		
 		$this->query($query);
 
+		$query = "
+		CREATE TABLE IF NOT EXISTS 'driver' (
+			`driver_id` int(11) NOT NULL,
+			`status` tinyint(1) NOT NULL DEFAULT '0',
+			PRIMARY KEY (`cmt_id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+		";
+
 		$query= "
 		  CREATE TABLE IF NOT EXISTS `driver_status` (
 			`driver_id` int(11) NOT NULL,
@@ -285,6 +293,9 @@ class Database
 		  `status_check` tinyint(1) NOT NULL DEFAULT '0',
 		  PRIMARY KEY (`cmt_id`)
 		) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+		ALTER TABLE 'complaint'
+				ADD COLUMN `officerCmnt` text DEFAULT 'Not Yet Added' NOT NULL;
 		
 		";
 

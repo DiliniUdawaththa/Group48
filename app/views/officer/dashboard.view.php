@@ -75,6 +75,9 @@
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-id-card"></i>Driver Registration</div>
                 </a>
+                <a href="<?=ROOT?>/officer/renewRegistration" class="link">
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration Renewal</div>
+                </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-users"></i>Drivers</div>
                 </a>
@@ -190,8 +193,8 @@
                                 $top_5 = $driver_registration->findTop5();
                                 foreach ($top_5 as $row) {
                                 echo "<tr>";
-                                echo "<td>" . $row->driverName ."</td>";
-                                echo "<td>" . $row->email ."</td>";
+                                echo "<td>" . $row->driver_id ."</td>";
+                                echo "<td>" . $row->passenger_id ."</td>";
                                 echo "<td>" . $row->contactNumber ."</td>";
                                 echo "<td><a href='<?=ROOT?>/officer/view_record" . $row->reg_id ."'
                                 class='btn1'>View</a></td>";
@@ -208,25 +211,23 @@
                             <table>
                                 <tr>
                                     <th>Complainant</th>
-                                    <th>Driver Name</th>
+                                    <th>Complaint</th>
+                                    <th>status</th>
                                     <th>option</th>
                                 </tr>
-                                <tr>
-                                    <td>Passenger</td>
-                                    <td>John Steve Doe</td>
-                                    <td><img src="info.png" alt=""></td>
-                                </tr>
-                                <tr>
-                                    <td>Passenger</td>
-                                    <td>John Steve Doe</td>
-                                    <td><img src="info.png" alt=""></td>
-                                </tr>
-                                <tr>
-                                    <td>Passenger</td>
-                                    <td>John Steve Doe</td>
-                                    <td><img src="info.png" alt=""></td>
-                                </tr>
-
+                                <?php 
+                                $Complaint = new Complaint();
+                                $top_5 = $Complaint->findTop5();
+                                foreach ($top_5 as $row) {
+                                echo "<tr>";
+                                echo "<td>" . $row->complainant ."</td>";
+                                echo "<td>" . $row->complaint ."</td>";
+                                echo "<td>" . $row->Status ."</td>";
+                                echo "<td><a href='<?=ROOT?>/officer/view_record" . $row->reg_id ."'
+                                class='btn1'>View</a></td>";
+                                echo "</tr>";
+                                }
+                                ?>
                             </table>
                         </div>
                     </div>
