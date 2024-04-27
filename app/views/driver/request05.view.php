@@ -34,60 +34,65 @@
         <div class="page-container">
             <div class="body-container">
 
-            
-
+          
+            <form method="POST">
                 <div class="req-body">
-                    <div class="req-content">
-            
-                        <div class="req-customer" style="padding-top:20px">
-                            <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="req-cus-pic">
-                            <div class="req-customer-details">
-                               
-                                    <p class="customer-name"><?php echo ucfirst($data['customer']->name)?></p>
-                                    <img src="<?= ROOT ?>/assets/img/images/rating.png" class="customer-rating">
-                                    <p class="req-time">2 mins ago</p>
-                                
+                    <div class="req-content" style="text-align:center;">
+                        <p class="rating-heading">Rating</p>
+                        <div>
+                            <h3>Mr. <?php echo ucfirst($data['customer']->name)?></h3>
+                            <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="rating-pro-pic">
+                            <div class="staricon">
+                                <i class="fa-solid fa-star" id="star1"></i>
+                                <i class="fa-solid fa-star" id="star2"></i>
+                                <i class="fa-solid fa-star" id="star3"></i>
+                                <i class="fa-solid fa-star" id="star4"></i>
+                                <i class="fa-solid fa-star" id="star5"></i>
                             </div>
+                            <input type="text" name='star' id="star" value=0>
+
                         </div>
-                        <div class="location-destination">
-                            <p class="req-loc-des"><b>From:</b> <?php echo $data['ride_info']->location?></p>
-                            <p class="req-loc-des"><b>To:</b> <?php echo $data['ride_info']->destination?></p>
-                            <p class="req-loc-des"><b>Distance:</b> 5.2km</p>
-                            <p class="req-loc-des"><b>Vehicle</b> Three Wheeler</p>
-                            <p class="req-loc-des"><b>Offer sent:</b> Rs 600</p>
-                            <?php echo $data['negotiation_sent']?>
-                        </div>
-                        <div style="display:flex;justify-content:space-around;"><p>Waiting for customer<div class="loader"></div></p></div>
-                        <form method="POST"><input type="submit" value="Cancel" class="cancel-offer-btn" name="cancel-offer"></form>
-                        <?php if($data['negotiation_sent'] == 1):?>
-                        <div class="negotiation">
                         
-                           <h3>Negotiation request</h3>
-                           <div>
-                                <p class="req-loc-des"><b>Offered fare:</b> Rs 600</p>
-                                <p class="req-loc-des"><b>Requesting fare:</b> Rs. 500</p>
-                            </div>
-                            <form method="POST">  
-                           <div class="neg-btns">
-                                    <input type="submit" class="accept-neg-btn" value="Accept" name="acceptneg">
-                                    <!-- <button class="accept-neg-btn">Accept</button> -->
-                                    <input type="submit" class="decline-neg-btn" value="Decline" name="declineneg">
-                                    <!-- <button class="decline-neg-btn">Decline</button> -->
-                                
-                            </div>
-                            </form>
+                       
+
                         
-                        </div>
-                        <?php endif;?>
+                            <center>
+                            <input type="submit" name="submit-rating" value="Submit" class="submit-rating">
+                            <input type="submit" name="skip-rating" value="Skip" class="skip-rating">
+                            </center>
                         
+                        
+                        
+                           
                     </div>
-                    <div class="req-map">
-                        <div id="map">
+                    
+                    <div class="reporting">
+                        <p class="rating-heading">Reporting</p>
+                      
+                        <div class="reporting-categories">
+                        <div><input type="checkbox" name="report1"  value="Inappropriate Conduct"><label >Inappropriate Conduct</label></div>
+                        <div><input type="checkbox" name="report2"  value="Refuse to pay"><label >Refuse to pay</label></div>
+                        <div><input type="checkbox" name="report3" value="Disrespect"><label >Disrespect</label></div>
+                        <div><input type="checkbox" name="report4" value="Damaging Vehicle"><label >Damaging Vehicle</label></div>
+                        <div><input type="checkbox" name="report5" value="Harassment"><label >Harassment</label></div>
+                        <div><input type="checkbox" name="report6" value="Intoxication"><label >Intoxication</label></div>
+                        <div><input type="checkbox" name="report7" value="Theft"><label >Theft</label></div>
+                        <div><input type="checkbox" name="report8" value="Trespassing"><label >Trespassing</label></div>
+                        
+
+                        </div>
+                       
+                        <div class="reporttext">
                             
-                        </div>
+                            <textarea type="text" placeholder="any note" name="other" value='' class="report-txtarea" ></textarea>
+                            
+                        </div>  
+                        
                         
                     </div>
+        
                 </div>
+        </form>
 
                 
 
@@ -104,54 +109,7 @@
                 </div>
             </div>
        </div>
-            <!-- leaflet js code -->
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-        <!-- routing js file -->
-        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-        <!-- search -->
-        <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-        <script>
-                
-            // map instalizion
-            var map = L.map('map').setView([ 7.8774, 80.7003], 9);
-            // google street
-            googleStreets = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
-                    maxZoom: 20,
-                    subdomains:['mt0','mt1','mt2','mt3']
-                });
-            googleStreets.addTo(map)
-
-            var Routing;
-            var lat=6.901963
-            var long=80.861292
-            var lat1=6.901963
-            var lon1=79.861292
-            Routing = L.Routing.control({
-                waypoints: [
-                    L.latLng(lat,long),
-                    L.latLng(lat1,lon1)
-                ],
-                addWaypoints: false // Hide the waypoints
-            });
-
-            Routing.addTo(map);
-            var lat2=(lat1+lat)/2
-            var lon2=(lon1+long)/2
-            map.flyTo([lat2,lon2], 14)
-            const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
-            popupElement.classList.add('leaflet-routing-container-hide');
-        
-            const standard_fare = document.getElementById('std-fare')
-            standard_fare.addEventListener('click', function() {
-                if (standard_fare.checked) {
-                    console.log("Hi")
-                    document.getElementById('offer-price').value = 600
-                } else {
-                }
-            });
-
-            
-                
+  <script>
 
             var status = 1
             var sidenav = 1
@@ -169,6 +127,60 @@
             const logout_container = document.querySelector('.logout-container')
             const cancel_button = document.querySelector('.cancel-btn')
             const logout_button = document.querySelector('.logout-btn')
+            
+            const star1 = document.getElementById('star1');
+            const star2 = document.getElementById('star2');
+            const star3 = document.getElementById('star3');
+            const star4 = document.getElementById('star4');
+            const star5 = document.getElementById('star5');
+            document.getElementById('star').style.display= "none";
+
+                star1.addEventListener('click', () => {
+                      star1.style.color = '#D1B000';
+                      star2.style.color = 'black';
+                      star3.style.color = 'black';
+                      star4.style.color = 'black';
+                      star5.style.color = 'black';
+                      document.getElementById('star').value=1;
+
+                    });
+                
+                star2.addEventListener('click', () => {
+                      star1.style.color = '#D1B000';
+                      star2.style.color = '#D1B000';
+                      star3.style.color = 'black';
+                      star4.style.color = 'black';
+                      star5.style.color = 'black';
+                      document.getElementById('star').value=2;
+                    });
+
+                star3.addEventListener('click', () => {
+                      star1.style.color = '#D1B000';
+                      star2.style.color = '#D1B000';
+                      star3.style.color = '#D1B000';
+                      star4.style.color = 'black';
+                      star5.style.color = 'black';
+                      document.getElementById('star').value=3;
+                    });
+
+                star4.addEventListener('click', () => {
+                      star1.style.color = '#D1B000';
+                      star2.style.color = '#D1B000';
+                      star3.style.color = '#D1B000';
+                      star4.style.color = '#D1B000';
+                      star5.style.color = 'black';
+                      document.getElementById('star').value=4;
+                    });
+
+                star5.addEventListener('click', () => {
+                      star1.style.color = '#D1B000';
+                      star2.style.color = '#D1B000';
+                      star3.style.color = '#D1B000';
+                      star4.style.color = '#D1B000';
+                      star5.style.color = '#D1B000';
+                      document.getElementById('star').value=5;
+                });
+
             
             logout_option.addEventListener('click',function (){
                 logout_container.style.display = 'block';

@@ -35,7 +35,7 @@
             <div class="body-container">
 
             <?php include 'driver_side.php'; ?>
-
+            <form method="POST">
                 <div class="req-body">
                     <div class="req-content">
             
@@ -45,13 +45,25 @@
                                
                                     <p class="customer-name"><?php echo ucfirst($data['customer']->name)?></p>
                                     <img src="<?= ROOT ?>/assets/img/images/rating.png" class="customer-rating">
-                                    <p class="req-time">2 mins ago</p>
+                                    <p class="req-time">Waiting..</p>
                                 
                             </div>
                         </div>
-                        <div class="location-destination">
+                        <div class="location-destination" style="text-align: center;">
                             <p>Mr <?php echo ucfirst($data['customer']->name)?> is waiting at his pick-up location</p>
+                            <p class="collect-cus-time"><b>Estimated Time:</b> 10 minutes</p>
+                            <div class="loader" style="margin:20px auto;"></div>
                         </div>
+                       
+
+                        
+                            <div class="neg-btns">
+                                <button type="button" class="cancel-s-ride" onclick="show_popup()">Cancel</button>
+                            
+                                <input type="submit" name="start-ride" value="Start Ride" class="start-ride">
+                            </div>
+                            
+      
                         
                            
                     </div>
@@ -61,7 +73,20 @@
                         </div>
                         
                     </div>
+                    <div class="cancel-reason1">
+                           <h3>Please give a reason</h3>
+                            <select name="reason" id="cancel-reason">
+                                <option value="Taking long">Taking Long</option>
+                                <option value="Vehicle Breakdown">Vehicle Breakdown</option>
+                                <option value="Other">Other</option>
+                            </select>
+                           <input type="Submit" name="cancel-s-ride" value="Submit" class="submit-pop-up" style="height:30px;">
+                           <button type="button" class="cancel-pop-up" onclick="hide_popup()">Cancel</button>
+                    </div>
                 </div>
+
+                </form>
+                        
 
                 
 
@@ -123,7 +148,13 @@
                 } else {
                 }
             });
-                
+
+            function hide_popup(){
+                document.querySelector('.cancel-reason1').style.display = 'none';
+            }
+            function show_popup(){
+                document.querySelector('.cancel-reason1').style.display = 'flex';
+            }
 
             var status = 1
             var sidenav = 1

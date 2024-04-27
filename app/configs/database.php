@@ -149,14 +149,16 @@ class Database
 		// 	";
 		
 		$query= "
-			CREATE TABLE IF NOT EXISTS `driverregistration` (
-			`email` varchar(50) NOT NULL,
+		CREATE TABLE IF NOT EXISTS`driverregistration` (
+			`id` int(11) NOT NULL,
+			`date` date NOT NULL DEFAULT current_timestamp(),
 			`profileimg` varchar(100) NOT NULL,
 			`driverlicenseimg` varchar(100) DEFAULT NULL,
 			`revenuelicenseimg` varchar(100) DEFAULT NULL,
 			`vehregistrationimg` varchar(100) DEFAULT NULL,
 			`vehinsuranceimg` varchar(100) DEFAULT NULL,
-			`status` int(2) NOT NULL
+			`status` int(2) NOT NULL,
+			PRIMARY KEY (`id`)
 		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 		";
 		
