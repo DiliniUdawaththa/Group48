@@ -29,5 +29,30 @@ class AdminDriver extends Model{
         echo("No matching results found..");
     }
 
+    public function countExpiringDrivers() {
+        $data = [
+            'role' => "driver"
+        ];
+    
+        $drivers = $this->where($data);
+        $expiringDriverCount = 0;
+    
+        // Calculate the reminder date as 7 days ahead of the current date
+        $reminderDate = date('Y-m-d', strtotime('+7 days'));
+    
+        // Loop through each driver to calculate deadline
+        foreach ($drivers as $driver) {
+            $deadline = date('Y-m-d', strtotime('+1 year', strtotime($driver->date)));
+    
+            // Check if the deadline is within the next seven days
+            if ($deadline >= date('Y-m-d') && $deadline <= $reminderDate) {
+                $expiringDriverCount++;
+            }
+        }
+    
+        return $expiringDriverCount;
+    }
+    
+
     
 }
