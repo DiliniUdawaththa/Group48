@@ -14,10 +14,9 @@ class renewRegistration extends Model{
 	protected $table1 = "users";
 
 	protected $allowedColumns = [
-
-		`email`,
-        `name`,
-		`status`,
+		'email',
+        'name',
+		'status',
 	];
 
 	protected $pdo; // PDO object to contact with the database directly
