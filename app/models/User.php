@@ -185,4 +185,29 @@ class User extends Model
         }
     }
 
+    public function isExpired($email){
+        $data = [
+            'email' => $email
+        ];
+    
+        $drivers = $this->where($data);
+        
+        // If no drivers found, return false
+        if (empty($drivers)) {
+            return false;
+        }
+    
+        foreach ($drivers as $driver){
+            $deadline = date('Y-m-d', strtotime('+1 year', strtotime($driver->date)));
+    
+            // If any of the drivers are expired, return true
+            if(date('Y-m-d') > $deadline){
+                return true;
+            }
+        }
+    
+        // If none of the drivers are expired, return false
+        return false;
+    }
+    
 }

@@ -471,6 +471,28 @@
 
     }
 
+    public function customerReport(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $this->view('admin/customer_report');
+
+    }
+
+    public function driverReport(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $this->view('admin/driver_report');
+
+    }
+
     
     // public function mail(){
     //     $newMail = new reminderMail();

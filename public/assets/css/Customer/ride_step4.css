@@ -8,11 +8,12 @@ body{
     width: 100vw;
     font-family: 'Poppins',sans-serif;
     /* overflow: hidden; */
+    background-color: aliceblue;
 }
 .main{
-    background-color: #D9D9D9;
+  background-color: aliceblue;
     display: flex;
-    /* flex-direction: row; */
+    /* flex-direction: row;  */
     
 }
 /* ------------------------------------------------------------------- */
