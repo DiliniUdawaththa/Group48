@@ -224,27 +224,27 @@ class Report extends Controller{
 
                             $pdf->writeHTML($content, true, false, true, false, '');
 
-                            $x = $pdf->GetX();
-                            $y = $pdf->GetY();
+                            // $x = $pdf->GetX();
+                            // $y = $pdf->GetY();
 
-                            $pdf->SetFont('times', '', 10);
+                            // $pdf->SetFont('times', '', 10);
 
-                            $pdf->SetXY($x, $y + 10); 
-                            $pdf->Cell(20, 10, 'Date:');
+                            // $pdf->SetXY($x, $y + 10); 
+                            // $pdf->Cell(20, 10, 'Date:');
 
-                            // Add current date
-                            $pdf->SetXY($x + 20, $y + 10); 
-                            $pdf->Cell(0, 10, date('Y-m-d'));
+                            // // Add current date
+                            // $pdf->SetXY($x + 20, $y + 10); 
+                            // $pdf->Cell(0, 10, date('Y-m-d'));
 
-                            // Add label for signature
-                            $pdf->SetXY($x + 120, $y + 10);
-                            $pdf->Cell(20, 10, 'Signature:');
+                            // // Add label for signature
+                            // $pdf->SetXY($x + 120, $y + 10);
+                            // $pdf->Cell(20, 10, 'Signature:');
 
-                            // Add dashed line for signature
-                            $pdf->SetXY($x + 140, $y + 10);
-                            $pdf->Cell(0, 10, str_repeat('-', 30));
+                            // // Add dashed line for signature
+                            // $pdf->SetXY($x + 140, $y + 10);
+                            // $pdf->Cell(0, 10, str_repeat('-', 30));
 
-                            $pdf->Ln(30);
+                            // $pdf->Ln(30);
     
                             // Output PDF
                             $pdf->Output('ride_report.pdf', 'I');
@@ -362,27 +362,27 @@ class Report extends Controller{
 
                             $pdf->writeHTML($content, true, false, true, false, '');
 
-                            $x = $pdf->GetX();
-                            $y = $pdf->GetY();
+                            // $x = $pdf->GetX();
+                            // $y = $pdf->GetY();
 
-                            $pdf->SetFont('times', '', 10);
+                            // $pdf->SetFont('times', '', 10);
 
-                            $pdf->SetXY($x, $y + 10); 
-                            $pdf->Cell(20, 10, 'Date:');
+                            // $pdf->SetXY($x, $y + 10); 
+                            // $pdf->Cell(20, 10, 'Date:');
 
-                            // Add current date
-                            $pdf->SetXY($x + 20, $y + 10); 
-                            $pdf->Cell(0, 10, date('Y-m-d'));
+                            // // Add current date
+                            // $pdf->SetXY($x + 20, $y + 10); 
+                            // $pdf->Cell(0, 10, date('Y-m-d'));
 
-                            // Add label for signature
-                            $pdf->SetXY($x + 120, $y + 10);
-                            $pdf->Cell(20, 10, 'Signature:');
+                            // // Add label for signature
+                            // $pdf->SetXY($x + 120, $y + 10);
+                            // $pdf->Cell(20, 10, 'Signature:');
 
-                            // Add dashed line for signature
-                            $pdf->SetXY($x + 140, $y + 10);
-                            $pdf->Cell(0, 10, str_repeat('-', 30));
+                            // // Add dashed line for signature
+                            // $pdf->SetXY($x + 140, $y + 10);
+                            // $pdf->Cell(0, 10, str_repeat('-', 30));
 
-                            $pdf->Ln(30);
+                            // $pdf->Ln(30);
 
                             $footerLineY = $pdf->getPageHeight() - 20;
 
@@ -397,7 +397,41 @@ class Report extends Controller{
                             // Output PDF
                             $pdf->Output('ride_report.pdf', 'I');
                         } else {
-                            echo "Error: No rides found for the selected date.";
+                            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+                            $pdf->AddPage();
+    
+                            $pdf->SetCreator('Admin');
+                            $pdf->SetAuthor('Admin');
+                            $pdf->SetTitle('Ride Report for ' . $startDate . ' - ' . $endDate);
+                            $pdf->SetSubject('Ride Report');
+                            $pdf->SetKeywords('TCPDF, PDF, report');
+
+                            $pdf->SetTextColor(255, 0, 0);
+                            $pdf->SetFont('times', 'B', 18);
+                            $pdf->Cell(0, 10, 'FAREFLEX TAXI BOOKING SYSTEM', 0, 1, 'C');
+                            $pdf->Ln(5);
+
+                            $pdf->SetTextColor(0, 0, 0);
+                            $pdf->SetFont('helvetica', 'B', 12);
+                            $pdf->Cell(0, 10, 'Ride Report for ' . $startDate . ' - ' . $endDate , 0, 1, 'C');
+                            $pdf->Ln(5);
+    
+                            $pdf->SetTextColor(0, 0, 0);
+                            $pdf->SetFont('helvetica', '', 12);
+                            $pdf->Cell(0, 10, 'No records found', 0, 1, 'C');
+
+                            $footerLineY = $pdf->getPageHeight() - 20;
+
+                            // Set the footer content and position
+                            $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+                            $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
+                            $pdf->setFooterData('', 0, $footerNote);
+
+                            // Set the footer line
+                            $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
+
+                            $pdf->Output('ride_report.pdf', 'I');
                         }
 
                     } else {
@@ -514,27 +548,27 @@ class Report extends Controller{
                         $pdf->Ln(5);
 
                         
-                        $pdf->Ln(30);
+                        // $pdf->Ln(30);
 
-                        $x = $pdf->GetX();
-                        $y = $pdf->GetY();
+                        // $x = $pdf->GetX();
+                        // $y = $pdf->GetY();
 
-                        $pdf->SetFont('times', '', 10);
+                        // $pdf->SetFont('times', '', 10);
 
-                        $pdf->SetXY($x, $y + 10); 
-                        $pdf->Cell(20, 10, 'Date:');
+                        // $pdf->SetXY($x, $y + 10); 
+                        // $pdf->Cell(20, 10, 'Date:');
 
-                            // Add current date
-                        $pdf->SetXY($x + 20, $y + 10); 
-                        $pdf->Cell(0, 10, date('Y-m-d'));
+                        //     // Add current date
+                        // $pdf->SetXY($x + 20, $y + 10); 
+                        // $pdf->Cell(0, 10, date('Y-m-d'));
 
-                            // Add label for signature
-                        $pdf->SetXY($x + 120, $y + 10);
-                        $pdf->Cell(20, 10, 'Signature:');
+                        //     // Add label for signature
+                        // $pdf->SetXY($x + 120, $y + 10);
+                        // $pdf->Cell(20, 10, 'Signature:');
 
-                            // Add dashed line for signature
-                        $pdf->SetXY($x + 140, $y + 10);
-                        $pdf->Cell(0, 10, str_repeat('-', 30));
+                        //     // Add dashed line for signature
+                        // $pdf->SetXY($x + 140, $y + 10);
+                        // $pdf->Cell(0, 10, str_repeat('-', 30));
 
                         $footerLineY = $pdf->getPageHeight() - 20;
 
@@ -685,7 +719,36 @@ class Report extends Controller{
                             $pdf->Output('customer_report.pdf', 'I');
 
                         }else{
-                            echo "No match found";
+                            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+                            $pdf->AddPage();
+    
+                            $pdf->SetCreator('Admin');
+                            $pdf->SetAuthor('Admin');
+                            $pdf->SetTitle('Customer Report');
+                            $pdf->SetSubject('Customer Report');
+                            $pdf->SetKeywords('TCPDF, PDF, report');
+
+                            $pdf->SetTextColor(255, 0, 0);
+                            $pdf->SetFont('times', 'B', 18);
+                            $pdf->Cell(0, 10, 'FAREFLEX TAXI BOOKING SYSTEM', 0, 1, 'C');
+                            $pdf->Ln(5);
+    
+                            $pdf->SetTextColor(0, 0, 0);
+                            $pdf->SetFont('helvetica', '', 12);
+                            $pdf->Cell(0, 10, 'No records found for Customer ID' .$custID , 0, 1, 'C');
+
+                            $footerLineY = $pdf->getPageHeight() - 20;
+
+                            // Set the footer content and position
+                            $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+                            $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
+                            $pdf->setFooterData('', 0, $footerNote);
+
+                            // Set the footer line
+                            $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
+
+                            $pdf->Output('ride_report.pdf', 'I');
                         }
 
                     }
@@ -982,7 +1045,36 @@ class Report extends Controller{
                             $pdf->Output('customer_report.pdf', 'I');
 
                         }else{
-                            echo "No match found";
+                            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+                            $pdf->AddPage();
+    
+                            $pdf->SetCreator('Admin');
+                            $pdf->SetAuthor('Admin');
+                            $pdf->SetTitle('Driver Report');
+                            $pdf->SetSubject('Driver Report');
+                            $pdf->SetKeywords('TCPDF, PDF, report');
+
+                            $pdf->SetTextColor(255, 0, 0);
+                            $pdf->SetFont('times', 'B', 18);
+                            $pdf->Cell(0, 10, 'FAREFLEX TAXI BOOKING SYSTEM', 0, 1, 'C');
+                            $pdf->Ln(5);
+    
+                            $pdf->SetTextColor(0, 0, 0);
+                            $pdf->SetFont('helvetica', '', 12);
+                            $pdf->Cell(0, 10, 'No records found for Driver ID' .$custID , 0, 1, 'C');
+
+                            $footerLineY = $pdf->getPageHeight() - 20;
+
+                            // Set the footer content and position
+                            $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+                            $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
+                            $pdf->setFooterData('', 0, $footerNote);
+
+                            // Set the footer line
+                            $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
+
+                            $pdf->Output('ride_report.pdf', 'I');
                         }
 
                     }
