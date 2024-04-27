@@ -113,6 +113,7 @@
         }
     
         $add_customer = new AdminCustomer();
+        $add_customer1 = new AdminRide();
     
         $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
     
@@ -121,9 +122,15 @@
         ];
     
         $rows = $add_customer->where($data);
+
+        $rides_counts = [];
+        foreach ($rows as $row) {
+            $rides_counts[$row->id] = $add_customer1->countRideByCustomer($row->id);
+        }
     
         $data['rows'] = is_array($rows) ? $rows : [];
-    
+        $data['rides_counts'] = $rides_counts;
+        $data['add_customer1'] = $add_customer1;
         $data['title'] = "Customer";
         $this->view('admin/customer', $data);
     }
@@ -172,6 +179,12 @@
         $total_driver_count = $total_driver['driver']; 
 
         $rows = $add_driver->where($data);
+
+        $rides_counts = [];
+        foreach ($rows as $row) {
+            $rides_counts[$row->id] = $add_driver1->countRideByDriver($row->id);
+        }
+
         $data['rows'] = array();
 
         for($i = 0;$i < count($rows); $i++)
@@ -179,6 +192,8 @@
             $data['rows'][] = $rows[$i];
         }
 
+        $data['rides_counts'] = $rides_counts;
+        $data['add_driver1'] = $add_driver1;
         $data['upcomingExpire'] = $upcomingExpire;
         $data['expired'] = $expired;
         $data['total_driver_count'] = $total_driver_count;
@@ -341,6 +356,7 @@
         if (isset($_GET['search'])) {
             $searchTerm = $_GET['search'];
             $add_customer = new AdminCustomer();
+            $add_customer1 = new AdminRide();
             $data = [
                 'role' => 'user',
                 'name' => strtolower($searchTerm)
@@ -352,6 +368,11 @@
                 unset($data['name']);
                 $rows = $add_customer->where($data);
             }
+
+            $rides_counts = [];
+            foreach ($rows as $row) {
+                $rides_counts[$row->id] = $add_customer1->countRideByCustomer($row->id);
+            }
     
             $data['rows'] = is_array($rows) ? $rows : [];
 
@@ -359,7 +380,8 @@
                 $noMatchFound = true;
             }
     
-    
+            $data['rides_counts'] = $rides_counts;
+            $data['add_customer1'] = $add_customer1;
             $data['title'] = "Customer";
             $data['noMatchFound'] = $noMatchFound;
             $this->view('admin/customer_search', $data);
@@ -374,6 +396,7 @@
         if (isset($_GET['search'])) {
             $searchTerm = $_GET['search'];
             $add_driver = new AdminDriver();
+            $add_driver1 = new AdminRide();
             $data = [
                 'role' => 'driver',
                 'name' => strtolower($searchTerm)
@@ -388,11 +411,17 @@
     
             $data['rows'] = is_array($rows) ? $rows : [];
 
+            $rides_counts = [];
+            foreach ($rows as $row) {
+                $rides_counts[$row->id] = $add_driver1->countRideByDriver($row->id);
+            }
+
             if (empty($data['rows'])) {
                 $noMatchFound = true;
             }
     
-    
+            $data['rides_counts'] = $rides_counts;
+            $data['add_driver1'] = $add_driver1;
             $data['title'] = "Customer";
             $data['noMatchFound'] = $noMatchFound;
             $this->view('admin/driver_search', $data);
