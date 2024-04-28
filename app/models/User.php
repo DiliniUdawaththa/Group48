@@ -120,8 +120,10 @@ class User extends Model
 
        // show($this->empID);
 
-        if ($this->where(['empID'=> $data['empID']])) {
-            $this->errors['empID'] = "Employee ID already exist.";
+        if (!preg_match("/^[1-9][0-9]{3}$/", $data['empID'])) {
+            $this->errors['empID'] = "Employee ID must be a 4-digit number and cannot start with 0.";
+        } elseif ($this->where(['empID' => $data['empID']])) {
+            $this->errors['empID'] = "Employee ID already exists.";
         }
 
         if (!preg_match("/^[a-zA-Z\s]+$/", trim($data['name']))) {
@@ -147,6 +149,8 @@ class User extends Model
 			$this->errors['phone'] = "Contact number must be  10 digits long.";
 		} elseif ($this->where(['phone'=> $data['phone']])) {
              $this->errors['phone'] = "Mobile number already exist.";
+        } elseif (!preg_match("/^07[0-9]{8,9}$/", $data['phone'])) {
+            $this->errors['phone'] = "Mobile number must be in a valid mobile number format.";
         }
 
         if(empty($this->errors))

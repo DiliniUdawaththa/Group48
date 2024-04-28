@@ -671,8 +671,10 @@ class officer extends Controller{
         $renew_driver = new renewRegistration($GLOBALS['pdo']);
 
         $email = $email;
+
         $renew_driver->updateStatus($email);
         $renew_driver->updateRegDate($email);
+        $renew_driver->updateDate($email);
         $renew_driver->confirmEmail($email);
 
         redirect('officer/renewRegistration');
