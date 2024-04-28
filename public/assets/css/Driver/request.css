@@ -140,7 +140,7 @@
           40%{background-position:0% 100%, 50%   0%,100%  50%}
           60%{background-position:0%  50%, 50% 100%,100%   0%}
           80%{background-position:0%  50%, 50%  50%,100% 100%}
-      }
+}
 .cancel-offer-btn{
     height:50px;
     width: 100px;
@@ -243,6 +243,13 @@
     border-radius: 5px;
     cursor:pointer;
     margin:0 auto;
+}
+
+.driver-canceled{
+    display:none;
+    text-align: center;
+    font-size: 15px;
+    color: rgb(166, 12, 12);
 }
 
 .cancel-pop-up{

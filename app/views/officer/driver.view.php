@@ -205,8 +205,8 @@
                             <td>Email</td>
                             <td>Mobile</td>
                             <td>More</td>
-                            <td>Action
-                        </tr>
+
+
 
                         </tr>
                     </thead>
@@ -216,13 +216,11 @@
                         <td class="td_email"><?= $row->email; ?></td>
                         <td class="td_mobile"><?= $row->phone; ?></td>
                         <td class="td_button1">
-                            <a href="<?=ROOT?>/officer/driver/"><button class="detail_btn1">
+                            <a href="<?=ROOT?>/officer/driver_view/<?= urlencode($row->id) ?>"><button class="detail_btn1">
                                     <!--<i
                                         class="fa-solid fa-circle-info" style="color: black;"></i>-->
                                     DETAIL
                                 </button></a>
-                        </td>
-                        <td class="td_button1">
                             <button class="suspend_btn" data-email="<?= $row->email ?>">SUSPEND</button>
                         </td>
                     </tr>

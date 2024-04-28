@@ -24,8 +24,10 @@
                             echo 'Pending';
                         } elseif ($row->status_check == 1) {
                             echo 'Investigated';
-                            } ?></h4>
-                <h4>Officer Coment: <?php echo isset($row->officercmnt) ? $row->officercmnt : 'N/A'; ?></h4>
+                            } elseif ($row->status_check == 2) {
+                                echo 'Rejected';
+                                }?></h4>
+                <h4>Officer Coment: <?php echo isset($row->officerCmnt) ? $row->officerCmnt : 'N/A'; ?></h4>
 
 
             </div>
