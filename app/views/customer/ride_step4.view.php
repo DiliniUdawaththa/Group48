@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- <meta http-equiv="refresh" content="15" id="refreshMeta"> -->
+    <meta http-equiv="refresh" content="15" id="refreshMeta">
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_step4.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css">   
@@ -18,10 +18,9 @@
             margin: 0;
             padding: 0;
         }
-        #map{
-            width: 50%;
-            height: 90vh;
-        }
+        
+        
+      
     </style>
 </head>
 <body id="body">
@@ -33,11 +32,12 @@
 <div class="activity">
         <div class="mainbox">
             <div class="contant" id="contant" >
-            <!-- Include jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
-                <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
+            <form action="" method="POST">
+                <button type="submit" name="submit" value="submit" style="border: none; background: none; cursor: pointer;">
+                       <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
+                </button>
+           </form>
                 <center>
                     
                     <h2>Select the Driver</h2>
@@ -71,6 +71,8 @@
                                 <?php endforeach; ?>
                          
                       <?php endforeach; ?>
+                      <div class="loader"></div>
+                      <b class="b">Searching </b>
 
                       <form action="" method="POST">
                            <input type="text" value='0' name='driver_id' id='Driver_Id'>
@@ -84,10 +86,10 @@
                     <div class="message_topbar">
                         <i class="fa-solid fa-xmark" id="close"></i>
                     </div>
-                    <div class="message_view">
-                    </div>
-                    <div class="message_input">
-                      <textarea name="message_text" id="message_text" cols="50" rows="3" value=""></textarea>
+                 
+                    <div class="message_input"  style="z-index:500; background-color:white;">
+                        <div style="padding:10px 30px">Enter your Negotiate fare</div>
+                      <input name="message_text" id="message_text" value="" placeholder="Enter your fare...">
                       <input type="text"  name='Driver_id' id='driverId' style="display:none;">
                       <input type="text"  name='ride_id' id='rideid' style="display:none;">
                       <button>Send</button>
@@ -100,7 +102,21 @@
             <div id="map" > </div>
         </div>
     </div>       
+    <div class="toggleicon" id="toggleSidebar" onclick="side_open()">
+             <i class="fa-solid fa-bars"></i>
+      </div>
+      <script>
+        function side_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.querySelector('.activity').style.opacity= '0.5';
+        }
+
+        function side_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.querySelector('.activity').style.opacity= '1';
+        }
         
+      </script> 
 </body>
 </html>
 <script>

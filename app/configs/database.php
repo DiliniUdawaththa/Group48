@@ -178,7 +178,7 @@ class Database
 			`driver_id` int(11) NOT NULL,
 			`vehicle` varchar(10) NOT NULL,
 			`lat` float NOT NULL,
-			`long` float NOT NULL,
+			`lng` float NOT NULL,
 			`status` tinyint(1) NOT NULL,
 			PRIMARY KEY (`driver_id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -208,29 +208,31 @@ class Database
 
 		$query= "
 		CREATE TABLE IF NOT EXISTS `rides` (
-		`id` int(10) NOT NULL AUTO_INCREMENT,
-		`passenger_id` int(10) NOT NULL,
-		`driver_id` int(10) NOT NULL,
-		`date` datetime NOT NULL,
-		`location` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-		`l_lat` float NOT NULL,
-		`l_long` float NOT NULL,
-		`destination` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-		`d_lat` float NOT NULL,
-		`d_long` float NOT NULL,
-		`m_lat` float DEFAULT NULL,
-		`m_long` float DEFAULT NULL,
-		`vehicle` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
-		`time` varchar(20) NOT NULL,
-		`distance` varchar(20) NOT NULL,
-		`fare` float NOT NULL,
-		`ride_start` tinyint(1) NOT NULL DEFAULT '0',
-		`state` varchar(10) NOT NULL,
-		PRIMARY KEY (`id`),
-		KEY `fk_passenger` (`passenger_id`),
-		KEY `fk_driver` (`driver_id`)
-		) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
-		INSERT INTO `rides` (`id`, `passenger_id`, `driver_id`, `date`, `location`, `l_lat`, `l_long`, `destination`, `d_lat`, `d_long`, `vehicle`, `time`, `distance`, `fare`, `ride_start`, `state`) VALUES
+			`id` int(10) NOT NULL AUTO_INCREMENT,
+			`passenger_id` int(10) NOT NULL,
+			`driver_id` int(10) NOT NULL,
+			`date` datetime NOT NULL,
+			`location` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+			`l_lat` float NOT NULL,
+			`l_long` float NOT NULL,
+			`destination` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+			`d_lat` float NOT NULL,
+			`d_long` float NOT NULL,
+			`m_lat` float DEFAULT NULL,
+			`m_long` float DEFAULT NULL,
+			`vehicle` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
+			`time` varchar(20) NOT NULL,
+			`distance` varchar(20) NOT NULL,
+			`fare` float NOT NULL,
+			`ride_start` tinyint(1) NOT NULL DEFAULT '0',
+			`state` varchar(10) NOT NULL,
+			`passenger_cancel` varchar(50) NOT NULL DEFAULT '',
+			`driver_cancel` varchar(50) NOT NULL DEFAULT '',
+			PRIMARY KEY (`id`),
+			KEY `fk_passenger` (`passenger_id`),
+			KEY `fk_driver` (`driver_id`)
+		  ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+		  INSERT INTO `rides` (`id`, `passenger_id`, `driver_id`, `date`, `location`, `l_lat`, `l_long`, `destination`, `d_lat`, `d_long`, `vehicle`, `time`, `distance`, `fare`, `ride_start`, `state`) VALUES
 		(9, 21, 3, '2024-04-09 13:30:35', 'University of Colombo, Sri Lanka', 6.90224, 79.8614, 'Veluwanarama Flats, Sri Lanka', 6.87326, 79.868, 'bike', '00:20', '2.21', 500, 0, 'Success'),
 		(10, 21, 4, '2024-04-09 15:01:15', 'Viharamahadevi Park, Sri Lanka', 6.91291, 79.8617, 'Molpe Road, Sri Lanka', 6.79482, 79.9008, 'Ac-car', '01:12', '50.67', 500, 0, 'Success'),
 		(13, 21, 4, '2024-04-09 18:25:47', 'Veluwanarama Flats, Sri Lanka', 6.87325, 79.868, 'University of Colombo, Sri Lanka', 6.90225, 79.86, 'auto', '00:7', '4.45', 500, 0, 'Success'),
@@ -306,12 +308,13 @@ class Database
 		$query="
 		CREATE TABLE IF NOT EXISTS `rating` (
 		`rate_id` int(11) NOT NULL AUTO_INCREMENT,
+		`ride_id` int(11) NOT NULL,
 		`role_id` int(11) NOT NULL,
 		`role` varchar(20) NOT NULL,
 		`rate` int(11) NOT NULL,
 		PRIMARY KEY (`rate_id`)
-		) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;	
-		";
+		) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+";
 
 		$this->query($query);
 
@@ -351,6 +354,22 @@ class Database
 		PRIMARY KEY (`message_id`)
 		) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 		COMMIT;
+	
+		";
+
+		$this->query($query);
+
+		$query="
+		CREATE TABLE IF NOT EXISTS `offers` (
+			`ride_id` int(11) NOT NULL,
+			`driver_id` int(11) NOT NULL,
+			`offer_price` int(11) NOT NULL,
+			`negotiation_status` int(11) DEFAULT '0',
+			`negotiation_price` int(11) DEFAULT NULL,
+			`accept_status` tinyint(1) NOT NULL DEFAULT '0',
+			PRIMARY KEY (`ride_id`,`driver_id`)
+		  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+		  
 	
 		";
 
