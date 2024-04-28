@@ -2,7 +2,7 @@
 <html>
 <head>
 <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
-<meta http-equiv="refresh" content="15" id="refreshMeta">
+<!-- <meta http-equiv="refresh" content="15" id="refreshMeta"> -->
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_step5.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css"> 
     <!-- google font   -->
@@ -21,10 +21,7 @@
             margin: 0;
             padding: 0;
         }
-        #map{
-            width: 50%;
-            height: 90vh;
-        }
+      
     </style>
 </head>
 <body id="body">
@@ -42,7 +39,7 @@
                     <h5 id='time_limit'></h5>
                     <div class="driver_profile">
                         <img class="driver_image" src="<?= ROOT ?>/assets/img/customer/person.png" alt="">
-                        <img class="driver_vehicle" src="<?= ROOT ?>/assets/img/customer/c2.jpeg" alt="">
+                        <img class="driver_vehicle" src="<?= ROOT ?>/assets/img/customer/<?=$vehicle?>.png" alt="">
                     </div>
             </center>
             
@@ -53,31 +50,66 @@
                 <span class="material-symbols-rounded">chat</span>
                 <span class="material-symbols-outlined">close</span>
               </button>
-              
-              <div class="chatbot">
-                <header>
-                  <h2>Chatbot</h2>
-                  <span class="close-btn material-symbols-outlined">close</span>
-                </header>
-                <ul class="chatbox">
-                  <li class="chat incoming">
-                    <span class="material-symbols-outlined">smart_toy</span>
-                    <p>Hi there 👋<br>How can I help you today?</p>
-                  </li>
-                </ul>
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" onsubmit="return validateForm()">
-                <div class="chat-input">
-                  <textarea   id="message" name="address" placeholder="Enter a message..." spellcheck="false" required></textarea>
-                  <span id="send-btn" class="material-symbols-rounded" ><input type="submit" value="Submit">send</span>
+              <button class="chatbot-toggler1">
+                <span class="material-symbols-rounded1"><i class="fa-solid fa-xmark"></i></span>
+                <span class="material-symbols-outlined1"><i class="fa-solid fa-xmark"></i></span>
+              </button>
+              <form action="" method='POST' id="message_form">
+                <div class="chatbot">    
+                    <span class="close-btn material-symbols-outlined"></span>
+                    <center>
+                    <div id="message1">Come fast</div>
+                    <div id="message2">I'm waiting for you</div>
+                    <div id="message3">Hurry up, please</div>
+                    <div id="message4">Running late, sorry</div>
+                    <div id="message5">Please be on time</div>
+                    <div id="message6">See you soon</div>
+                    <div id="message7">I'm almost there</div>
+                    <div id="message8">Will arrive in a few minutes</div>
+                    <div id="message9">I'm here, where are you?</div>
+                    <div id="message10">Please wait a moment</div>
+                    <div id="message11">Let's get moving</div>
+                    <div id="message12">Let me know when you're here</div>
+                    <input type="text" name="message" id="passenger_message" style="display:none;">
+                    </center>
                 </div>
-                </form>
-              </div>
-                
+              </form> 
+              <form action="" method='POST' id="cancel_form">
+              <div class="chatbot1">    
+                    <span class="close-btn1 material-symbols-outlined"></span>
+                    <center>
+                    <div id="cancel1">no driver</div>
+                    <div id="cancel2">change of plans</div>
+                    <div id="cancel3">delayed pickup</div>
+                    <div id="cancel4">vehicle issue</div>
+                    <div id="cancel5">Feeling uncomfortable</div>
+                    <div id="cancel6">emergency</div>
+                    <div id="cancel7">wrong destination</div>
+                    <div id="cancel8">other</div>
+                    <input type="text" name="passenger_cancel" id="passenger_cancel" style="display:none;">
+                    </center>
+                </div>
+              </form>
                 
             </div>
             <div id="map" > </div>
         </div>
-    </div>       
+    </div>   
+    <div class="toggleicon" id="toggleSidebar" onclick="side_open()">
+             <i class="fa-solid fa-bars"></i>
+      </div>
+      <script>
+        function side_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.querySelector('.activity').style.opacity= '0.5';
+        }
+
+        function side_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.querySelector('.activity').style.opacity= '1';
+        }
+        
+      </script>    
     <script>
     function openWhatsApp() {
         
@@ -159,92 +191,112 @@
 <!-- chat box -->
 <script>
     const chatbotToggler = document.querySelector(".chatbot-toggler");
+    const chatbotToggler1 = document.querySelector(".chatbot-toggler1");
 const closeBtn = document.querySelector(".close-btn");
+const closeBtn1 = document.querySelector(".close-btn1");
 const chatbox = document.querySelector(".chatbox");
-const chatInput = document.querySelector(".chat-input textarea");
-const sendChatBtn = document.querySelector(".chat-input span");
+const chatbox1 = document.querySelector(".chatbox1");
 
-let userMessage = null; // Variable to store user's message
-const API_KEY = "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"; // Paste your API key here
-const inputInitHeight = chatInput.scrollHeight;
-
-const createChatLi = (message, className) => {
-    // Create a chat <li> element with passed message and className
-    const chatLi = document.createElement("li");
-    chatLi.classList.add("chat", `${className}`);
-    let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
-    chatLi.innerHTML = chatContent;
-    chatLi.querySelector("p").textContent = message;
-    return chatLi; // return chat <li> element
-}
-
-   const generateResponse = (chatElement) => {
-    const API_URL = "https://api.openai.com/v1/chat/completions";
-    const messageElement = chatElement.querySelector("p");
-
-    // Define the properties and message for the API request
-    const requestOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${API_KEY}`
-        },
-        body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{role: "user", content: userMessage}],
-        })
-    }
-
-    // Send POST request to API, get response and set the reponse as paragraph text
-    fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
-        messageElement.textContent = data.choices[0].message.content.trim();
-    }).catch(() => {
-        messageElement.classList.add("error");
-        messageElement.textContent = "Oops! Something went wrong. Please try again.";
-    }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
-}
-
-const handleChat = () => {
-    userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
-    if(!userMessage) return;
-
-    // Clear the input textarea and set its height to default
-    chatInput.value = "";
-    chatInput.style.height = `${inputInitHeight}px`;
-
-    // Append the user's message to the chatbox
-    chatbox.appendChild(createChatLi(userMessage, "outgoing"));
-    chatbox.scrollTo(0, chatbox.scrollHeight);
-    
-    setTimeout(() => {
-        // Display "Thinking..." message while waiting for the response
-        const incomingChatLi = createChatLi("Thinking...", "incoming");
-        chatbox.appendChild(incomingChatLi);
-        chatbox.scrollTo(0, chatbox.scrollHeight);
-        generateResponse(incomingChatLi);
-    }, 600);
-}
-
-chatInput.addEventListener("input", () => {
-    // Adjust the height of the input textarea based on its content
-    chatInput.style.height = `${inputInitHeight}px`;
-    chatInput.style.height = `${chatInput.scrollHeight}px`;
-   
-});
-
-chatInput.addEventListener("keydown", (e) => {
-    // If Enter key is pressed without Shift key and the window 
-    // width is greater than 800px, handle the chat
-    if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
-        e.preventDefault();
-        handleChat();
-    }
-});
-
-sendChatBtn.addEventListener("click", handleChat);
 closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
 chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
 
+closeBtn1.addEventListener("click", () => document.body.classList.remove("show-chatbot1"));
+chatbotToggler1.addEventListener("click", () => document.body.classList.toggle("show-chatbot1"));
+
+var message = [];
+var messageText= [];
+for (var i = 1; i < 13; i++) {
+    message[i] = document.getElementById('message' + i);
+    messageText[i] = message[i].innerText;
+}
+
+    message[1].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[1];
+    document.getElementById('message_form').submit();
+     });
+    message[2].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[2];
+    document.getElementById('message_form').submit();
+     });
+     message[3].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[3];
+    document.getElementById('message_form').submit();
+     });
+     message[4].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[4];
+    document.getElementById('message_form').submit();
+     });
+     message[5].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[5];
+    document.getElementById('message_form').submit();
+     });
+     message[6].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[6];
+    document.getElementById('message_form').submit();
+     });
+     message[7].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[7];
+    document.getElementById('message_form').submit();
+     });
+     message[8].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[8];
+    document.getElementById('message_form').submit();
+     });
+     message[9].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[9];
+    document.getElementById('message_form').submit();
+     });
+     message[10].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[10];
+    document.getElementById('message_form').submit();
+     });
+     message[11].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[11];
+    document.getElementById('message_form').submit();
+     });
+     message[12].addEventListener('click', function() {
+    document.getElementById('passenger_message').value=messageText[12];
+    document.getElementById('message_form').submit();
+     });
+
+var cancel = [];
+var cancelText= [];
+for (var i = 1; i < 9; i++) {
+    cancel[i] = document.getElementById('cancel' + i);
+    cancelText[i] = cancel[i].innerText;
+}
+    cancel[1].addEventListener('click', function() {
+    document.getElementById('passenger_cancel').value=cancelText[1];
+    document.getElementById('cancel_form').submit();
+     });
+     cancel[2].addEventListener('click', function() {
+    document.getElementById('passenger_cancel').value=cancelText[2];
+    document.getElementById('cancel_form').submit();
+     });
+     cancel[3].addEventListener('click', function() {
+    document.getElementById('passenger_cancel').value=cancelText[3];
+    document.getElementById('cancel_form').submit();
+     });
+     cancel[4].addEventListener('click', function() {
+    document.getElementById('passenger_cancel').value=cancelText[4];
+    document.getElementById('cancel_form').submit();
+     });
+     cancel[5].addEventListener('click', function() {
+    document.getElementById('passenger_cancel').value=cancelText[5];
+    document.getElementById('cancel_form').submit();
+     });
+     cancel[6].addEventListener('click', function() {
+    document.getElementById('passenger_cancel').value=cancelText[6];
+    document.getElementById('cancel_form').submit();
+     });
+     cancel[7].addEventListener('click', function() {
+    document.getElementById('passenger_cancel').value=cancelText[7];
+    document.getElementById('cancel_form').submit();
+     });
+     cancel[8].addEventListener('click', function() {
+    document.getElementById('passenger_cancel').value=cancelText[8];
+    document.getElementById('cancel_form').submit();
+     });
 
 </script>
 

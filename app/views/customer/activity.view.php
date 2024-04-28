@@ -18,11 +18,11 @@
            <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="" class="userimage">
            <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?php echo $_SESSION['USER_DATA']->name; ?> </H3>
            <h6>
-             <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-             <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-             <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-             <i class="fa-solid fa-star" ></i>
-             <i class="fa-solid fa-star" ></i>
+               <?php for($i=0; $i<$rating; $i++){ ?>
+                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                  <?php } for($i=$rating; $i<5; $i++){?>
+                  <i class="fa-solid fa-star" ></i>
+                  <?php }?>
            </h6>
         </div>
         
@@ -57,11 +57,11 @@
                 <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
+                <?php for($i=0; $i<$rating; $i++){ ?>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                  <?php } for($i=$rating; $i<5; $i++){?>
                   <i class="fa-solid fa-star" ></i>
-                  <i class="fa-solid fa-star" ></i>
+                  <?php }?>
                 </h6>
              </div>
              

@@ -123,6 +123,96 @@ body{
     margin-top: 3vh;
   }
 
+  .upload{
+    width: 50px; height: 50px; padding:5px; border:solid; border-radius:10px;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    body{
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+    }
+    .activity{
+     margin-left: 0px;
+     width:100vw;
+     /* background-image: linear-gradient(to bottom, white, #84D7EB); */
+     padding: 0;
+     box-shadow:none;
+     margin: 0;
+     flex-direction: column;
+    }
+    .activity form{
+      margin-left: 0px;
+      width:100vw;
+      /* background-image: linear-gradient(to bottom, white, #84D7EB); */
+      padding: 0;
+      box-shadow:none;
+      margin: 0;
+      flex-direction:column-reverse;
+     }
+    .box1{
+      margin: 0;
+      box-shadow:none;
+      height: 40vh;
+      width: 100%;
+      padding: 0;
+      background-image: linear-gradient(to bottom, white, #84D7EB);
+     
+    }
+    .box2{
+      margin: 0;
+      box-shadow:none;
+      height: 60vh;
+      width: 100%;
+      padding: 0;
+      background-image: linear-gradient(to top, white, #84D7EB);
+     
+    }
+    .box1 h1{
+       font-size: 3vh;
+    }
+    .box1 h3{
+      font-size: 1.6vh;
+    }
+    .box2 h1{
+      font-size: 3vh;
+   }
+    #driver_photo{
+      height: 14vh;
+      width: 14vh;
+  
+    }
+    .staricon i{
+      margin-bottom: 20px;
+      font-size: 2vh;
+      cursor: pointer;
+    }
+    .report_submit button{
+       font-size: 2vh;
+       width: 8vh;
+    }
+    .report_submit a{
+      font-size: 1.4vh;
+      margin-bottom: 3vh;
+
+  }
+  .reportlist input{
+     font-size: 2vh;
+     height: 1.5vh;
+  }
+  .reportlist label{
+    font-size: 1.5vh;
+  }
+  .upload{
+    font-size: 1.5vh;
+  }
+  .reporttext textarea{
+    font-size: 1.5vh;
+  }
+
+}
+
 
   
 

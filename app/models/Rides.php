@@ -27,6 +27,8 @@ class Rides extends Model
 		'distance',
         'fare',
         'state',
+		'passenger_cancel',
+		'driver_cancel',
 	];
 
     public function validate($data)

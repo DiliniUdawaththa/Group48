@@ -16,21 +16,17 @@
             margin: 0;
             padding: 0;
         }
-        #map{
-            width: 50%;
-            height: 90vh;
-        }
+       
     </style>
 </head>
 <body id="body">
 
    <?php include 'ride_side.php'; ?>
-
 <!-- ---------------------------------------------------------------------------------- -->
 <div class="activity">
         <div class="mainbox">
             <div class="contant" >
-                <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
+                <!-- <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a> -->
                 <center>
                     
                     <h2>Select the Vehicle</h2>
@@ -100,7 +96,21 @@
         </div>
     </div>       
         
+    <div class="toggleicon" id="toggleSidebar" onclick="side_open()">
+             <i class="fa-solid fa-bars"></i>
+      </div>
+      <script>
+        function side_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.querySelector('.activity').style.opacity= '0.5';
+        }
+
+        function side_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.querySelector('.activity').style.opacity= '1';
+        }
         
+      </script> 
     </body>
 </html>
 <script>

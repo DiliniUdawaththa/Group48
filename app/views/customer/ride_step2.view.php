@@ -21,7 +21,6 @@
 </head>
 <body id="body">
    <?php include 'ride_side.php'; ?>
-
 <!-- ---------------------------------------------------------------------------------- -->
 <div class="activity">
         <div class="box">
