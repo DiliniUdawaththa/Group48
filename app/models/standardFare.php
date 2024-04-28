@@ -109,5 +109,19 @@ class standardFare extends Model
     
     }
     
+    public function getFareByTypeAndVehicle($fareType, $vehicleType) {
+        
+        $sql = "SELECT standard_fare FROM fare WHERE faretype = '$fareType' AND vehicletype = '$vehicleType'";
+        $result = $this->query($sql);
+
+        $standardFare = null;
+        if ($result && count($result) > 0){
+            $row = $standardFare;
+            $standardFare = $row['standardFare'];
+
+        }
+
+        return $standardFare;
+    }
 
 }

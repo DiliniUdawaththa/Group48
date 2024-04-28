@@ -1,0 +1,38 @@
+.Profile Image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #1c0171;
+    }
+
+    th {
+        background-color: #29009a;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .data td:nth-child(4) {
+        /* Assuming this is the column for status */
+        /*color: white;*/
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+
+    
