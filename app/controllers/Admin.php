@@ -159,10 +159,17 @@
         }
 
         $add_driver = new AdminDriver();
+        $add_driver1 = new AdminRide();
+        $add_driver2 = new AdminDashboard();
 
         $data = [
             'role' => "driver"
         ];
+
+        $upcomingExpire = $add_driver->countExpiringDrivers();
+        $expired = $add_driver1->expiredDriverCount();
+        $total_driver = $add_driver2->getRoleCounts();
+        $total_driver_count = $total_driver['driver']; 
 
         $rows = $add_driver->where($data);
         $data['rows'] = array();
@@ -172,6 +179,9 @@
             $data['rows'][] = $rows[$i];
         }
 
+        $data['upcomingExpire'] = $upcomingExpire;
+        $data['expired'] = $expired;
+        $data['total_driver_count'] = $total_driver_count;
         $data['title'] = "Drivers";
         $this->view('admin/driver',$data);
     }
@@ -471,11 +481,33 @@
 
     }
 
+    public function customerReport(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $this->view('admin/customer_report');
+
+    }
+
+    public function driverReport(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $this->view('admin/driver_report');
+
+    }
+
     
-    // public function mail(){
-    //     $newMail = new reminderMail();
-    //     $newMail->selectDriver();
-    // }
+    public function mail(){
+        $newMail = new reminderMail();
+        $newMail->selectDriver();
+    }
 
 
  }

@@ -13,7 +13,7 @@ class offers extends Model
         'offer_price',
         'negotiation_status',
         'negotiation_price',
-		'accept_status',
+        'accept_status'
 	];
 
     public function validate($data)

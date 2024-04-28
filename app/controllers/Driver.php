@@ -16,7 +16,7 @@ class Driver extends Controller{
         $driverreg = new Driverregistration();
 
         $row1 = $driverreg->where([
-            "email"=> $_SESSION['USER_DATA']->email,
+            "id"=> $_SESSION['USER_DATA']->id,
         ]);
         if(!isset($row1[0])){
             $registrationitems = array (
@@ -28,6 +28,7 @@ class Driver extends Controller{
             );
 
             $_SESSION['REGISITEMS'] = $registrationitems;
+            sleep(2);
             
 
             redirect('driver/registration');
@@ -62,10 +63,16 @@ class Driver extends Controller{
         ]);
         if(empty($row)){
             $data['vehicles'] = 0;
+            $vehicle_type = 'auto';
         }else{
             $data['vehicles'] = 1;
             $data['vehicledata'] = $row[0];
+            $vehicle_type = $row[0]->type;
+            if($vehicle_type=="threewheel"){
+                $vehicle_type="auto";
+            }
         }
+        
         
 
         $current_rides = new Current_rides();
@@ -73,6 +80,43 @@ class Driver extends Controller{
         $currides = $current_rides ->findAll();
         
         $data['current_rides'] = $currides;
+        $data['status'] = 1;
+
+        $driverst = new Driver_status();
+
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            if(isset($_POST['driver_loc'])){
+                if($_POST['driver-status']=='active'){
+                    $data['status']=1;
+                    $row5 = $driverst-> where([
+                        "driver_id" => $_SESSION['USER_DATA']->id,
+                    ]);
+                    if(!isset($row5[0])){
+                        $_POST['driver_id'] = $_SESSION['USER_DATA'] -> id;
+                        $_POST['vehicle'] = $vehicle_type;
+                        $_POST['lng'] = (float)$_POST['longitude'];
+                        $_POST['lat'] = (float)$_POST['latitude'];
+                        $_POST['status']= 1;
+                        $driverst -> insert($_POST);
+                    }
+                    
+                }
+                else{
+                    $data['status']=0;
+                    $row4 = $driverst-> where([
+                        "driver_id" => $_SESSION['USER_DATA']->id,
+                    ]);
+                    if(isset($row4[0])){
+                        $data1 = (array)$row4[0];
+                        $id = array();
+                        $id['driver_id'] = $row4[0]->driver_id;
+                        $driverst -> delete($id);
+                    }
+                    
+                }
+            }
+        }
 
 
         $this->view('driver/activity',$data);
@@ -196,8 +240,24 @@ class Driver extends Controller{
 
     public function request02(){
         $data['errors'] = [];
-
+        $data['negotiation_sent'] = 0;
         $cust = new User();
+        $offers = new Offers();
+
+        $current_offer = $offers->where([
+            'driver_id' => $_SESSION['USER_DATA']->id,
+        ]);
+
+        if($current_offer[0]->accept_status == 1){
+            redirect(redirect('driver/request03'));
+        }
+
+        if($current_offer[0]->offer_price != $current_offer[0]->negotiation_price){
+            if($current_offer[0]->negotiation_status==1){
+                $data['negotiation_sent'] = 1;
+            }
+        }
+        
 
         $row4 = $cust->first([
             "id"=> $_SESSION['pass_id'],
@@ -211,7 +271,116 @@ class Driver extends Controller{
 
         $data['ride_info'] = $row3;
 
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            if(isset($_POST['acceptneg'])){
+                redirect('driver/request03');
+            }
+            if(isset($_POST['declineneg'])){
+                redirect('driver/request03');
+            }
+
+            if(isset($_POST['cancel-offer'])){
+                $offers -> delete((array)$current_offer[0]);
+                redirect('driver/activity');
+            }
+
+
+        }
+
         $this->view('driver/request02',$data);
+    }
+
+    public function request03(){
+        $data['errors'] = [];
+
+        $cust = new User();
+        $ride = new Rides();
+        $current_ride = $ride->first([
+            "id" => $_SESSION['ride_id'],
+        ]);
+
+        $row4 = $cust->first([
+            "id"=> $_SESSION['pass_id'],
+        ]);
+        $data['customer'] = $row4;
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            if(isset($_POST['start-ride'])){
+                $current_ride->ride_start = 1;
+                // $ride->update($current_ride);
+                redirect('driver/request04');
+
+            }
+            if(isset($_POST['cancel-s-ride'])){
+                
+            }
+            
+        }
+        
+
+        $this->view('driver/request03',$data);
+    }
+
+    public function request04(){
+        $data['errors'] = [];
+
+        $cust = new User();
+
+        $row4 = $cust->first([
+            "id"=> $_SESSION['pass_id'],
+        ]);
+        $data['customer'] = $row4;
+
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            redirect('driver/request05');
+        }
+        
+
+        $this->view('driver/request04',$data);
+    }
+
+    public function request05(){
+        $data['errors'] = [];
+        $complain_status = 0;
+        $complain = NULL;
+        $cust = new User();
+        $complaint = new Complaint();
+
+        $row4 = $cust->first([
+            "id"=> $_SESSION['pass_id'],
+        ]);
+        $data['customer'] = $row4;
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            show([$_POST]);
+            for ($i = 1; $i <= 8; $i++) {    
+                $reportName = 'report' . $i;
+                if (isset($_POST[$reportName])) {
+                    $complain_status = 1;
+                    $complain = $complain . ucfirst($_POST[$reportName]) . '. ';
+                } 
+            }
+            if(isset($_POST['other'])){
+                if($_POST['other']!= NULL){
+                    $complain_status = 1;
+                    $complain = $complain . ucfirst($_POST['other']);
+                }
+                
+            }
+
+            if($complain_status==1){
+                $_POST['complainant'] = $_SESSION['USER_DATA'] -> id;
+                $_POST['passenger_id'] =$_SESSION['pass_id'];
+                $_POST['driver_id'] = $_SESSION['USER_DATA'] -> id;
+                $_POST['datetime'] = date('Y-m-d H:i:s');
+                $_POST['complaint'] = $complain;
+                $complaint->insert($_POST);
+            }
+
+            redirect('driver/activity');
+            
+        }
+
+        $this->view('driver/request05',$data);
+
     }
 
     public function registration(){
@@ -220,7 +389,7 @@ class Driver extends Controller{
         $driverreg = new Driverregistration();
 
         $row1 = $driverreg->where([
-            "email"=> $_SESSION['USER_DATA']->email,
+            "id"=> $_SESSION['USER_DATA']->id,
         ]);
 
         
@@ -232,7 +401,9 @@ class Driver extends Controller{
 
             if($_SERVER['REQUEST_METHOD'] == "POST"){
                 if(isset($_POST['registration'])){
-                    $Registerdata['email'] = $_SESSION['USER_DATA']->email;
+        
+                    $Registerdata['id'] = $_SESSION['USER_DATA']->id;
+                    $Registerdata['date'] = date('Y-m-d');
                     $Registerdata['profileimg'] = $_SESSION['REGISITEMS']['profileimg'];
                     $Registerdata['driverlicenseimg'] =  $_SESSION['REGISITEMS']['driverlicenseimg'];
                     $Registerdata['revenuelicenseimg'] =  $_SESSION['REGISITEMS']['revenuelicenseimg'];
@@ -343,7 +514,7 @@ class Driver extends Controller{
         }
 
 
-            $this->view('driver/registration/profilePicture',$data);
+        $this->view('driver/registration/profilePicture',$data);
         
     }
 

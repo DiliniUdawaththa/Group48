@@ -22,6 +22,7 @@
                     color: white;
             }
 
+
 </style>
     </head>
     <body>
@@ -33,8 +34,8 @@
         <div class="page-container">
             <div class="body-container">
 
-            
-
+            <?php include 'driver_side.php'; ?>
+            <form method="POST">
                 <div class="req-body">
                     <div class="req-content">
             
@@ -44,49 +45,48 @@
                                
                                     <p class="customer-name"><?php echo ucfirst($data['customer']->name)?></p>
                                     <img src="<?= ROOT ?>/assets/img/images/rating.png" class="customer-rating">
-                                    <p class="req-time">2 mins ago</p>
+                                    <p class="req-time">Waiting..</p>
                                 
                             </div>
                         </div>
-                        <div class="location-destination">
-                            <p class="req-loc-des"><b>From:</b> <?php echo $data['ride_info']->location?></p>
-                            <p class="req-loc-des"><b>To:</b> <?php echo $data['ride_info']->destination?></p>
-                            <p class="req-loc-des"><b>Distance:</b> 5.2km</p>
-                            <p class="req-loc-des"><b>Vehicle</b> Three Wheeler</p>
-                            <p class="req-loc-des"><b>Offer sent:</b> Rs 600</p>
-                            <?php echo $data['negotiation_sent']?>
+                        <div class="location-destination" style="text-align: center;">
+                            <p>Mr <?php echo ucfirst($data['customer']->name)?> is waiting at his pick-up location</p>
+                            <p class="collect-cus-time"><b>Estimated Time:</b> 10 minutes</p>
+                            <div class="loader" style="margin:20px auto;"></div>
                         </div>
-                        <div style="display:flex;justify-content:space-around;"><p>Waiting for customer<div class="loader"></div></p></div>
-                        <form method="POST"><input type="submit" value="Cancel" class="cancel-offer-btn" name="cancel-offer"></form>
-                        <?php if($data['negotiation_sent'] == 1):?>
-                        <div class="negotiation">
+                       
+
                         
-                           <h3>Negotiation request</h3>
-                           <div>
-                                <p class="req-loc-des"><b>Offered fare:</b> Rs 600</p>
-                                <p class="req-loc-des"><b>Requesting fare:</b> Rs. 500</p>
+                            <div class="neg-btns">
+                                <button type="button" class="cancel-s-ride" onclick="show_popup()">Cancel</button>
+                            
+                                <input type="submit" name="start-ride" value="Start Ride" class="start-ride">
                             </div>
-                            <form method="POST">  
-                           <div class="neg-btns">
-                                    <input type="submit" class="accept-neg-btn" value="Accept" name="acceptneg">
-                                    <!-- <button class="accept-neg-btn">Accept</button> -->
-                                    <input type="submit" class="decline-neg-btn" value="Decline" name="declineneg">
-                                    <!-- <button class="decline-neg-btn">Decline</button> -->
-                                
-                            </div>
-                            </form>
+                            
+      
                         
-                        </div>
-                        <?php endif;?>
-                        
+                           
                     </div>
                     <div class="req-map">
                         <div id="map">
-                            
+
                         </div>
                         
                     </div>
+                    <div class="cancel-reason1">
+                           <h3>Please give a reason</h3>
+                            <select name="reason" id="cancel-reason">
+                                <option value="Taking long">Taking Long</option>
+                                <option value="Vehicle Breakdown">Vehicle Breakdown</option>
+                                <option value="Other">Other</option>
+                            </select>
+                           <input type="Submit" name="cancel-s-ride" value="Submit" class="submit-pop-up" style="height:30px;">
+                           <button type="button" class="cancel-pop-up" onclick="hide_popup()">Cancel</button>
+                    </div>
                 </div>
+
+                </form>
+                        
 
                 
 
@@ -103,7 +103,7 @@
                 </div>
             </div>
        </div>
-            <!-- leaflet js code -->
+            !-- leaflet js code -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <!-- routing js file -->
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
@@ -149,8 +149,12 @@
                 }
             });
 
-            
-                
+            function hide_popup(){
+                document.querySelector('.cancel-reason1').style.display = 'none';
+            }
+            function show_popup(){
+                document.querySelector('.cancel-reason1').style.display = 'flex';
+            }
 
             var status = 1
             var sidenav = 1

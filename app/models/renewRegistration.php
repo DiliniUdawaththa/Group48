@@ -14,7 +14,6 @@ class renewRegistration extends Model{
 	protected $table1 = "users";
 
 	protected $allowedColumns = [
-
 		'email',
         'name',
 		'status',
