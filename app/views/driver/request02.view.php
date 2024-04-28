@@ -22,7 +22,6 @@
                     color: white;
             }
 
-
 </style>
     </head>
     <body>
@@ -34,7 +33,7 @@
         <div class="page-container">
             <div class="body-container">
 
-            <?php include 'driver_side.php'; ?>
+            
 
                 <div class="req-body">
                     <div class="req-content">
@@ -55,15 +54,35 @@
                             <p class="req-loc-des"><b>Distance:</b> 5.2km</p>
                             <p class="req-loc-des"><b>Vehicle</b> Three Wheeler</p>
                             <p class="req-loc-des"><b>Offer sent:</b> Rs 600</p>
+                            <?php echo $data['negotiation_sent']?>
                         </div>
                         <div style="display:flex;justify-content:space-around;"><p>Waiting for customer<div class="loader"></div></p></div>
-                        <button class="cancel-offer-btn">Cancel</button>
-                           
+                        <form method="POST"><input type="submit" value="Cancel" class="cancel-offer-btn" name="cancel-offer"></form>
+                        <?php if($data['negotiation_sent'] == 1):?>
+                        <div class="negotiation">
+                        
+                           <h3>Negotiation request</h3>
+                           <div>
+                                <p class="req-loc-des"><b>Offered fare:</b> Rs 600</p>
+                                <p class="req-loc-des"><b>Requesting fare:</b> Rs. 500</p>
+                            </div>
+                            <form method="POST">  
+                           <div class="neg-btns">
+                                    <input type="submit" class="accept-neg-btn" value="Accept" name="acceptneg">
+                                    <!-- <button class="accept-neg-btn">Accept</button> -->
+                                    <input type="submit" class="decline-neg-btn" value="Decline" name="declineneg">
+                                    <!-- <button class="decline-neg-btn">Decline</button> -->
+                                
+                            </div>
+                            </form>
+                        
+                        </div>
+                        <?php endif;?>
                         
                     </div>
                     <div class="req-map">
                         <div id="map">
-
+                            
                         </div>
                         
                     </div>
@@ -84,7 +103,7 @@
                 </div>
             </div>
        </div>
-            !-- leaflet js code -->
+            <!-- leaflet js code -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <!-- routing js file -->
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
@@ -129,6 +148,8 @@
                 } else {
                 }
             });
+
+            
                 
 
             var status = 1

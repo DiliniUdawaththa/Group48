@@ -21,12 +21,14 @@
     </head>
     <body>
         
-        <?php include 'driver_side.php'; ?>
+        
 
 
 
         <div class="page-container">
             <div class="body-container">
+
+            <?php include 'driver_side.php'; ?>
                 
                 <div class="activity-container" style="display:block">
                     <div class="status-container">
@@ -39,6 +41,15 @@
                             </div>
                             <div class="inactive">
                                 <p>Unavailable</p>
+                            </div>
+                            <div style="display:none;">
+                                <form method="POST">
+                                    <input type="text" name="longitude" id = "long">
+                                    <input type="text" name="latitude" id="lat">
+                                    <input type="text" name="driver-status" id="driver-status">
+                                    <input type="submit" name="driver_loc" id="driver-loc">
+                                </form>
+                            
                             </div>
                             
                         </div>
@@ -106,6 +117,34 @@
                 
 
         <script>
+            
+
+     var lat = 0;
+    var long=0;
+            if(!navigator.geolocation){
+                        console.log("Error")
+                    }else{
+                        //automatically coordinate change
+                        // setInterval(()=>{
+                            //get current position
+                            navigator.geolocation.getCurrentPosition(getPosition)
+                        // },5000);
+                    
+                    }
+                    function getPosition(position){
+                        console.log(position)  
+                         lat=position.coords.latitude
+                         console.log(lat);
+                         long=position.coords.longitude
+                         console.log(long)
+                        var accuracy= position.coords.accuracy
+
+                        console.log("your coordinate is Lat:"+lat+"Long"+long)
+
+                       
+                   
+                        // map.setView(marker, 18);
+                    }
             var status = 1
             var sidenav = 1
             const addVehBtn = document.querySelector('#add-veh-btn');
@@ -122,6 +161,21 @@
             const logout_container = document.querySelector('.logout-container')
             const cancel_button = document.querySelector('.cancel-btn')
             const logout_button = document.querySelector('.logout-btn')
+
+            <?php if($data['status']==1):?>
+                status_icon.src = '<?= ROOT ?>/assets/img/images/active.png';
+                inactive_btn.style.backgroundColor = '#E4E4E4'
+                inactive_btn.style.color = 'black'
+                active_btn.style.backgroundColor = '#162938'
+                active_btn.style.color = 'white'
+            <?php endif;?>
+            <?php if($data['status']==0):?>
+                status_icon.src = '<?= ROOT ?>/assets/img/images/inactive.png';
+                active_btn.style.backgroundColor = '#E4E4E4'
+                active_btn.style.color = 'black'
+                inactive_btn.style.backgroundColor = '#162938'
+                inactive_btn.style.color = 'white'
+            <?php endif;?>
             
             logout_option.addEventListener('click',function (){
                 logout_container.style.display = 'block';
@@ -131,7 +185,7 @@
                 logout_container.style.display = 'none';
             })
             
-            more.addEventListener('click', function (){
+            more.addEventListener('click', function (){     
                 if(sidenav == 1){
                     navigation.style.display = 'none';
                     sidenav = 0
@@ -143,15 +197,25 @@
 
             })
 
-            active_btn.addEventListener('click',function (){
+            document.querySelector('.active').addEventListener('click',function (){
                 status = 1
+                console.log("Ji")
+                document.getElementById('long').value = long
+                document.getElementById('lat').value = lat
+                document.getElementById('driver-status').value = "active"
+                document.getElementById('driver-loc').click()
                 status_icon.src = '<?= ROOT ?>/assets/img/images/active.png';
                 active_btn.style.backgroundColor = '#162938'
                 active_btn.style.color = 'white'
                 inactive_btn.style.backgroundColor = '#E4E4E4'
                 inactive_btn.style.color = 'black'
             })
-            inactive_btn.addEventListener('click',function (){
+            document.querySelector('.inactive').addEventListener('click',function (){
+                console.log("fds")
+                document.getElementById('long').value = long
+                document.getElementById('lat').value = lat
+                document.getElementById('driver-status').value = "inactive"
+                document.getElementById('driver-loc').click()
                 status = 0
                 status_icon.src = '<?= ROOT ?>/assets/img/images/inactive.png';
                 active_btn.style.backgroundColor = '#E4E4E4'
@@ -208,6 +272,12 @@
                 }
                 <?php endforeach; ?>
           }
+          
+          
+          
+         
+          
+                
 
         </script>
     </body>

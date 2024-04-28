@@ -173,6 +173,7 @@ a{
     padding-right: 20px;
     align-items: center;
     border-radius: 20px;
+    z-index: 2;
 
 }
 
@@ -188,7 +189,83 @@ a{
     cursor: pointer;
     margin-right: 5px;
     color: #194672;
+    
   }
+
+  .noti-icon{
+    position:relative;
+  }
+
+  @keyframes blink {
+    0% {
+        background-color: inherit; /* Start with the current color */
+        transform: scale(1)
+    }
+    50% {
+        background-color: rgb(155, 155, 155); /* Blinking to red */
+        transform: scale(1.2)
+    }
+    100% {
+        background-color: inherit; /* Back to the current color */
+        transform: scale(1)
+    }
+}
+  
+  .noti-msg-count{
+    display: none;
+    position: absolute;
+    top:5%;
+    left: 10%;
+    background-color: red;
+    color: white;
+    border-radius: 100%;
+    font-size: 10px;
+    height:15px;
+    width: 15px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+.notification-content{
+    position:fixed;
+    z-index: 1;
+    top: 50px;
+    right:99px;
+    width:200px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0; /* No border radius at top right */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: rgb(197, 197, 197);
+}
+
+.noti-0{
+    display: block;
+    text-align: center;
+    padding-top:20px;
+    padding-bottom: 20px;
+}
+
+.noti-1{
+    display: none;
+    cursor: pointer;
+    margin:5px;
+    padding:5px;
+    border-radius: 10px;
+    background-color: azure;
+}
+.noti-1:hover{
+    
+    margin-left:2px;
+    margin-right:2px;
+}
+
+.exp-not{
+    font-size: 15px;
+    display: block;
+    color:red;
+    font-weight: bold;
+}
 /*-------------------------Notification Container---------------------*/
 
 .analytics-container{
@@ -281,12 +358,13 @@ a{
 }
 
 .inactive{
-    background-color: #E4E4E4;
-    color: black;
-}
-.active{
     background-color: #162938;
     color: white;
+}
+.active{
+    background-color: #E4E4E4;
+    color: black;
+    
 }
 
 

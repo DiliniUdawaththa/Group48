@@ -45,11 +45,11 @@
                     Request a ride, hop in, and go.
                 </h2>   
                 <form action="" method="POST">
-                    <?php if(!empty($errors['location'])):?>
+                <?php if(!empty($errors['location'])):?>
                          <center><small id="Firstname-error" class="signup-error" > <?=$errors['location']?></small></center>
                     <?php endif;?>
                 <div class="search-box">
-                    <input type="text" name="location" class="search-input" id="searchInput1"  placeholder="Enter location..." onfocus="showDropdown(1)" oninput="filterItems(this.value, 1)" >
+                    <input type="text" value="<?= set_value('location') ?>" name="location" class="search-input" id="searchInput1"  placeholder="Enter location..." onfocus="showDropdown(1)" oninput="filterItems(this.value, 1)" >
                     <i class="search-icon" onclick="toggleDropdown(1)">🔍</i>
                     <i  class="fa-regular fa-circle" id="searchicon"></i>
                     <div class="dropdown-list" id="dropdownList1">
@@ -62,12 +62,14 @@
                         <?php endforeach; ?>
                     </div>                
                 </div>
-
-                <input type="text" name="l_lat" id="l.lat" value="0.000" class="coodinates"><input type="text" name="l_long"  id="l.long" value="0.000" class="coodinates" >
-
+                
+                <input type="text" name="l_lat" id="l.lat" value="<?= set_value('l_lat') ?>" class="coodinates"><input type="text" name="l_long"  id="l.long" value="<?= set_value('l_long') ?>" class="coodinates" >
+                <?php if(!empty($errors['destination'])):?>
+                         <center><small id="Firstname-error" class="signup-error" > <?=$errors['destination']?></small></center>
+                    <?php endif;?>
                 <div class="search-box">
 
-                    <input type="text" name="destination" class="search-input" id="searchInput2" placeholder="Enter destination..." onfocus="showDropdown(2)" oninput="filterItems(this.value, 2)" >
+                    <input type="text" value="<?= set_value('destination') ?>" name="destination" class="search-input" id="searchInput2" placeholder="Enter destination..." onfocus="showDropdown(2)" oninput="filterItems(this.value, 2)" >
                     <i class="search-icon" onclick="toggleDropdown(2)">🔍</i>
                     <i class="fa-solid fa-circle" id="searchicon"></i>
                     <div class="dropdown-list" id="dropdownList2">
@@ -80,7 +82,7 @@
                     </div>
                 </div>
                
-                <input type="text" name="d_lat" id="d.lat" value="0.000" class="coodinates"><input type="text" name="d_long"  id="d.long"  value="0.000" class="coodinates">
+                <input type="text" name="d_lat" id="d.lat" value="<?= set_value('d_lat') ?>" class="coodinates"><input type="text" name="d_long"  id="d.long"  value="<?= set_value('d_long') ?>" class="coodinates">
 
                 <a href="<?=ROOT?>/customer/ride_step2" class="golink"><button id="Go" class="go" onclick="sendDataToPHP()"><b>Go</b></button></a>
                 
@@ -143,6 +145,7 @@
             hideDropdown(index);
 
             const selectedValue = item.innerText;
+    //------------------------------------live location----------------------------------
             if (selectedValue === " Live location" && index===1) {
                
               //Real time tracking

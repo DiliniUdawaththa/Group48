@@ -131,17 +131,15 @@
                         <thead>
                             <tr>
                                 <!--<td>ID</td>-->
-                                <td>Driver Name</td>
-                                <td>email</td>
-                                <td>Contact Details</td>
-                                <td>NIC</td>
-                                <td>Licence</td>
-                                <td>Option</td>
+                                < <td>Profile</td>
+                                    <td>Email</td>
+                                    <td>Option</td>
                             </tr>
                         </thead>
                         <?php foreach ($rows as $row) : ?>
                         <tr class="data">
-                            <td class="driveName"><?= $row->driverName; ?></td>
+                            <td><?php echo "<img src='" .$row["profileimg"] . "'alt='Profile Image'>"?></td>
+                            <img src="<?= ROOT ?>/assets/img/logoname.png" class="barimage">
                             <td class="td_email"><?= $row->email; ?></td>
                             <td class="td_contact"><?= $row->contactNumber; ?></td>
                             <td><?php echo'<img src="data:nicCopy;base64,'.base64_encode($row->nicCopy).'" alt="Image" style="width: 100px; height:100px;">';?>

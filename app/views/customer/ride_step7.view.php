@@ -29,7 +29,7 @@
 
 <!-- ---------------------------------------------------------------------------------- -->
    <div class="activity">
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
 <!-- -----------------------------Rating part------------------------------------------------------------------ -->
         <div class="box1">
             <div>
@@ -37,7 +37,7 @@
             </div>
              <div >
                 <img id="driver_photo" src="<?= ROOT ?>/assets/img/person.jpg" alt="">
-                <h3>Mr.S.Makesh</h3>
+                <h3>Mr.<?=$driver_name?></h3>
                 <div class="staricon">
                   <i class="fa-solid fa-star" id="star1"></i>
                   <i class="fa-solid fa-star" id="star2"></i>
@@ -78,6 +78,12 @@
                      <div><input type="checkbox" name="report13" value="Independence"><label >Independence</label></div>
                      <div><input type="checkbox" name="report14" value="Self-discipline"><label >Self-discipline</label></div>
                      </div>
+                  </div>
+                  <div>
+                  <input type="file" id="fileInput" style="display: none;" name="file">
+                      <label for="fileInput" style="cursor: pointer;">
+                          <span alt="Upload File" class="upload"> Upload <i class="fa-solid fa-upload"></i> </span>
+                      </label>
                   </div>
                   <div class="reporttext">
                      <textarea type="text" placeholder="any note" name="other" value='' > </textarea>

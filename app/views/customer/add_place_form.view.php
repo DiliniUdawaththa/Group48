@@ -24,14 +24,14 @@
 
 
              <div class="profile">
-                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$_SESSION['USER_DATA']->img_path;?>" alt="" class="userimage">
+                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
+                  <?php for($i=0; $i<$rating; $i++){ ?>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                  <?php } for($i=$rating; $i<5; $i++){?>
                   <i class="fa-solid fa-star" ></i>
-                  <i class="fa-solid fa-star" ></i>
+                  <?php }?>
                 </h6>
              </div>
              
@@ -90,11 +90,18 @@
                                 <option value="Office"></option>
                                 <option value="Other"></option>
                               </datalist>
+                              <?php if(!empty($errors['category'])):?>
+                             <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['category']?> </small>
+                           <?php endif;?>
                               <br>
+                          
                          <div class="address">
                           <label for="address" class="label">Address</label><br>
                           </div>
                           <input type="text" id="location_name" name="location" value="<?= set_value('location') ?>" >
+                          <?php if(!empty($errors['address'])):?>
+                             <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['address']?> </small>
+                           <?php endif;?>
                           <br>
                         
                           <input type="text" id="lat" name="lat">
