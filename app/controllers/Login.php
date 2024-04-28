@@ -36,6 +36,16 @@ class Login extends Controller
                             "id"=> $_POST["id"],
                         ]);
                         if(!isset($row1[0])){
+
+                            $registrationitems = array (
+                                'profileimg' => '0',
+                                'driverlicenseimg' => '0',
+                                'revenuelicenseimg' => '0',
+                                'vehregistrationimg' => '0',
+                                'vehinsuranceimg' => '0',
+                            );
+                
+                            $_SESSION['REGISITEMS'] = $registrationitems;
                             redirect('driver/registration');
                         }else{
                             $driver = new User();

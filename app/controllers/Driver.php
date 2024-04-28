@@ -152,6 +152,8 @@ class Driver extends Controller{
 
         $driverst = new Driver_status();
 
+        echo "hiifsdddddddddddddddddddddddddddddddddddddddddddddddddd";
+
         if($_SERVER['REQUEST_METHOD'] == "POST"){
 
             if(isset($_POST['driver_loc'])){
@@ -168,9 +170,8 @@ class Driver extends Controller{
                         $_POST['status']= 1;
                         $driverst -> insert($_POST);
                     }
-                    
                 }
-                else{
+                elseif($_POST['driver-status']=='inactive'){
                     $data['status']=0;
                     $row4 = $driverst-> where([
                         "driver_id" => $_SESSION['USER_DATA']->id,
@@ -181,14 +182,25 @@ class Driver extends Controller{
                         $id['driver_id'] = $row4[0]->driver_id;
                         $driverst -> delete($id);
                     }
-                    
+
                 }
+                    
+                
+
             }
+            echo "hids";
         }
 
+            $this->view('driver/activity',$data);
+        
+            
+        
 
-        $this->view('driver/activity',$data);
+
+       
     }
+
+   
 
     public function analytics(){
         $data['errors'] = [];
@@ -333,15 +345,7 @@ class Driver extends Controller{
             'driver_id' => $_SESSION['USER_DATA']->id,
         ]);
 
-        if($current_offer[0]->accept_status == 1){
-            redirect(redirect('driver/request03'));
-        }
-
-        if($current_offer[0]->offer_price != $current_offer[0]->negotiation_price){
-            if($current_offer[0]->negotiation_status==1){
-                $data['negotiation_sent'] = 1;
-            }
-        }
+        
         
 
         $row4 = $cust->first([
@@ -360,19 +364,54 @@ class Driver extends Controller{
             if(isset($_POST['acceptneg'])){
                 redirect('driver/request03');
             }
-            if(isset($_POST['declineneg'])){
+            elseif(isset($_POST['declineneg'])){
                 redirect('driver/request03');
             }
 
-            if(isset($_POST['cancel-offer'])){
+            elseif(isset($_POST['cancel-offer'])){
                 $offers -> delete((array)$current_offer[0]);
                 redirect('driver/activity');
             }
+                $current_offer = $offers->where([
+                    'driver_id' => $_SESSION['USER_DATA']->id,
+                ]);
+
+                if($current_offer[0]->accept_status == 1){
+                    echo "Accepted";
+                }elseif($current_offer[0]->offer_price != $current_offer[0]->negotiation_price){
+                    if($current_offer[0]->negotiation_status==1){
+                        $data['negotiation_sent'] = 1;
+                        echo "negotiation";
+                    }else{
+                        echo "Waiting";
+                    }
+
+                }else{
+                    echo "aiting";
+                }
+            
+          
+            
 
 
+
+        }else{
+
+            if($current_offer[0]->accept_status == 1){
+                redirect(redirect('driver/request03'));
+            }
+    
+            if($current_offer[0]->offer_price != $current_offer[0]->negotiation_price){
+                if($current_offer[0]->negotiation_status==1){
+                    $data['negotiation_sent'] = 1;
+                }
+            }
+
+            $this->view('driver/request02',$data);
+            show($_POST);
         }
 
-        $this->view('driver/request02',$data);
+       
     }
 
     public function request03(){
