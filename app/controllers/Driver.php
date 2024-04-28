@@ -152,8 +152,6 @@ class Driver extends Controller{
 
         $driverst = new Driver_status();
 
-        echo "hiifsdddddddddddddddddddddddddddddddddddddddddddddddddd";
-
         if($_SERVER['REQUEST_METHOD'] == "POST"){
 
             if(isset($_POST['driver_loc'])){
@@ -214,13 +212,18 @@ class Driver extends Controller{
             'driver_id' => $_SESSION['USER_DATA']->id,
         ]);
 
+
         $data['current_rides'] = $allRides;
-        foreach ($allRides as $ride) {
-            $data['total_earned'] += $ride->fare;
-            $data['total_rides'] += 1;
-            $data['total_distance'] += $ride->distance;
-            $ride->date = $dateTime->format('Y-m-d');
+        if(isset($allRides[0])){
+            foreach ($allRides as $ride) {
+                $data['total_earned'] += $ride->fare;
+                $data['total_rides'] += 1;
+                $data['total_distance'] += $ride->distance;
+                $ride->date = $dateTime->format('Y-m-d');
+            }
+
         }
+        
 
         $this -> view('driver/analytics',$data);
     }
@@ -304,10 +307,10 @@ class Driver extends Controller{
 
         if($_SERVER['REQUEST_METHOD'] == "POST"){
             
-            show($_SESSION);
+            // show($_SESSION);
             $_POST['driver_id'] = $_SESSION['USER_DATA']->id;
             $_POST['ride_id'] = $id;
-            show($_POST);
+            // show($_POST);
 
             if(isset($_POST['offer_price'])){
                 $row2 = $offers->where([
@@ -362,6 +365,9 @@ class Driver extends Controller{
 
         if($_SERVER['REQUEST_METHOD'] == "POST"){
             if(isset($_POST['acceptneg'])){
+                $current_offer[0]->offer_price = $current_offer[0]->negotiation_price;
+                $current_offer[0]->negotiation_status = 0;
+                $offers->update_offer_price($_SESSION['USER_DATA']->id,(array)$current_offer[0]);
                 redirect('driver/request03');
             }
             elseif(isset($_POST['declineneg'])){
@@ -381,7 +387,7 @@ class Driver extends Controller{
                 }elseif($current_offer[0]->offer_price != $current_offer[0]->negotiation_price){
                     if($current_offer[0]->negotiation_status==1){
                         $data['negotiation_sent'] = 1;
-                        echo "negotiation";
+                        echo "Negotiation";
                     }else{
                         echo "Waiting";
                     }
@@ -408,7 +414,7 @@ class Driver extends Controller{
             }
 
             $this->view('driver/request02',$data);
-            show($_POST);
+            // show($_POST);
         }
 
        
@@ -474,7 +480,7 @@ class Driver extends Controller{
         ]);
         $data['customer'] = $row4;
         if($_SERVER['REQUEST_METHOD'] == "POST"){
-            show([$_POST]);
+            // show([$_POST]);
             for ($i = 1; $i <= 8; $i++) {    
                 $reportName = 'report' . $i;
                 if (isset($_POST[$reportName])) {
@@ -543,7 +549,6 @@ class Driver extends Controller{
 
             }
             $this->view('driver/registration/registration',$data);
-            show([$_SESSION]);
             
     }
 
@@ -570,7 +575,7 @@ class Driver extends Controller{
                             if(in_array($_FILES['photoInput']['type'],$allowed)){
                                 $destination = $folder.time().$_FILES['photoInput']['name'];
                                 move_uploaded_file($_FILES['photoInput']['tmp_name'],$destination);
-                                show($_FILES['photoInput']);
+                                // show($_FILES['photoInput']);
                                 $_SESSION['REGISITEMS']['driverlicenseimg']=$destination;
                                 $_POST['image'] = $destination;
                                 $data['errors']= [];

@@ -188,7 +188,7 @@ class Model extends Database
 		}
 		$query = trim($query, ",");
 		$query .= " where id =".$id;
-		// print_r($query);	
+		print_r($query);	
 
 
 		$this->query($query, $data);

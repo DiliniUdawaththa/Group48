@@ -205,7 +205,7 @@ class Database
 		";
 		
 		$this->query($query);
-
+		
 		$query= "
 		CREATE TABLE IF NOT EXISTS `rides` (
 			`id` int(10) NOT NULL AUTO_INCREMENT,
