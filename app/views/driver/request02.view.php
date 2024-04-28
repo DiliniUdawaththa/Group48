@@ -27,7 +27,7 @@
     <body>
         
     
-
+    <?php include 'driver_side.php'; ?>
 
 
         <div class="page-container">
@@ -64,7 +64,7 @@
                            <h3>Negotiation request</h3>
                            <div>
                                 <p class="req-loc-des"><b>Offered fare:</b> Rs 600</p>
-                                <p class="req-loc-des"><b>Requesting fare:</b> Rs. 500</p>
+                                <p class="req-loc-des"><b>Requesting fare:</b><div class="neg-price"> Rs. 500</div></p>
                             </div>
                             <form method="POST">  
                            <div class="neg-btns">
@@ -132,7 +132,7 @@
                     
                     if(xhr.status === 200){
                         let data = xhr.response;
-                        if(data=="Waiting"){
+                        if(data=="Negotiation"){
                             document.querySelector('.negotiation').style.display = 'flex';
                         
                         }if(data=="Accepted"){
