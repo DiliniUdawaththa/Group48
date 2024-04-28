@@ -106,10 +106,11 @@
                 <table>
                     <thead>
                         <tr>
-                            <td>Customer ID</td>
+                            <td>Driver ID</td>
                             <td>Name</td>
                             <td>Email</td>
                             <td>Mobile</td>
+                            <td>Rides Count</td>
                         </tr>
                     </thead>
                     <?php foreach ($rows as $row) : ?>
@@ -118,6 +119,7 @@
                             <td class="td_name"><?= $row->name; ?></td>
                             <td class="td_email"><?= $row->email; ?></td>
                             <td class="td_mobile"><?= $row->phone; ?></td>
+                            <td class="td_rides"><?= $add_driver1->countRideByDriver($row->id); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
