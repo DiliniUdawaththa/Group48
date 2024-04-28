@@ -86,9 +86,6 @@
                 <a href="<?=ROOT?>/officer/standardFare" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div>
                 </a>
-                <a href="<?=ROOT?>/officer/driver" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-taxi"></i>Drivers</div>
-                </a>
                 <a href="#" class="link">
                     <div class="linkbutton2"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>Logout</div>
                 </a>

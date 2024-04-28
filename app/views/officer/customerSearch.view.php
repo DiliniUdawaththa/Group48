@@ -72,9 +72,7 @@
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-id-card"></i></i>Driver Registration</div>
                 </a>
-                <a href="<?=ROOT?>/officer/renewRegistration" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-address-book"></i></i>Renew Registration</div>
-                </a>
+
                 <a href="<?=ROOT?>/officer/driver" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div>
                 </a>

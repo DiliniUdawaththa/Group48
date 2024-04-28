@@ -455,9 +455,9 @@ class officer extends Controller{
             $data['rows'][] = $rows[$i];
         }
 
+        }
         $data['title'] = "complains";
         $this->view('officer/complains',$data);
-        }
     }
 
 
@@ -565,6 +565,30 @@ class officer extends Controller{
         
 
         redirect('officer/complains');
+
+    }
+
+
+    public function complainAnalays() {
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        
+        $add_complaint = new Complaint();
+
+        $pending = $add_complaint->getPendingCount();
+        $investigated = $add_complaint->getInvestigatedCount();
+        $rejected = $add_complaint->getRejectedCount();
+        $total = $add_complaint->getCount();
+
+        $data['pending'] = $pending;
+        $data['investigated'] = $investigated;
+        $data['rejected'] = $rejected;
+        $data['total'] = $total;
+        
+        $this->view('officer/complainAnalys',$data);
 
     }
 

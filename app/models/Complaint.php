@@ -41,14 +41,27 @@ class Complaint extends Model
 		$result = $this->query("SELECT COUNT(*) as count FROM complaint WHERE status_check = '0';");
 		return $result[0]->count;
 	  }
-	  
+
+	  public function getInvestigatedCount() {
+		$result = $this->query("SELECT COUNT(*) as count1 FROM complaint WHERE status_check = '1';");
+	
+		return $result[0]->count1;
+	}
+
+	public function getRejectedCount() {
+		$result = $this->query("SELECT COUNT(*) as count2 FROM complaint WHERE status_check = '2';");
+	
+		return $result[0]->count2;
+	}
+	
+	public function getCount() {
+		$result = $this->query("SELECT COUNT(*) as count3 FROM complaint;");
+	
+		return $result[0]->count3;
+	} 
 	 
 	 
-	  /*public function getDriverCount() {
-        $results = $this->query("SELECT COUNT(*) as count FROM users WHERE role = 'driver';");
-    
-        return $results[0]->count;
-    } */
+	 
 
     public function add_comment($cmt_id, $data)
 	{

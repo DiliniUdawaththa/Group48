@@ -165,11 +165,7 @@
         <div class="interface">
             <div class="navi">
                 <div class="navi1">
-                    <h2>COMPLAINTS</h2>
-                </div>
-                <div class="operation">
-                    <a href="<?=ROOT?>/officer/complainAnalays/"><button type="button" class="button-style"
-                            id="plus">COMPLAINTS ANALYSE</button></a>
+                    <h2>COMPLAINTS ANALYSE</h2>
                 </div>
             </div>
             <div class="table1">
@@ -183,40 +179,27 @@
                             <td>Option</td>
                         </tr>
                     </thead>
-                    <?php foreach ($rows as $row) : ?>
 
-                    <tr class="data">
-                        <td><?= $row->complainant ?></td>
-
-                        <td><?= $row->complaint?></td>
-                        <td><?= $row->officerCmnt?></td>
-                        <td><?php if ($row->status_check == 0) {
-                            echo 'Pending';
-                        } elseif ($row->status_check == 1) {
-                            echo 'Investigated';
-                            } elseif ($row->status_check == 2) {
-                                echo 'Rejected';
-                            } ?></td>
-                        <td class="td_button1">
-                            <a href="<?=ROOT?>/officer/complainView/<?= urlencode($row->cmt_id) ?>"><button
-                                    class="detail_btn1">
-                                    <!--<i
+                    <td class="td_button1">
+                        <a href="<?=ROOT?>/officer/complainView/<?= urlencode($row->cmt_id) ?>"><button
+                                class="detail_btn1">
+                                <!--<i
                                         class="fa-solid fa-circle-info" style="color: black;">--></i>
-                                    DETAILS
-                                </button></a>
-                            <a href="<?=ROOT?>/officer/add_comment/<?=$row->cmt_id?>"><button class="detail_btn1">
-                                    <!--<i
+                                DETAILS
+                            </button></a>
+                        <a href="<?=ROOT?>/officer/add_comment/<?=$row->cmt_id?>"><button class="detail_btn1">
+                                <!--<i
                                         class="fa-solid fa-circle-info" style="color: black;">--></i>
-                                    COMMENT
-                                </button></a>
+                                COMMENT
+                            </button></a>
 
-                            <button class="accept_btn" data-cmt_id="<?= $row->cmt_id ?>">INVESTIGATED</button>
-                            <button class="reject_btn" data-cmt_id="<?= $row->cmt_id ?>">REJECT</button>
+                        <button class="accept_btn" data-cmt_id="<?= $row->cmt_id ?>">INVESTIGATED</button>
+                        <button class="reject_btn" data-cmt_id="<?= $row->cmt_id ?>">REJECT</button>
 
 
-                        </td>
+                    </td>
                     </tr>
-                    <?php endforeach; ?>
+
 
                 </table>
             </div>

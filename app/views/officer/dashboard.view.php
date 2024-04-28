@@ -53,6 +53,10 @@
         position: relative;
         top: 50px;
     }
+
+    body {
+        overflow: hidden;
+    }
     </style>
 </head>
 
