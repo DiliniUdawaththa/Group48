@@ -17,60 +17,93 @@
                     background-color:#194672;
                     color: white;
             }
+
+            #email-col2,#phone-col2{
+                display:none;
+            }
+
+            .profile-update{
+                height:20px;
+                width:70%;
+            }
+
+            #email-upd-btn2,#phone-upd-btn2{
+                display:none;
+            }
         </style>
     </head>
     <body>
         
-        <?php include 'driver_side.php'; ?>
-
+    
+    <?php include 'driver_side.php'; ?>
 
 
         <div class="page-container">
             <div class="body-container">
-
+                <form action="" method="post" enctype="multipart/form-data">
                 <div class="profile-container">
                     <div class="profile-bar">
                         <div class="propic-container">
-                            <img src="<?= ROOT ?>/assets/img/images/profilepic.png" class="propic">
-                            <button class="upload-propic"><img src="<?= ROOT ?>/assets/img/images/upload_icon.png" style="height:10px"> Upload</button>
+                            <img src="<?= ROOT ?>/<?php echo $_SESSION['USER_DATA']->img_path; ?>" class="propic">
+                            <button type="button" class="upload-propic" onclick="upload_pic()"><img src="<?= ROOT ?>/assets/img/images/upload_icon.png" style="height:10px"> Upload</button>
+                            <button type="submit" name="update-pic" value="1" class="save-propic"><img src="<?= ROOT ?>/assets/img/images/done_icon.png" style="height:10px"> Save</button>
+                            <input onchange="load_image(this.files[0])" type="file" name="photoInput" id="photoInput" style="display: none;">
                         </div>
                         <div class="detail-container">
+
                             <table class="profile-details-table">
                                 <tr class="tr1">
                                     <td class="col1">Name</td>
                                     <td class="col2"><?php echo $_SESSION['USER_DATA']->name; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
+                                    <td class="col3"></td>
                                 </tr>
                                 <tr>
-                                    <td class="col1">NIC</td>
-                                    <td class="col2">200143234422</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
+                                    <td class="col1">Registration ID</td>
+                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->id; ?></td>
+                                    <td class="col3"></td>
                                 </tr>
                                 <tr class="tr1">
-                                    <td class="col1">Registation ID</td>
-                                    <td class="col2">1001324292d</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
                                     <td class="col1">Email</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->email; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr class="tr1">
-                                    <td class="col1">Phone</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->phone; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
+                                    <td class="col2" id="email-col1"><?php echo $_SESSION['USER_DATA']->email; ?></td>
+                                    <td class="col2" id="email-col2"><input type="text" class="profile-update" name="new-email"></td>
+                                    <td class="col3">
+                                        <button type="button" onclick="update_email()" id="email-upd-btn"><img src="<?= ROOT ?>/assets/img/images/edit_icon.png" style="height:15px"></button>
+                                        <button type="submit" value="1" name="update-email" id="email-upd-btn2"><img src="<?= ROOT ?>/assets/img/images/done_icon.png" style="height:15px"></button>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="col1">Date Of Birth</td>
-                                    <td class="col2">09/20/2001</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
+                                    <td class="col1">Phone</td>
+                                    <td class="col2" id="phone-col1"><?php echo $_SESSION['USER_DATA']->phone; ?></td>
+                                    <td class="col2" id="phone-col2"><input type="text" class="profile-update" name="new-phone"></td>
+                                    <td class="col3">
+                                        <button type="button" onclick="update_phone()" id="phone-upd-btn"><img src="<?= ROOT ?>/assets/img/images/edit_icon.png" style="height:15px"></button>
+                                        <button type="submit" value="1"name="update-phone" id="phone-upd-btn2"><img src="<?= ROOT ?>/assets/img/images/done_icon.png" style="height:15px"></button>
+                                    </td>
+                                </tr>
+                                <tr class="tr1">
+                                    <td class="col1">Role</td>
+                                    <td class="col2">Driver</td>
+                                    <td class="col3"></td>
+                                </tr>
+                                <tr>
+                                    <td class="col1">Joined Date</td>
+                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->date; ?></td>
+                                    <td class="col3"></td>
                                 </tr>
                                 
                             </table>
                         </div>
+                        
+                        
                     </div>
+                    <div class="renew-registration-container">
+                        <p class="reg-exp">Your registration will be expired after <?php echo (365 - $data['dayDifference']) ?> days.</p>
+                        <button type="button" class="renew-registraion">Renew Now</button>
+                        </div>
+                    
                 </div>
+                
+        </form>
                 <div class="logout-container">
                     <h2>Log Out</h2>
                     <p class="logout-text">Are you sure you want to log out?</p>
@@ -80,6 +113,38 @@
         </div>
 
         <script>
+            document.querySelector('.renew-registraion').addEventListener('click', function() {
+                window.location.href = "<?= ROOT ?>/driver/renewHelp";
+
+
+            });
+
+            function upload_pic(){
+                document.getElementById('photoInput').click();
+            }
+            function load_image(file){
+                var mylink = window.URL.createObjectURL(file);
+                console.log(mylink);
+                document.querySelector(".propic").src = mylink;
+                uploadedFlag = 1;
+                document.querySelector('.upload-propic').style.display = 'none';
+                document.querySelector('.save-propic').style.display = 'block';
+            }
+
+            function update_email(){
+                document.getElementById('email-col1').style.display = 'none';
+                document.getElementById('email-col2').style.display = 'block';
+                document.getElementById('email-upd-btn').style.display = 'none';
+                document.getElementById('email-upd-btn2').style.display = 'block';
+
+            }
+
+            function update_phone(){
+                document.getElementById('phone-col1').style.display = 'none';
+                document.getElementById('phone-col2').style.display = 'block';
+                document.getElementById('phone-upd-btn').style.display = 'none';
+                document.getElementById('phone-upd-btn2').style.display = 'block';
+            }
             var status = 1
             var sidenav = 1
             const addVehBtn = document.querySelector('#add-veh-btn');
