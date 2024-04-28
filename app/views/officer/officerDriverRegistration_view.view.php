@@ -48,7 +48,7 @@
     const ok_button = document.querySelector('.ok-btn')
 
     ok_button.addEventListener('click', () => {
-        window.location.href = "<?=ROOT?>/Officer/complains";
+        window.location.href = "<?=ROOT?>/Officer/officerdriverRegistration";
     })
     </script>
 </body>

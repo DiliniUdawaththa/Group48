@@ -79,7 +79,10 @@
                     <div class="linkbutton"><i class="fa-solid fa-address-book"></i></i>Renew Registration</div>
                 </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Drivers</div>
+                    <div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div>
+                </a>
+                <a href="<?=ROOT?>/officer/customer" class="link">
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
                     <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
@@ -193,7 +196,7 @@
                             <table>
                                 <tr>
                                     <th>Profile Picture</th>
-                                    <th>Email</th>
+                                    <th>ID</th>
                                     <th>Status</th>
                                     <th>Option</th>
                                 </tr>
@@ -203,14 +206,14 @@
                                 foreach ($top_5 as $row) {
                                 echo "<tr>";
                                 echo "<td><img src='" . ROOT . "/" . $row->profileimg . "' alt='Profile Image' style='width: 150px; height: 100px;'></td>";
-                                echo "<td>" . $row->email ."</td>";
+                                echo "<td>" . $row->id ."</td>";
                                 echo "<td>"; if ($row->status = '0') {
                                     echo "Pending";
                                 } elseif($row->status = '1') {
                                     echo "Accepted";
                                 }
                                 echo "</td>";
-                                echo "<td><a href='" . ROOT . "/officer/driverregistration_view/" . $row->email . "' class='btn1'>View</a></td>";
+                                echo "<td><a href='" . ROOT . "/officer/driverregistration_view/" . $row->id . "' class='btn1'>View</a></td>";
                                 echo "</tr>";
                                 }
                                 ?>

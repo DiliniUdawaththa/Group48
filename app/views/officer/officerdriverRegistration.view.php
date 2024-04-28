@@ -75,7 +75,10 @@
                     <div class="linkbutton1"><i class="fa-solid fa-id-card"></i>Driver Registration</div>
                 </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Drivers</div>
+                    <div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div>
+                </a>
+                <a href="<?=ROOT?>/officer/customer" class="link">
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
                     <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
@@ -138,28 +141,23 @@
                             </tr>
                         </thead>
                         <?php foreach ($rows as $row) : ?>
+
                         <tr class="data">
                             <td><img src="<?= ROOT . '/' . $row->profileimg ?>" alt="Profile Image"
                                     style="width: 100px; height: 100px;"></td>
 
-                            <td><?= $row->email ?></td>
-
-                            <td class="td_button1">
-                                <a href="<?=ROOT?>/Officer/driverregistration_view/<?= urlencode($row->email) ?>"><button
-                                        class="detail_btn1">
-                                        <!--<i
-                                        class="fa-solid fa-circle-info" style="color: black;">--></i>
-                                        DETAILS
-                                    </button></a>
+                            <td><?=ROOT?>/Officer/driverregistrationDetail(<?= urlencode($row->id) ?>)
                             </td>
-                            <td class="td_button">
-                                <div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash"
-                                            style="color: black;"></i></div></button>
-                                <a href="<?=ROOT?>/officer/standardFare_view/"><button class="detail_btn"><i
-                                            class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
+                            <td class="td_button1">
+                                <a href="<?=ROOT?>/Officer/driverregistration_view/<?= urlencode($row->id) ?>"><button
+                                        class="detail_btn1">DETAILS</button></a>
+                                <button class="accept_btn" data-email="<?= $row->email ?>">ACCEPT</button>
                             </td>
                         </tr>
+
                         <?php endforeach; ?>
+
+
                     </table>
                 </div>
             </form>
