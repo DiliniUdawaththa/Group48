@@ -92,13 +92,14 @@ class Database
 		$this->query($query);
 
 		$query = "
-			CREATE TABLE IF NOT EXISTS `vehicle` (
+		DROP TABLE IF EXISTS `vehicle`;
+		CREATE TABLE `vehicle` (
 			`licenseplate` varchar(100) NOT NULL,
-			`owner` varchar(100) NOT NULL,
+			`owner` int(20) NOT NULL,
 			`type` varchar(20) NOT NULL,
 			`color` varchar(10) DEFAULT NULL,
 			PRIMARY KEY (`licenseplate`)
-		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 		   
 		   ";
 		$this->query($query);
