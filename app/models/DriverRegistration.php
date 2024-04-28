@@ -22,9 +22,14 @@ class Driverregistration extends Model
 	];
 
 	public function findTop5() {
-		$sql = "SELECT * FROM $this->table WHERE status = 0 /*ORDER BY email DESC*/ LIMIT 5";
+		$sql = "SELECT * FROM $this->table WHERE status = 0 ORDER BY id DESC LIMIT 3";
 		return $this->query($sql);
 	}
+
+	public function getPendingRCount() {
+		$result = $this->query("SELECT COUNT(*) as count FROM driverregistration WHERE status = '0';");
+		return $result[0]->count;
+	  }
 
 	public function findById($id) {
 		$sql = "SELECT * FROM $this->table WHERE reg_id = ?";

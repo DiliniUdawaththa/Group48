@@ -76,7 +76,7 @@
                     <div class="linkbutton"><i class="fa-solid fa-id-card"></i>Driver Registration</div>
                 </a>
                 <a href="<?=ROOT?>/officer/renewRegistration" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration Renewal</div>
+                    <div class="linkbutton"><i class="fa-solid fa-address-book"></i></i>Renew Registration</div>
                 </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-users"></i>Drivers</div>
@@ -135,9 +135,9 @@
                         <div class="box">
                             <?php $model = new OfficerDriver();
                         $count = $model->getDriverCount();
-                            echo "<h1>$count</h1>"; 
+                            echo "<h2>$count</h2>"; 
                             ?>
-                            <h3>Drivers</h3>
+                            <h3>DRIVERS</h3>
                         </div>
                         <div class="val-box">
                             <img src="<?= ROOT ?>/assets/img/officer_images/drivers.png" alt=""
@@ -146,28 +146,23 @@
                     </div>
                     <div class="card">
                         <div class="box">
-                            <h1>53</h1>
-                            <h3>Suspenders</h3>
+                            <?php $model1 = new OfficerDriver();
+                        $count = $model1->getSuspendedDriverCount();   
+                        echo "<h1>$count</h1>"; ?>
+                            <h3>SUSPENDS</h3>
                         </div>
                         <div class="val-box">
                             <img src="<?= ROOT ?>/assets/img/officer_images/ban.png" alt=""
-                                style="width: 75px; height:75px;">
+                                style="width: 60px; height:60px;">
                         </div>
                     </div>
+
                     <div class="card">
                         <div class="box">
-                            <h1>5</h1>
-                            <h3>Complaints</h3>
-                        </div>
-                        <div class="val-box">
-                            <img src="<?= ROOT ?>/assets/img/officer_images/complaints.png" alt=""
-                                style="width: 75px; height:75px;">
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="box">
-                            <h1>350000</h1>
-                            <h3>Standard Fare</h3>
+                            <?php $model3 = new Driverregistration();
+                        $count = $model3->getPendingRCount();   
+                        echo "<h1>$count</h1>"; ?>
+                            <h3>REGISTRATION</h3>
                         </div>
                         <div class="val-box">
                             <img src="<?= ROOT ?>/assets/img/officer_images/standardfare.png" alt=""
@@ -175,17 +170,31 @@
                         </div>
                     </div>
 
+                    <div class="card">
+                        <div class="box">
+                            <?php $model2 = new Complaint();
+                        $count = $model2->getPendingCount();   
+                        echo "<h1>$count</h1>"; ?>
+                            <h3>COMPLAINTS</h3>
+                        </div>
+                        <div class="val-box">
+                            <img src="<?= ROOT ?>/assets/img/officer_images/complaints.png" alt=""
+                                style="width: 75px; height:75px;">
+                        </div>
+                    </div>
+
+
                     <div class="content-2">
                         <div class="recent-payments">
                             <div class="title">
-                                <h2>Driver Registration</h2>
+                                <h2>DRIVER REGISTRATION</h2>
                                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="btn1">View All</a>
                             </div>
                             <table>
                                 <tr>
                                     <th>Profile Picture</th>
                                     <th>Email</th>
-                                    <th>Contact Number</th>
+                                    <th>Status</th>
                                     <th>Option</th>
                                 </tr>
                                 <?php 
@@ -193,8 +202,15 @@
                                 $top_5 = $driver_registration->findTop5();
                                 foreach ($top_5 as $row) {
                                 echo "<tr>";
-                                echo "<td><img src='" . ROOT . "/" . $row->profileimg . "' alt='Profile Image' style='width: 100px; height: 100px;'></td>";
+                                echo "<td><img src='" . ROOT . "/" . $row->profileimg . "' alt='Profile Image' style='width: 150px; height: 100px;'></td>";
                                 echo "<td>" . $row->email ."</td>";
+                                echo "<td>"; if ($row->status = '0') {
+                                    echo "Pending";
+                                } elseif($row->status = '1') {
+                                    echo "Accepted";
+                                }
+                                echo "</td>";
+                                echo "<td><a href='" . ROOT . "/officer/driverregistration_view/" . $row->email . "' class='btn1'>View</a></td>";
                                 echo "</tr>";
                                 }
                                 ?>
@@ -202,8 +218,8 @@
                         </div>
                         <div class="new-students">
                             <div class="title">
-                                <h2>Complaints</h2>
-                                <a href="#" class="btn1">View All</a>
+                                <h2>COMPLAINTS</h2>
+                                <a href="<?=ROOT?>/officer/complains" class="btn1">View All</a>
                             </div>
                             <table>
                                 <tr>
@@ -219,8 +235,13 @@
                                 echo "<tr>";
                                 echo "<td>" . $row->complainant ."</td>";
                                 echo "<td>" . $row->complaint ."</td>";
-                                echo "<td>" . $row->status_check ."</td>";
-                                
+                                echo "<td>"; if ($row->status = '0') {
+                                    echo "Pending";
+                                } elseif($row->status = '1') {
+                                    echo "Accepted";
+                                }
+                                echo "</td>";
+                                echo "<td><a href='" . ROOT . "/officer/complainView/" . $row->cmt_id . "' class='btn1'>View</a></td>";
                                 echo "</tr>";
                                 }
                                 ?>

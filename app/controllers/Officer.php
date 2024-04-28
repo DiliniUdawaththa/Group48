@@ -283,6 +283,51 @@ class officer extends Controller{
     }
 
     
+    public function getStandardFare($vehicleType) {
+        
+        $currentTime = date('H:i');
+
+        
+        $fareTimeRanges = [
+            'traffic_time' => [
+                ['start' => '06:30', 'end' => '09:00'],
+                ['start' => '16:00', 'end' => '18:00'],
+                ['start' => '12:00', 'end' => '14:00']
+            ],
+            'normal_time' => [
+                ['start' => '09:00', 'end' => '12:00'],
+                ['start' => '14:00', 'end' => '16:00'],
+                ['start' => '18:00', 'end' => '22:00']
+            ],
+            'early_morning' => [
+                ['start' => '00:00', 'end' => '06:30']
+            ],
+            'late_night' => [
+                ['start' => '23:00', 'end' => '23:59']
+            ]
+        ];
+
+        
+        $fareType = '';
+        foreach ($fareTimeRanges as $type => $ranges) {
+            for ($i = 0; $i < count($ranges); $i += 2) {
+                if ($currentTime >= $ranges[$i] && $currentTime <= $ranges[$i + 1]) {
+                    $fareType = $type;
+                    break 2;
+                }
+            }
+        }
+
+        
+        $fareModel = new standardFare();
+        $standardFare = $fareModel->getFareByTypeAndVehicle($fareType, $vehicleType);
+
+        $this->view('officer/standardFare_view',$standardFare);
+    }
+
+    
+
+    
 /*----------------------------------*/
 
 

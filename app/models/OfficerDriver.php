@@ -13,6 +13,12 @@ class OfficerDriver extends Model{
     
         return $results[0]->count;
     }
+
+    public function getSuspendedDriverCount() {
+        $results = $this->query("SELECT COUNT(*) as count FROM users WHERE role = 'driver' AND status = '1';");
+    
+        return $results[0]->count;
+    }
     
     public function delete_driver($id = null)
     {
