@@ -27,7 +27,7 @@
     <body>
         
     
-
+    <?php include 'driver_side.php'; ?>
 
 
         <div class="page-container">
@@ -58,13 +58,13 @@
                         </div>
                         <div style="display:flex;justify-content:space-around;"><p>Waiting for customer<div class="loader"></div></p></div>
                         <form method="POST"><input type="submit" value="Cancel" class="cancel-offer-btn" name="cancel-offer"></form>
-                        <?php if($data['negotiation_sent'] == 1):?>
+                        
                         <div class="negotiation">
                         
                            <h3>Negotiation request</h3>
                            <div>
                                 <p class="req-loc-des"><b>Offered fare:</b> Rs 600</p>
-                                <p class="req-loc-des"><b>Requesting fare:</b> Rs. 500</p>
+                                <p class="req-loc-des"><b>Requesting fare:</b><div class="neg-price"> Rs. 500</div></p>
                             </div>
                             <form method="POST">  
                            <div class="neg-btns">
@@ -77,7 +77,7 @@
                             </form>
                         
                         </div>
-                        <?php endif;?>
+                       
                         
                     </div>
                     <div class="req-map">
@@ -110,7 +110,43 @@
         <!-- search -->
         <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
         <script>
+            <?php if($data['negotiation_sent'] == 1):?>
+                document.querySelector('.negotiation').style.display = 'flex';
+            <?php endif;?>
+
+            function display_negotiation(){
+                if(document.querySelector('.negotiation').style.display == 'none'){
+                    document.querySelector('.negotiation').style.display = 'flex';
+                }
+            }
+
+
+            setInterval(() =>{
+                console.log("Hi");
+                let xhr = new XMLHttpRequest();
+                console.log(xhr);
+                xhr.open("POST", '<?php echo ROOT; ?>'+"/driver/request02", true);
+                xhr.onload = ()=>{
+                    console.log("nol");
+                    if(xhr.readyState === XMLHttpRequest.DONE){
+                    
+                    if(xhr.status === 200){
+                        let data = xhr.response;
+                        if(data=="Negotiation"){
+                            document.querySelector('.negotiation').style.display = 'flex';
+                        
+                        }if(data=="Accepted"){
+                            window.location.href = "<?php echo ROOT; ?>/driver/request03";
+                        }
+                    
+                }
+            }
+            }
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("incoming_id="+'yes');
+        }, 5000);
                 
+            
             // map instalizion
             var map = L.map('map').setView([ 7.8774, 80.7003], 9);
             // google street
