@@ -143,6 +143,7 @@
             message('please login to view the page');
             redirect("login");
         }
+        $_SESSION['offer_count'] = 1;
         $user = new User();
         $current_ride = new Current_rides();
         $standardfare = new standardFare();
@@ -288,7 +289,12 @@
         //             $data['rows1'][] = $rows1[$i];
         //     }
         // }
-
+        
+        $curride = $current_ride->first(['passenger_id' => $_SESSION['USER_DATA']->id ]);
+      
+        $rows10 = $offers->where([
+            'ride_id' => $curride ->id,
+        ]);
         $rows2 = $offers->findAll();
         $data['rows2'] = array();
        
@@ -360,10 +366,10 @@
                 if($_POST['id'] !== ''){
                    redirect('customer/ride_step5/location='.$_GET['location'].'&l_lat='.$_GET['l_lat'].'&l_long='.$_GET['l_long'].'&driver_id='.$_POST['driver_id'].'&id='.$_POST['id']);
                 }
+
+                
             }
-        }
-       
-       //  back button click
+            //  back button click
         if(isset($_POST['submit']))
         {
             $id =array();
@@ -383,9 +389,38 @@
             redirect('customer/ride_step3/.php?time='.$time.'&distance='.$distance.'&location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long.'&m_lat='.$m_lat.'&m_long='.$m_long);
 
         }
-
+            $i=0;
+        // if (isset($rows10)) {
+            if ( $rows10=='') {
+                echo "no-change";
+            } else {  
+                if( $_SESSION['offer_count'] == 1)
+                {
+                    $_SESSION['offer_count']= $_SESSION['offer_count']+1;
+                    echo "exists";
+                } 
+                if($_SESSION['offer_count']==count($rows10)){
+                    $_SESSION['offer_count']= $_SESSION['offer_count']+1;
+                    echo "exists";
+                }         
+                
+            }
+        // }
+        
+        
+   
+        
+       
+    }else{
+        // show($_SESSION['offer_count']);
+        // show(count($rows10));
+        // show($rows10);
         $data['title'] = "Ride";
         $this->view('customer/ride_step4',$data);
+    }
+
+       
+        
     }
 
     public function ride_step5(){

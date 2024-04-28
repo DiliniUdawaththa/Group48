@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="refresh" content="15" id="refreshMeta">
+    <!-- <meta http-equiv="refresh" content="15" id="refreshMeta"> -->
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_step4.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css">   
@@ -125,6 +125,31 @@
     var button = document.getElementById("sizeButton");
     button.classList.toggle("beating");
    }
+
+   setInterval(() =>{
+                console.log("Hi");
+                let xhr = new XMLHttpRequest();
+                console.log(xhr);
+                xhr.open("POST", '<?php echo ROOT; ?>'+"/customer/ride_step4", true);
+                xhr.onload = ()=>{
+                    console.log("nol");
+                    if(xhr.readyState === XMLHttpRequest.DONE){
+                    
+                    if(xhr.status === 200){
+                        let data = xhr.response;
+                        console.log(data);
+                        if(data=="exists"){
+                            location.reload();
+                        }
+
+                        
+                    
+                }
+            }
+            }
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("incoming_id="+'yes');
+        }, 5000);
 
 
 </script>
