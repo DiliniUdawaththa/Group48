@@ -12,147 +12,15 @@ body{
 .main{
     background-color: #D9D9D9;
     display: flex;
-    /* flex-direction: row; */
+    /* flex-direction: row;*/
     
 }
 
-/* -----------------------sidebar------------------------------------------ */
-.sidebar{
-position: fixed;
-   width: 300px;
-   color: #D9D9D9;
-   background-color:#111827;
-   height: 100vh;
-   overflow: hidden;
-}
-.barimagetag{
-    text-align: center;
-}
-.barimage{
-    padding: 10px;
-    height: 80px;
-    
-}
-/* ------------------------------- */
-.profile{
-    text-align: center;
 
-}
-.userimage{
-    height: 120px;
-    border-radius: 100px;
-    width: 120px;
-
-}
-.profile h3{
-    margin-bottom: 10px;
-}
-.profile h6{
-    margin-top: 0;
-}
-/* .username{
-
-} */
-
-/* --------------------------------- */
-
-.linktag{
-    display: flex;
-    flex-direction: column;
-}
-.link{
-    color: #D9D9D9;
-    text-decoration: none;
-    font-weight: 600px;
-    font-size: 20px;
-}
-.linkbutton {
-    padding: 19px 10px;
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
-}
-.linkbutton2 {
-    padding: 19px 10px;
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
-}
-.linkbutton1{
-    padding: 15px 10px;
-    background-color: #1f3648;
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
-}
-.linkbutton i {
-    margin-right: 15px;
-    margin-left: 10px;
-}
-.linkbutton2 i {
-    margin-right: 15px;
-    margin-left: 10px;
-}
-.linkbutton1 i {
-    margin-right: 15px;
-    margin-left: 10px;
-
-}
-.linkbutton1:nth-child(1){
-    border-left: 4px solid #fff;
-}
-
-.linkbutton:hover{
-    background-color: #1f3648;
-}
-.linkbutton2:hover{
-    background-color: #1f3648;
-}
-
-/* logout part-------------------------------------------------------------------------- */
-.logout-container{
-    padding:30px;
-    width: 50%;
-    height: 200px;
-    display: none;
-    text-align: center;
-    color: black;
-    background-color: #ffffff;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-
-}
-.logout-container button{
-    height:40px;
-    width:150px;
-    border: 0px;
-    cursor: pointer;
-}
-.cancel-btn{
-}
-
-.logout-btn{
-    background-color: #194672;
-    color:white;
-}
-.logout-btn:hover{
-    background-color: rgb(207, 207, 207);
-    color:black;
-}
-.cancel-logout{
-    display: flex;
-    justify-content: space-between;
-    width: 400px;
-    margin: 0 auto;
-    margin-top: 50px;
-}
-.logout-text{
-    margin-top: 10px;
-    display: block;
-    font-size: 16px;
-}
 /* ------------------------------------------------------------------- */
 
 .activity{
-    background-color:#D9D9D9;
+    background-color:aliceblue;
     width:80.4%;
     height: 100vh;
     display: flex;
@@ -164,11 +32,12 @@ position: fixed;
     display: flex;
     align-items: center;
     width: 92%;
-    background-color: #111827;
+    background-image: linear-gradient(to right,#194672, #42678B, #194672);
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
     height: 40px;
     padding: 20px 30px;
     color: #D9D9D9;
-    margin-top: 8px;
+    margin-top: 25px;
     border-radius: 10px;
     
 }
@@ -179,7 +48,7 @@ position: fixed;
     display: flex;
     width: 10%;
 }
-.heading .time{
+.heading .vehicle{
     display: flex;
     width: 10%;
 }
@@ -195,30 +64,50 @@ position: fixed;
     display: flex;
     width: 10%;
 }
+.h1{
+    background-image: linear-gradient(to right,#194672, #42678B, #194672);
+    margin: 20px 20px 40px 20px;
+    display: none;
+    justify-content: center;
+    border-radius: 20px;
+    width: 78vw;
+    
+}
+.h1 h1{
+    /* margin-left: 40px; */
+    margin: 0px;
+    padding: 15px;
+    color: white;
+   
+}
 .data {
     display: flex;
     align-items: center;
     width: 92%;
-    background-color:#eeeded;
     height: 40px;
     padding: 10px 30px;
     color:#111827;
     margin-top: 8px;
-    border-radius: 10px;
-    border: solid #eeeded;
+    /* border-radius: 10px; */
+    cursor: pointer;
+    box-shadow: 0px 8px 6px -6px rgba(0, 0, 0, 0.3),
+    0px -8px 6px -6px rgba(0, 0, 0, 0.3);
 }
-.data:hover{
+/* .data:hover{
     border: solid #162938;
     cursor: pointer;
-}
+} */
 .data div{
     pad: 10px;
+}
+.data span{
+    display: none;
 }
 .data .date{
     display: flex;
     width: 10%;
 }
-.data .time{
+.data .vehicle{
     display: flex;
     width: 10%;
 }
@@ -233,4 +122,66 @@ position: fixed;
 .data .fare{
     display: flex;
     width: 10%;
+}
+
+/* //------------------------------------------mobile---------------- */
+@media only screen and (max-width: 1000px) {
+    body{
+        overflow-x: hidden;
+    }
+    .activity{
+     margin-left: 0px;
+     width:100vw;
+    }
+  }
+  @media only screen and (max-width: 1000px) {
+    .activity{
+     margin: 0px;
+     width:100%;
+     height: 100%;
+     padding: 0;
+     /* padding-top:0px; */
+    }
+    .heading{
+        display: none;
+    }
+    .data{
+        display: block;
+        height: auto; 
+        /* font-size: 1.5em;    */
+    }
+    .data .date{
+        display: flex;
+        width: 50%;
+        float: right;
+    }
+    .data .name{
+        display: flex;
+        width: 50%;
+        float: left;
+    }
+    .data .vehicle{
+        display: flex;
+        width: 30%;
+        float: left;
+    }
+    
+    .data .location{
+        display: flex;
+        width: 50%;
+        clear: both;
+        margin-top: 10px;
+    }
+    .data .fare{
+        display: flex;
+        width: 30%;
+        float: right;
+    }
+    .h1{
+        display: flex;
+    }
+    .data span{
+        display: block;
+        font-weight: 600;
+    }
 }

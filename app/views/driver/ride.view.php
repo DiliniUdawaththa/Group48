@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,309 +9,101 @@
         <link rel="stylesheet" href="<?= ROOT ?>/assets/css/driverui.css">
         <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
         <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
+        <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> -->
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <style>
+            .opt3{
+                    background-color:#194672;
+                    color: white;
+            }
+
+            #email-col2,#phone-col2{
+                display:none;
+            }
+
+            .profile-update{
+                height:20px;
+                width:70%;
+            }
+
+            #email-upd-btn2,#phone-upd-btn2{
+                display:none;
+            }
+        </style>
     </head>
     <body>
-        <div class="navigation-bar">
-            <div style="width: 80px;"><img src="<?= ROOT ?>/assets/img/images/more_icon.png"  class="more-icon" ></div>
-            <img src="<?= ROOT ?>/assets/img/images/Logo.png" style="height: 60px;">
-        </div>
+        
+    
+    <?php include 'driver_side.php'; ?>
+
+
         <div class="page-container">
-            <div class="side-nav">
-                <img src="<?= ROOT ?>/assets/img/logonamenw.png" class="logo">
-                <div>
-                    <img src="<?= ROOT ?>/assets/img/images/profilepic.png" class="profile-pic">
-                    
-                    <h4 class="name"><?php echo $_SESSION['USER_DATA']->name; ?> - Driver<img src="<?= ROOT ?>/assets/img/images/active.png" id="status_icon" class="status-light"></h4>
-                    <img src="<?= ROOT ?>/assets/img/images/rating.png" class="rating">
-                </div>
-                <div class="options">
-                    <div class="opt1"><div><i class="fa fa-tasks" aria-hidden="true" style="margin-right: 10px;"></i> Hire Request</div><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-                    <div class="opt2"><div><i class="fa fa-line-chart" aria-hidden="true" style="margin-right: 10px;"></i> Analytics</div><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-                    <div class="opt2-1"><div><i class="fa fa-car" aria-hidden="true" style="margin-right: 10px;"></i> Vehicles</div><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-                    <div class="opt3"><div><i class="fa fa-user" aria-hidden="true" style="margin-right: 10px;"></i> Profile</div><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-                    <div class="opt4"><div><i class="fa fa-sign-out" aria-hidden="true" style="margin-right: 10px;"></i> Logout</div></div>
-
-                </div>
-            </div>
             <div class="body-container">
-                <div class="notification-bar">
-                    <div class="nosubmit">
-                        <input class="search-box" type="search" placeholder="Search...">
-                    </div>
-                    <div>
-                        <i class="fa-regular fa-bell noti-icon"></i>
-                        <i class="fa-regular fa-message msg-icon"></i>
-                    </div>
-                </div>
-                <div class="activity-container">
-                    <div class="status-container">
-                        <h2>Hello, <?php echo $_SESSION['USER_DATA']->name; ?></h2>
-                        
-                        <div class="select-status">
-                            <div><p>Active status:</p></div>
-                            <div class="active">
-                                <p>Available</p>
-                            </div>
-                            <div class="inactive">
-                                <p>Unavailable</p>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                    <div class="request-container">
-                        <h2>Request for ride</h2>
-                        <div class="request-box">
-                            <div>
-                                <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="request-customer-pic">
-                                <img src="<?= ROOT ?>/assets/img/images/rating.png" style="height: 10px;display: block;">
-                            </div>
-                            <div class="destination">
-                                <p style="display: block;margin: 5px;">From: 25, Hill Street, Colombo</p>
-                                <p style="display: block;margin: 5px;">To: 213/A , Katubedda , Moratuwa</p>
-                            </div>
-                            <div style="width: 100px;"> 
-                                <?php if($data['vehicles']==0):?>
-                                    <p style="color:brown">Add your vehicle first to send offers!</p>
-                                <?php endif;?>
-                                <?php if($data['vehicles']>0):?>
-                                    <button class="map-view-btn">Map View</button>
-                                    <button class="accept-btn">Offer</button> 
-                                <?php endif;?>
-                            </div>
-                        </div>
-                        <div class="request-box">
-                            <div>
-                                <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="request-customer-pic">
-                                <img src="<?= ROOT ?>/assets/img/images/rating.png" style="height: 10px;display: block;">
-                            </div>
-                            <div class="destination">
-                                <p style="display: block;margin: 5px;">From: 43, Bambalapitiya, Colombo</p>
-                                <p style="display: block;margin: 5px;">To: 243/A , Kollupitiya, Colombo</p>
-                            </div>
-                            <div style="width: 100px;"> 
-                                <?php if($data['vehicles']==0):?>
-                                    <p style="color:brown">Add your vehicle first to send offers!</p>
-                                <?php endif;?>
-                                <?php if($data['vehicles']>0):?>
-                                    <button class="map-view-btn1">Map View</button>
-                                    <button class="accept-btn1">Offer</button> 
-                                <?php endif;?>
-                            </div>
-                        </div>
-                        <div class="map-route">
-                            <button class="close-map">X</button>
-                            <img src="<?= ROOT ?>/assets/img/images/map.jpg">
-                        </div>
-                        <div class="offer-container">
-                            <button class="close-offer">X</button>
-                            <div style="text-align: center;">
-                                <table class="offer-table">
-                                    <tr><td rowspan="2" style="vertical-align: top;padding-right: 10px;font-size: 25px;">Your Fare(Rs):</td><td style="text-align: left;"><input type="number" id="fare-amount"></td></tr>
-                                    <tr><td style="text-align: left;"><input type="checkbox" id="std-fare"> Standard fare</td></tr>
-                                </table>
-                                <button class="send-offer">Send Offer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="analytics-container">
-                    <div class="today-analytics">
-                        <div class="t-topic"><h3>Today's Performance</h3> </div>
-                        <div class="t-body">
-                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/coin.png" class="performance-img"> <p class="p-stat">LKR 2,000</p></div>
-                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/clock.png" class="performance-img"><p class="p-stat">126 Mins</p></div>
-                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/bar-chart.png" class="performance-img"> <p class="p-stat">13  Rides</p></div>       
-
-
-                        </div>
-
-                    </div>
-                    <div class="charts-container">
-                        <div class="chart">
-                            <h3 style="text-align: center;">Daily Rides</h3>
-                            <div id="chart1">
-                            </div>
-                        </div>
-
-                        <div class="chart">
-                            <div id="chart2">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                
-                <script>
-
-                var options = {
-                chart: {
-                    type: 'line',
-                    width: 600 ,
-                },
-                series: [{
-                    name: 'sales',
-                    data: [27,23,18,19,17,13,25,19,22]
-                }],
-                xaxis: {
-                    categories: ["Feb 14","Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22"]
-                }
-                }
-                var chart = new ApexCharts(document.querySelector("#chart1"), options);
-                chart.render();
-
-                var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
-                chart2.render();
-
-                </script>
-                <div class="vehicles-container">
-                    <?php if($data['vehicles']==0):?>
-                        
-                    
-                        <div class="empty-vehicles">
-                            <div style="text-align: center;margin:20px;">
-                                <h3 >No vehicles to display!</h3>
-                                
-                            </div>
-                            <button id="add-veh-btn" onclick="addVehicle()">Add Vehicle</button>
-                            <div class="add-vehicle">
-                                <form action="" method="post">
-                                    <table>
-                                        <tr><td class="veh-attribute">
-                                            <label for="licenseplate">License Plate number</label></td>
-                                            <td class="veh-value">
-                                            <?php if(!empty($errors['licenseplate'])):?>
-                                                <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['licenseplate']?> </small>
-                                            <?php endif;?>
-                                                <input type="text" class="vehicle-input" name="licenseplate" id="licenseplate"></td></tr>
-                                        <tr><td class="veh-attribute"><p>Type</p></td>
-                                            <td class="veh-value"><div style="display: block;">
-                                                    
-                                                    <input type="radio" class="vehicle-input-check" name="type" value="threewheel" id="type1" checked>
-                                                    <label for="type1">Three Wheeler</label>
-                                                </div>
-                                                <div style="display: block;">
-                                                    <input type="radio" class="vehicle-input-check" name="type" value="car" id="type1">
-                                                    <label for="type2">Car</label>
-                                                </div>
-                                            </td>
-                                            
-                                                
-                                        </tr>
-                            
-                                        <tr><td class="veh-attribute"><label for="color">Color</label></td><td class="veh-value"><input type="color" name="color" id="color"></td></tr>
-                                    </table>
-                                    <input type="submit" value="Add" class="add-btn">
-                                    
-                                    
-                                    
-                                    
-                                </form>
-                            </div>
-                            
-                        </div>
-                    <?php endif;?>
-                    <?php if($data['vehicles']>0):?>
-                    <div class="vehicles-bar">
-                        <h1>Vehicles Owned</h1>
-                       <div class="vehicle1">
-                            <div class="vehicle1-type">
-                                <?php if($data['vehicledata']->type=='threewheel'):?>
-                                <img src="<?= ROOT ?>/assets/img/images/c2.png" style="width: 100px;">
-                                <?php endif;?>
-                                <?php if($data['vehicledata']->type=='car'):?>
-                                <img src="<?= ROOT ?>/assets/img/images/c3.png" style="width: 100px;">
-                                <?php endif;?>
-                                <span class="display-type"><?php echo $data['vehicledata']->type?></span>
-                            </div>
-                            <div class="vehicle1-lp">
-                                <p style="font-weight: bold;">LicensePlate:</p>
-                                <p><?php echo $data['vehicledata']->licenseplate?></p>
-                            </div>
-                            <div class="vehicle1-color">
-                                <P style="font-weight: bold;">Color:</P>
-                                <P style="background-color: <?php echo $data['vehicledata']->color?>;padding:5px;border-radius: 100%;"><?php echo $data['vehicledata']->color?></P>
-                            </div>
-                            <div class="vehicle1-btns">
-                                <button class="update-veh">Update</button>
-                                <form method="post">
-                                    <input type="submit" value="delete" name="delete" class="delete-veh">
-                                </form>
-                            </div>
-
-                       </div>
-                       <div class="update-veh1">
-                            <h2>Update current vehicle information</h2>
-                            <form action="" method="post">
-                                <table>
-                                    <tr><td class="veh-attribute"><label for="licenseplate">License Plate number</label></td><td class="veh-value"><input type="text" class="vehicle-input" name="newlicenseplate" id="licenseplate" value="<?php echo $data['vehicledata']->licenseplate?>"></td></tr>
-                                    <tr><td class="veh-attribute"><p>Type</p></td>
-                                        <td class="veh-value"><div style="display: block;">
-                                                
-                                                <input type="radio" class="vehicle-input-check" value="threewheel" name="newtype" id="type1" checked>
-                                                <label for="type1">Three Wheeler</label>
-                                            </div>
-                                            <div style="display: block;">
-                                                <input type="radio" class="vehicle-input-check" value="car" name="newtype" id="type2">
-                                                <label for="type2">Car</label>
-                                            </div>
-                                        </td>
-                                        
-                                            
-                                    </tr>
-                        
-                                    <tr><td class="veh-attribute"><label for="color">Color</label></td><td class="veh-value"><input type="color" name="newcolor" id="color" value="<?php echo $data['vehicledata']->color?>"></td></tr>
-                                </table>                               
-                            <div class="save-veh-container"><input type="submit" name="save" class="save-veh-btn" value="Save"></div>
-                            </form>
-                        </div>
-                    </div>
-                    <?php endif;?>
-                </div>
+                <form action="" method="post" enctype="multipart/form-data">
                 <div class="profile-container">
                     <div class="profile-bar">
                         <div class="propic-container">
-                            <img src="<?= ROOT ?>/assets/img/images/profilepic.png" class="propic">
-                            <button class="upload-propic"><img src="<?= ROOT ?>/assets/img/images/upload_icon.png" style="height:10px"> Upload</button>
+                            <img src="<?= ROOT ?>/<?php echo $_SESSION['USER_DATA']->img_path; ?>" class="propic">
+                            <button type="button" class="upload-propic" onclick="upload_pic()"><img src="<?= ROOT ?>/assets/img/images/upload_icon.png" style="height:10px"> Upload</button>
+                            <button type="submit" name="update-pic" value="1" class="save-propic"><img src="<?= ROOT ?>/assets/img/images/done_icon.png" style="height:10px"> Save</button>
+                            <input onchange="load_image(this.files[0])" type="file" name="photoInput" id="photoInput" style="display: none;">
                         </div>
                         <div class="detail-container">
+
                             <table class="profile-details-table">
                                 <tr class="tr1">
                                     <td class="col1">Name</td>
                                     <td class="col2"><?php echo $_SESSION['USER_DATA']->name; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
+                                    <td class="col3"></td>
                                 </tr>
                                 <tr>
-                                    <td class="col1">NIC</td>
-                                    <td class="col2">200143234422</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
+                                    <td class="col1">Registration ID</td>
+                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->id; ?></td>
+                                    <td class="col3"></td>
                                 </tr>
                                 <tr class="tr1">
-                                    <td class="col1">Registation ID</td>
-                                    <td class="col2">1001324292d</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr>
                                     <td class="col1">Email</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->email; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
-                                </tr>
-                                <tr class="tr1">
-                                    <td class="col1">Phone</td>
-                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->phone; ?></td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
+                                    <td class="col2" id="email-col1"><?php echo $_SESSION['USER_DATA']->email; ?></td>
+                                    <td class="col2" id="email-col2"><input type="text" class="profile-update" name="new-email"></td>
+                                    <td class="col3">
+                                        <button type="button" onclick="update_email()" id="email-upd-btn"><img src="<?= ROOT ?>/assets/img/images/edit_icon.png" style="height:15px"></button>
+                                        <button type="submit" value="1" name="update-email" id="email-upd-btn2"><img src="<?= ROOT ?>/assets/img/images/done_icon.png" style="height:15px"></button>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="col1">Date Of Birth</td>
-                                    <td class="col2">09/20/2001</td>
-                                    <td class="col3"><button><img src="<?= ROOT ?>/assets/img/images/edit_icon.png"></button></td>
+                                    <td class="col1">Phone</td>
+                                    <td class="col2" id="phone-col1"><?php echo $_SESSION['USER_DATA']->phone; ?></td>
+                                    <td class="col2" id="phone-col2"><input type="text" class="profile-update" name="new-phone"></td>
+                                    <td class="col3">
+                                        <button type="button" onclick="update_phone()" id="phone-upd-btn"><img src="<?= ROOT ?>/assets/img/images/edit_icon.png" style="height:15px"></button>
+                                        <button type="submit" value="1"name="update-phone" id="phone-upd-btn2"><img src="<?= ROOT ?>/assets/img/images/done_icon.png" style="height:15px"></button>
+                                    </td>
+                                </tr>
+                                <tr class="tr1">
+                                    <td class="col1">Role</td>
+                                    <td class="col2">Driver</td>
+                                    <td class="col3"></td>
+                                </tr>
+                                <tr>
+                                    <td class="col1">Joined Date</td>
+                                    <td class="col2"><?php echo $_SESSION['USER_DATA']->date; ?></td>
+                                    <td class="col3"></td>
                                 </tr>
                                 
                             </table>
                         </div>
+                        
+                        
                     </div>
+                    <div class="renew-registration-container">
+                        <p class="reg-exp">Your registration will be expired after <?php echo (365 - $data['dayDifference']) ?> days.</p>
+                        <button type="button" class="renew-registraion">Renew Now</button>
+                        </div>
+                    
                 </div>
+                
+        </form>
                 <div class="logout-container">
                     <h2>Log Out</h2>
                     <p class="logout-text">Are you sure you want to log out?</p>
@@ -322,6 +113,38 @@
         </div>
 
         <script>
+            document.querySelector('.renew-registraion').addEventListener('click', function() {
+                window.location.href = "<?= ROOT ?>/driver/renewHelp";
+
+
+            });
+
+            function upload_pic(){
+                document.getElementById('photoInput').click();
+            }
+            function load_image(file){
+                var mylink = window.URL.createObjectURL(file);
+                console.log(mylink);
+                document.querySelector(".propic").src = mylink;
+                uploadedFlag = 1;
+                document.querySelector('.upload-propic').style.display = 'none';
+                document.querySelector('.save-propic').style.display = 'block';
+            }
+
+            function update_email(){
+                document.getElementById('email-col1').style.display = 'none';
+                document.getElementById('email-col2').style.display = 'block';
+                document.getElementById('email-upd-btn').style.display = 'none';
+                document.getElementById('email-upd-btn2').style.display = 'block';
+
+            }
+
+            function update_phone(){
+                document.getElementById('phone-col1').style.display = 'none';
+                document.getElementById('phone-col2').style.display = 'block';
+                document.getElementById('phone-upd-btn').style.display = 'none';
+                document.getElementById('phone-upd-btn2').style.display = 'block';
+            }
             var status = 1
             var sidenav = 1
             const addVehBtn = document.querySelector('#add-veh-btn');
@@ -330,10 +153,6 @@
             const active_btn = document.querySelector('.active');
             const inactive_btn = document.querySelector('.inactive');
             const status_icon = document.getElementById('status_icon');
-            const hire_option = document.querySelector('.opt1');
-            const activity_option = document.querySelector('.opt2');
-            const vehicles_option = document.querySelector('.opt2-1');
-            const profile_option = document.querySelector('.opt3');
             const logout_option = document.querySelector('.opt4')
             const notification_container = document.querySelector('.analytics-container')
             const activity_container = document.querySelector('.activity-container')
@@ -425,18 +244,14 @@
                 inactive_btn.style.color = 'white'
             })
 
-            document.querySelector('.map-view-btn1').addEventListener('click', function(){
-                document.querySelector('.map-route').style.display = 'block'
-            })
+            
+            function map_view(){
+                document.querySelector('.map-route').style.display = 'block';
+            }
+            function close_map(){
+                document.querySelector('.map-route').style.display = 'none';
+            }
 
-
-            document.querySelector('.map-view-btn').addEventListener('click', function(){
-                document.querySelector('.map-route').style.display = 'block'
-            })
-
-            document.querySelector('.close-map').addEventListener('click', function(){
-                document.querySelector('.map-route').style.display = 'none'
-            })
 
             document.querySelector('.accept-btn').addEventListener('click', function(){
                 document.querySelector('.offer-container').style.display = 'block'
@@ -477,3 +292,4 @@
         </script>
     </body>
 </html>
+

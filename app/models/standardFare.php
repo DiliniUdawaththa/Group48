@@ -70,9 +70,58 @@ class standardFare extends Model
     }
 
     public function update_standardFare($Fid, $data)
+	{
+		if (!empty($this->allowedColumns)) {
+			foreach ($data as $key => $value) {
+				if (!in_array($key, $this->allowedColumns)) {
+					unset($data[$key]);
+				}
+			}
+		}
+
+		$keys = array_keys($data);
+		// $Fid = array_search($Fid, $data);
+
+		$query = "update " . $this->table . " set ";
+		foreach ($keys as $key) {
+			$query .= $key . "=:" . $key . ",";
+		}
+		$query = trim($query, ",");
+		$query .= " where Fid = :Fid";
+		// print_r($query);	
+
+
+		$this->query($query, $data);
+	}
+
+    public function view_standardFare($Fid)
     {
-        $this->update($Fid, $data);
-            
+       
+        
+        $query = "SELECT * FROM " . $this->table . " where Fid = :Fid";
+        $params = array(":Fid" => $Fid);
+        
+
+        $result = $this->query($query, $params);
+
+        return $result;
+        
+    
+    }
+    
+    public function getFareByTypeAndVehicle($fareType, $vehicleType) {
+        
+        $sql = "SELECT standard_fare FROM fare WHERE faretype = '$fareType' AND vehicletype = '$vehicleType'";
+        $result = $this->query($sql);
+
+        $standardFare = null;
+        if ($result && count($result) > 0){
+            $row = $standardFare;
+            $standardFare = $row['standardFare'];
+
+        }
+
+        return $standardFare;
     }
 
     public function view_standardFare($Fid)

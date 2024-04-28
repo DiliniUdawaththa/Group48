@@ -146,9 +146,10 @@
                             <a href="<?=ROOT?>/officer/standardFare_delete/<?=$row->Fid?>">
                                 <div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash"
                                             style="color: black;"></i></div></button>
-                                <a href="<?=ROOT?>/officer/standardFare_view/" <?=$row->Fid?>><button
+                                <a href="<?=ROOT?>/officer/standardFare_View/<?= urlencode($row->Fid) ?>"><button
                                         class="detail_btn"><i class="fa-solid fa-circle-info"
                                             style="color: black;"></i></button></a>
+
                         </td>
                     </tr>
                     <?php endforeach; ?>

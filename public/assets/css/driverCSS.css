@@ -195,11 +195,20 @@ a{
     font-size: 16px;
     font-weight:bolder;
 }
+
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 300px;
+    margin: auto;
+}
 .upload-btn{
     display:block;
-    margin: auto;
+    /* margin: auto; */
     height: 45px;
-    width: 225px;
+    /* width: 225px; */
+    width: 125px;
     font-weight: bold;
     border-radius: 8px;
     border: 0px;
@@ -213,8 +222,29 @@ a{
         color: black;
         border: 1px solid black;
     }
+
+.done-btn{
+    display: block;
+    height: 45px;
+    /* width: 225px; */
+    width: 125px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 0px;
+    color:black;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid black;
+}
+.done-btn:hover{
+    background-color: rgb(225, 222, 219);
+    color: black;
+    border: 1px solid black;
+}
+
 .image-container{
-    height:350px;
+    min-height:350px;
     display: flex;
     justify-content: center; /* Centers horizontally */
     align-items: center;

@@ -33,12 +33,28 @@ class Login extends Controller
                     {
                         $driverreg = new Driverregistration();
                         $row1 = $driverreg->where([
-                            "email"=> $_POST["email"],
+                            "id"=> $_POST["id"],
                         ]);
                         if(!isset($row1[0])){
+
+                            $registrationitems = array (
+                                'profileimg' => '0',
+                                'driverlicenseimg' => '0',
+                                'revenuelicenseimg' => '0',
+                                'vehregistrationimg' => '0',
+                                'vehinsuranceimg' => '0',
+                            );
+                
+                            $_SESSION['REGISITEMS'] = $registrationitems;
                             redirect('driver/registration');
                         }else{
-                            redirect('driver/ride');
+                            $driver = new User();
+                            if($driver->isExpired($_POST["email"]))
+                            {
+                                redirect('driver/expire');
+                            }else{
+                                redirect('driver/ride');
+                            }                           
                         }
 
                         

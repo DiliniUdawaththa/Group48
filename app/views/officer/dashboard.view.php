@@ -7,7 +7,7 @@
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Dashboard.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/dashboard.css">
     <style>
     .error {
         border: 1px solid red;
@@ -75,8 +75,14 @@
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-id-card"></i>Driver Registration</div>
                 </a>
+                <a href="<?=ROOT?>/officer/renewRegistration" class="link">
+                    <div class="linkbutton"><i class="fa-solid fa-address-book"></i></i>Renew Registration</div>
+                </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Drivers</div>
+                    <div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div>
+                </a>
+                <a href="<?=ROOT?>/officer/customer" class="link">
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
                     <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
@@ -99,74 +105,14 @@
 
         </div>
 
-        <div class="interface">
-            <div class="navi">
-                <div class="navi1">
+        <div class="container1">
+            <div class="header">
+                <div class="nav">
                     <h2>Officer Dashboard</h2>
                 </div>
             </div>
 
-
-
-            <!-- <div class="operation">
-                <i class="fa-solid fa-bell"></i>
-            </div>
-        </div>
-
-        <div class="values">
-            <div class="val-box">
-                <i class="fa-solid fa-users"></i>
-                <div>
-                    <span>Customers</span>
-                    <h3>1000</h3>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fa-solid fa-user-group"></i>
-                <div>
-                    <span>Drivers</span>
-                    <h3>100</h3>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fa-solid fa-user-tie"></i>
-                <div>
-                    <span>Officers</span>
-                    <h3>4</h3>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fa-solid fa-taxi"></i>
-                <div>
-                    <span>Rides</span>
-                    <h3>400</h3>
-                </div>
-            </div>
-        </div>-->
-
-
-            <!--div class="chart-container">
-            <div class="chart-box">
-                <div id="chart1" class="chart"></div>
-                <div class="chart-label">
-
-                </div>
-            </div>
-            <div class="chart-box">
-                <div id="chart2" class="chart"></div>
-                <div class="chart-label">
-
-                </div>
-            </div>
-            <div class="chart-box">
-                <div id="chart3" class="chart"></div>
-                <div class="chart-label">
-
-                </div>
-            </div>
-        </div>-->
-
-            <div class="main-div">
+            <!--<div class="main-div">
                 <div class="box1">
                     <a class="none-dec" href="<?=ROOT?>/officer/driver">
                         <div class="con-button">Drivers</div>
@@ -184,13 +130,137 @@
                         <div class="con-button">Standard Fare</div>
                     </a>
                 </div>
+            </div>-->
+
+            <div class="content">
+                <div class="cards">
+                    <div class="card">
+                        <div class="box">
+                            <?php $model = new OfficerDriver();
+                        $count = $model->getDriverCount();
+                            echo "<h2>$count</h2>"; 
+                            ?>
+                            <h3>DRIVERS</h3>
+                        </div>
+                        <div class="val-box">
+                            <img src="<?= ROOT ?>/assets/img/officer_images/drivers.png" alt=""
+                                style="width: 75px; height:75px;">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="box">
+                            <?php $model1 = new OfficerDriver();
+                        $count = $model1->getSuspendedDriverCount();   
+                        echo "<h1>$count</h1>"; ?>
+                            <h3>SUSPENDS</h3>
+                        </div>
+                        <div class="val-box">
+                            <img src="<?= ROOT ?>/assets/img/officer_images/ban.png" alt=""
+                                style="width: 60px; height:60px;">
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="box">
+                            <?php $model3 = new Driverregistration();
+                        $count = $model3->getPendingRCount();   
+                        echo "<h1>$count</h1>"; ?>
+                            <h3>REGISTRATION</h3>
+                        </div>
+                        <div class="val-box">
+                            <img src="<?= ROOT ?>/assets/img/officer_images/standardfare.png" alt=""
+                                style="width: 75px; height:75px;">
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="box">
+                            <?php $model2 = new Complaint();
+                        $count = $model2->getPendingCount();   
+                        echo "<h1>$count</h1>"; ?>
+                            <h3>COMPLAINTS</h3>
+                        </div>
+                        <div class="val-box">
+                            <img src="<?= ROOT ?>/assets/img/officer_images/complaints.png" alt=""
+                                style="width: 75px; height:75px;">
+                        </div>
+                    </div>
+
+
+                    <div class="content-2">
+                        <div class="recent-payments">
+                            <div class="title">
+                                <h2>DRIVER REGISTRATION</h2>
+                                <a href="<?=ROOT?>/officer/officerdriverRegistration" class="btn1">View All</a>
+                            </div>
+                            <table>
+                                <tr>
+                                    <th>Profile Picture</th>
+                                    <th>ID</th>
+                                    <th>Status</th>
+                                    <th>Option</th>
+                                </tr>
+                                <?php 
+                                $driver_registration = new Driverregistration();
+                                $top_5 = $driver_registration->findTop5();
+                                foreach ($top_5 as $row) {
+                                echo "<tr>";
+                                echo "<td><img src='" . ROOT . "/" . $row->profileimg . "' alt='Profile Image' style='width: 150px; height: 100px;'></td>";
+                                echo "<td>" . $row->id ."</td>";
+                                echo "<td>"; if ($row->status = '0') {
+                                    echo "Pending";
+                                } elseif($row->status = '1') {
+                                    echo "Accepted";
+                                }
+                                echo "</td>";
+                                echo "<td><a href='" . ROOT . "/officer/driverregistration_view/" . $row->id . "' class='btn1'>View</a></td>";
+                                echo "</tr>";
+                                }
+                                ?>
+                            </table>
+                        </div>
+                        <div class="new-students">
+                            <div class="title">
+                                <h2>COMPLAINTS</h2>
+                                <a href="<?=ROOT?>/officer/complains" class="btn1">View All</a>
+                            </div>
+                            <table>
+                                <tr>
+                                    <th>Complainant</th>
+                                    <th>Complaint</th>
+                                    <th>status</th>
+                                    <th>option</th>
+                                </tr>
+                                <?php 
+                                $Complaint = new Complaint();
+                                $top_5 = $Complaint->findTop5();
+                                foreach ($top_5 as $row) {
+                                echo "<tr>";
+                                echo "<td>" . $row->complainant ."</td>";
+                                echo "<td>" . $row->complaint ."</td>";
+                                echo "<td>"; if ($row->status = '0') {
+                                    echo "Pending";
+                                } elseif($row->status = '1') {
+                                    echo "Accepted";
+                                }
+                                echo "</td>";
+                                echo "<td><a href='" . ROOT . "/officer/complainView/" . $row->cmt_id . "' class='btn1'>View</a></td>";
+                                echo "</tr>";
+                                }
+                                ?>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
-
-
-
         </div>
+
+
+
+
+
+
+
     </div>
 
 
