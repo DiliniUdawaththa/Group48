@@ -88,6 +88,7 @@
          <div class="container">
 
             <div class="h1"><center><h1>How to Request the Ride</h1></center></div>
+            <center><div class="version"><i id="pc" class="fa-solid fa-desktop"></i><i id="mobile" class="fa-solid fa-mobile"></i></div></center>
             <!-- --------------------------slideshow-container--------------------------------------------------------------------------------------- -->
             <div class="slideshow-container">
 
@@ -111,10 +112,66 @@
                 <div class="text">Step 4 <br><center><h3>slelect the driver & negotiate</h3></center></div>      
               </div>
 
+              <div class="mySlides fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/5.png" style="width:100%">
+                <div class="text">Step 5 <br><center><h3>Waiting for driver</h3></center></div>      
+              </div>
+
+              <div class="mySlides fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/6.png" style="width:100%">
+                <div class="text">Step 6 <br><center><h3>Journey underway</h3></center></div>      
+              </div>
+
+              <div class="mySlides fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/7.png" style="width:100%">
+                <div class="text">Step 7 <br><center><h3>Rating and complain</h3></center></div>      
+              </div>
+
+            </div>
+            <div class="slideshow-container1" style="display:none;">
+
+              <div class="mySlides fade">               
+                <img src="<?=ROOT?>/assets/img/customer/help/11.png" style="width:100%">  
+                <div class="text">Step 1 <br><center><h3>slelect the location and destination</h3></center></div>  
+              </div>
+
+              <div class="mySlides fade">  
+                <img src="<?=ROOT?>/assets/img/customer/help/12.png" style="width:100%">
+                <div class="text">Step 2 <br><center><h3>slelect the althernative path</h3></center></div>    
+              </div>
+
+              <div class="mySlides fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/13.png" style="width:100%">
+                <div class="text">Step 3 <br><center><h3>slelect the vehicle</h3></center></div>    
+              </div>
+
+              <div class="mySlides fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/14.png" style="width:100%">
+                <div class="text">Step 4 <br><center><h3>slelect the driver & negotiate</h3></center></div>      
+              </div>
+
+              <div class="mySlides fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/15.png" style="width:100%">
+                <div class="text">Step 5 <br><center><h3>Waiting for driver</h3></center></div>      
+              </div>
+
+              <div class="mySlides fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/16.png" style="width:100%">
+                <div class="text">Step 6 <br><center><h3>Journey underway</h3></center></div>      
+              </div>
+
+              <div class="mySlides fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/17.png" style="width:100%">
+                <div class="text">Step 7 <br><center><h3>Rating and complain</h3></center></div>      
+              </div>
+
             </div>
               <br>
 
               <div style="text-align:center">
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
                 <span class="dot"></span> 
                 <span class="dot"></span> 
                 <span class="dot"></span> 
@@ -215,6 +272,22 @@
           document.getElementById("mySidebar").style.display = "none";
           document.querySelector('.container').style.opacity= '1';
           }
+
+          pc=document.getElementById('pc');
+          mobile=document.getElementById('mobile');
+          pc_img = document.querySelector('.lideshow-container');
+          mobile_img=document.querySelector('.lideshow-container1');
+
+          pc.addEventListener('click',()=>{
+            mobile_img.style.display='none';
+            pc_img.style.display="block";
+            pc.style.background-color='aliceblue';
+            
+          });
+          mobile.addEventListener('click',()=>{
+            mobile_img.style.display='block';
+            pc_img.style.display="none";
+          });
         </script>
         </body>
         </html>

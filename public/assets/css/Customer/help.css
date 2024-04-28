@@ -114,6 +114,29 @@ body{
 .p{
     margin: 0 20px;
 }
+.version{
+  display: flex;
+  width: 12vh;
+  height: 5vh;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+}
+.version i{
+  width: 6vh;
+  /* height: 5vh; */
+  display: flex;
+  justify-content: center;
+  font-size: 3vh;
+  padding: 1vh;
+}
+#pc{
+  
+   background-color: aliceblue;
+}
+#mobile{
+  background-color: #42678B;
+}
+
 
 
 @media only screen and (max-width: 1000px) {
