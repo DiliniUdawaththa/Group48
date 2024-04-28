@@ -148,7 +148,7 @@ class Driver extends Controller{
         $currides = $current_rides ->findAll();
         
         $data['current_rides'] = $currides;
-        $data['status'] = 1;
+        $data['status'] = 0;
 
         $driverst = new Driver_status();
 
@@ -348,6 +348,9 @@ class Driver extends Controller{
             'driver_id' => $_SESSION['USER_DATA']->id,
         ]);
 
+        $data['offer_price'] = $current_offer[0]->offer_price;
+        $data['negotiation_price'] = $current_offer[0]->negotiation_price;
+
         
         
 
@@ -368,16 +371,22 @@ class Driver extends Controller{
                 $current_offer[0]->offer_price = $current_offer[0]->negotiation_price;
                 $current_offer[0]->negotiation_status = 0;
                 $offers->update_offer_price($_SESSION['USER_DATA']->id,(array)$current_offer[0]);
-                redirect('driver/request03');
             }
             elseif(isset($_POST['declineneg'])){
-                redirect('driver/request03');
+                $current_offer[0]->negotiation_status = 0;
+                $offers->update_offer_price($_SESSION['USER_DATA']->id,(array)$current_offer[0]);
+                redirect('driver/request02');
             }
 
             elseif(isset($_POST['cancel-offer'])){
                 $offers -> delete((array)$current_offer[0]);
                 redirect('driver/activity');
             }
+
+
+            
+
+                
                 $current_offer = $offers->where([
                     'driver_id' => $_SESSION['USER_DATA']->id,
                 ]);
@@ -386,17 +395,17 @@ class Driver extends Controller{
                     echo "Accepted";
                 }elseif($current_offer[0]->offer_price != $current_offer[0]->negotiation_price){
                     if($current_offer[0]->negotiation_status==1){
-                        $data['negotiation_sent'] = 1;
-                        echo "Negotiation";
+                        $output = (string)$current_offer[0]->negotiation_price;
+                        echo $output;
                     }else{
                         echo "Waiting";
                     }
 
                 }else{
-                    echo "aiting";
+                    echo "Waiting";
                 }
             
-          
+            
             
 
 
@@ -436,24 +445,44 @@ class Driver extends Controller{
         if($_SERVER['REQUEST_METHOD'] == "POST"){
             if(isset($_POST['start-ride'])){
                 $current_ride->ride_start = 1;
-                // $ride->update($current_ride);
+                $ride -> update($_SESSION['ride_id'], (array)$current_ride);
                 redirect('driver/request04');
+                
 
             }
-            if(isset($_POST['cancel-s-ride'])){
-                
+            elseif(isset($_POST['cancel-s-ride'])){
+                $current_ride->state="cancel";
+                $ride -> update($_SESSION['ride_id'], (array)$current_ride);
+                redirect('driver/activity');
+            }
+            else{
+                if($current_ride->state=="cancel"){
+                    echo "customer-cancel";
+                }else{
+                    echo "Waiting";
+                }
+
             }
             
+            
+            
+        }else{
+            $this->view('driver/request03',$data);
+
         }
         
 
-        $this->view('driver/request03',$data);
+        
     }
 
     public function request04(){
         $data['errors'] = [];
 
         $cust = new User();
+        $ride = new Rides();
+        $current_ride = $ride->first([
+            'id' => $_SESSION['ride_id'],
+        ]);
 
         $row4 = $cust->first([
             "id"=> $_SESSION['pass_id'],
@@ -461,7 +490,12 @@ class Driver extends Controller{
         $data['customer'] = $row4;
 
         if($_SERVER['REQUEST_METHOD'] == "POST"){
-            redirect('driver/request05');
+            if(isset($_POST['end-ride'])){
+                $current_ride->state = 'Success';
+                $ride -> update($_SESSION['ride_id'], (array)$current_ride);
+                redirect('driver/request05');
+            }
+
         }
         
 

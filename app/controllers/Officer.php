@@ -11,7 +11,7 @@ class officer extends Controller{
         $data['title'] = "Officer";
         $this->view('Officer/dashboard',$data);
     }
-    public function officerdriverRegistration(){
+    /*public function officerdriverRegistration(){
         if(!Auth::logged_in())
         {
             message('please login to view the page');
@@ -30,6 +30,114 @@ class officer extends Controller{
 
         $data['title'] = "Officer";
         $this->view('Officer/officerdriverRegistration',$data);
+    }*/
+
+
+    //---------------------------Diver registration---------------------------
+    public function officerdriverRegistration() {
+        if (!Auth::logged_in()) {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+    
+        $add_driverregistration = new Driverregistration();
+    
+        $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+    
+        $data = [
+            'status' => '0',
+        ];
+    
+        if ($searchTerm !== null) {
+            // If a search term is provided, perform a search
+            $rows = $add_driverregistration->where1($data, $searchTerm);
+        } else {
+            // Otherwise, retrieve all drivers
+            $rows = $add_driverregistration->where($data);
+        }
+    
+        $data['rows'] = is_array($rows) ? $rows : [];
+    
+        $data['title'] = "officer";
+        $this->view('Officer/officerdriverRegistration', $data);
+    }
+
+   /* public function driverregistrationDetail($id) {
+        if(!Auth::logged_in()) {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        
+        $driverregistration = new Driverregistration();
+        $user = new User();
+    
+        // Build SQL query with join
+        $sql = "SELECT dr.*, u.name 
+                FROM driverregistration dr
+                LEFT JOIN users u ON dr.id = u.id 
+                WHERE dr.status = 0";
+    
+        // Execute the query
+        $rows = $driverregistration->query($sql);
+    
+        // Check if rows are returned
+        if (!$rows) {
+            echo "No data found for driver registrations with status = 0";
+            // Handle this case as needed, like redirecting or showing a message
+        } else {
+            // Proceed only if rows are not empty
+            $data = [
+                'title' => "driverRegistration",
+                'rows' => $rows, // Pass the rows directly to the view
+            ];
+    
+            $this->view('officer/officerdriverRegistration', $data);
+        }
+    }
+    */
+    
+    
+    
+    
+    
+
+
+
+    
+
+    public function driverregistrationDetail($id){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $driverregistration = new Driverregistration();
+        $user = new User();
+
+        $data = [
+            'id' => $id
+        ];
+        $rows = $driverregistration->where($data);
+        $row = (object) $rows[0];
+
+        $driver = $row->id;
+        $data2 = [
+            'id' => $driver
+        ];
+        $rows2 = $user->where($data2);
+        $row2 = null;
+        if (is_array($rows2) && count($rows2) > 0) {
+            $row2 = (object) $rows2[0];
+        }
+
+        $data = [
+            'title' => "driverRegistration",
+            'row' => $row,
+            'row2' => $row2,
+        ];
+
+        $this->view('officer/officerdriverRegistration',$data);
+        
     }
 
 
@@ -57,11 +165,58 @@ class officer extends Controller{
         $data['title'] = "standardFare";
         $this->view('Officer/standardFare',$data);
         } */
+    
+
+    public function driverregistration_view($id){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $driverregistration = new Driverregistration();
+        $user = new User();
+
+        $data = [
+            'id' => $id
+        ];
+        $rows = $driverregistration->where($data);
+        $row = (object) $rows[0];
+
+        /*$customer = $row->passenger_id;
+        $data1 = [
+            'id' => $customer
+        ];
+        $rows1 = $user->where($data1);
+        $row1 = null;
+        if (is_array($rows1) && count($rows1) > 0) {
+            $row1 = (object) $rows1[0];
+        }*/
+
+
+
+        $driver = $row->id;
+        $data2 = [
+            'id' => $driver
+        ];
+        $rows2 = $user->where($data2);
+        $row2 = null;
+        if (is_array($rows2) && count($rows2) > 0) {
+            $row2 = (object) $rows2[0];
+        }
+
+        $data = [
+            'title' => "driverRegistration",
+            'row' => $row,
+            'row2' => $row2,
+        ];
+
+        $this->view('officer/officerDriverRegistration_view',$data);
+        
     }
 
 
 
-    //Standard Fare
+    //-----------------Standard Fare--------------------------
     public function standardFare(){
         if(!Auth::logged_in())
         {
@@ -178,46 +333,78 @@ class officer extends Controller{
     }
 
 
-   public function standardFare_view($Fid){
+    public function standardFare_View($Fid){
         if(!Auth::logged_in())
         {
-            message('please login to view the page');
+            message('please login to view the admin section');
             redirect("login");
         }
-        $data['errors'] = [];
+        
+        $standardFare = new standardFare();
 
-        $add_standardFare = new standardFare();
-
-        $rows = $add_standardFare->view_standardFare($Fid);
-        $data['rows'] = array();
-
-        if(isset($rows[0])){
-        for($i = 0;$i < count($rows); $i++)
-        {
-            $data['rows'][] = $rows[$i];
+        $data = [
+            'Fid' => $Fid
+        ];
+        $rows = $standardFare->where($data);
+        $row = null;
+        if (is_array($rows) && count($rows) > 0) {
+            $row = (object) $rows[0];
         }
+        
+
+        $data = [
+            'title' => "standardFare",
+            'row' => $row,
+            
+        ];
+
+        $this->view('officer/standardFare_view',$data);
     }
 
-        /*if($_SERVER['REQUEST_METHOD'] == "POST")
-		{
-            
-			if($add_standardFare->validate($_POST))
-			{    
-                // show($_POST);
-                $_POST['Fid']=$Fid; 
-                // show($_POST);           
-                $add_standardFare->view_standardFare($Fid);
-                redirect('officer/standardFare');
+    
+    public function getStandardFare($vehicleType) {
+        
+        $currentTime = date('H:i');
+
+        
+        $fareTimeRanges = [
+            'traffic_time' => [
+                ['start' => '06:30', 'end' => '09:00'],
+                ['start' => '16:00', 'end' => '18:00'],
+                ['start' => '12:00', 'end' => '14:00']
+            ],
+            'normal_time' => [
+                ['start' => '09:00', 'end' => '12:00'],
+                ['start' => '14:00', 'end' => '16:00'],
+                ['start' => '18:00', 'end' => '22:00']
+            ],
+            'early_morning' => [
+                ['start' => '00:00', 'end' => '06:30']
+            ],
+            'late_night' => [
+                ['start' => '23:00', 'end' => '23:59']
+            ]
+        ];
+
+        
+        $fareType = '';
+        foreach ($fareTimeRanges as $type => $ranges) {
+            for ($i = 0; $i < count($ranges); $i += 2) {
+                if ($currentTime >= $ranges[$i] && $currentTime <= $ranges[$i + 1]) {
+                    $fareType = $type;
+                    break 2;
+                }
             }
-           
-        }*/
+        }
 
+        
+        $fareModel = new standardFare();
+        $standardFare = $fareModel->getFareByTypeAndVehicle($fareType, $vehicleType);
 
-        $data['title'] = "standardFare";
-        $this->view('Officer/standardFare_view',$data);
-        /*}*/
-    } 
+        $this->view('officer/standardFare_view',$standardFare);
+    }
 
+    
 
     
 /*----------------------------------*/
@@ -248,7 +435,7 @@ class officer extends Controller{
         $this->view('officer/driver',$data);
     }*/
 
-
+/*--------------------------complaint-----------------------------*/
     public function complains(){
         if(!Auth::logged_in())
         {
@@ -382,7 +569,7 @@ class officer extends Controller{
     }
 
 
-
+    
 
 
     
@@ -420,32 +607,264 @@ class officer extends Controller{
         $passengerName = $complainModel->getpassengername($passenger_id);
     }*/
 
-    
-    public function customer_complain($passenger_id){
-        if(!Auth::logged_in()) 
+    /*---------------CUSTOMER-----------------------*/
+    public function customer(){
+        if(!Auth::logged_in())
         {
-            message('please login to view the page');
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $add_OfficerCustomer = new OfficerCustomer();
+
+        $search = isset($_GET['sarch']) ? $_GET['search'] : null;
+
+        $data = [
+            'role' => "user"
+        ];
+
+        if($search !== null){
+            $rows = $add_OfficerCustomer->where2($data , $search);
+        }else {
+            // Otherwise, retrieve all customers
+            $rows = $add_OfficerCustomer->where($data);
+        }
+
+        
+
+        //$rows = $add_OfficerDriver->where($data);
+        //$data['rows'] = array();
+        $data['rows'] = is_array($rows) ? $rows : [];
+
+        /*for($i = 0;$i < count($rows); $i++)
+        {
+            $data['rows'][] = $rows[$i];
+        }*/
+
+        $data['title'] = "customers";
+        $this->view('officer/customer',$data);
+        
+    }
+
+    public function customer_View($id){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
             redirect("login");
         }
         
+        $user = new User();
+        $registration = new Driverregistration();
 
-        $data['title'] = "Officer";
-        $this->view('Officer/customer_complains',$data);
+        $data = [
+            'id' => $id
+        ];
+        $rows = $user->where($data);
+        $row = null;
+        if (is_array($rows) && count($rows) > 0) {
+            $row = (object) $rows[0];
+        }
+
+        $customer = $row->id;
+        $data1 = [
+            'id' => $customer
+        ];
+        $rows1 = $registration->where($data1);
+        $row1 = null;
+        if (is_array($rows1) && count($rows1) > 0) {
+            $row1 = (object) $rows1[0];
+        }
+        
+
+        $data = [
+            'title' => "driverreg",
+            'row' => $row,
+            'row1' => $row1,
+            
+        ];
+
+        $this->view('officer/customer_view',$data);
     }
 
-    public function driver_complain(){
+   
+    
+    /*public function driverdetail_view($id) {
+        if (!Auth::logged_in()) {
+            message('Please login to view the admin section');
+            redirect("login");
+        }
+    
+        // Fetch driver details from the user table
+        $user = new User();
+        $driver_data = $user->find($driver_id); // Assuming 'id' is the primary key in the user table
+    
+        if (!$driver_data) {
+            // Handle case when driver does not exist
+            message('Driver not found');
+            redirect("some_page");
+        }
+    
+        // Fetch complaints for the particular driver from the complain table
+        $complaint = new Complain();
+        $complaints = $complaint->where(['id' => $driver_id])->findAll();
+    
+        // Prepare data to pass to the view
+        $data = [
+            'driver_data' => $driver_data, // Driver details
+            'complaints' => $complaints,   // Complaints for the driver
+        ];
+    
+        $this->view('officer/driver_detail_view', $data);
+    }*/
+
+        
+
+
+
+    public function customer_complain($id){
         if(!Auth::logged_in())
         {
             message('please login to view the page');
             redirect("login");
         }
-        $data['title'] = "Officer";
-        $this->view('Officer/driver_complain',$data);
+
+        $complaint = new Complaint();
+    
+        $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+    
+        $data = [
+            'passenger_id' => $id,
+        ];
+    
+        $rows = $complaint->where($data);
+    
+        $data['rows'] = is_array($rows) ? $rows : [];
+    
+        $data['title'] = "customercomplain";
+        $this->view('officer/customer_complain', $data);
     }
 
+    /* public function customer() {
+        if (!Auth::logged_in()) {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+    
+        $add_customer = new AdminCustomer();
+    
+        $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+    
+        $data = [
+            'role' => 'user',
+        ];
+    
+        $rows = $add_customer->where($data);
+    
+        $data['rows'] = is_array($rows) ? $rows : [];
+    
+        $data['title'] = "Customer";
+        $this->view('admin/customer', $data);
+    }*/
+   
+    
+
 
     
+
+
     
+   
+
+    /*public function search() {
+        if (isset($_GET['search'])) {
+            $searchTerm = $_GET['search'];
+            $model = new OfficerDriver();
+            // $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+    
+            $data = [
+                'role' => 'driver',
+            ];
+            $data = $model->where1($data, $searchTerm);
+            include 'driver.view.php';
+        } else {
+            // Redirect or handle the absence of search term
+        }
+    }*/
+
+    public function searchCustomer() {
+
+        $noMatchFound = false;
+
+        if (isset($_GET['search'])) {
+            $searchTerm = $_GET['search'];
+            $add_customer = new OfficerCustomer();
+            $data = [
+                'role' => 'customer',
+                'name' => strtolower($searchTerm)
+            ];
+    
+            if ($searchTerm !== '') {
+                $rows = $add_customer->whereLike($data, $searchTerm);
+            } else {
+                unset($data['name']);
+                $rows = $add_customer->where($data);
+            }
+    
+            $data['rows'] = is_array($rows) ? $rows : [];
+
+            if (empty($data['rows'])) {
+                $noMatchFound = true;
+            }
+    
+    
+            $data['title'] = "customer";
+            $data['noMatchFound'] = $noMatchFound;
+            $this->view('officer/customerSearch', $data);
+        }
+    }
+
+    public function suspendCustomer($email){
+        $suspend_customer = new OfficerCustomerAction($GLOBALS['pdo']);
+
+        $email = $email;
+        $suspend_customer->updateCustomerStatus($email);
+        //$suspend_driver->updateRegDate($email);
+        $suspend_customer->OfficerConfirmEmail($email);
+
+        redirect('officer/suspendCustomer2');
+
+    }
+
+    public function suspendCustomer2(){
+        // if(!Auth::logged_in())
+        // {
+        //     message('please login to view the Officer section');
+        //     redirect("login");
+        // }
+
+        $renew_customer = new OfficerCustomerAction($GLOBALS['pdo']);
+
+        $data = [
+            'role' => 'user'
+        ];
+
+        $rows = $renew_customer->where($data);
+        $data['rows'] = array();
+
+        if(isset($rows[0])){
+            for($i = 0;$i < count($rows); $i++)
+            {
+                $data['rows'][] = $rows[$i];
+            }
+
+        $this->view('officer/customer',$data);
+        }
+    }
+    
+
+
+    
+    /*-------------------DRIVER------------------------*/
     public function driver(){
         if(!Auth::logged_in())
         {
@@ -481,8 +900,103 @@ class officer extends Controller{
 
         $data['title'] = "Drivers";
         $this->view('officer/driver',$data);
+        
     }
 
+   
+    
+    /*public function driverdetail_view($id) {
+        if (!Auth::logged_in()) {
+            message('Please login to view the admin section');
+            redirect("login");
+        }
+    
+        // Fetch driver details from the user table
+        $user = new User();
+        $driver_data = $user->find($driver_id); // Assuming 'id' is the primary key in the user table
+    
+        if (!$driver_data) {
+            // Handle case when driver does not exist
+            message('Driver not found');
+            redirect("some_page");
+        }
+    
+        // Fetch complaints for the particular driver from the complain table
+        $complaint = new Complain();
+        $complaints = $complaint->where(['id' => $driver_id])->findAll();
+    
+        // Prepare data to pass to the view
+        $data = [
+            'driver_data' => $driver_data, // Driver details
+            'complaints' => $complaints,   // Complaints for the driver
+        ];
+    
+        $this->view('officer/driver_detail_view', $data);
+    }*/
+
+    public function driver_View($id){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        
+        $user = new User();
+        $registration = new Driverregistration();
+
+        $data = [
+            'id' => $id
+        ];
+        $rows = $user->where($data);
+        $row = null;
+        if (is_array($rows) && count($rows) > 0) {
+            $row = (object) $rows[0];
+        }
+
+        $driver = $row->id;
+        $data1 = [
+            'id' => $driver
+        ];
+        $rows1 = $registration->where($data1);
+        $row1 = null;
+        if (is_array($rows1) && count($rows1) > 0) {
+            $row1 = (object) $rows1[0];
+        }
+        
+
+        $data = [
+            'title' => "driverreg",
+            'row' => $row,
+            'row1' => $row1,
+            
+        ];
+
+        $this->view('officer/driver_view',$data);
+    }
+
+
+    public function driver_complain($id){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+
+        $complaint = new Complaint();
+    
+        $searchTerm = isset($_GET['search']) ? $_GET['search'] : null;
+    
+        $data = [
+            'driver_id' => $id,
+        ];
+    
+        $rows = $complaint->where($data);
+    
+        $data['rows'] = is_array($rows) ? $rows : [];
+    
+        $data['title'] = "drivercomplain";
+        $this->view('officer/driver_complain', $data);
+    }
 
     /* public function customer() {
         if (!Auth::logged_in()) {
@@ -498,20 +1012,21 @@ class officer extends Controller{
             'role' => 'user',
         ];
     
-        if ($searchTerm !== null) {
-            // If a search term is provided, perform a search
-            $rows = $add_customer->where1($data, $searchTerm);
-        } else {
-            // Otherwise, retrieve all customers
-            $rows = $add_customer->where($data);
-        }
+        $rows = $add_customer->where($data);
     
         $data['rows'] = is_array($rows) ? $rows : [];
     
         $data['title'] = "Customer";
         $this->view('admin/customer', $data);
-    } */
+    }*/
+   
+    
 
+
+    
+
+
+    
     public function driver_delete($id=null){
         if(!Auth::logged_in())
         {

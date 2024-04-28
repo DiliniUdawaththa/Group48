@@ -53,8 +53,7 @@
                             <p class="req-loc-des"><b>To:</b> <?php echo $data['ride_info']->destination?></p>
                             <p class="req-loc-des"><b>Distance:</b> 5.2km</p>
                             <p class="req-loc-des"><b>Vehicle</b> Three Wheeler</p>
-                            <p class="req-loc-des"><b>Offer sent:</b> Rs 600</p>
-                            <?php echo $data['negotiation_sent']?>
+                            <p class="req-loc-des"><b>Offer sent:</b> Rs <?php echo $data['offer_price'] ?></p>
                         </div>
                         <div style="display:flex;justify-content:space-around;"><p>Waiting for customer<div class="loader"></div></p></div>
                         <form method="POST"><input type="submit" value="Cancel" class="cancel-offer-btn" name="cancel-offer"></form>
@@ -63,8 +62,8 @@
                         
                            <h3>Negotiation request</h3>
                            <div>
-                                <p class="req-loc-des"><b>Offered fare:</b> Rs 600</p>
-                                <p class="req-loc-des"><b>Requesting fare:</b><div class="neg-price"> Rs. 500</div></p>
+                                <p class="req-loc-des"><b>Offered fare:</b> Rs <?php echo $data['offer_price'] ?></p>
+                                <p class="req-loc-des"><b>Requesting fare:</b><div class="neg-price"> Rs. <?php echo $data['negotiation_price'] ?></div></p>
                             </div>
                             <form method="POST">  
                            <div class="neg-btns">
@@ -132,11 +131,11 @@
                     
                     if(xhr.status === 200){
                         let data = xhr.response;
-                        if(data=="Negotiation"){
-                            document.querySelector('.negotiation').style.display = 'flex';
-                        
-                        }if(data=="Accepted"){
+                        if(data=="Accepted"){
                             window.location.href = "<?php echo ROOT; ?>/driver/request03";
+                        }else if(data != "Waiting"){
+                            document.querySelector('.negotiation').style.display = 'flex';
+                            document.querySelector('.neg-price').innerHTML = data;
                         }
                     
                 }
