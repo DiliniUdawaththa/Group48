@@ -25,6 +25,7 @@ class Rides extends Model
         'vehicle',
 		'time',
 		'distance',
+		'ride_start',
         'fare',
         'state',
 		'passenger_cancel',

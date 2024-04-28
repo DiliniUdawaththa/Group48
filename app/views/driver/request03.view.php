@@ -62,6 +62,9 @@
                             
                                 <input type="submit" name="start-ride" value="Start Ride" class="start-ride">
                             </div>
+                            <div class="driver-canceled">
+                                <p>Driver canceled the Ride</p>
+                            </div>
                             
       
                         
@@ -110,6 +113,33 @@
         <!-- search -->
         <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
         <script>
+
+
+    setInterval(() =>{
+                console.log("Hi");
+                let xhr = new XMLHttpRequest();
+                console.log(xhr);
+                xhr.open("POST", '<?php echo ROOT; ?>'+"/driver/request03", true);
+                xhr.onload = ()=>{
+                    console.log("nol");
+                    if(xhr.readyState === XMLHttpRequest.DONE){
+                    
+                    if(xhr.status === 200){
+                        let data = xhr.response;
+                        console.log(data);
+                        if(data=="customer-cancel"){
+                            document.querySelector('.driver-canceled').style.display = "block";
+                            document.querySelector('.neg-btns').style.display = "none";
+                            setTimeout(() => {
+                                window.location.href = "<?php echo ROOT; ?>/driver/activity";
+                            }, 2000);
+                        }
+                }
+            }
+            }
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("incoming_id="+'yes');
+        }, 5000);
                 
             // map instalizion
             var map = L.map('map').setView([ 7.8774, 80.7003], 9);

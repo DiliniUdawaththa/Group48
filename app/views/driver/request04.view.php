@@ -65,7 +65,7 @@
                         </div>
                        
 
-                        <form>
+                        <form method="POST">
                             <center>
                             <input type="submit" name="end-ride" value="End Ride" class="end-ride">
                             </center>
