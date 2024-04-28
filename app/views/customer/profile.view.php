@@ -21,11 +21,11 @@
                 <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="" class="userimage">
                 <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
                 <h6>
+                <?php for($i=0; $i<$rating; $i++){ ?>
                   <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                  <?php } for($i=$rating; $i<5; $i++){?>
                   <i class="fa-solid fa-star" ></i>
-                  <i class="fa-solid fa-star" ></i>
+                  <?php }?>
                 </h6>
              </div>
              
@@ -58,7 +58,10 @@
                  <?php foreach ($rows as $row) : ?>
                     <?php if($row->id==$_SESSION['USER_DATA']->id) { ?>
                     <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="">
-                    <input type="file" name="image">
+                    <input type="file" name="image" id="fileInput" style="display:none;">
+                      <label for="fileInput" style="cursor: pointer; margin:30px">
+                          <center><span alt="Upload File" style="width: 50px; height: 50px; padding:5px; border:solid; border-radius:10px; "> Upload <i class="fa-solid fa-upload"></i> </span></center>
+                      </label>
                  </div>
                  
                  

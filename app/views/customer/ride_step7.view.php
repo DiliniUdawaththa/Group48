@@ -80,12 +80,10 @@
                      </div>
                   </div>
                   <div>
-                  <!-- <label for="fileInput" style="cursor: pointer;">
-                    <span style="display: inline-block; width: 50px; height: 50px; padding: 5px; border: solid; border-radius: 10px;"> 
-                        Upload <i class="fas fa-upload"></i> 
-                    </span> -->
-                    <input type="file"  name="file">
-                <!-- </label> -->
+                  <input type="file" id="fileInput" style="display: none;" name="file">
+                      <label for="fileInput" style="cursor: pointer;">
+                          <span alt="Upload File" style="width: 50px; height: 50px; padding:5px; border:solid; border-radius:10px;"> Upload <i class="fa-solid fa-upload"></i> </span>
+                      </label>
                   </div>
                   <div class="reporttext">
                      <textarea type="text" placeholder="any note" name="other" value='' > </textarea>

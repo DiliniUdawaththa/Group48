@@ -2,7 +2,7 @@
 <html>
 <head>
 <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
-<meta http-equiv="refresh" content="15" id="refreshMeta">
+<!-- <meta http-equiv="refresh" content="15" id="refreshMeta"> -->
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_step5.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css"> 
     <!-- google font   -->
@@ -37,12 +37,12 @@
         <div class="mainbox">
             <div class="contant" >
              <center>
-                    <h2>Driver on the way</h2> 
+                    <h2>Journey underway</h2> 
                     <h6>Estimate time </h6>    
                     <h5 id='time_limit'></h5>
                     <div class="driver_profile">
                         <img class="driver_image" src="<?= ROOT ?>/assets/img/customer/person.png" alt="">
-                        <img class="driver_vehicle" src="<?= ROOT ?>/assets/img/customer/c2.jpeg" alt="">
+                        <img class="driver_vehicle" src="<?= ROOT ?>/assets/img/customer/<?=$vehicle?>.jpeg" alt="">
                     </div>
             </center>
                

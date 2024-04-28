@@ -9,6 +9,7 @@ class rating extends Model
 
 	protected $allowedColumns = [
         'rate_id',
+        'ride_id',
         'role_id',
         'role',
         'rate',

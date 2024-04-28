@@ -23,10 +23,25 @@
         }
         $add_place = new Add_Place();
         $user = new User();
+        $rating = new Rating();
 
-        $img = array();
-        $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
-        $data['img'] = $img[0];
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
+        
+        // show($data);
+        // $data['rating'] = $img[0];
         // show($data);
 
         $rows = $add_place->findAll();
@@ -80,10 +95,27 @@
 
         }
         $user = new User();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
         $data['img'] = $img[0]->img_path;
+
         if(empty($_GET['location'])){
             redirect("customer/ride_step1");
         }
@@ -122,6 +154,22 @@
         $standardfare = new standardFare();
         $driver_status = new Driver_status();
         $arr =array();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
@@ -207,10 +255,26 @@
         }
         $rides = new Rides();
         $driver_staus= new Driver_status;
-        $message= new Message();
         $offers = new Offers();
         $user = new User();
         $current_ride = new Current_rides();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
+
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
@@ -226,16 +290,16 @@
             }
         }
         
-        $rows1 = $message->findAll();
-        $data['rows1'] = array();
+        // $rows1 = $message->findAll();
+        // $data['rows1'] = array();
        
-        if(isset($rows1[0])){
+        // if(isset($rows1[0])){
 
-            for($i = 0;$i < count($rows1); $i++)
-            {
-                    $data['rows1'][] = $rows1[$i];
-            }
-        }
+        //     for($i = 0;$i < count($rows1); $i++)
+        //     {
+        //             $data['rows1'][] = $rows1[$i];
+        //     }
+        // }
 
         $rows2 = $offers->findAll();
         $data['rows2'] = array();
@@ -270,17 +334,16 @@
         }
         if ($_SERVER["REQUEST_METHOD"]=="POST")
         {
+            // negotiate part
             if(isset($_POST['message_text']) && $_POST['message_text']!=="")
             {
                  $chat = array();
-                 $chat['sender']='Passenger';
-                 $chat['passenger_id']=$_SESSION['USER_DATA']->id;
-                 $chat['driver_id']=$_POST['Driver_id'];
-                 $chat['message']=$_POST['message_text'];
-                 $chat['ride_id'] = $_POST['ride_id'];
-                // show( $chat);
-                $message->insert($chat);
+                 $chat['negotiation_price']=$_POST['message_text'];
+                 $chat['negotiation_status'] = 1;
+                $offers->update_negotiate_fare($_POST['ride_id'],$_POST['Driver_id'],$chat);
             }
+
+            // go button click go next state
             if(isset($_POST['driver_id']))
             {
                 $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
@@ -294,22 +357,45 @@
                 $_POST['vehicle']=$_GET['vehicle'];
                 $_POST['time']=$_GET['time'];
                 $_POST['distance']=$_GET['distance'];
-                // $_POST['fare']=500;
                 $_POST['state']="Reject";
-               //  show($_POST['id']);
                if($_GET['m_lat']!=='' && $_GET['m_long']!==''){
                     $_POST['m_lat']=$_GET['m_lat'];
                     $_POST['m_long']=$_GET['m_long'];
                }
                 $rides->insert($_POST);
+
+                //
+                $accept_status= array();
+                $accept_status['accept_status']=1;
+                // show($accept_status);
+                $offers->update_accept_status($_POST['driver_id'],$accept_status);
                 if($_POST['id'] !== ''){
                    redirect('customer/ride_step5/location='.$_GET['location'].'&l_lat='.$_GET['l_lat'].'&l_long='.$_GET['l_long'].'&driver_id='.$_POST['driver_id'].'&id='.$_POST['id']);
                 }
             }
         }
-        // if ($_SERVER["REQUEST_METHOD"]=="SENT"){
-        //       show('hi');
-        // }
+       
+       //  back button click
+        if(isset($_POST['submit']))
+        {
+            $id =array();
+            $id = $current_ride->where(['passenger_id' => $_SESSION['USER_DATA']->id]);
+            $current_ride_id['id']=$id[0]->id;
+            $current_ride->delete($current_ride_id);
+            $time=$_GET['time'];
+            $distance=$_GET['distance'];
+            $location=$_GET['location'];
+            $l_lat=$_GET['l_lat'];
+            $l_long=$_GET['l_long'];
+            $destination=$_GET['destination'];
+            $d_lat=$_GET['d_lat'];
+            $d_long=$_GET['d_long'];
+            $m_lat=$_GET['m_lat'];
+            $m_long=$_GET['m_long'];
+            redirect('customer/ride_step3/.php?time='.$time.'&distance='.$distance.'&location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long.'&m_lat='.$m_lat.'&m_long='.$m_long);
+
+        }
+
         $data['title'] = "Ride";
         $this->view('customer/ride_step4',$data);
     }
@@ -323,10 +409,33 @@
         $driver_status= new Driver_status;
         $user = new User();
         $rides = new Rides();
+        $message= new Message();
+        $current_ride = new Current_rides();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
         $data['img'] = $img[0]->img_path;
+
+        $vehicle = array();
+        $vehicle = $rides->where(['id'=>$_GET['id']]);
+        $data['vehicle']=$vehicle[0]->vehicle;
+
 
         $rows = $driver_status->findAll();
         $data['rows'] = array();
@@ -350,6 +459,28 @@
                   }
             }
         }
+        if ($_SERVER["REQUEST_METHOD"]=="POST")
+        {
+            if(isset($_POST['message']))
+            {
+                $_POST['ride_id']=$_GET['id'];
+                $_POST['sender']='passenger';
+                $_POST['passenger_id']=$_SESSION['USER_DATA']->id;
+                $_POST['driver_id']=$_GET['driver_id'];
+                
+                $message->insert($_POST);
+            }
+            if(isset($_POST['passenger_cancel']))
+            {
+                $_POST['state']='cancel';
+                $rides->update($_GET['id'],$_POST);
+                $ride_id = array();
+                $ride_id['id']=$_GET['id'];
+                $current_ride->delete($ride_id);
+                redirect('customer/ride_step');
+            }
+            
+        }
 
         $rows3 = $rides->findAll(); 
         if(isset($rows3[0])){
@@ -357,10 +488,11 @@
             for($i = 0;$i < count($rows3); $i++)
             {
                     if($rows3[$i]->id == $_GET['id']  && $rows3[$i]->ride_start==1){
-                           redirect('customer/ride_step6/driver_id='.$_GET['driver_id'].'&id='.$_GET['id']);
+                           redirect('customer/ride_step6/.php?driver_id='.$_GET['driver_id'].'&id='.$_GET['id']);
                     }
             }
         }
+    
         // show($data);
         // redirect('customer/ride_step6/driver_id='.$_GET['driver_id']);
         $data['title'] = "Ride";
@@ -375,10 +507,31 @@
         }
         $rides = new Rides();
         $user = new User();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
+
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
         $data['img'] = $img[0]->img_path;
+
+        $vehicle = array();
+        $vehicle = $rides->where(['id'=>$_GET['id']]);
+        $data['vehicle']=$vehicle[0]->vehicle;
 
         $rows = $rides->findAll();
         $data['rows'] = array();
@@ -386,7 +539,10 @@
 
             for($i = 0;$i < count($rows); $i++)
             {
-                    $data['rows'][] = $rows[$i];
+                  $data['rows'][]=$rows[$i];
+                if($rows[$i]->id == $_GET['id']  && $rows[$i]->state=='Success'){
+                    redirect('customer/ride_step7/.php?driver_id='.$_GET['driver_id'].'&id='.$_GET['id']);
+                }
             }
         }
 
@@ -403,6 +559,22 @@
         $complaint = new Complaint();
         $rating = new Rating();
         $user = new User();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
+
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
@@ -447,12 +619,21 @@
                 }
 
                 // rating part insert data--------------------------------------------------
-                $sample1["role_id"]=3;
+                $sample1['ride_id']=$_GET['id'];
+                $sample1["role_id"]=$_GET['driver_id'];
                 $sample1['role']='Driver';
                 $sample1['rate']=$_POST['star'];
 
                 if($_POST['star']!=='0'){
-                    $rating->insert($sample1);
+                    if($rating->where(['ride_id' => $_GET['id'],'role' => 'Driver']))
+                    {
+                        $rate_id['ride_id']=$_GET['id'];
+                        $rate_id['role']='Driver';
+                          $rating->delete($rate_id);
+                        // show($sample1);
+                    }
+                     $rating->insert($sample1);
+                    // show($sample1);
                 }
                 redirect('customer/ride_step1');
 
@@ -471,6 +652,22 @@
         $data['errors'] = [];
         $add_place = new Add_Place();
         $user = new User();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
@@ -501,6 +698,22 @@
         $data['errors'] = [];
         $add_place = new Add_Place();
         $user = new User();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
@@ -526,6 +739,22 @@
         $data['errors'] = [];
         $add_place = new Add_Place();
         $user = new User();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
@@ -571,6 +800,22 @@
         // show($_POST);
         $add_place = new Add_Place();
         $user = new User();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
@@ -605,6 +850,22 @@
         $data['errors'] = [];
         $rides = new Rides();
         $user = new User();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
 		
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
@@ -639,6 +900,23 @@
                 redirect("login");
             }
             $user =new User();
+            $rating = new Rating();
+
+            $rate = array();
+            $sum =0;
+            $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+            for($i = 0;$i < count($rate); $i++)
+            {
+                $sum= $sum + $rate[$i]->rate;
+            }
+            if(count($rate) == 0)
+            {
+                $data['rating']=3;
+            }
+            else{
+                $data['rating']=round($sum/count($rate));
+            }
+
             $img = array();
             $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
             $data['img'] = $img[0]->img_path;
@@ -720,6 +998,7 @@
                             $arr['nic']=$_POST['nic'];
                             $arr['dob']=$_POST['dob'];
                             $user->update($_SESSION['USER_DATA']->id,$arr);
+                            redirect('customer/profile');
                             //  show($arr);
                             // show($_POST);
 
@@ -739,6 +1018,22 @@
             redirect("login");
         }
         $user = new User();
+        $rating = new Rating();
+
+        $rate = array();
+         $sum =0;
+        $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
+        for($i = 0;$i < count($rate); $i++)
+        {
+            $sum= $sum + $rate[$i]->rate;
+        }
+        if(count($rate) == 0)
+        {
+            $data['rating']=3;
+        }
+        else{
+            $data['rating']=round($sum/count($rate));
+        }
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
