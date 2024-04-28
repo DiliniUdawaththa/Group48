@@ -97,56 +97,63 @@
 
         </div>
 
+
+
         <script>
-        const logout_option = document.querySelector('.linkbutton2')
-        const logout_container = document.querySelector('.logout-container')
-        const cancel_button = document.querySelector('.cancel-btn')
-        const logout_button = document.querySelector('.logout-btn')
-        logout_option.addEventListener('click', () => {
-            logout_container.style.display = 'block'
-        })
+        document.addEventListener('DOMContentLoaded', function() {
+            const logout_option = document.querySelector('.linkbutton2');
+            const logout_container = document.querySelector('.logout-container');
+            const cancel_logout_button = document.querySelector('.cancel-btn');
+            const logout_button = document.querySelector('.logout-btn');
 
-        cancel_button.addEventListener('click', () => {
-            logout_container.style.display = 'none'
-        })
+            logout_option.addEventListener('click', () => {
+                logout_container.style.display = 'block';
+            });
 
-        logout_button.addEventListener('click', () => {
-            window.location.href = "<?=ROOT?>/logout";
-        })
+            cancel_logout_button.addEventListener('click', () => {
+                logout_container.style.display = 'none';
+            });
 
-        const accept_buttons = document.querySelectorAll('.accept_btn');
-        const reject_buttons = document.querySelectorAll('.reject_btn');
-        const accept_container = document.querySelector('.accept-container');
-        const reject_container = document.querySelector('.reject-container');
-        const cancel_accept_button = document.querySelector('.cancel-accept-btn');
-        const cancel_reject_button = document.querySelector('.cancel-reject-btn');
+            logout_button.addEventListener('click', () => {
+                window.location.href = "<?=ROOT?>/logout";
+            });
 
-        accept_buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                const cmt_id = button.getAttribute('data-cmt_id');
-                accept_container.style.display = 'block';
-                document.querySelector('.ok-btn').addEventListener('click', () => {
-                    window.location.href = "<?=ROOT?>/officer/renewAccept/" +
-                        encodeURIComponent(cmt_id);
+            const accept_buttons = document.querySelectorAll('.accept_btn');
+            const reject_buttons = document.querySelectorAll('.reject_btn');
+            const accept_container = document.querySelector('.accept-container');
+            const reject_container = document.querySelector('.reject-container');
+            const cancel_accept_button = document.querySelector('.cancel-accept-btn');
+            const cancel_reject_button = document.querySelector('.cancel-reject-btn');
+
+            accept_buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const cmt_id = button.getAttribute('data-cmt_id');
+                    accept_container.style.display = 'block';
+                    document.querySelector('.ok-btn').addEventListener('click', () => {
+                        window.location.href = "<?=ROOT?>/officer/investigate/" +
+                            encodeURIComponent(cmt_id);
+                    });
                 });
             });
-        });
-        cancel_accept_button.addEventListener('click', () => {
-            accept_container.style.display = 'none';
-        });
+            cancel_accept_button.addEventListener('click', () => {
+                accept_container.style.display = 'none';
+            });
 
-        reject_buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                const cmt_id = button.getAttribute('data-cmt_id');
-                reject_container.style.display = 'block';
-                document.querySelector('.reject-btn').addEventListener('click', () => {
-                    window.location.href = "<?=ROOT?>/officer/renewReject/" +
-                        encodeURIComponent(cmt_id);
+            reject_buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const cmt_id = button.getAttribute('data-cmt_id');
+                    reject_container.style.display = 'block';
+                    document.querySelector('.reject-btn').addEventListener('click', () => {
+                        window.location.href = "<?=ROOT?>/officer/reject/" +
+                            encodeURIComponent(cmt_id);
+                    });
                 });
             });
-        });
-        cancel_reject_button.addEventListener('click', () => {
-            reject_container.style.display = 'none';
+            cancel_reject_button.addEventListener('click', () => {
+                reject_container.style.display = 'none';
+            });
+
+
         });
         </script>
 
@@ -162,6 +169,7 @@
                         <tr>
                             <td>Complainant</td>
                             <td>Complaint</td>
+                            <td>Officer Comment</td>
                             <td>Status</td>
                             <td>Option</td>
                         </tr>
@@ -170,11 +178,15 @@
 
                     <tr class="data">
                         <td><?= $row->complainant ?></td>
+
                         <td><?= $row->complaint?></td>
+                        <td><?= $row->officerCmnt?></td>
                         <td><?php if ($row->status_check == 0) {
                             echo 'Pending';
                         } elseif ($row->status_check == 1) {
                             echo 'Investigated';
+                            } elseif ($row->status_check == 2) {
+                                echo 'Rejected';
                             } ?></td>
                         <td class="td_button1">
                             <a href="<?=ROOT?>/officer/complainView/<?= urlencode($row->cmt_id) ?>"><button
@@ -194,7 +206,6 @@
 
 
                         </td>
-                        <td></td>
                     </tr>
                     <?php endforeach; ?>
 
@@ -204,23 +215,22 @@
 
 
         </div>
-        <div class="accept-container">
-            <h2>Investigate Complaint</h2>
-            <p class="accept-text">Are you sure you investigate this complaint?</p>
-            <div class="btn"><button class="cancel-accept-btn">NO</button> <button class="ok-btn">YES</button>
-            </div>
-        </div>
-
-        <div class="reject-container">
-            <h2>Reject Complaint</h2>
-            <p class="reject-text">Are you sure you want to reject this Complaint?</p>
-            <div class="btn"><button class="cancel-reject-btn">NO</button> <button class="reject-btn">YES</button>
-            </div>
-        </div>
 
 
     </div>
+    <div class="accept-container">
+        <h2>Investigate Complaint</h2>
+        <p class="accept-text">Are you sure you investigate this complaint?</p>
+        <div class="btn"><button class="cancel-accept-btn">NO</button> <button class="ok-btn">YES</button>
+        </div>
+    </div>
 
+    <div class="reject-container">
+        <h2>Reject Complaint</h2>
+        <p class="reject-text">Are you sure you want to reject this Complaint?</p>
+        <div class="btn"><button class="cancel-reject-btn">NO</button> <button class="reject-btn">YES</button>
+        </div>
+    </div>
 
 
 

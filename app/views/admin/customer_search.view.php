@@ -42,6 +42,7 @@
                 <a href="<?=ROOT?>/admin/driver" class="link"><div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div></a>
                 <a href="<?=ROOT?>/admin/officer" class="link"><div class="linkbutton"><i class="fa-solid fa-user-tie"></i>Officer</div></a>
                 <a href="<?=ROOT?>/admin/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-taxi"></i>Rides</div></a>
+                <a href="<?=ROOT?>/admin/report" class="link"><div class="linkbutton"><i class="fa-solid fa-list"></i>Reports</div></a>
                 <a href="#" class="link"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>Logout</div></a>
             </div>
 
@@ -74,20 +75,20 @@
                     <table>
                         <thead>
                             <tr>
+                                <td>Customer ID</td>
                                 <td>Name</td>
                                 <td>Email</td>
                                 <td>Mobile</td>
-                                <td>More</td>
+                                <td>Rides Count</td>
                             </tr>
                         </thead>
                         <?php foreach ($rows as $row) : ?>
                             <tr class="data">
+                                <td class="td_name"><?= $row->id; ?></td>
                                 <td class="td_name"><?= $row->name; ?></td>
                                 <td class="td_email"><?= $row->email; ?></td>
                                 <td class="td_mobile"><?= $row->phone; ?></td>
-                                <td class="td_button">
-                                    <a href="<?=ROOT?>/admin/customer/"><button class="detail_btn"><i class="fa-solid fa-circle-info" style="color: black;"></i></button></a>
-                                </td>
+                                <td class="td_rides"><?= $add_customer1->countRideByCustomer($row->id); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </table>
