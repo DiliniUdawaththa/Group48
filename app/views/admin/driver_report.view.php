@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class='report'>
-                <form action="<?=ROOT?>/report/driverReport/" method="post">
+                <form action="<?=ROOT?>/report/driverReport/" method="post" onsubmit="return validateForm()">
                     <label for="selectField"><h4>Select Report Type</h4></label>
                     <select id="selectField" name="selectField" onchange="toggleFields()" required>
                         <option value="">Select...</option>
@@ -73,7 +73,8 @@
 
                     <div id="field1" style="display: none;">
                         <label for="field1Input">Driver ID</label>
-                        <input type="number" id="field1Input" name="field1Input">
+                        <input type="number" id="field1Input" name="field1Input"><br>
+                        <small id="field1Error" style="color: red;"></small>
                     </div>
 
                     <input type="submit" value="Submit">
@@ -115,6 +116,21 @@
             } else {
             field1.style.display = "none";
             }
+        }
+        function validateForm() {
+            var selectField = document.getElementById("selectField");
+            var field1Input = document.getElementById("field1Input");
+            var field1Error = document.getElementById("field1Error");
+
+            // Reset previous error messages
+            field1Error.innerHTML = "";
+
+            if (selectField.value === "option2" && !field1Input.value) { 
+                field1Error.innerHTML = "Please enter a Driver ID"; 
+                return false; 
+            }
+
+            return true;
         }
     </script>
 
