@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>More Details of Driver</title>
+    <title>More Details of Customer</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Admin/RideMore.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/fontawesome-free-6.4.0-web/css/all.min.css">
     <style>
@@ -39,7 +39,7 @@
 
             </div>
             <div class='content'>
-                <h4>Driver ID: <?php echo isset($row->id) ? $row->id : 'N/A'; ?></h4>
+                <h4>Customer ID: <?php echo isset($row->id) ? $row->id : 'N/A'; ?></h4>
                 <h4>Contact Number: <?php echo isset($row->phone) ? $row->phone : 'N/A'; ?></h4>
                 <h4>Email: <?php echo isset($row->email) ? $row->email : 'N/A'; ?></h4>
                 <h4>Address: <?php echo isset($row->address) ? $row->adress : 'N/A'; ?></h4>
@@ -61,13 +61,13 @@
     const ok_button = document.querySelector('.ok-btn')
 
     ok_button.addEventListener('click', () => {
-        window.location.href = "<?=ROOT?>/officer/driver";
+        window.location.href = "<?=ROOT?>/officer/customer";
     })
 
     const complaint_button = document.querySelector('.complaint-btn')
 
     complaint_button.addEventListener('click', () => {
-        window.location.href = "<?=ROOT?>/officer/driver_complain/<?= urlencode($row->id) ?>";
+        window.location.href = "<?=ROOT?>/officer/customer_complain/<?= urlencode($row->id) ?>";
     })
     </script>
 </body>

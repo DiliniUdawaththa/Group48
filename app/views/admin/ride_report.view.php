@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class='report'>
-                <form action="<?=ROOT?>/report/rideReportForm/" method="post">
+                <form action="<?=ROOT?>/report/rideReportForm/" method="post" onsubmit="return validateForm()">
                     <label for="selectField"><h4>Select Report type:</h4></label>
                     <select id="selectField" name="selectField" onchange="toggleFields()" required>
                         <option value="">Select...</option>
@@ -73,17 +73,20 @@
 
                     <div id="field1" style="display: none;">
                         <label for="field1Input">Select Date</label>
-                        <input type="date" id="field1Input" name="field1Input">
+                        <input type="date" id="field1Input" name="field1Input"><br>
+                        <small id="field1Error" style="color: red;"></small>
                     </div>
 
                     <div id="field2" style="display: none;">
                         <label for="field2Input">Start Date</label>
-                        <input type="date" id="field2Input" name="field2Input">
+                        <input type="date" id="field2Input" name="field2Input"><br>
+                        <small id="field2Error" style="color: red;"></small>
                     </div>
 
                     <div id="field3" style="display: none;">
                         <label for="field3Input">End Date</label>
-                        <input type="date" id="field3Input" name="field3Input">
+                        <input type="date" id="field3Input" name="field3Input"><br>
+                        <small id="field3Error" style="color: red;"></small>
                     </div>
 
                     <input type="submit" value="Submit">
@@ -133,6 +136,63 @@
             field3.style.display = "none";
             }
         }
+
+        function validateForm() {
+            var selectField = document.getElementById("selectField");
+            var field1Input = document.getElementById("field1Input");
+            var field2Input = document.getElementById("field2Input");
+            var field3Input = document.getElementById("field3Input");
+            var field1Error = document.getElementById("field1Error");
+            var field2Error = document.getElementById("field2Error");
+            var field3Error = document.getElementById("field3Error");
+            var currentDate = new Date();
+            var isValid = true;
+
+            // Reset previous error messages
+            field1Error.innerHTML = "";
+            field2Error.innerHTML = "";
+            field3Error.innerHTML = "";
+
+            if (selectField.value === "option1") {
+                if (!field1Input.value) {
+                    field1Error.innerHTML = "Please select a date";
+                    isValid = false;
+                } else {
+                    var selectedDate = new Date(field1Input.value);
+                    if (selectedDate > currentDate) {
+                        field1Error.innerHTML = "Selected date cannot be greater than current date";
+                        isValid = false;
+                    }
+                }
+            } else if (selectField.value === "option2") {
+                if (!field2Input.value) {
+                    field2Error.innerHTML = "Please select a start date";
+                    isValid = false;
+                }
+                if (!field3Input.value) {
+                    field3Error.innerHTML = "Please select an end date";
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    var startDate = new Date(field2Input.value);
+                    var endDate = new Date(field3Input.value);
+
+                    if (startDate > currentDate || endDate > currentDate) {
+                        field2Error.innerHTML = "Date cannot be greater than current date";
+                        isValid = false;
+                    }
+
+                    if (startDate > endDate) {
+                        field3Error.innerHTML = "End date cannot be earlier than start date";
+                        isValid = false;
+                    }
+                }
+            }
+
+            return isValid;
+        }
+
     </script>
 
 </body>

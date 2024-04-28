@@ -64,11 +64,11 @@ body{
     font-size: 20px;
 }
 .linkbutton {
-    padding: 15px 10px;
+    padding: 17px 10px;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
 }
 .linkbutton2 {
-    padding: 15px 10px;
+    padding: 17px 10px;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
 }
 .linkbutton1{
@@ -166,7 +166,7 @@ body{
     /* display: flex; */
     align-items: center;
     /* justify-content: space-between; */
-    background: #111827;
+    background: #fff;
     padding: 5px 15px 5px 15px;
     /* border-left: 4px;
     border-right: 4px;
@@ -179,7 +179,7 @@ body{
     /* justify-content: flex-start; */
     align-items: center;
     padding: 10px 14px;
-    color: #fff;
+    color: #111827;
 }
 .report {
     background-color: #ffffff;
@@ -189,6 +189,11 @@ body{
     margin-left: 10px;
     margin-right: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .report form {
@@ -212,12 +217,15 @@ body{
     width: 100%;
     max-width: 300px;
     box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
 }
 
 .report input[type="submit"] {
     background-color: #1f3648;
     color: #ffffff;
     cursor: pointer;
+    font-size: 18px;
 }
 
 .report input[type="submit"]:hover {
@@ -229,4 +237,38 @@ body{
     outline: none;
     border-color: #1f3648;
     box-shadow: 0 0 5px rgba(31, 54, 72, 0.5);
+}
+
+.report input[type="number"] {
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    align-items: center;
+}
+
+.report input[type="number"]:focus {
+    outline: none;
+    border-color: #1f3648; 
+    box-shadow: 0 0 5px rgba(31, 54, 72, 0.5); 
+}
+
+.report h4 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #1f3648;
+}
+
+.report .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px; 
+    position: absolute;
+    bottom: -20px; 
+    left: 0;
 }
