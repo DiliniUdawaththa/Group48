@@ -18,33 +18,9 @@
             margin: 0;
             padding: 0;
         }
-        #map{
-            width: 50%;
-            height: 90vh;
-        }
         
-        .loader {
-        border: 5px solid #000;
-        border-radius: 50%;
-        border-top: 5px solid white;
-        width: 30px;
-        height: 30px;
-        -webkit-animation: spin 2s linear infinite; /* Safari */
-        animation: spin 2s linear infinite;
-        margin-top: 20px;
-        }
-
-        /* Safari */
-        @-webkit-keyframes spin {
-        0% { -webkit-transform: rotate(0deg); }
-        100% { -webkit-transform: rotate(360deg); }
-        }
-
-        @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-        }
-
+        
+      
     </style>
 </head>
 <body id="body">
@@ -96,7 +72,7 @@
                          
                       <?php endforeach; ?>
                       <div class="loader"></div>
-                      <b>Searching </b>
+                      <b class="b">Searching </b>
 
                       <form action="" method="POST">
                            <input type="text" value='0' name='driver_id' id='Driver_Id'>
@@ -113,7 +89,7 @@
                  
                     <div class="message_input"  style="z-index:500; background-color:white;">
                         <div style="padding:10px 30px">Enter your Negotiate fare</div>
-                      <input name="message_text" id="message_text" value="" placeholder="Enter your fare..." style="margin:5px 20%; height:25px; font-size:1.2em">
+                      <input name="message_text" id="message_text" value="" placeholder="Enter your fare...">
                       <input type="text"  name='Driver_id' id='driverId' style="display:none;">
                       <input type="text"  name='ride_id' id='rideid' style="display:none;">
                       <button>Send</button>
@@ -126,7 +102,21 @@
             <div id="map" > </div>
         </div>
     </div>       
+    <div class="toggleicon" id="toggleSidebar" onclick="side_open()">
+             <i class="fa-solid fa-bars"></i>
+      </div>
+      <script>
+        function side_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.querySelector('.activity').style.opacity= '0.5';
+        }
+
+        function side_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.querySelector('.activity').style.opacity= '1';
+        }
         
+      </script> 
 </body>
 </html>
 <script>

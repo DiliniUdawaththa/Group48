@@ -21,10 +21,7 @@
             margin: 0;
             padding: 0;
         }
-        #map{
-            width: 50%;
-            height: 90vh;
-        }
+      
     </style>
 </head>
 <body id="body">
@@ -97,7 +94,22 @@
             </div>
             <div id="map" > </div>
         </div>
-    </div>       
+    </div>   
+    <div class="toggleicon" id="toggleSidebar" onclick="side_open()">
+             <i class="fa-solid fa-bars"></i>
+      </div>
+      <script>
+        function side_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.querySelector('.activity').style.opacity= '0.5';
+        }
+
+        function side_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.querySelector('.activity').style.opacity= '1';
+        }
+        
+      </script>    
     <script>
     function openWhatsApp() {
         

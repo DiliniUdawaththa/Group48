@@ -37,7 +37,7 @@
             </div>
              <div >
                 <img id="driver_photo" src="<?= ROOT ?>/assets/img/person.jpg" alt="">
-                <h3>Mr.S.Makesh</h3>
+                <h3>Mr.<?=$driver_name?></h3>
                 <div class="staricon">
                   <i class="fa-solid fa-star" id="star1"></i>
                   <i class="fa-solid fa-star" id="star2"></i>
@@ -82,7 +82,7 @@
                   <div>
                   <input type="file" id="fileInput" style="display: none;" name="file">
                       <label for="fileInput" style="cursor: pointer;">
-                          <span alt="Upload File" style="width: 50px; height: 50px; padding:5px; border:solid; border-radius:10px;"> Upload <i class="fa-solid fa-upload"></i> </span>
+                          <span alt="Upload File" class="upload"> Upload <i class="fa-solid fa-upload"></i> </span>
                       </label>
                   </div>
                   <div class="reporttext">

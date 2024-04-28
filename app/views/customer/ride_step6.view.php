@@ -21,10 +21,10 @@
             margin: 0;
             padding: 0;
         }
-        #map{
+        /* #map{
             width: 50%;
             height: 90vh;
-        }
+        } */
     </style>
 </head>
 <body id="body">

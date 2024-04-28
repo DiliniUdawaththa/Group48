@@ -25,21 +25,18 @@
         $user = new User();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
-        }
-        
+                
         // show($data);
         // $data['rating'] = $img[0];
         // show($data);
@@ -97,19 +94,16 @@
         $user = new User();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
         $img = array();
@@ -156,19 +150,16 @@
         $arr =array();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
         $img = array();
@@ -260,19 +251,16 @@
         $current_ride = new Current_rides();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
 
@@ -413,19 +401,16 @@
         $current_ride = new Current_rides();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
         $img = array();
@@ -509,19 +494,16 @@
         $user = new User();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
 
@@ -560,25 +542,26 @@
         $rating = new Rating();
         $user = new User();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
         $data['img'] = $img[0]->img_path;
+
+        $img = array();
+        $driver_name = $user->where(['id'=>$_GET['driver_id']]);
+        $data['driver_name'] = $driver_name[0]->name;
 
         $sample = array();   // sample is complaint data store array
         $sample1= array();   // sample1 is rating data story array
@@ -654,19 +637,16 @@
         $user = new User();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
         $img = array();
@@ -700,19 +680,16 @@
         $user = new User();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
         $img = array();
@@ -741,19 +718,16 @@
         $user = new User();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
         $img = array();
@@ -802,19 +776,16 @@
         $user = new User();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
         $img = array();
@@ -852,19 +823,16 @@
         $user = new User();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 		
         $img = array();
@@ -902,19 +870,16 @@
             $user =new User();
             $rating = new Rating();
 
-            $rate = array();
-            $sum =0;
             $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-            for($i = 0;$i < count($rate); $i++)
-            {
-                $sum= $sum + $rate[$i]->rate;
-            }
-            if(count($rate) == 0)
-            {
-                $data['rating']=3;
-            }
-            else{
-                $data['rating']=round($sum/count($rate));
+           $sum = 0;
+
+            if (is_array($rate) && count($rate) > 0) {
+                foreach ($rate as $r) {
+                    $sum += $r->rate;
+                }
+                $data['rating'] = round($sum / count($rate));
+            } else {
+                $data['rating'] = 3;
             }
 
             $img = array();
@@ -1020,19 +985,16 @@
         $user = new User();
         $rating = new Rating();
 
-        $rate = array();
-         $sum =0;
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
-        for($i = 0;$i < count($rate); $i++)
-        {
-            $sum= $sum + $rate[$i]->rate;
-        }
-        if(count($rate) == 0)
-        {
-            $data['rating']=3;
-        }
-        else{
-            $data['rating']=round($sum/count($rate));
+        $sum = 0;
+
+        if (is_array($rate) && count($rate) > 0) {
+            foreach ($rate as $r) {
+                $sum += $r->rate;
+            }
+            $data['rating'] = round($sum / count($rate));
+        } else {
+            $data['rating'] = 3;
         }
 
         $img = array();
