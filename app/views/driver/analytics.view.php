@@ -21,7 +21,7 @@
     </head>
     <body>
         
-        <?php include 'driver_side.php'; ?>
+    <?php include 'driver_side.php'; ?>
 
 
 
@@ -31,23 +31,51 @@
                     <div class="today-analytics">
                         <div class="t-topic"><h3>Today's Performance</h3> </div>
                         <div class="t-body">
-                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/coin.png" class="performance-img"> <p class="p-stat">LKR 2,000</p></div>
-                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/clock.png" class="performance-img"><p class="p-stat">126 Mins</p></div>
-                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/bar-chart.png" class="performance-img"> <p class="p-stat">13  Rides</p></div>       
+                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/coin.png" class="performance-img"> <p class="p-stat">LKR <?php echo $data['total_earned'] ?></p></div>
+                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/clock.png" class="performance-img"><p class="p-stat"><?php echo $data['total_distance'] ?> km</p></div>
+                            <div class="t-content"><img src="<?= ROOT ?>/assets/img/images/bar-chart.png" class="performance-img"> <p class="p-stat"><?php echo $data['total_rides'] ?>  Rides</p></div>       
 
 
                         </div>
 
                     </div>
+                    <div class="ride-history">
+                        <div class="t-topic"><h3>Ride History</h3> </div>
+                        <table>
+                            <tr>
+                                <th>Passenger</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Destination</th>
+                                <th>Distance</th>
+                                <th>Time</th>
+                                <th>Earned fare</th>
+                            </tr>
+                        <?php if($data['total_rides']>0): ?>
+                            <?php foreach ($data['current_rides'] as $rides) : ?>
+                                <tr>
+                                <td> <?php echo $rides -> date; ?></td>
+                                <td> <?php echo $rides -> date; ?></td>
+                                <td> <?php echo $rides -> location; ?></td>
+                                <td> <?php echo $rides -> destination; ?></td>
+                                <td> <?php echo $rides -> distance; ?></td>
+                                <td> <?php echo $rides -> time; ?></td>
+                                <td> <?php echo $rides -> fare; ?></td>
+                                </tr>
+
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        </table>
+                        <?php if($data['total_rides']=0): ?>
+                            <p class="no-rides" style="margin:10px">No rides to display</p>
+                            <?php endif; ?>
+
+                        
+                    </div>
                     <div class="charts-container">
                         <div class="chart">
                             <h3 style="text-align: center;">Daily Rides</h3>
                             <div id="chart1">
-                            </div>
-                        </div>
-
-                        <div class="chart">
-                            <div id="chart2">
                             </div>
                         </div>
 
@@ -72,8 +100,6 @@
                 var chart = new ApexCharts(document.querySelector("#chart1"), options);
                 chart.render();
 
-                var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
-                chart2.render();
 
                 </script>
                 
