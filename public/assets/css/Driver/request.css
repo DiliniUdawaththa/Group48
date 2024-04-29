@@ -16,6 +16,18 @@
     border-radius:  50px 0px 0  50px;
     background-color: white;
 }
+@media screen and (max-width: 700px){
+    .req-body{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        height: 89vh;
+        width: 90%;
+    }
+
+    .req-content{
+        background-image: linear-gradient(to bottom, azure,rgb(186, 255, 254));
+    }
+}
 
 .req-content{
     display: flex;
@@ -62,6 +74,34 @@
     margin-top: 10px;
     font-size: 16px;
     width: 100%;
+}
+
+.std-fare-txt{
+    font-size:13px;
+    margin-top:2px;
+    margin-left:10px;
+}
+@media screen and (max-width: 700px){
+    .req-loc-des{
+        margin-top: 5px;
+    }
+    .req-cus-pic{
+        max-height:70px;
+        max-width: 70px;
+        border-radius: 100%;
+        
+    }
+
+    #std-fare{
+        height: 20px;
+        width: 20px;
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+
+    .std-fare-txt{
+        font-size: 20px;
+    }
 }
 
 .offer-btn{
@@ -205,6 +245,37 @@
     border:0px;
     border-radius: 5px;
     cursor:pointer;
+}
+
+.call-option{
+    position:absolute;
+    right:20px;
+    bottom: 20px;
+    z-index: 999;
+    background-color: white;
+    height:30px;
+    width: 30px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    border-radius: 100%;
+    cursor: pointer;
+    font-size: 15px;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+}
+
+.call-option:hover{
+    font-size:20px;
+    height:35px;
+    width: 35px;
+}
+
+@media screen and (max-width: 700px){
+    .call-option{
+        height:50px;
+        width: 50px;
+        font-size: 25px;
+    }
 }
 
 .cancel-s-ride{
