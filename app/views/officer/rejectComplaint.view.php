@@ -7,7 +7,7 @@
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Officer.css">
-
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/renewDRegistration.css">
     <style>
     .error {
         border: 1px solid red;
@@ -27,28 +27,31 @@
         background-color: #a7cfbc;
     }
 
-    .detail_btn {
-        background-color: rgb(82, 41, 194);
-        color: #fff;
-        padding: 10px 20px;
+    .con-button {
+        width: 80%;
+        background-color: #000000;
+        color: white;
         border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 10px;
-    }
-
-    .delete_btn {
-        background-color: red;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 10px;
-    }
-
-    .dltbutton {
+        border-radius: 10px;
+        height: 50px;
+        font-size: 20px;
+        margin: auto;
         display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .none-dec {
+        text-decoration: none;
+    }
+
+
+    .box1 {
+        width: 80%;
+        margin: auto;
+        text-align: center;
+        position: relative;
+        top: 50px;
     }
     </style>
 </head>
@@ -70,17 +73,16 @@
                     <div class="linkbutton"><i class="fa-solid fa-gauge"></i>Dashboard</div>
                 </a>
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-id-card"></i></i>Driver Registration</div>
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration</div>
                 </a>
-
                 <a href="<?=ROOT?>/officer/driver" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/customer" class="link">
-                    <div class="linkbutton1"><i class="fa-solid fa-users"></i>Customers</div>
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
-                    <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
+                    <div class="linkbutton1"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
                 </a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div>
@@ -100,27 +102,9 @@
 
         </div>
 
+
+
         <script>
-        const logout_option = document.querySelector('.linkbutton2')
-        const logout_container = document.querySelector('.logout-container')
-        const cancel_button = document.querySelector('.cancel-btn')
-        const logout_button = document.querySelector('.logout-btn')
-        logout_option.addEventListener('click', () => {
-            logout_container.style.display = 'block'
-        })
-
-        cancel_button.addEventListener('click', () => {
-            logout_container.style.display = 'none'
-        })
-
-        logout_button.addEventListener('click', () => {
-            window.location.href = "<?=ROOT?>/logout";
-        })
-
-        const table = document.querySelector('.table1')
-        const search = document.querySelector('.srch')
-
-
         document.addEventListener('DOMContentLoaded', function() {
             const logout_option = document.querySelector('.linkbutton2');
             const logout_container = document.querySelector('.logout-container');
@@ -139,34 +123,34 @@
                 window.location.href = "<?=ROOT?>/logout";
             });
 
-            const suspend_buttons = document.querySelectorAll('.suspend_btn');
-            //const reject_buttons = document.querySelectorAll('.reject_btn');
-            const suspend_container = document.querySelector('.suspend-container');
-            //const reject_container = document.querySelector('.reject-container');
-            const cancel_suspend_button = document.querySelector('.cancel-suspend-btn');
-            //const cancel_reject_button = document.querySelector('.cancel-reject-btn');
+            const accept_buttons = document.querySelectorAll('.accept_btn');
+            const reject_buttons = document.querySelectorAll('.reject_btn');
+            const accept_container = document.querySelector('.accept-container');
+            const reject_container = document.querySelector('.reject-container');
+            const cancel_accept_button = document.querySelector('.cancel-accept-btn');
+            const cancel_reject_button = document.querySelector('.cancel-reject-btn');
 
-            suspend_buttons.forEach(button => {
+            accept_buttons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const email = button.getAttribute('data-email');
-                    suspend_container.style.display = 'block';
+                    const cmt_id = button.getAttribute('data-cmt_id');
+                    accept_container.style.display = 'block';
                     document.querySelector('.ok-btn').addEventListener('click', () => {
-                        window.location.href = "<?=ROOT?>/officer/suspendCustomer/" +
-                            encodeURIComponent(email);
+                        window.location.href = "<?=ROOT?>/officer/investigate/" +
+                            encodeURIComponent(cmt_id);
                     });
                 });
             });
-            cancel_suspend_button.addEventListener('click', () => {
-                suspend_container.style.display = 'none';
+            cancel_accept_button.addEventListener('click', () => {
+                accept_container.style.display = 'none';
             });
 
-            /*reject_buttons.forEach(button => {
+            reject_buttons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const email = button.getAttribute('data-email');
+                    const cmt_id = button.getAttribute('data-cmt_id');
                     reject_container.style.display = 'block';
                     document.querySelector('.reject-btn').addEventListener('click', () => {
-                        window.location.href = "<?=ROOT?>/officer/renewReject/" +
-                            encodeURIComponent(email);
+                        window.location.href = "<?=ROOT?>/officer/reject/" +
+                            encodeURIComponent(cmt_id);
                     });
                 });
             });
@@ -174,75 +158,107 @@
                 reject_container.style.display = 'none';
             });
 
-            document.querySelectorAll('.slip-btn').forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent default link behavior
+            var Rejected = <?php echo $rejected; ?>;
+            var pending = <?php echo $pending; ?>;
+            var investigated = <?php echo $Investigated; ?>;
+            var total = <?php echo $total; ?>;
 
-                    // Get the href attribute of the clicked link
-                    const href = this.parentElement.getAttribute('href');
 
-                    // Open the PDF file in a new tab/window
-                    window.open(href, '_blank');
-                });
-            });*/
+            var options = {
+                series: [rejected, investigated, pending],
+                chart: {
+                    type: 'donut',
+                },
+                labels: ['Rejected', 'Investigated', 'Pending'],
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 50
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+
+
         });
         </script>
 
         <div class="interface">
             <div class="navi">
                 <div class="navi1">
-                    <h2>CUSTOMERS</h2>
-                </div>
-                <div class="search">
-                    <form action="<?= ROOT ?>/officer/searchCustomer" method="GET">
-                        <input type="text" name="search" placeholder="Search for customer">
-                        <input type="submit" value="Search" class="srch">
-                    </form>
+                    <h2>REJECTED COMPLAINTS</h2>
                 </div>
             </div>
-
             <div class="table1">
                 <table>
                     <thead>
                         <tr>
-                            <td>Name</td>
-                            <td>Email</td>
-                            <td>Mobile</td>
-                            <td>More</td>
-
-
-
+                            <td>Complainant</td>
+                            <td>Complaint</td>
+                            <td>Officer Action</td>
+                            <td>Option</td>
                         </tr>
                     </thead>
                     <?php foreach ($rows as $row) : ?>
+
                     <tr class="data">
-                        <td class="td_name"><?= $row->name; ?></td>
-                        <td class="td_email"><?= $row->email; ?></td>
-                        <td class="td_mobile"><?= $row->phone; ?></td>
+                        <td><?= $row->complainant ?></td>
+
+                        <td><?= $row->complaint?></td>
+                        <td><?= $row->officerCmnt?></td>
                         <td class="td_button1">
-                            <a href="<?=ROOT?>/officer/customer_view/<?= urlencode($row->id) ?>"><button
+                            <a href="<?=ROOT?>/officer/complainView/<?= urlencode($row->cmt_id) ?>"><button
                                     class="detail_btn1">
-                                    <!--<i
-                                        class="fa-solid fa-circle-info" style="color: black;"></i>-->
-                                    DETAIL
+                                    DETAILS
                                 </button></a>
-                            <button class="suspend_btn" data-email="<?= $row->email ?>">SUSPEND</button>
+                            <a href="<?=ROOT?>/officer/add_comment/<?=$row->cmt_id?>"><button class="detail_btn1">
+                                    <!--<i
+                    class="fa-solid fa-circle-info" style="color: black;">--></i>
+                                    COMMENT
+                                </button></a>
+
+                            <!--<button class="accept_btn" data-cmt_id="<?= $row->cmt_id ?>">INVESTIGATED</button>
+                            <button class="reject_btn" data-cmt_id="<?= $row->cmt_id ?>">REJECT</button>-->
+
+
                         </td>
                     </tr>
                     <?php endforeach; ?>
+
                 </table>
-
             </div>
 
-            <div class="suspend-container">
-                <h2>Susped a Driver</h2>
-                <p class="accept-text">Are you sure you want to suspend this customer?</p>
-                <div class="btn"><button class="cancel-suspend-btn">Cancel</button> <button
-                        class="ok-btn">Suspend</button></div>
-            </div>
 
 
         </div>
+
+
+        <!-- </div>
+    <div class="accept-container">
+        <h2>Investigate Complaint</h2>
+        <p class="accept-text">Are you sure you investigate this complaint?</p>
+        <div class="btn"><button class="cancel-accept-btn">NO</button> <button class="ok-btn">YES</button>
+        </div>
+    </div>
+
+    <div class="reject-container">
+        <h2>Reject Complaint</h2>
+        <p class="reject-text">Are you sure you want to reject this Complaint?</p>
+        <div class="btn"><button class="cancel-reject-btn">NO</button> <button class="reject-btn">YES</button>
+        </div>
+
+
+    </div> -->
+
+
+
 </body>
 
 </html>

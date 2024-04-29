@@ -75,6 +75,9 @@
                 <a href="<?=ROOT?>/officer/driver" class="link">
                     <div class="linkbutton1"><i class="fa-solid fa-users"></i>Drivers</div>
                 </a>
+                <a href="<?=ROOT?>/officer/customer" class="link">
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
+                </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
                     <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
                 </a>
@@ -216,7 +219,8 @@
                         <td class="td_email"><?= $row->email; ?></td>
                         <td class="td_mobile"><?= $row->phone; ?></td>
                         <td class="td_button1">
-                            <a href="<?=ROOT?>/officer/driver_view/<?= urlencode($row->id) ?>"><button class="detail_btn1">
+                            <a href="<?=ROOT?>/officer/driver_view/<?= urlencode($row->id) ?>"><button
+                                    class="detail_btn1">
                                     <!--<i
                                         class="fa-solid fa-circle-info" style="color: black;"></i>-->
                                     DETAIL

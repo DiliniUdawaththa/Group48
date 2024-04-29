@@ -48,5 +48,5 @@ function message($msg ='',$erase = false)
 
 function esc($str)
 {
-	return n12br(htmlspecialchars($str));
+	return (htmlspecialchars($str));
 }
