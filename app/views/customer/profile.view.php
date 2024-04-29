@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/Profile.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css">
@@ -47,7 +47,42 @@
            
              
         </div>
+         <!-- //------------------------------------------mobile bar----------------------------------- -->
+      <div class="open-sidebar open-bar-block open-border-right" style="display:none" id="mySidebar">
+            <button onclick="side_close()" class="sidebar_close_button"><i class="fa-solid fa-circle-left fa-fade"></i></button>
+               <div class="barimagetag">
+                <img src="<?= ROOT ?>/assets/img/logonamenw.png" alt=" " class="barimage">
+             </div>
 
+
+             <div class="profile">
+                <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="" class="userimage">
+                <H3 class="username"><?php echo $_SESSION['USER_DATA']->role; ?> - <?=Auth::getname();?></H3>
+                <h6>
+                <?php for($i=0; $i<$rating; $i++){ ?>
+                  <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                  <?php } for($i=$rating; $i<5; $i++){?>
+                  <i class="fa-solid fa-star" ></i>
+                  <?php }?>
+                </h6>
+             </div>
+             
+
+             <div class="linktag">
+                <a href="<?= ROOT ?>/customer/ride" class="link2"><div class="linkbutton"><i class="fa-solid fa-car-tunnel"></i>Ride</div></a>
+                <a href="<?= ROOT ?>/customer/add_place" class="link2"><div class="linkbutton"><i class="fa-solid fa-map-location-dot"></i>Add Place</div></a>
+                <a href="<?= ROOT ?>/customer/activity" class="link2"><div class="linkbutton"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
+                <a href="<?=ROOT?>/customer/profile" class="link"><div class="linkbutton1"><i class="fa-solid fa-user"></i>Profile</div></a>
+                <a href="<?= ROOT ?>/customer/help" class="link2"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
+                <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
+             </div>
+      
+             <div class="logout-container">
+              <h2>Log Out</h2>
+              <p class="logout-text">Are you sure you want to log out?</p>
+              <div class="cancel-logout"><button class="cancel-btn">Cancel</button> <button class="logout-btn">Log Out</button></div>
+             </div>
+          </div>
         <!-- //-------------------------------------------------------------------------------------------------------------------- -->
         <div class="container">
            <div class="h1"><center><h1>Profile</h1></center></div>
@@ -60,7 +95,7 @@
                     <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="">
                     <input type="file" name="image" id="fileInput" style="display:none;">
                       <label for="fileInput" style="cursor: pointer; margin:30px">
-                          <center><span alt="Upload File" style="width: 50px; height: 50px; padding:5px; border:solid; border-radius:10px; "> Upload <i class="fa-solid fa-upload"></i> </span></center>
+                          <center><span alt="Upload File" class="upload_file"style=" "> Upload <i class="fa-solid fa-upload"></i> </span></center>
                       </label>
                  </div>
                  
@@ -71,7 +106,7 @@
                     <label for="">E-Mail Address</label><br>
                     <input type="text" name="email" value="<?=$row->email;?>" readonly><br>
                     <label for="">Mobile Number</label><br>
-                    <input type="text" name="phone" value="<?=$row->phone;?>" readonly><br>
+                    <input type="text" name="phone" value="<?=$row->phone;?>"   ><br>
                     <label for="" >Address</label><br>
                     <input type="text" value="<?=$row->address;?>" name="address"><br>
                     <label for="">NIC No</label><br>
@@ -87,6 +122,22 @@
         </div>
 
 </div>
+<div class="toggleicon" id="toggleSidebar" onclick="side_open()">
+             <i class="fa-solid fa-bars"></i>
+        </div>
+        <script>
+          function side_open() {
+          document.getElementById("mySidebar").style.display = "block";
+          document.querySelector('.container').style.opacity= '0.5';
+          }
+
+          function side_close() {
+          document.getElementById("mySidebar").style.display = "none";
+          document.querySelector('.container').style.opacity= '1';
+          }
+
+         
+        </script>
 </body>
 </html>
 <script>

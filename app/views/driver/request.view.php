@@ -27,14 +27,14 @@
     </head>
     <body>
         
-    
+    <?php include 'driver_side.php'; ?>
 
 
 
         <div class="page-container">
             <div class="body-container">
 
-            <?php include 'driver_side.php'; ?>
+            
 
                 <div class="req-body">
                     <div class="req-content">
@@ -61,7 +61,7 @@
                             <div class="offer-div">
                                 <p class="enter-offer-txt">Enter your offer:</p>
                                 <input type="number" id='offer-price' name="offer_price">
-                                <p style="font-size:13px;margin-top:2px;margin-left:10px;"><input type="checkbox" id="std-fare">Standard fare</p>
+                                <p class="std-fare-txt " ><input type="checkbox" id="std-fare">Standard fare</p>
                             </div>
                             <input type="submit" name="offer" class="req-offer-btn" value="Offer">
         
@@ -93,7 +93,7 @@
                 </div>
             </div>
        </div>
-            !-- leaflet js code -->
+            <!-- leaflet js code  -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <!-- routing js file -->
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
@@ -111,10 +111,17 @@
             googleStreets.addTo(map)
 
             var Routing;
-            var lat=6.901963
-            var long=80.861292
-            var lat1=6.901963
-            var lon1=79.861292
+            <?php if (isset($data['ride_info']->l_lat) && isset($data['ride_info']->l_long) && isset($data['ride_info']->d_lat) && isset($data['ride_info']->d_lat)): ?>
+                var lat=parseFloat("<?php echo $data['ride_info']->l_lat?>")
+                var long=parseFloat("<?php echo $data['ride_info']->l_long?>")
+                var lat1=parseFloat("<?php echo $data['ride_info']->d_lat?>")
+                var lon1=parseFloat("<?php echo $data['ride_info']->d_long?>")
+            <?php else: ?> 
+                var lat=6.87848
+                var long=79.8581
+                var lat1=6.87313
+                var lon1=79.868 
+            <?php endif; ?>  
             Routing = L.Routing.control({
                 waypoints: [
                     L.latLng(lat,long),
@@ -166,6 +173,7 @@
             })
             
             more.addEventListener('click', function (){
+                console.log("works")
                 if(sidenav == 1){
                     navigation.style.display = 'none';
                     sidenav = 0

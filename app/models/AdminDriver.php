@@ -3,6 +3,23 @@
 class AdminDriver extends Model{
     protected $table = "users";
 
+    protected $allowedColumns = [
+
+		'empID',
+		'name',
+		'phone',
+		'email',
+		'password',
+		// 'term1',
+		// 'term2',	
+		'role',
+		'date',
+        'img_path',
+        'address',
+        'nic',
+        'dob',
+	];
+
     public function whereLike($data, $searchTerm)
     {
         $keys = array_keys($data);
@@ -51,6 +68,35 @@ class AdminDriver extends Model{
         }
     
         return $expiringDriverCount;
+    }
+
+    public function validateRenew($data){
+        $this->errors = [];
+
+        $this->name = $data['name'];
+        $this->email = $data['email'];
+
+        if (!preg_match("/^[a-zA-Z\s]+$/", trim($data['name']))) {
+            $this->errors['name'] = "Name can only have letters.";
+       }
+
+       if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        $this->errors['email'] = "Email is not valid.";
+        } elseif (!$this->where(['email' => $data['email'], 'role' => 'driver'])) {
+            // Assuming 'role' is a column that specifies the role of the user
+            $this->errors['email'] = "Email is not in the system or not belongs to a driver.";
+        }
+
+        if ($_FILES['pdf_file']['name'] !== 'slip.pdf') {
+            $this->errors['pdf_file'] = "Payment slip must be named as 'slip.pdf'.";
+        }
+    
+        if(empty($this->errors)) {
+            return true;
+        }
+
+        return false;
+
     }
     
 

@@ -27,6 +27,13 @@ class Vehicle extends Model
 		if($this->where(['licenseplate'=>$data['licenseplate']]))
 		{
 			$this->errors['licenseplate'] = "That vehicle already exists";
+		}elseif(strlen(str_replace(' ', '', $data['licenseplate'])) != 6){
+			$this->errors['licenseplate'] = "Invalid License plate";
+		}
+
+		if(empty($data['type']))
+		{
+			$this->errors['type']= "Type is required";
 		}
 		
 

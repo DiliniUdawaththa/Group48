@@ -281,10 +281,10 @@ class officer extends Controller{
                 // $_POST['Fid'] =$add_standardFare->$Fid;
                 // $_POST['faretype'] =$add_standardFare->$faretype;
                 // $_POST['vehicletype'] =$add_standardFare->vehicletype;
-                 $_POST['fare'] =$add_standardFare->fare;
-                 $_POST['updatedby'] =$add_standardFare->updatedby;
-                 $_POST['date'] = $add_standardFare->date;
-                 $_POST['date'] = date("Y-m-d H:i:s");*/
+                //  $_POST['fare'] =$add_standardFare->fare;
+                //  $_POST['updatedby'] =$add_standardFare->updatedby;
+                //  $_POST['date'] = $add_standardFare->date;
+                 $_POST['date'] = date("Y-m-d H:i:s");
                 $add_standardFare->insert($_POST);
 				redirect('officer/standardFare');
             }
@@ -1293,8 +1293,10 @@ class officer extends Controller{
         $renew_driver = new renewRegistration($GLOBALS['pdo']);
 
         $email = $email;
+
         $renew_driver->updateStatus($email);
         $renew_driver->updateRegDate($email);
+        $renew_driver->updateDate($email);
         $renew_driver->confirmEmail($email);
 
         redirect('officer/renewRegistration');

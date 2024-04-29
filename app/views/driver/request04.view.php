@@ -65,7 +65,7 @@
                         </div>
                        
 
-                        <form>
+                        <form method="POST">
                             <center>
                             <input type="submit" name="end-ride" value="End Ride" class="end-ride">
                             </center>
@@ -114,10 +114,17 @@
             googleStreets.addTo(map)
 
             var Routing;
-            var lat=6.901963
-            var long=80.861292
-            var lat1=6.901963
-            var lon1=79.861292
+            <?php if (isset($data['ride_info']->l_lat) && isset($data['ride_info']->l_long) && isset($data['ride_info']->d_lat) && isset($data['ride_info']->d_lat)): ?>
+                var lat=parseFloat("<?php echo $data['ride_info']->l_lat?>")
+                var long=parseFloat("<?php echo $data['ride_info']->l_long?>")
+                var lat1=parseFloat("<?php echo $data['ride_info']->d_lat?>")
+                var lon1=parseFloat("<?php echo $data['ride_info']->d_long?>")
+            <?php else: ?> 
+                var lat=6.87848
+                var long=79.8581
+                var lat1=6.87313
+                var lon1=79.868 
+            <?php endif; ?>  
             Routing = L.Routing.control({
                 waypoints: [
                     L.latLng(lat,long),
@@ -133,14 +140,7 @@
             const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
             popupElement.classList.add('leaflet-routing-container-hide');
         
-            const standard_fare = document.getElementById('std-fare')
-            standard_fare.addEventListener('click', function() {
-                if (standard_fare.checked) {
-                    console.log("Hi")
-                    document.getElementById('offer-price').value = 600
-                } else {
-                }
-            });
+
                 
 
             var status = 1
@@ -180,22 +180,7 @@
 
             })
 
-            active_btn.addEventListener('click',function (){
-                status = 1
-                status_icon.src = '<?= ROOT ?>/assets/img/images/active.png';
-                active_btn.style.backgroundColor = '#162938'
-                active_btn.style.color = 'white'
-                inactive_btn.style.backgroundColor = '#E4E4E4'
-                inactive_btn.style.color = 'black'
-            })
-            inactive_btn.addEventListener('click',function (){
-                status = 0
-                status_icon.src = '<?= ROOT ?>/assets/img/images/inactive.png';
-                active_btn.style.backgroundColor = '#E4E4E4'
-                active_btn.style.color = 'black'
-                inactive_btn.style.backgroundColor = '#162938'
-                inactive_btn.style.color = 'white'
-            })
+
 
             
             function map_view(){
@@ -214,13 +199,6 @@
                 document.querySelector('.add-vehicle').style.display = 'flex'
             }
 
-            document.querySelector('.update-veh').addEventListener('click', function(){
-                document.querySelector('.update-veh1').style.display = 'block'
-            })
-
-            document.querySelector('.cancel-veh-btn').addEventListener('click', function(){
-                document.querySelector('.update-veh1').style.display = 'none'
-            })
 
 
         </script>

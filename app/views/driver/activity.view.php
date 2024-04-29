@@ -58,35 +58,45 @@
                     </div>
 
                     <div class="request-container">
-                        <h2>Request for ride</h2>
-                        <?php foreach ($data['current_rides'] as $rides) : ?>
-                                <div class="request-box">
-                                    <div>
-                                        <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="request-customer-pic">
-                                        <img src="<?= ROOT ?>/assets/img/images/rating.png" style="height: 10px;display: block;">
-                                    </div>
-                                    <div class="destination">
-                                        <p style="display: block;margin: 5px;">From: <?php echo $rides -> location; ?></p>
-                                        <p style="display: block;margin: 5px;">To: <?php echo $rides -> destination; ?></p>
-                                    </div>
-                                    <div style="width: 100px;"> 
-                                        <?php if($data['vehicles']==0):?>
-                                            <p style="color:brown">Add your vehicle first to send offers!</p>
-                                        <?php endif;?>
-                                        <?php if($data['vehicles']>0):?>
-                                            <button onclick="map_view()" class="map-view-btn">Map View</button>
-                                            <button class="accept-btn" id="proceed_<?=$rides->id?>" onclick="delete_line('proceed_<?=$rides->id?>')">Proceed</button> 
-                                        <?php endif;?>
-                                    </div>
-                                </div>
-                        <?php endforeach; ?>
-                        <?php if(count($data['current_rides'])==0):?>
-                            <h2>No rides</h2>
-                        <? else: ?>
-                            
+                        <h2 class="request-topic">Request for ride</h2>
+                        <?php if($data['suspended_status']==0):?>
 
-                            <h2></h2>
-                        <?php endif;?>
+                            <?php if($data['status']==1):?>
+                                
+                            <?php foreach ($data['current_rides'] as $rides) : ?>
+                                    <div class="request-box">
+                                        <div>
+                                            <img src="<?= ROOT ?>/assets/img/customer/profile/person.jpg" class="request-customer-pic">
+                                            <img src="<?= ROOT ?>/assets/img/images/rating.png" style="height: 10px;display: block;">
+                                        </div>
+                                        <div class="destination">
+                                            <p style="display: block;margin: 5px;">From: <?php echo $rides -> location; ?></p>
+                                            <p style="display: block;margin: 5px;">To: <?php echo $rides -> destination; ?></p>
+                                        </div>
+                                        <div style="width: 100px;"> 
+                                            <?php if($data['vehicles']==0):?>
+                                                <p style="color:brown">Add your vehicle first to send offers!</p>
+                                            <?php endif;?>
+                                            <?php if($data['vehicles']>0):?>
+                                                
+                                                <button class="accept-btn" id="proceed_<?=$rides->id?>" onclick="delete_line('proceed_<?=$rides->id?>')">Proceed</button> 
+                                            <?php endif;?>
+                                        </div>
+                                    </div>
+                            <?php endforeach; ?>
+                            <?php if(count($data['current_rides'])==0):?>
+                                <p class="ride-box-text">No rides</p>
+                            <?php endif; ?>
+                            <?php else: ?>
+                                <p class="ride-box-text">Your are currently <b>Inactive</b></p>
+                            <?php endif;?>
+
+                        <?php else: ?>
+                            <p class="ride-box-text">Your are currently <b>Suspended!</b></p>
+                        <?php endif; ?>
+
+
+                        
                         
                         
                         <div class="map-route">
@@ -124,7 +134,7 @@
           
 
      var lat = 0;
-    var long=0;
+     var long=0;
             if(!navigator.geolocation){
                         console.log("Error")
                     }else{

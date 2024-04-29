@@ -783,7 +783,7 @@ class Report extends Controller{
                     $expiredCount = $driver->expiredDriverCount();
                     $activeCount = $total_driver_count - $expiredCount;
 
-                    if (!empty($rows)) {
+                    // if (!empty($rows)) {
                         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
                         $pdf->SetCreator('Admin');
@@ -794,126 +794,127 @@ class Report extends Controller{
 
                         $pdf->AddPage();
 
-                        $pdf->SetTextColor(255, 0, 0);
-                        $pdf->SetFont('times', 'B', 18);
-                        $pdf->Cell(0, 10, 'FAREFLEX TAXI BOOKING SYSTEM', 0, 1, 'C');
-                        $pdf->Ln(5);
+                        // $pdf->SetTextColor(255, 0, 0);
+                        // $pdf->SetFont('times', 'B', 18);
+                        // $pdf->Cell(0, 10, 'FAREFLEX TAXI BOOKING SYSTEM', 0, 1, 'C');
+                        // $pdf->Ln(5);
 
-                        $w = array(45, 45, 45,45);
-                        // Header
-                        $header = array('Driver ID','Name', 'Email', 'Phone');
-                        $header1 = array(date('Y') - 1, date('Y'), 'Growth(%)');
-                        $header2 = array('Total', 'Active', 'Expired');
+                        // $w = array(45, 45, 45,45);
+                        // // Header
+                        // $header = array('Driver ID','Name', 'Email', 'Phone');
+                        // $header1 = array(date('Y') - 1, date('Y'), 'Growth(%)');
+                        // $header2 = array('Total', 'Active', 'Expired');
 
-                        $pdf->SetTextColor(0, 0, 0);
-                        $pdf->SetFont('times', 'B', 14);
-                        $pdf->Cell(0, 10, 'Driver Count Summary', 0, 1, 'C');
-                        $pdf->Ln(5);
+                        // $pdf->SetTextColor(0, 0, 0);
+                        // $pdf->SetFont('times', 'B', 14);
+                        // $pdf->Cell(0, 10, 'Driver Count Summary', 0, 1, 'C');
+                        // $pdf->Ln(5);
 
-                        $pdf->SetX(40);
-                        $pdf->SetFont('helvetica', '', 10);
-                        $pdf->SetFillColor(220, 220, 220);
-                        $pdf->SetTextColor(0);
-                        $pdf->SetDrawColor(255, 255, 255);
-                        $pdf->SetLineWidth(0.3);
-                        $pdf->SetFont('', 'B');
-                        $pdf->SetFillColor(240, 240, 240);
-                        $pdf->SetTextColor(0);
-                        $pdf->Cell($w[0], 10, $header2[0], 1, 0, 'C', 1);
-                        $pdf->Cell($w[1], 10, $header2[1], 1, 0, 'C', 1);
-                        $pdf->Cell($w[2], 10, $header2[2], 1, 1, 'C', 1);
-                        $pdf->SetFont('');
-                        $pdf->SetFillColor(255);
-                        $pdf->SetTextColor(0);
-                        $pdf->SetFont('');
-                        $fill = false;
-                        $pdf->SetX(40);
-                        $pdf->Cell($w[0], 10, $total_driver_count, 'LR', 0, 'C', $fill);
-                        $pdf->Cell($w[1], 10, $activeCount, 'LR', 0, 'C', $fill);
-                        $pdf->Cell($w[2], 10, $expiredCount, 'LR', 0, 'C', $fill);
-                        $pdf->Ln(15);
+                        // $pdf->SetX(40);
+                        // $pdf->SetFont('helvetica', '', 10);
+                        // $pdf->SetFillColor(220, 220, 220);
+                        // $pdf->SetTextColor(0);
+                        // $pdf->SetDrawColor(255, 255, 255);
+                        // $pdf->SetLineWidth(0.3);
+                        // $pdf->SetFont('', 'B');
+                        // $pdf->SetFillColor(240, 240, 240);
+                        // $pdf->SetTextColor(0);
+                        // $pdf->Cell($w[0], 10, $header2[0], 1, 0, 'C', 1);
+                        // $pdf->Cell($w[1], 10, $header2[1], 1, 0, 'C', 1);
+                        // $pdf->Cell($w[2], 10, $header2[2], 1, 1, 'C', 1);
+                        // $pdf->SetFont('');
+                        // $pdf->SetFillColor(255);
+                        // $pdf->SetTextColor(0);
+                        // $pdf->SetFont('');
+                        // $fill = false;
+                        // $pdf->SetX(40);
+                        // $pdf->Cell($w[0], 10, $total_driver_count, 'LR', 0, 'C', $fill);
+                        // $pdf->Cell($w[1], 10, $activeCount, 'LR', 0, 'C', $fill);
+                        // $pdf->Cell($w[2], 10, $expiredCount, 'LR', 0, 'C', $fill);
+                        // $pdf->Ln(15);
 
-                        $pdf->SetTextColor(0, 0, 0);
-                        $pdf->SetFont('times', 'B', 14);
-                        $pdf->Cell(0, 10, 'Driver count by year', 0, 1, 'C');
-                        $pdf->Ln(5);
+                        // $pdf->SetTextColor(0, 0, 0);
+                        // $pdf->SetFont('times', 'B', 14);
+                        // $pdf->Cell(0, 10, 'Driver count by year', 0, 1, 'C');
+                        // $pdf->Ln(5);
 
-                        $pdf->SetX(40);
-                        $pdf->SetFont('helvetica', '', 10);
-                        $pdf->SetFillColor(220, 220, 220);
-                        $pdf->SetTextColor(0);
-                        $pdf->SetDrawColor(255, 255, 255);
-                        $pdf->SetLineWidth(0.3);
-                        $pdf->SetFont('', 'B');
-                        $pdf->SetFillColor(240, 240, 240);
-                        $pdf->SetTextColor(0);
-                        $pdf->Cell($w[0], 10, $header1[0], 1, 0, 'C', 1);
-                        $pdf->Cell($w[1], 10, $header1[1], 1, 0, 'C', 1);
-                        $pdf->Cell($w[2], 10, $header1[2], 1, 1, 'C', 1);
-                        $pdf->SetFont('');
-                        $pdf->SetFillColor(255);
-                        $pdf->SetTextColor(0);
-                        $pdf->SetFont('');
-                        $fill = false;
-                        $pdf->SetX(40);
-                        $pdf->Cell($w[0], 10, $userCounts[date('Y') - 1], 'LR', 0, 'C', $fill);
-                        $pdf->Cell($w[1], 10, $userCounts[date('Y')], 'LR', 0, 'C', $fill);
-                        $pdf->Cell($w[2], 10, $growth, 'LR', 0, 'C', $fill);
-                        $pdf->Ln(15);
+                        // $pdf->SetX(40);
+                        // $pdf->SetFont('helvetica', '', 10);
+                        // $pdf->SetFillColor(220, 220, 220);
+                        // $pdf->SetTextColor(0);
+                        // $pdf->SetDrawColor(255, 255, 255);
+                        // $pdf->SetLineWidth(0.3);
+                        // $pdf->SetFont('', 'B');
+                        // $pdf->SetFillColor(240, 240, 240);
+                        // $pdf->SetTextColor(0);
+                        // $pdf->Cell($w[0], 10, $header1[0], 1, 0, 'C', 1);
+                        // $pdf->Cell($w[1], 10, $header1[1], 1, 0, 'C', 1);
+                        // $pdf->Cell($w[2], 10, $header1[2], 1, 1, 'C', 1);
+                        // $pdf->SetFont('');
+                        // $pdf->SetFillColor(255);
+                        // $pdf->SetTextColor(0);
+                        // $pdf->SetFont('');
+                        // $fill = false;
+                        // $pdf->SetX(40);
+                        // $pdf->Cell($w[0], 10, $userCounts[date('Y') - 1], 'LR', 0, 'C', $fill);
+                        // $pdf->Cell($w[1], 10, $userCounts[date('Y')], 'LR', 0, 'C', $fill);
+                        // $pdf->Cell($w[2], 10, $growth, 'LR', 0, 'C', $fill);
+                        // $pdf->Ln(15);
 
-                        $pdf->SetTextColor(0, 0, 0);
-                        $pdf->SetFont('times', 'B', 14);
-                        $pdf->Cell(0, 10, 'Drivers registered within this year', 0, 1, 'C');
-                        $pdf->Ln(5);
+                        // $pdf->SetTextColor(0, 0, 0);
+                        // $pdf->SetFont('times', 'B', 14);
+                        // $pdf->Cell(0, 10, 'Drivers registered within this year', 0, 1, 'C');
+                        // $pdf->Ln(5);
 
                         // Output table
-                        $pdf->SetX(15);
-                        $pdf->SetFont('helvetica', '', 10);
-                        $pdf->SetFillColor(220, 220, 220);
-                        $pdf->SetTextColor(0);
-                        $pdf->SetDrawColor(255, 255, 255);
-                        $pdf->SetLineWidth(0.3);
-                        $pdf->SetFont('', 'B');
-                        $pdf->SetFillColor(240, 240, 240);
-                        $pdf->SetTextColor(0);
-                        $pdf->Cell($w[0], 10, $header[0], 1, 0, 'C', 1);
-                        $pdf->Cell($w[1], 10, $header[1], 1, 0, 'C', 1);
-                        $pdf->Cell($w[2], 10, $header[2], 1, 0, 'C', 1);
-                        $pdf->Cell($w[3], 10, $header[3], 1, 1, 'C', 1);
-                        $pdf->SetFont('');
-                        $pdf->SetFillColor(255);
-                        $pdf->SetTextColor(0);
-                        $pdf->SetFont('');
-                        $fill = false;
-                        $pdf->SetX(15);
-                        foreach ($rows as $row) {
-                            $fill = !$fill;
-                            $pdf->SetX(15);
-                            $pdf->Cell($w[0], 10, $row['id'], 'LR', 0, 'C', $fill);
-                            $pdf->Cell($w[1], 10, $row['name'], 'LR', 0, 'C', $fill);
-                            $pdf->Cell($w[2], 10, $row['email'], 'LR', 0, 'C', $fill);
-                            $pdf->Cell($w[3], 10, $row['phone'], 'LR', 1, 'C', $fill);
-                            $fill = !$fill;
-                        }
-                        $pdf->Cell(array_sum($w), 0, '', 'T');
+                        // $pdf->SetX(15);
+                        // $pdf->SetFont('helvetica', '', 10);
+                        // $pdf->SetFillColor(220, 220, 220);
+                        // $pdf->SetTextColor(0);
+                        // $pdf->SetDrawColor(255, 255, 255);
+                        // $pdf->SetLineWidth(0.3);
+                        // $pdf->SetFont('', 'B');
+                        // $pdf->SetFillColor(240, 240, 240);
+                        // $pdf->SetTextColor(0);
+                        // $pdf->Cell($w[0], 10, $header[0], 1, 0, 'C', 1);
+                        // $pdf->Cell($w[1], 10, $header[1], 1, 0, 'C', 1);
+                        // $pdf->Cell($w[2], 10, $header[2], 1, 0, 'C', 1);
+                        // $pdf->Cell($w[3], 10, $header[3], 1, 1, 'C', 1);
+                        // $pdf->SetFont('');
+                        // $pdf->SetFillColor(255);
+                        // $pdf->SetTextColor(0);
+                        // $pdf->SetFont('');
+                        // $fill = false;
+                        // $pdf->SetX(15);
+                        // foreach ($rows as $row) {
+                        //     $fill = !$fill;
+                        //     $pdf->SetX(15);
+                        //     $pdf->Cell($w[0], 10, $row['id'], 'LR', 0, 'C', $fill);
+                        //     $pdf->Cell($w[1], 10, $row['name'], 'LR', 0, 'C', $fill);
+                        //     $pdf->Cell($w[2], 10, $row['email'], 'LR', 0, 'C', $fill);
+                        //     $pdf->Cell($w[3], 10, $row['phone'], 'LR', 1, 'C', $fill);
+                        //     $fill = !$fill;
+                        // }
+                        // $pdf->Cell(array_sum($w), 0, '', 'T');
                         
-                        $pdf->Ln(30);
+                        // $pdf->Ln(30);
 
-                        $footerLineY = $pdf->getPageHeight() - 20;
+                        // $footerLineY = $pdf->getPageHeight() - 20;
 
                         // Set the footer content and position
                         $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
                         $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
                         // $pdf->setFooterData('', 0, $footerNote);
 
-                        // Set the footer line
-                        $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
+                        // // Set the footer line
+                        // $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
                         
                         $pdf->Output('driver_report.pdf', 'I');
 
-                    }else{
-                        echo "Error: No customers found for the selected year.";
-                    }
+                    // }
+                    // else{
+                    //     echo "Error: No customers found for the selected year.";
+                    // }
                 }else if ($reportType === "option2"){
                     if (isset($_POST["field1Input"]) && !empty($_POST["field1Input"])){
                         $custID = $_POST["field1Input"];
@@ -1197,6 +1198,4 @@ class Report extends Controller{
         
     }
 }
-
-
 ?>
