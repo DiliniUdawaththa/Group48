@@ -62,8 +62,9 @@ class AdminDashboard extends Model{
     public function countDriversByMonth() {
         $currentYear = date('Y');
         $query = "SELECT COUNT(*) as driver_count, MONTH(date) as month 
-                  FROM driverregistration
-                  WHERE YEAR(date) = :year
+                  FROM users
+                  WHERE role = 'driver' 
+                  AND YEAR(date) = :year
                   GROUP BY MONTH(date)";
         
         $params = [':year' => $currentYear];

@@ -103,7 +103,7 @@
             </div>
             <div class = "chart_phase">
                 <div class="chart_des">
-                    <h3>Annual Registration</h3>
+                    <h3>Annual System Login</h3>
                 </div>
                 <div id="chart1" style="height: 80%; width:100%;">
                     <!-- <h2>Weekly rides</h2> -->
