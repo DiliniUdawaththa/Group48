@@ -62,13 +62,13 @@
                     <h2>RIDES</h2>
                 </div>
                 <div class="search">
-                <form action="<?=ROOT?>/admin/searchRide" method="GET">
+                <form action="<?=ROOT?>/admin/searchRide" method="GET" onsubmit="return validateForm()">
                     <!-- <select name="searchBy">
                         <option value="date">Date</option>
                         <option value="driver_id">Driver ID</option>
                         <option value="passenger_id">Customer ID</option>
                     </select> -->
-                    <input type="date" name="search" placeholder="Search rides by date" class="input-val">
+                    <input type="date" id="search" name="search" placeholder="Search rides by date" class="input-val">
                     <input type="submit" value="Search" class="srch">
                 </form>
                 </div>
@@ -136,6 +136,18 @@
             //     }
             // });
         });
+
+        function validateForm() {
+            var inputDate = document.getElementById("search");
+            var currentDate = new Date(); 
+            var date = new Date(inputDate.value);
+
+            if (date > currentDate) {
+                alert("Please select a date greater than or equal to the current date.");
+                return false; 
+            }
+            return true;
+        }
 
     </script>
 </body>

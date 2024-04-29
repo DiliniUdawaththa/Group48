@@ -92,7 +92,6 @@ class Database
 		$this->query($query);
 
 		$query = "
-		DROP TABLE IF EXISTS `vehicle`;
 		CREATE TABLE `vehicle` (
 			`licenseplate` varchar(100) NOT NULL,
 			`owner` int(20) NOT NULL,
