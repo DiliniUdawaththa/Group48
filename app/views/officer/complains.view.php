@@ -75,13 +75,18 @@
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration</div>
                 </a>
+                <a href="<?=ROOT?>/officer/driver" class="link">
+                    <div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div>
+                </a>
+                <a href="<?=ROOT?>/officer/customer" class="link">
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
+                </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
                     <div class="linkbutton1"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
                 </a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div>
                 </a>
-                <!--<a href="<?=ROOT?>/admin/ride" class="link"><div class="linkbutton"><i class="fa-solid fa-taxi"></i>Rides</div></a>-->
                 <a href="#" class="link">
                     <div class="linkbutton2"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>Logout</div>
                 </a>
@@ -162,6 +167,10 @@
                 <div class="navi1">
                     <h2>COMPLAINTS</h2>
                 </div>
+                <div class="operation">
+                    <a href="<?=ROOT?>/officer/rejectComplaint/"><button type="button" class="button-style1"
+                            id="plus">Suspenders</button></a>
+                </div>
             </div>
             <div class="table1">
                 <table>
@@ -199,6 +208,12 @@
                                     <!--<i
                                         class="fa-solid fa-circle-info" style="color: black;">--></i>
                                     COMMENT
+                                </button></a>
+                            <a href="<?=ROOT?>/Report/complaintReport/<?= urlencode($row->cmt_id) ?>"><button
+                                    class="detail_btn1">
+                                    <!--<i
+                                        class="fa-solid fa-circle-info" style="color: black;">--></i>
+                                    REPORT
                                 </button></a>
 
                             <button class="accept_btn" data-cmt_id="<?= $row->cmt_id ?>">INVESTIGATED</button>

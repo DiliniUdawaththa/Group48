@@ -72,7 +72,10 @@
                     <div class="linkbutton"><i class="fa-solid fa-id-card"></i></i>Driver Registration</div>
                 </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
-                    <div class="linkbutton1"><i class="fa-solid fa-users"></i>Drivers</div>
+                    <div class="linkbutton1"><i class="fa-solid fa-user-group"></i>Drivers</div>
+                </a>
+                <a href="<?=ROOT?>/officer/customer" class="link">
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
                     <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
