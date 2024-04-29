@@ -19,7 +19,7 @@ class Driverregistration extends Model
 		'vehregistrationimg',
 		'vehinsuranceimg',
 		'status',
-		'id',
+		
 	];
 
 	public function findTop5() {

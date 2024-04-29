@@ -159,7 +159,7 @@
                             <div>
                                 <label for="date" class="label">Updated Date</label><br>
                             </div>
-                            <input value="<?= set_value('date') ?>" type="text" name="date"
+                            <input value="<?= set_value('date') ?>" type="date" name="date"
                                 class="<?=!empty($errors['date']) ? 'error':'';?>" required>
                             <?php if(!empty($errors['date'])):?>
                             <?php endif;?><br>

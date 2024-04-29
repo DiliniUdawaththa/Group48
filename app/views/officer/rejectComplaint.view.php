@@ -158,6 +158,34 @@
                 reject_container.style.display = 'none';
             });
 
+            var Rejected = <?php echo $rejected; ?>;
+            var pending = <?php echo $pending; ?>;
+            var investigated = <?php echo $Investigated; ?>;
+            var total = <?php echo $total; ?>;
+
+
+            var options = {
+                series: [rejected, investigated, pending],
+                chart: {
+                    type: 'donut',
+                },
+                labels: ['Rejected', 'Investigated', 'Pending'],
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 50
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+
 
         });
         </script>
@@ -165,7 +193,7 @@
         <div class="interface">
             <div class="navi">
                 <div class="navi1">
-                    <h2>COMPLAINTS ANALYSE</h2>
+                    <h2>REJECTED COMPLAINTS</h2>
                 </div>
             </div>
             <div class="table1">
@@ -174,32 +202,35 @@
                         <tr>
                             <td>Complainant</td>
                             <td>Complaint</td>
-                            <td>Officer Comment</td>
-                            <td>Status</td>
+                            <td>Officer Action</td>
                             <td>Option</td>
                         </tr>
                     </thead>
+                    <?php foreach ($rows as $row) : ?>
 
-                    <td class="td_button1">
-                        <a href="<?=ROOT?>/officer/complainView/<?= urlencode($row->cmt_id) ?>"><button
-                                class="detail_btn1">
-                                <!--<i
-                                        class="fa-solid fa-circle-info" style="color: black;">--></i>
-                                DETAILS
-                            </button></a>
-                        <a href="<?=ROOT?>/officer/add_comment/<?=$row->cmt_id?>"><button class="detail_btn1">
-                                <!--<i
-                                        class="fa-solid fa-circle-info" style="color: black;">--></i>
-                                COMMENT
-                            </button></a>
+                    <tr class="data">
+                        <td><?= $row->complainant ?></td>
 
-                        <button class="accept_btn" data-cmt_id="<?= $row->cmt_id ?>">INVESTIGATED</button>
-                        <button class="reject_btn" data-cmt_id="<?= $row->cmt_id ?>">REJECT</button>
+                        <td><?= $row->complaint?></td>
+                        <td><?= $row->officerCmnt?></td>
+                        <td class="td_button1">
+                            <a href="<?=ROOT?>/officer/complainView/<?= urlencode($row->cmt_id) ?>"><button
+                                    class="detail_btn1">
+                                    DETAILS
+                                </button></a>
+                            <a href="<?=ROOT?>/officer/add_comment/<?=$row->cmt_id?>"><button class="detail_btn1">
+                                    <!--<i
+                    class="fa-solid fa-circle-info" style="color: black;">--></i>
+                                    COMMENT
+                                </button></a>
+
+                            <!--<button class="accept_btn" data-cmt_id="<?= $row->cmt_id ?>">INVESTIGATED</button>
+                            <button class="reject_btn" data-cmt_id="<?= $row->cmt_id ?>">REJECT</button>-->
 
 
-                    </td>
+                        </td>
                     </tr>
-
+                    <?php endforeach; ?>
 
                 </table>
             </div>
@@ -209,7 +240,7 @@
         </div>
 
 
-    </div>
+        <!-- </div>
     <div class="accept-container">
         <h2>Investigate Complaint</h2>
         <p class="accept-text">Are you sure you investigate this complaint?</p>
@@ -224,7 +255,7 @@
         </div>
 
 
-    </div>
+    </div> -->
 
 
 

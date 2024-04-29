@@ -168,8 +168,8 @@
                     <h2>COMPLAINTS</h2>
                 </div>
                 <div class="operation">
-                    <a href="<?=ROOT?>/officer/complainAnalays/"><button type="button" class="button-style"
-                            id="plus">COMPLAINTS ANALYSE</button></a>
+                    <a href="<?=ROOT?>/officer/rejectComplaint/"><button type="button" class="button-style1"
+                            id="plus">Suspenders</button></a>
                 </div>
             </div>
             <div class="table1">
@@ -208,6 +208,12 @@
                                     <!--<i
                                         class="fa-solid fa-circle-info" style="color: black;">--></i>
                                     COMMENT
+                                </button></a>
+                            <a href="<?=ROOT?>/Report/complaintReport/<?= urlencode($row->cmt_id) ?>"><button
+                                    class="detail_btn1">
+                                    <!--<i
+                                        class="fa-solid fa-circle-info" style="color: black;">--></i>
+                                    REPORT
                                 </button></a>
 
                             <button class="accept_btn" data-cmt_id="<?= $row->cmt_id ?>">INVESTIGATED</button>

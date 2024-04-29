@@ -112,7 +112,7 @@
         <div class="container1">
             <div class="header">
                 <div class="nav">
-                    <h2>Officer Dashboard</h2>
+                    <h2>OFFICER DASHBOARD</h2>
                 </div>
             </div>
 
@@ -207,18 +207,20 @@
                                 <?php 
                                 $driver_registration = new Driverregistration();
                                 $top_5 = $driver_registration->findTop5();
-                                foreach ($top_5 as $row) {
-                                echo "<tr>";
-                                echo "<td><img src='" . ROOT . "/" . $row->profileimg . "' alt='Profile Image' style='width: 150px; height: 100px;'></td>";
-                                echo "<td>" . $row->id ."</td>";
-                                echo "<td>"; if ($row->status = '0') {
-                                    echo "Pending";
-                                } elseif($row->status = '1') {
-                                    echo "Accepted";
-                                }
-                                echo "</td>";
-                                echo "<td><a href='" . ROOT . "/officer/driverregistration_view/" . $row->id . "' class='btn1'>View</a></td>";
-                                echo "</tr>";
+                                if($top_5 !== false){
+                                    foreach ($top_5 as $row) {
+                                    echo "<tr>";
+                                    echo "<td><img src='" . ROOT . "/" . $row->profileimg . "' alt='Profile Image' style='width: 150px; height: 100px;'></td>";
+                                    echo "<td>" . $row->id ."</td>";
+                                    echo "<td>"; if ($row->status = '0') {
+                                        echo "Pending";
+                                    } elseif($row->status = '1') {
+                                        echo "Accepted";
+                                    }
+                                    echo "</td>";
+                                    echo "<td><a href='" . ROOT . "/officer/driverregistration_view/" . $row->id . "' class='btn1'>View</a></td>";
+                                    echo "</tr>";
+                                    }
                                 }
                                 ?>
                             </table>
@@ -238,18 +240,20 @@
                                 <?php 
                                 $Complaint = new Complaint();
                                 $top_5 = $Complaint->findTop5();
-                                foreach ($top_5 as $row) {
-                                echo "<tr>";
-                                echo "<td>" . $row->complainant ."</td>";
-                                echo "<td>" . $row->complaint ."</td>";
-                                echo "<td>"; if ($row->status = '0') {
-                                    echo "Pending";
-                                } elseif($row->status = '1') {
-                                    echo "Accepted";
-                                }
-                                echo "</td>";
-                                echo "<td><a href='" . ROOT . "/officer/complainView/" . $row->cmt_id . "' class='btn1'>View</a></td>";
-                                echo "</tr>";
+                                if($top_5 !== false){
+                                    foreach ($top_5 as $row) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row->complainant ."</td>";
+                                    echo "<td>" . $row->complaint ."</td>";
+                                    echo "<td>"; if ($row->status = '0') {
+                                        echo "Pending";
+                                    } elseif($row->status = '1') {
+                                        echo "Accepted";
+                                    }
+                                    echo "</td>";
+                                    echo "<td><a href='" . ROOT . "/officer/complainView/" . $row->cmt_id . "' class='btn1'>View</a></td>";
+                                    echo "</tr>";
+                                    }
                                 }
                                 ?>
                             </table>
