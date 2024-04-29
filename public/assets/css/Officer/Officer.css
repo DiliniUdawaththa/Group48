@@ -193,6 +193,20 @@ body{
     cursor: pointer;
     font-size: 20px; 
 }
+
+.button-style1 {
+    background-color: red; 
+    color: #FFFFFF; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer;
+    font-size: 20px; 
+}
+
+.button-style1:hover {
+    background-color: #232c3c; 
+}
 .button-style:hover {
     background-color: #232c3c; 
 }
@@ -386,6 +400,12 @@ table tbody tr:nth-child(odd) {
     justify-content: space-around;
 }
 
+.td_button2{
+    /*display: flex;
+    /* align-items: center; */
+    justify-content: space-around;
+}
+
 
 
 .detail_btn1{
@@ -395,7 +415,8 @@ table tbody tr:nth-child(odd) {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 20px;
+    
 }
 
 .suspend_btn{
@@ -452,6 +473,120 @@ table tbody tr:nth-child(odd) {
     color: crimson;
 }
 
+.accept_btn{
+    background-color: green;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.reject_btn{
+    background-color: red;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/*Accept part-------------------------------------------------------------------------- */
+.accept-container{
+    padding:30px;
+    width: 50%;
+    height: 200px;
+    display: none;
+    text-align: center;
+    color: black;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+}
+.accept-container button{
+    height:40px;
+    width:150px;
+    border: 0px;
+    cursor: pointer;
+}
+.ok-btn{
+    background-color: #194672;
+    color:white;
+}
+.ok-btn:hover{
+    background-color: rgb(207, 207, 207);
+    color:black;
+}
+.btn{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.accept-text{
+    margin-top: 10px;
+    display: block;
+    font-size: 16px;
+    color: crimson;
+    
+}
+
+/* Reject part-------------------------------------------------------------------------- */
+.reject-container{
+    padding:30px;
+    width: 50%;
+    height: 200px;
+    display: none;
+    text-align: center;
+    color: black;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+}
+.reject-container button{
+    height:40px;
+    width:150px;
+    border: 0px;
+    cursor: pointer;
+}
+.reject-btn{
+    background-color: #194672;
+    color:white;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.reject-btn:hover{
+    background-color: rgb(207, 207, 207);
+    color:black;
+}
+.btn{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.reject-text{
+    margin-top: 10px;
+    display: block;
+    font-size: 16px;
+    color: crimson;
+}
 
 
 
