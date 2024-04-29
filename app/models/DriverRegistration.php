@@ -19,7 +19,7 @@ class Driverregistration extends Model
 		'vehregistrationimg',
 		'vehinsuranceimg',
 		'status',
-		'id',
+		
 	];
 
 	public function findTop5() {
@@ -42,6 +42,23 @@ class Driverregistration extends Model
 		} else {
 			return false;
 		}
+	}
+
+	public function countExpiringDrivers(){
+		$drivers = $this->findall();
+		$expiringDriverCount = 0;
+		$reminderDate = date('Y-m-d', strtotime('+7 days'));
+
+		if($drivers !== false){
+			foreach ($drivers as $driver){
+				$deadline = date('Y-m-d', strtotime('+1 year', strtotime($driver->date)));
+
+				if ($deadline >= date('Y-m-d') && $deadline <= $reminderDate) {
+					$expiringDriverCount++;
+				}	
+			}
+		}
+		return $expiringDriverCount;
 	}
 
 

@@ -214,6 +214,28 @@ class officer extends Controller{
         
     }
 
+    /*public function RegistrationAccept($id){
+        $renew_driver = new OfficerDriverRegistration($GLOBALS['pdo']);
+        $driver = new user();
+
+        $email = $email;
+        $renew_driver->updateDriverStatus($id);
+        $renew_driver->updateRegDate($email);
+        $renew_driver->confirmEmail($email);
+
+        redirect('officer/renewRegistration');
+
+    }
+
+    public function RegistrationReject($email){
+        $renew_driver = new renewRegistration($GLOBALS['pdo']);
+
+        $renew_driver->rejectEmail($email);
+        $renew_driver->deleteRequest($email);
+
+        redirect('officer/renewRegistration');
+    }
+*/
 
 
     //-----------------Standard Fare--------------------------
@@ -256,13 +278,13 @@ class officer extends Controller{
 		{
 			if($add_standardFare->validate($_POST))
 			{
-                /*$_POST['Fid'] =$add_standardFare->Fid;
-                //$_POST['faretype'] =$add_standardFare->faretype;
-                //$_POST['vehicletype'] =$add_standardFare->vehicletype;
-                $_POST['fare'] =$add_standardFare->fare;
-                $_POST['updatedby'] =$add_standardFare->updatedby;
-                $_POST['date'] = $add_standardFare->date;
-                // $_POST['date'] = date("Y-m-d H:i:s");*/
+                // $_POST['Fid'] =$add_standardFare->$Fid;
+                // $_POST['faretype'] =$add_standardFare->$faretype;
+                // $_POST['vehicletype'] =$add_standardFare->vehicletype;
+                 $_POST['fare'] =$add_standardFare->fare;
+                 $_POST['updatedby'] =$add_standardFare->updatedby;
+                 $_POST['date'] = $add_standardFare->date;
+                 $_POST['date'] = date("Y-m-d H:i:s");*/
                 $add_standardFare->insert($_POST);
 				redirect('officer/standardFare');
             }
@@ -455,10 +477,41 @@ class officer extends Controller{
             $data['rows'][] = $rows[$i];
         }
 
+        }
         $data['title'] = "complains";
         $this->view('officer/complains',$data);
-        }
     }
+
+
+    /*public function complains(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $add_complaint = new Complaint();
+
+        $search = isset($_GET['sarch']) ? $_GET['search'] : null;
+
+        $data = [
+            'status_check' => "0"
+        ];
+
+        if($search !== null){
+            $rows = $add_complaint->where2($data , $search);
+        }else {
+            // Otherwise, retrieve all
+            $rows = $add_complaint->where($data);
+        }
+
+        $data['rows'] = is_array($rows) ? $rows : [];
+
+       
+        $data['title'] = "complaint";
+        $this->view('officer/complains',$data);
+        
+    }*/
 
 
 
@@ -566,6 +619,60 @@ class officer extends Controller{
 
         redirect('officer/complains');
 
+    }
+
+
+    public function complainAnalays() {
+        if(!Auth::logged_in())
+        {
+            message('please login to view the page');
+            redirect("login");
+        }
+        
+        $add_complaint = new Complaint();
+
+        $pending = $add_complaint->getPendingCount();
+        $investigated = $add_complaint->getInvestigatedCount();
+        $rejected = $add_complaint->getRejectedCount();
+        $total = $add_complaint->getCount();
+
+        $data['pending'] = $pending;
+        $data['investigated'] = $investigated;
+        $data['rejected'] = $rejected;
+        $data['total'] = $total;
+        
+        $this->view('officer/complainAnalys',$data);
+
+    }
+
+    public function rejectComplaint(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $add_complaint = new Complaint();
+
+        $search = isset($_GET['sarch']) ? $_GET['search'] : null;
+
+        $data = [
+            'status_check' => "2"
+        ];
+
+        if($search !== null){
+            $rows = $add_complaint->where2($data , $search);
+        }else {
+            // Otherwise, retrieve all
+            $rows = $add_complaint->where($data);
+        }
+
+        $data['rows'] = is_array($rows) ? $rows : [];
+
+       
+        $data['title'] = "complaint";
+        $this->view('officer/rejectComplaint',$data);
+        
     }
 
 
