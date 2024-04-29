@@ -28,7 +28,7 @@
  
 
    <?php include 'ride_side.php'; ?>
-
+ 
 <!-- ---------------------------------------------------------------------------------- -->
 <div class="activity">
         <div class="mainbox">
@@ -99,6 +99,30 @@
              <i class="fa-solid fa-bars"></i>
       </div>
       <script>
+        setInterval(() =>{
+                console.log("Hi");
+                let xhr = new XMLHttpRequest();
+                console.log(xhr);
+                xhr.open("POST", '<?php echo ROOT; ?>'+"/customer/ride_step5", true);
+                xhr.onload = ()=>{
+                    console.log("nol");
+                    if(xhr.readyState === XMLHttpRequest.DONE){
+                    
+                    if(xhr.status === 200){
+                        let data = xhr.response;
+                        console.log(data);
+                        if(data=="exists"){
+                            location.reload();
+                        }
+           
+                }
+            }
+            }
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("incoming_id="+'yes');
+        }, 5000);
+      </script>
+      <script>
         function side_open() {
         document.getElementById("mySidebar").style.display = "block";
         document.querySelector('.activity').style.opacity= '0.5';
@@ -108,6 +132,8 @@
         document.getElementById("mySidebar").style.display = "none";
         document.querySelector('.activity').style.opacity= '1';
         }
+
+        
         
       </script>    
     <script>

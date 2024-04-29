@@ -123,7 +123,7 @@ class Driver extends Controller{
         $data['errors'] = [];
 
         $vehicle = new Vehicle();
-        $owner = $_SESSION['USER_DATA']->email;
+        $owner = $_SESSION['USER_DATA']->id;
         // show($_SESSION['USER_DATA']->email);
 
         $row = $vehicle->where([
@@ -235,12 +235,14 @@ class Driver extends Controller{
         $data['vehicledata'] = [];
 
         $vehicle = new Vehicle();
-        $owner = $_SESSION['USER_DATA']->email;
+        $owner = $_SESSION['USER_DATA']->id;
         // show($_SESSION['USER_DATA']->email);
 
         $row = $vehicle->where([
             "owner"=> $owner,
         ]);
+
+
 
         if(empty($row)){
             $data['vehicles'] = 0;
@@ -261,7 +263,7 @@ class Driver extends Controller{
 
                 if(isset($_POST['save'])){
                     $data['newrecord'] = $row[0];
-                    $data['newrecord']->owner = $_SESSION['USER_DATA']->email;
+                    $data['newrecord']->owner = $_SESSION['USER_DATA']->id;
                     $data['newrecord']->licenseplate = $_POST['newlicenseplate'];
                     $data['newrecord']->type = $_POST['newtype'];
                     $data['newrecord']->color = $_POST['newcolor'];
@@ -269,14 +271,14 @@ class Driver extends Controller{
             }
             
             
-            $_POST['owner'] = $_SESSION['USER_DATA']->email;
+            $_POST['owner'] = $_SESSION['USER_DATA']->id;
             
             // show($_POST);
             if($vehicle->validate($_POST)){
                 
                 // show($_POST);
                 $vehicle->insert($_POST);
-                redirect('driver/vehicles');
+                // redirect('driver/vehicles');
             }
         }
 
@@ -345,7 +347,7 @@ class Driver extends Controller{
         $offers = new Offers();
 
         $current_offer = $offers->where([
-            'driver_id' => $_SESSION['USER_DATA']->id,
+            'ride_id' => $_SESSION['ride_id'],
         ]);
 
         $data['offer_price'] = $current_offer[0]->offer_price;
@@ -364,6 +366,8 @@ class Driver extends Controller{
             "id"=> $_SESSION['ride_id'],
         ]);
 
+    //    show($current_offer);
+
         $data['ride_info'] = $row3;
 
         if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -371,6 +375,7 @@ class Driver extends Controller{
                 $current_offer[0]->offer_price = $current_offer[0]->negotiation_price;
                 $current_offer[0]->negotiation_status = 0;
                 $offers->update_offer_price($_SESSION['USER_DATA']->id,(array)$current_offer[0]);
+                redirect('driver/request02');
             }
             elseif(isset($_POST['declineneg'])){
                 $current_offer[0]->negotiation_status = 0;
@@ -388,7 +393,7 @@ class Driver extends Controller{
 
                 
                 $current_offer = $offers->where([
-                    'driver_id' => $_SESSION['USER_DATA']->id,
+                    'ride_id' => $_SESSION['ride_id'],
                 ]);
 
                 if($current_offer[0]->accept_status == 1){
@@ -414,6 +419,7 @@ class Driver extends Controller{
 
             if($current_offer[0]->accept_status == 1){
                 redirect(redirect('driver/request03'));
+                show($current_offer[0]);
             }
     
             if($current_offer[0]->offer_price != $current_offer[0]->negotiation_price){
