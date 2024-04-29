@@ -121,6 +121,7 @@ class Driver extends Controller{
     }
     public function activity(){
         $data['errors'] = [];
+        $data['suspended_status'] = 0;
 
         $vehicle = new Vehicle();
         $owner = $_SESSION['USER_DATA']->email;
@@ -186,7 +187,6 @@ class Driver extends Controller{
                 
 
             }
-            echo "hids";
         }
 
             $this->view('driver/activity',$data);
@@ -296,6 +296,7 @@ class Driver extends Controller{
             "id"=> $id,
         ]);
 
+
         $data['ride_info'] = $row3;
 
         $row4 = $cust->first([
@@ -371,6 +372,7 @@ class Driver extends Controller{
                 $current_offer[0]->offer_price = $current_offer[0]->negotiation_price;
                 $current_offer[0]->negotiation_status = 0;
                 $offers->update_offer_price($_SESSION['USER_DATA']->id,(array)$current_offer[0]);
+                redirect('driver/request02');
             }
             elseif(isset($_POST['declineneg'])){
                 $current_offer[0]->negotiation_status = 0;
@@ -434,6 +436,15 @@ class Driver extends Controller{
 
         $cust = new User();
         $ride = new Rides();
+        $current_rides = new Current_rides();
+
+        //Information of the current ride stored in $row3
+        $row3 = $current_rides->first([
+            "id"=> $_SESSION['ride_id'],
+        ]);
+
+        $data['ride_info'] = $row3;
+
         $current_ride = $ride->first([
             "id" => $_SESSION['ride_id'],
         ]);
