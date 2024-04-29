@@ -93,7 +93,7 @@ class offers extends Model
 			$query .= $key . "= :" . $key . ",";
 		}
 		$query = trim($query, ",");
-		$query .= " where driver_id =".$id;
+		$query .= " where ride_id =".$id;
 		// print_r($query);	
 
 

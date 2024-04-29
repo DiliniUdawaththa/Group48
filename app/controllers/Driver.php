@@ -389,6 +389,7 @@ class Driver extends Controller{
             'ride_id' => $_SESSION['ride_id'],
         ]);
 
+
         $data['offer_price'] = $current_offer[0]->offer_price;
         $data['negotiation_price'] = $current_offer[0]->negotiation_price;
 
@@ -410,13 +411,13 @@ class Driver extends Controller{
         $data['ride_info'] = $row3;
 
         if($_SERVER['REQUEST_METHOD'] == "POST"){
-            if(isset($_POST['acceptneg'])){
+            if(isset($_POST["accept-neg"])){
                 $current_offer[0]->offer_price = $current_offer[0]->negotiation_price;
                 $current_offer[0]->negotiation_status = 0;
-                $offers->update_offer_price($_SESSION['USER_DATA']->id,(array)$current_offer[0]);
+                $offers->update_offer_price($_SESSION['ride_id'],(array)$current_offer[0]);
                 redirect('driver/request02');
             }
-            elseif(isset($_POST['declineneg'])){
+            elseif(isset($_POST['decline-neg'])){
                 $current_offer[0]->negotiation_status = 0;
                 $offers->update_offer_price($_SESSION['USER_DATA']->id,(array)$current_offer[0]);
                 redirect('driver/request02');

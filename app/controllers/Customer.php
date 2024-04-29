@@ -696,7 +696,7 @@
                      $rating->insert($sample1);
                         // show($sample1);
                 }
-                // redirect('customer/ride_step1');
+                redirect('customer/ride_step1');
 
             }
         $data['title'] = "Ride";
