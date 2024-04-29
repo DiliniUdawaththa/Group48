@@ -55,8 +55,11 @@ class Driver extends Controller{
             $_SESSION['registration-expire'] = 0;
         }
         
+        $data['emailValidation'] = " ";
+        $data['phoneValidation'] = " ";
         if($_SERVER['REQUEST_METHOD'] == "POST"){
             $update_flag = 0;
+            
             $folder = "uploads/images/";
                 if(!file_exists($folder)){
                     mkdir($folder,0777,true);
@@ -95,14 +98,36 @@ class Driver extends Controller{
 
                 if(isset($_POST['update-email'])){
                     if (filter_var($_POST['new-email'], FILTER_VALIDATE_EMAIL)) {
-                        $_SESSION['USER_DATA'] ->email = $_POST['new-email'];
-                        $update_flag = 1;
-                      }
+                        $row20 = $user->first([
+                            'email' => $_POST['new-email'],
+                        ]);
+                        if(empty($row20)){
+                            $_SESSION['USER_DATA'] ->email = $_POST['new-email'];
+                            $update_flag = 1;
+                        }
+                            else{
+                                $data['emailValidation'] = "Email already exists";
+                            }
+                    }else{
+                        $data['emailValidation'] = "Invalid email type";
+                    }
+                        
+                      
                 }
                 if(isset($_POST['update-phone'])){
                     if(strlen($_POST['new-phone'])==10){
-                        $_SESSION['USER_DATA'] ->phone = $_POST['new-phone'];
-                        $update_flag = 1;
+                        $row20 = $user->first([
+                            'phone' => $_POST['new-phone'],
+                        ]);
+                        if(empty($row20)){
+                            $_SESSION['USER_DATA'] ->phone = $_POST['new-phone'];
+                            $update_flag = 1;
+                        }else{
+                            $data['phoneValidation'] = "Phone number already exists";
+                        }
+                        
+                    }else{
+                        $data['phoneValidation'] = "Phone number should consists 10 digits";
                     }
                 }
 
@@ -233,6 +258,7 @@ class Driver extends Controller{
 
         $data['vehicles'] = 0;
         $data['vehicledata'] = [];
+        $data['vehicleError'] = " ";
 
         $vehicle = new Vehicle();
         $owner = $_SESSION['USER_DATA']->id;
@@ -250,11 +276,26 @@ class Driver extends Controller{
             $data['vehicles'] = 1;
             $data['vehicledata'] = $row[0];
         }
+        $_POST['owner'] = $_SESSION['USER_DATA']->id;
 
          // show($row[0]);
          if($_SERVER['REQUEST_METHOD'] == "POST"){
+            if(isset($_POST['add-vehicle'])){
+                
+
+                if($vehicle->validate($_POST)){
+            
+                    show($_POST);
+                    $vehicle->insert($_POST);
+                    redirect('driver/vehicles');
+                }else{
+                    $data['vehicleError'] = "The numberplate is invalid or already exists";
+                }
+            }
+
 
             if(isset($row[0])){
+                
                 if(isset($_POST['delete'])){
                     $record = (array)$row[0];
                     $vehicle->delete($record);
@@ -267,19 +308,16 @@ class Driver extends Controller{
                     $data['newrecord']->licenseplate = $_POST['newlicenseplate'];
                     $data['newrecord']->type = $_POST['newtype'];
                     $data['newrecord']->color = $_POST['newcolor'];
+
+                    
                 }
             }
             
             
-            $_POST['owner'] = $_SESSION['USER_DATA']->id;
+            
             
             // show($_POST);
-            if($vehicle->validate($_POST)){
-                
-                // show($_POST);
-                $vehicle->insert($_POST);
-                // redirect('driver/vehicles');
-            }
+            
         }
 
 
@@ -524,6 +562,7 @@ class Driver extends Controller{
         $complain = NULL;
         $cust = new User();
         $complaint = new Complaint();
+        $rating = new Rating();
 
         $row4 = $cust->first([
             "id"=> $_SESSION['pass_id'],
@@ -544,6 +583,17 @@ class Driver extends Controller{
                     $complain = $complain . ucfirst($_POST['other']);
                 }
                 
+            }
+
+            if($_POST['star'] >0){
+                
+                $_POST['ride_id'] = $_SESSION['ride_id'];
+                $_POST['role_id'] = $_SESSION['pass_id'];
+                $_POST['role'] = "customer";
+                $_POST['rate'] = $_POST['star'];
+                show($_POST);
+                $rating->insert($_POST);
+
             }
 
             if($complain_status==1){
