@@ -33,6 +33,9 @@
                     
                         <div class="empty-vehicles">
                             <div style="text-align: center;margin:20px;">
+                                <?php if($data['vehicleError'] != " "): ?>
+                                    <h3 style="color:red"><?php echo $data['vehicleError'] ?></h3>
+                                <?php endif;?>
                                 <h3 >No vehicles to display!</h3>
                                 
                             </div>
@@ -55,13 +58,21 @@
                                                 <input type="text" class="vehicle-input" name="licenseplate" id="licenseplate"></td></tr>
                                         <tr><td class="veh-attribute"><p>Type</p></td>
                                             <td class="veh-value"><div style="display: block;">
-                                                    
+                                                <div>
                                                     <input type="radio" class="vehicle-input-check" name="type" value="threewheel" id="type1" checked>
                                                     <label for="type1">Three Wheeler</label>
                                                 </div>
                                                 <div style="display: block;">
+                                                    <input type="radio" class="vehicle-input-check" name="type" value="bike" id="type1">
+                                                    <label for="type2">Bike</label>
+                                                </div>
+                                                <div style="display: block;">
                                                     <input type="radio" class="vehicle-input-check" name="type" value="car" id="type1">
                                                     <label for="type2">Car</label>
+                                                </div>
+                                                <div style="display: block;">
+                                                    <input type="radio" class="vehicle-input-check" name="type" value="Ac-car" id="type1">
+                                                    <label for="type2">AC Car</label>
                                                 </div>
                                             </td>
                                             
@@ -70,7 +81,7 @@
                             
                                         <tr><td class="veh-attribute"><label for="color">Color</label></td><td class="veh-value"><input type="color" name="color" id="color"></td></tr>
                                     </table>
-                                    <input type="submit" value="Add" class="add-btn">
+                                    <input type="submit" name="add-vehicle" value="Add" class="add-btn">
                                     
                                     
                                     
@@ -86,10 +97,16 @@
                        <div class="vehicle1">
                             <div class="vehicle1-type">
                                 <?php if($data['vehicledata']->type=='threewheel'):?>
-                                <img src="<?= ROOT ?>/assets/img/images/c2.png" style="width: 100px;">
+                                <img src="<?= ROOT ?>/assets/img/images/threewheel.png" style="width: 100px;">
                                 <?php endif;?>
                                 <?php if($data['vehicledata']->type=='car'):?>
-                                <img src="<?= ROOT ?>/assets/img/images/c3.png" style="width: 100px;">
+                                <img src="<?= ROOT ?>/assets/img/images/car.png" style="width: 100px;">
+                                <?php endif;?>
+                                <?php if($data['vehicledata']->type=='Ac-car'):?>
+                                <img src="<?= ROOT ?>/assets/img/images/car.png" style="width: 100px;">
+                                <?php endif;?>
+                                <?php if($data['vehicledata']->type=='bike'):?>
+                                <img src="<?= ROOT ?>/assets/img/images/bike.png" style="width: 100px;">
                                 <?php endif;?>
                                 <span class="display-type"><?php echo $data['vehicledata']->type?></span>
                             </div>
