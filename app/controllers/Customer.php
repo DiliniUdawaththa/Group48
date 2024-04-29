@@ -671,7 +671,7 @@
                 $sample['complaint'] = rtrim($sample['complaint'], ', ');  //tail trim
             
                 $sample['passenger_id']=$_SESSION['USER_DATA']->id;
-                $sample['driver_id']=3;
+                $sample['driver_id']=$_GET['driver_id'];
                 $sample['complainant']='Passenger';
                 $sample['datetime'] = date("Y-m-d H:i:s");
                 if (!empty($sample['complaint'])){
@@ -694,9 +694,9 @@
                         // show($sample1);
                     }
                      $rating->insert($sample1);
-                    // show($sample1);
+                        show($sample1);
                 }
-                redirect('customer/ride_step1');
+                // redirect('customer/ride_step1');
 
             }
         $data['title'] = "Ride";
