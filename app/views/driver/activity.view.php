@@ -66,7 +66,7 @@
                             <?php foreach ($data['current_rides'] as $rides) : ?>
                                     <div class="request-box">
                                         <div>
-                                            <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="request-customer-pic">
+                                            <img src="<?= ROOT ?>/assets/img/customer/profile/person.jpg" class="request-customer-pic">
                                             <img src="<?= ROOT ?>/assets/img/images/rating.png" style="height: 10px;display: block;">
                                         </div>
                                         <div class="destination">
