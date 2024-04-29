@@ -97,7 +97,12 @@
                         
                     </div>
                     <div class="renew-registration-container">
-                        <p class="reg-exp">Your registration will be expired after <?php echo (365 - $data['dayDifference']) ?> days.</p>
+                        <?php if(365 - $data['dayDifference']>0): ?>
+                            <p class="reg-exp">Your registration will be expired after <?php echo (365 - $data['dayDifference']) ?> days.</p>
+                        <?php else: ?>
+                            <p class="reg-exp">Your registration has expired</p>
+                        <?php endif; ?>
+                        
                         <button type="button" class="renew-registraion">Renew Now</button>
                         </div>
                     
