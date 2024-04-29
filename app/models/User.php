@@ -101,7 +101,13 @@ class User extends Model
 			$this->role = 'user';
 
 		}
-		// show($this->role);
+		
+        // if (!preg_match("/^[0-9]+$/", $data['nic'])) {
+		// 	$this->errors['nic'] = "Invalid NIC.";
+		// }
+        
+       
+    //    show($this->errors);
 		if(empty($this->errors))
 		{
 			return true;
@@ -153,7 +159,7 @@ class User extends Model
         } elseif (!preg_match("/^07[0-9]{8,9}$/", $data['phone'])) {
             $this->errors['phone'] = "Mobile number must be in a valid mobile number format.";
         }
-
+       
         if(empty($this->errors))
 		{
             // show($_POST);

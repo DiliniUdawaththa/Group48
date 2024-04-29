@@ -694,9 +694,9 @@
                         // show($sample1);
                     }
                      $rating->insert($sample1);
-                        show($sample1);
+                        // show($sample1);
                 }
-                // redirect('customer/ride_step1');
+                redirect('customer/ride_step1');
 
             }
         $data['title'] = "Ride";
@@ -947,6 +947,7 @@
             }
             $user =new User();
             $rating = new Rating();
+            $data['errors']=[];
 
             $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
            $sum = 0;
@@ -989,23 +990,23 @@
                                 // show("File is an image - " . $check["mime"] . ".");
                                 $uploadOk = 1;
                             } else {
-                                // show("File is not an image.");
+                                $data['errors']['img']="File is not an image.";
                                 $uploadOk = 0;
                             }
 
 
                             // Check file size
                             if ($_FILES["image"]["size"] > 500000) {
-                                message("Sorry, your file is too large.");
+                                $data['errors']['img']="Sorry, your file is too large.";
                                 $uploadOk = 0;
-                            }
+                            }else{
 
                             // Allow certain file formats
                             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                             && $imageFileType != "gif" ) {
-                                message("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+                                $data['errors']['img']="Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                                 $uploadOk = 0;
-                            }
+                            }else{
 
                             // Check if file already exists
                             if (file_exists($targetFile)) {
@@ -1032,18 +1033,57 @@
 
                                 }
                             }
+                          }
+                        }
                        }
                             // $arr["img_path"]= $_SESSION['USER_DATA']->img_path;
                             // $arr['name']=$_POST['name'];
                             // $arr['email']=$_POST['email'];
-                            // $arr['phone']=$_POST['phone'];
-                            $arr['address']=$_POST['address'];
-                            $arr['nic']=$_POST['nic'];
-                            $arr['dob']=$_POST['dob'];
-                            $user->update($_SESSION['USER_DATA']->id,$arr);
-                            redirect('customer/profile');
-                            //  show($arr);
-                            // show($_POST);
+                            $nic = preg_replace("/[^0-9]/", "", $_POST['nic']);
+                                if (strlen($nic) == 12 || (strlen($nic) == 9 && strpos($nic, 'V') !== false)) {
+                                
+                                } elseif(!empty($_POST['nic'])) {
+                                    $data['errors']['nic'] = "Invalid NIC.";
+                                }else{
+                                    $data['errors']['nic'] = "NIC is Empty.";
+                                }
+                            
+                                if (empty($_POST['phone'])) {
+                                    $data['errors']['phone'] = "Contact number is Empty.";
+                                } elseif (!preg_match("/^[0-9]+$/", $_POST['phone'])) {
+                                    $data['errors']['phone'] = "Contact number is Invalid.";
+                                } elseif (strlen($_POST['phone']) < 10) {
+                                    $data['errors']['phone'] = "Contact number is Invalid.";
+                                } elseif (strlen($_POST['phone']) >10)  {
+                                     $data['errors']['phone'] = "Contact number is Invalid.";
+                                } elseif (!preg_match("/^07[0-9]{8,9}$/", $_POST['phone'])) {
+                                    $data['errors']['phone'] = "Contact number is Invalid.";
+                                }
+                             
+                                if (empty($_POST['address'])) {
+                                    $data['errors']['address'] = "Address  is Empty.";
+                                }
+
+                                if (empty($_POST['dob'])) {
+                                    $data['errors']['dob'] = "Date of Birth  is Empty.";
+                                }
+
+                            if($data['errors']==[]){
+                                $arr['phone']=$_POST['phone'];
+                                $arr['address']=$_POST['address'];
+                                $arr['nic']=$_POST['nic'];
+                                $arr['dob']=$_POST['dob'];
+                           
+                                
+                                $user->update($_SESSION['USER_DATA']->id,$arr);
+                                redirect('customer/profile');
+                            }
+
+                           
+
+                       
+                    //    show($data['errors']);
+                            
 
                 }
                 
@@ -1053,6 +1093,7 @@
             
             $data['title'] = "Help";
             $this->view('customer/profile',$data);
+                
         }
     public function Help(){
         if(!Auth::logged_in())

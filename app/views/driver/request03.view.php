@@ -117,33 +117,7 @@
         <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
         <script>
 
-        var driver_lat = 0;
-        var driver_long=0;
-            if(!navigator.geolocation){
-                        console.log("Error")
-                    }else{
-                        //automatically coordinate change
-                        // setInterval(()=>{
-                            //get current position
-                            navigator.geolocation.getCurrentPosition(getPosition)
-                        // },5000);
-                    
-                    }
-                    function getPosition(position){
-                        console.log(position)  
-                         driver_lat=position.coords.latitude
-                         console.log(driver_lat);
-                         driver_long=position.coords.longitude
-                         console.log(driver_long)
-                        var accuracy= position.coords.accuracy
-
-                        
-
-                       
-                   
-                        // map.setView(marker, 18);
-                    }
-
+       
 
     setInterval(() =>{
                 console.log("Hi");
@@ -179,6 +153,52 @@
                     subdomains:['mt0','mt1','mt2','mt3']
                 });
             googleStreets.addTo(map)
+
+            var driver_lat = 0;
+        var driver_long=0;
+            if(!navigator.geolocation){
+                        console.log("Error")
+                    }else{
+                        //automatically coordinate change
+                        // setInterval(()=>{
+                            //get current position
+                            navigator.geolocation.getCurrentPosition(getPosition)
+                        // },5000);
+                    
+                    }
+                    var marker,circle;
+                    function getPosition(position){
+                        console.log(position)  
+                         driver_lat=position.coords.latitude
+                         console.log(driver_lat);
+                         driver_long=position.coords.longitude
+                         console.log(driver_long)
+                        var accuracy= position.coords.accuracy
+
+                        if(marker){
+                            map.removeLayer(marker)
+                        }
+                        if(circle){
+                            map.removeLayer(circle)
+                        }
+
+                        marker=L.marker([driver_lat,driver_long])
+                        map.removeLayer(marker);
+                        markers.push(marker)
+                        // marker.addTo(map)
+                        circle =L.circle([driver_lat,driver_long],{radius:accuracy})
+
+                        var featureGroup = L.featureGroup([marker,circle]).addTo(map)
+
+                        map.fitBounds(featureGroup.getBounds())
+
+                        console.log("your coordinate is Lat:"+lat+"Long"+long+"Accuracy"+accuracy)
+
+                       map.flyTo([driver_lat,driver_long],14    )
+                   
+                        // map.setView(marker, 18);
+                    }
+
 
             var Routing;
             <?php if (isset($data['ride_info']->l_lat) && isset($data['ride_info']->l_long) && isset($data['ride_info']->d_lat) && isset($data['ride_info']->d_lat)): ?>

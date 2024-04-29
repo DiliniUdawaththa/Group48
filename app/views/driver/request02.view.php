@@ -34,10 +34,10 @@
             <div class="body-container">
 
             
-
+            
                 <div class="req-body">
                     <div class="req-content">
-            
+                    
                         <div class="req-customer" style="padding-top:20px">
                             <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="req-cus-pic">
                             <div class="req-customer-details">
@@ -55,6 +55,7 @@
                             <p class="req-loc-des"><b>Vehicle</b> Three Wheeler</p>
                             <p class="req-loc-des"><b>Offer sent:</b> Rs <?php echo $data['offer_price'] ?></p>
                         </div>
+                        
                         <div style="display:flex;justify-content:space-around;"><p>Waiting for customer<div class="loader"></div></p></div>
                         <form method="POST"><input type="submit" value="Cancel" class="cancel-offer-btn" name="cancel-offer"></form>
                         
@@ -67,9 +68,10 @@
                             </div>
                             <form method="POST">  
                            <div class="neg-btns">
-                                    <input type="submit" class="accept-neg-btn" value="Accept" name="acceptneg">
+                                    <input type="submit" class="accept-neg-btn" value="Accept" name="accept-neg">
                                     <!-- <button class="accept-neg-btn">Accept</button> -->
-                                    <input type="submit" class="decline-neg-btn" value="Decline" name="declineneg">
+                                   
+                                    <input type="submit" class="decline-neg-btn" value="Decline" name="decline-neg">
                                     <!-- <button class="decline-neg-btn">Decline</button> -->
                                 
                             </div>
@@ -86,7 +88,7 @@
                         
                     </div>
                 </div>
-
+            
                 
 
                                     

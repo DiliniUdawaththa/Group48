@@ -415,9 +415,10 @@
 
             $rides_counts = [];
 
-            if($rows !== false){}
-            foreach ($rows as $row) {
-                $rides_counts[$row->id] = $add_driver1->countRideByDriver($row->id);
+            if($rows !== false){
+                foreach ($rows as $row) {
+                    $rides_counts[$row->id] = $add_driver1->countRideByDriver($row->id);
+                }
             }
 
             if (empty($data['rows'])) {
