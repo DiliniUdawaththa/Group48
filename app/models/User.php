@@ -33,6 +33,7 @@ class User extends Model
         'address',
         'nic',
         'dob',
+        'empID',
 	];
 
 	public function validate($data)
