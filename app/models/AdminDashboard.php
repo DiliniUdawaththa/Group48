@@ -46,11 +46,13 @@ class AdminDashboard extends Model{
     
         $userCounts = [];
     
-        foreach ($results as $result) {
-            $month = $result->month;
-            $count = $result->user_count;
-    
-            $userCounts[$month] = $count;
+        if($results !== false){
+            foreach ($results as $result) {
+                $month = $result->month;
+                $count = $result->user_count;
+        
+                $userCounts[$month] = $count;
+            }
         }
     
         return $userCounts;
@@ -67,17 +69,24 @@ class AdminDashboard extends Model{
         $params = [':year' => $currentYear];
         $results = $this->query($query, $params);
     
-        $driverCounts = [];
+        // Check if $results is a valid result set
+        if ($results !== false) {
+            $driverCounts = [];
     
-        foreach ($results as $result) {
-            $month = $result->month;
-            $count = $result->driver_count;
+            foreach ($results as $result) {
+                $month = $result->month;
+                $count = $result->driver_count;
     
-            $driverCounts[$month] = $count;
+                $driverCounts[$month] = $count;
+            }
+    
+            return $driverCounts;
+        } else {
+            // Handle the case where the query failed
+            return [];
         }
-    
-        return $driverCounts;
     }
+    
     
     
     
