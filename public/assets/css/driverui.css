@@ -40,7 +40,7 @@ a{
 
 @media screen and (max-width: 1000px){
     .page-container{
-        grid-template-columns: 30% 70%;
+        margin-left: 0px;
     }
 }
 
@@ -144,8 +144,9 @@ a{
     .side-nav{
         display: block;
         position: fixed;
+        z-index: 2147483647;
         top: 70px;
-        width: 70%;
+        /* width: 70%; */
         height: 100%;
         padding-top:50px;
     }
@@ -408,6 +409,7 @@ a{
     width: 50%;
     padding-top:10px;
     margin: 5% auto;
+    padding-bottom: 5px;;
     min-height: 30vh;
     background-color: white;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -425,6 +427,15 @@ a{
     padding-right: 20px;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     margin :5px;
+}
+
+.request-topic{
+    border-bottom: 1px solid rgb(224, 224, 224);
+    margin-bottom: 5px;
+}
+.ride-box-text{
+    padding-top: 20px;
+    color:red;
 }
 
 .request-customer-pic{
@@ -466,7 +477,8 @@ a{
 
 @media screen and (max-width: 700px){
     .select-status {
-        grid-template-columns: 30% 35% 35%;
+        display: flex;
+        flex-direction: column;
         width: 100%;
     }
     .active, .inactive{
@@ -482,8 +494,10 @@ a{
 
         min-height: 100px;
         display: flex;
+        align-items: center;
         justify-content: space-between;
         flex-direction: column;
+        padding: 5px 0px 5px 0px;
 
     }
 
@@ -873,7 +887,7 @@ a{
 @media screen and (max-width: 700px){
     .profile-bar{
         grid-template-columns: 100%;
-        grid-template-rows:20% 70% ;
+        grid-template-rows:30% 70% ;
     }
     .detail-container{
         font-size: 18px;
@@ -886,7 +900,7 @@ a{
     }
 
     .col3{
-        display: none;
+        display: block;
     }
     .col1{width: 200px;
     text-align: left;

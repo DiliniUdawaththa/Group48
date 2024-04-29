@@ -169,6 +169,30 @@ body{
 /*-------------------------Search Bar------------------------------*/
 .search{
     padding: 30px 30px;
+    align-items: center;
+    padding: 10px 0;
+}
+.search form {
+    display: flex;
+    align-items: center;
+}
+.search input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px; /* Adjust the spacing between input and button */
+}
+
+.search input[type="submit"] {
+    background-color: #111827;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.search input[type="submit"]:hover {
+    background-color: #000; /* Change the color on hover as desired */
 }
 .srch{
     background-color: #111827;

@@ -370,8 +370,10 @@
             }
 
             $rides_counts = [];
-            foreach ($rows as $row) {
-                $rides_counts[$row->id] = $add_customer1->countRideByCustomer($row->id);
+            if($rows !== false){
+                foreach ($rows as $row) {
+                    $rides_counts[$row->id] = $add_customer1->countRideByCustomer($row->id);
+                }
             }
     
             $data['rows'] = is_array($rows) ? $rows : [];
@@ -412,6 +414,8 @@
             $data['rows'] = is_array($rows) ? $rows : [];
 
             $rides_counts = [];
+
+            if($rows !== false){}
             foreach ($rows as $row) {
                 $rides_counts[$row->id] = $add_driver1->countRideByDriver($row->id);
             }

@@ -51,18 +51,28 @@
         </div>
     </div>       
     <script>
-    function openWhatsApp() {
-        
-        // WhatsApp URL with phone number (replace '1234567890' with the desired phone number)
-        <?php  foreach ($rows2 as $row2) :  ?>
-               
-        num =  parseInt("<?=$row2->phone;?>");       
-         var url = 'https://wa.me/+94'+num;
-
-        // Open WhatsApp in a new tab
-        window.open(url, '_blank');
-        <?php   endforeach; ?>
-    }
+      setInterval(() =>{
+                console.log("Hi");
+                let xhr = new XMLHttpRequest();
+                console.log(xhr);
+                xhr.open("POST", '<?php echo ROOT; ?>'+"/customer/ride_step6", true);
+                xhr.onload = ()=>{
+                    console.log("nol");
+                    if(xhr.readyState === XMLHttpRequest.DONE){
+                    
+                    if(xhr.status === 200){
+                        let data = xhr.response;
+                        console.log(data);
+                        if(data=="exists"){
+                            location.reload();
+                        }
+           
+                }
+            }
+            }
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("incoming_id="+'yes');
+        }, 5000);
 </script>
 </body>
 </html>
