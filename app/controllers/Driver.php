@@ -867,8 +867,10 @@ class Driver extends Controller{
     public function renew_insert(){
         $data['errors'] = [];
         $renew_driver = new renewRegistration($GLOBALS['pdo']);
+        $renew_driver1 = new AdminDriver();
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
+            if($renew_driver1->validateRenew($_POST)){
                 // $_POST['email'] =$renew_driver->email;
                 // $_POST['name'] =$renew_driver->name;
                 $_POST['email'] = $_POST['email'];
@@ -887,7 +889,11 @@ class Driver extends Controller{
 
                 $renew_driver->insert($_POST);
                 redirect('driver/renew3');
+            }
         }
+        $data['errors'] = $renew_driver1->errors;
+        $data['title'] = "Officer";
+        $this->view('driver/renewRegistration/renew_form',$data);
     }
 
     public function downloadSlip() {
