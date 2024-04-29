@@ -300,3 +300,47 @@ form{
     
     
  }
+
+
+ .h1{
+    display: none;
+ }
+
+ @media only screen and (max-width: 1000px) {
+    .container_part{
+     margin-left: 0px;
+     width:100vw;
+    }
+    .h1{
+        margin:1vh auto;
+        width: 100%;
+        display: block;
+        background-image: linear-gradient(to right,#194672, #42678B, #194672);
+        display: flex;
+        justify-content: center;
+    }
+    h1{
+        font-size: 3vh;
+        color: white;
+    }
+    .title{
+        font-size: 2vh;
+    }
+    .data{
+        font-size: 1.8vh;
+        height: 12vh;
+    }
+    .update_btn{
+        font-size: 2vh;
+    }
+    .delete_btn{
+        margin-top: 1vh;
+    font-size: 2vh;
+    }
+    .td_i{
+        font-size: 3vh;
+    }
+    #plus{
+        font-size: 4vh;
+    }
+  }

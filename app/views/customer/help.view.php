@@ -88,9 +88,13 @@
          <div class="container">
 
             <div class="h1"><center><h1>How to Request the Ride</h1></center></div>
-            <center><div class="version"><i id="pc" class="fa-solid fa-desktop"></i><i id="mobile" class="fa-solid fa-mobile"></i></div></center>
+            <center><div class="version">
+                         <span id="pc"><i  class="fa-solid fa-desktop"></i></span>
+                         <span id="mobile"><i  class="fa-solid fa-mobile"></i></span>
+                  </div></center>
             <!-- --------------------------slideshow-container--------------------------------------------------------------------------------------- -->
-            <div class="slideshow-container">
+            <div id="con">
+            <div class="slideshow-container" >
 
               <div class="mySlides fade">               
                 <img src="<?=ROOT?>/assets/img/customer/help/1.png" style="width:100%">  
@@ -128,58 +132,72 @@
               </div>
 
             </div>
-            <div class="slideshow-container1" style="display:none;">
+            
+              <br>
 
-              <div class="mySlides fade">               
-                <img src="<?=ROOT?>/assets/img/customer/help/11.png" style="width:100%">  
+              <div id="dot" style="text-align:center">
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+              </div>
+              </div>
+            <div id="cont" style="display:none">
+              <div class="slideshow-container"  >
+                <center>
+              <div class="mySlides1 fade">               
+                <img src="<?=ROOT?>/assets/img/customer/help/11.png" style="width:30%">  
                 <div class="text">Step 1 <br><center><h3>slelect the location and destination</h3></center></div>  
               </div>
 
-              <div class="mySlides fade">  
-                <img src="<?=ROOT?>/assets/img/customer/help/12.png" style="width:100%">
+              <div class="mySlides1 fade">  
+                <img src="<?=ROOT?>/assets/img/customer/help/12.png" style="width:30%">
                 <div class="text">Step 2 <br><center><h3>slelect the althernative path</h3></center></div>    
               </div>
 
-              <div class="mySlides fade">    
-                <img src="<?=ROOT?>/assets/img/customer/help/13.png" style="width:100%">
+              <div class="mySlides1 fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/13.png" style="width:30%">
                 <div class="text">Step 3 <br><center><h3>slelect the vehicle</h3></center></div>    
               </div>
 
-              <div class="mySlides fade">    
-                <img src="<?=ROOT?>/assets/img/customer/help/14.png" style="width:100%">
+              <div class="mySlides1 fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/14.png" style="width:30%">
                 <div class="text">Step 4 <br><center><h3>slelect the driver & negotiate</h3></center></div>      
               </div>
 
-              <div class="mySlides fade">    
-                <img src="<?=ROOT?>/assets/img/customer/help/15.png" style="width:100%">
+              <div class="mySlides1 fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/15.png" style="width:30%">
                 <div class="text">Step 5 <br><center><h3>Waiting for driver</h3></center></div>      
               </div>
 
-              <div class="mySlides fade">    
-                <img src="<?=ROOT?>/assets/img/customer/help/16.png" style="width:100%">
+              <div class="mySlides1 fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/16.png" style="width:30%">
                 <div class="text">Step 6 <br><center><h3>Journey underway</h3></center></div>      
               </div>
 
-              <div class="mySlides fade">    
-                <img src="<?=ROOT?>/assets/img/customer/help/17.png" style="width:100%">
+              <div class="mySlides1 fade">    
+                <img src="<?=ROOT?>/assets/img/customer/help/17.png" style="width:30%">
                 <div class="text">Step 7 <br><center><h3>Rating and complain</h3></center></div>      
               </div>
+              </center>
 
             </div>
-              <br>
 
-              <div style="text-align:center">
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-                <span class="dot"></span> 
+            <div id="dot1" style="text-align:center">
+                <span class="dot1"></span> 
+                <span class="dot1"></span> 
+                <span class="dot1"></span> 
+                <span class="dot1"></span> 
+                <span class="dot1"></span> 
+                <span class="dot1"></span> 
+                <span class="dot1"></span> 
               </div>
-
+            </div>
             <!-- -------------------------------------------------------------------------------------------------------------------- -->
-            <div class="h1"><center><h1>How to Add Place</h1></center></div>
+            <div class="h1"><center><h1>About</h1></center></div>
             <div class="img"><center><img src="<?=ROOT?>/assets/img/help.jpg" alt=""></center></div>
             <div class="p">
                   <p>
@@ -196,14 +214,12 @@
 
                     <br></li><br><li><b>Confirm the Ride:</b> After selecting a ride option, confirm your choice. The app will typically show you the driver's details, including their name, vehicle details, <br>and an estimated time of arrival.
 
-                    <br></li><br><li><b>Payment Method:</b> Select your preferred payment method (credit card, PayPal, cash, etc.) and confirm the ride.
+                    <br></li><br><li><b>Payment Method:</b> Select your preferred payment method  cash and confirm the ride.
 
                     <br></li><br><li><b>Waiting for the Driver:</b> You'll be able to track the driver's location in real-time on a map. The app will also provide you with their contact information.
 
                    <br> </li><br><li><b>Enjoy Your Ride:</b> Once the driver arrives, hop in the vehicle, and the driver will take you to your destination.
-
-                   <br> </li><br><li><b>Payment:</b> Payment is usually processed automatically through the app based on your chosen payment method. You may also have the option to add a tip for the driver.
-
+                     <br>
                     <br></li><li><b>Rate and Review:</b> After the ride, you can rate the driver and leave a review if you'd like to provide feedback.
                   </li></ul>  
                 </p>
@@ -218,10 +234,33 @@
 
         </div>
         <script>
+           pc = document.getElementById('pc');
+            mobile = document.getElementById('mobile');
+            pc_img = document.getElementById('con');
+            mobile_img =document.getElementById('cont')
+
+            pc.addEventListener('click', () => {
+                mobile_img.style.display = 'none';
+                pc_img.style.display = 'block';
+                pc.style.backgroundColor = 'aliceblue';
+                mobile.style.backgroundColor = '#42678B';
+               
+            });
+
+            mobile.addEventListener('click', () => {
+                mobile_img.style.display = 'block';
+                pc_img.style.display = 'none';
+                mobile.style.backgroundColor = 'aliceblue';
+                pc.style.backgroundColor = '#42678B';
+                
+            });
+
   //   --------slide show--------------------------------------------------------------------
             let slideIndex = 0;
+            let slideIndex1 = 0;
+            
             showSlides();
-
+            showSlides1();
             function showSlides() {
               let i;
               let slides = document.getElementsByClassName("mySlides");
@@ -236,8 +275,29 @@
               }
               slides[slideIndex-1].style.display = "block";  
               dots[slideIndex-1].className += " active";
-              setTimeout(showSlides, 2000); // Change image every 2 seconds
+              setTimeout(showSlides, 3000); // Change image every 2 seconds
             }
+
+            
+ 
+            function showSlides1() {
+              let i;
+              let slides1 = document.getElementsByClassName("mySlides1");
+              let dots1 = document.getElementsByClassName("dot1");
+              for (i = 0; i < slides1.length; i++) {
+                slides1[i].style.display = "none";  
+              }
+              slideIndex1++;
+              if (slideIndex1 > slides1.length) {slideIndex1 = 1}    
+              for (i = 0; i < dots1.length; i++) {
+                dots1[i].className = dots1[i].className.replace(" active", "");
+              }
+              slides1[slideIndex1-1].style.display = "block";  
+              dots1[slideIndex1-1].className += " active";
+              setTimeout(showSlides1, 3000); // Change image every 2 seconds
+            }
+
+            
 
 //------------------------logout---------------------------------------------
 
@@ -273,21 +333,7 @@
           document.querySelector('.container').style.opacity= '1';
           }
 
-          pc=document.getElementById('pc');
-          mobile=document.getElementById('mobile');
-          pc_img = document.querySelector('.lideshow-container');
-          mobile_img=document.querySelector('.lideshow-container1');
-
-          pc.addEventListener('click',()=>{
-            mobile_img.style.display='none';
-            pc_img.style.display="block";
-            pc.style.background-color='aliceblue';
-            
-          });
-          mobile.addEventListener('click',()=>{
-            mobile_img.style.display='block';
-            pc_img.style.display="none";
-          });
+         
         </script>
         </body>
         </html>

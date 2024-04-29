@@ -144,6 +144,7 @@
             redirect("login");
         }
         $_SESSION['offer_count'] = 1;
+        $_SESSION['negotiation_status_count'] =1;
         $user = new User();
         $current_ride = new Current_rides();
         $standardfare = new standardFare();
@@ -279,22 +280,24 @@
             }
         }
         
-        // $rows1 = $message->findAll();
-        // $data['rows1'] = array();
+        $rows1 = $rating->findAll();
+        $data['rows1'] = array();
        
-        // if(isset($rows1[0])){
+        if(isset($rows1[0])){
 
-        //     for($i = 0;$i < count($rows1); $i++)
-        //     {
-        //             $data['rows1'][] = $rows1[$i];
-        //     }
-        // }
+            for($i = 0;$i < count($rows1); $i++)
+            {
+                    $data['rows1'][] = $rows1[$i];
+            }
+        }
         
         $curride = $current_ride->first(['passenger_id' => $_SESSION['USER_DATA']->id ]);
       
         $rows10 = $offers->where([
             'ride_id' => $curride ->id,
         ]);
+        $rows11 = $offers->where(['ride_id' => $curride ->id,'accept_status' => 1]);
+
         $rows2 = $offers->findAll();
         $data['rows2'] = array();
        
@@ -334,7 +337,11 @@
                  $chat = array();
                  $chat['negotiation_price']=$_POST['message_text'];
                  $chat['negotiation_status'] = 1;
+                //  show($_POST['fare']);
                 $offers->update_negotiate_fare($_POST['ride_id'],$_POST['Driver_id'],$chat);
+
+                $data['title'] = "Ride";
+                $this->view('customer/ride_step4',$data);
             }
 
             // go button click go next state
@@ -363,10 +370,11 @@
                 $accept_status['accept_status']=1;
                 // show($accept_status);
                 $offers->update_accept_status($_POST['driver_id'],$accept_status);
+                show($_POST['id']);
                 if($_POST['id'] !== ''){
                    redirect('customer/ride_step5/location='.$_GET['location'].'&l_lat='.$_GET['l_lat'].'&l_long='.$_GET['l_long'].'&driver_id='.$_POST['driver_id'].'&id='.$_POST['id']);
                 }
-
+                $this->view('customer/ride_step4',$data);
                 
             }
             //  back button click
@@ -389,22 +397,36 @@
             redirect('customer/ride_step3/.php?time='.$time.'&distance='.$distance.'&location='.$location.'&l_lat='.$l_lat.'&l_long='.$l_long.'&destination='.$destination.'&d_lat='.$d_lat.'&d_long='.$d_long.'&m_lat='.$m_lat.'&m_long='.$m_long);
 
         }
-            $i=0;
+           
         // if (isset($rows10)) {
-            if ( $rows10=='') {
+            if (empty($rows10) &&  $_SESSION['offer_count'] == 2) {
+                $_SESSION['offer_count'] = $_SESSION['offer_count'] - 1;
+                echo "exists";}
+            elseif (empty($rows10)) {
                 echo "no-change";
-            } else {  
-                if( $_SESSION['offer_count'] == 1)
-                {
-                    $_SESSION['offer_count']= $_SESSION['offer_count']+1;
+            } else {
+                if ($_SESSION['offer_count'] == 1) {
+                    $_SESSION['offer_count'] = $_SESSION['offer_count'] + 1;
+                    echo "exists";
+                } elseif ($_SESSION['offer_count'] == count($rows10)) {
+                    $_SESSION['offer_count'] = $_SESSION['offer_count'] + 1;
+                    echo "exists";
+                } elseif ($_SESSION['offer_count'] - 2 == count($rows10)) {
+                    $_SESSION['offer_count'] = $_SESSION['offer_count'] - 1;
                     echo "exists";
                 } 
-                if($_SESSION['offer_count']==count($rows10)){
-                    $_SESSION['offer_count']= $_SESSION['offer_count']+1;
-                    echo "exists";
-                }         
                 
             }
+
+        //     if(!empty($rows11)){
+        //         if ( $_SESSION['negotiation_status_count'] == count($rows11)  && $_SESSION['negotiation_status_count']==1 ) {
+        //             $_SESSION['negotiation_status_count'] = $_SESSION['negotiation_status_count'] + 1;
+        //             echo "exists";
+        //         }
+                
+        //     }
+        //     else{
+                // echo "no-change";  
         // }
         
         
@@ -413,8 +435,11 @@
        
     }else{
         // show($_SESSION['offer_count']);
-        // show(count($rows10));
-        // show($rows10);
+        // show($_SESSION['negotiation_status_count']);
+        // if(!empty($rows11))
+        // {
+        // show(count($rows11));
+        // }
         $data['title'] = "Ride";
         $this->view('customer/ride_step4',$data);
     }
@@ -453,7 +478,9 @@
         $data['img'] = $img[0]->img_path;
 
         $vehicle = array();
-        $vehicle = $rides->where(['id'=>$_GET['id']]);
+        $curr=[];
+        $curr=$current_ride->where(['passenger_id' => $_SESSION['USER_DATA']->id ]);
+        $vehicle = $rides->where(['id'=>$curr[0]->id]);
         $data['vehicle']=$vehicle[0]->vehicle;
 
 
@@ -467,18 +494,24 @@
             }
         }
 
+        $driver_id=array();
+        $driver_id=$rides->where(['id' => $curr[0]->id]);
         $rows2 = $user->findAll();
         $data['rows2'] = array();
         if(isset($rows2[0])){
 
             for($i = 0;$i < count($rows2); $i++)
             {
-                  if($_GET['driver_id'] == $rows2[$i]->id)
+                  if($driver_id[0]->driver_id == $rows2[$i]->id)
                   {
                     $data['rows2'][] = $rows2[$i];
                   }
             }
         }
+
+                $arr=[];
+                $arr=$rides->where(['id' => $curr[0]->id]);
+
         if ($_SERVER["REQUEST_METHOD"]=="POST")
         {
             if(isset($_POST['message']))
@@ -499,24 +532,20 @@
                 $current_ride->delete($ride_id);
                 redirect('customer/ride_step');
             }
-            
-        }
-
-        $rows3 = $rides->findAll(); 
-        if(isset($rows3[0])){
-
-            for($i = 0;$i < count($rows3); $i++)
-            {
-                    if($rows3[$i]->id == $_GET['id']  && $rows3[$i]->ride_start==1){
-                           redirect('customer/ride_step6/.php?driver_id='.$_GET['driver_id'].'&id='.$_GET['id']);
-                    }
+     
+                if($arr[0]->ride_start == 1){
+                    echo "exists";
+                }else{
+                  echo "no-change";
+                }
+              
+        }else{
+            if($arr[0]->ride_start == 1){
+                redirect('customer/ride_step6/.php?driver_id='.$driver_id[0]->driver_id.'&id='.$curr[0]->id);
             }
-        }
-    
-        // show($data);
-        // redirect('customer/ride_step6/driver_id='.$_GET['driver_id']);
         $data['title'] = "Ride";
         $this->view('customer/ride_step5',$data);
+        }
     }
 
     public function ride_step6(){
@@ -528,6 +557,7 @@
         $rides = new Rides();
         $user = new User();
         $rating = new Rating();
+        $current_ride = new Current_rides();
 
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
         $sum = 0;
@@ -546,6 +576,18 @@
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
         $data['img'] = $img[0]->img_path;
 
+        if ($_SERVER["REQUEST_METHOD"]=="POST")
+        {
+                 $curr=[];
+                 $curr=$current_ride->where(['passenger_id' => $_SESSION['USER_DATA']->id ]);
+                 $arr=[];
+                 $arr=$rides->where(['id' => $curr[0]->id]);
+                 if($arr[0]->state == 'Success'){
+                    echo "exists";
+                }else{
+                  echo "no-change";
+                }
+        }else{
         $vehicle = array();
         $vehicle = $rides->where(['id'=>$_GET['id']]);
         $data['vehicle']=$vehicle[0]->vehicle;
@@ -565,6 +607,7 @@
 
         $data['title'] = "Ride";
         $this->view('customer/ride_step6',$data);
+      }
     }
 
     public function ride_step7(){
@@ -604,7 +647,7 @@
         $sample['complaint'] = '';
         if($_SERVER['REQUEST_METHOD'] == "POST"){
             if ($_FILES["file"]["error"] === UPLOAD_ERR_OK) {
-                $targetDir = "C://wamp64/www/FAREFLEX/public/assets/img/customer/profile/"; // Directory where files will be uploaded
+                $targetDir = "C://wamp64/www/FAREFLEX/public/assets/img/customer/complaint/"; // Directory where files will be uploaded
                 $targetFile = $targetDir . basename($_FILES["file"]["name"]);
             
                 if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {

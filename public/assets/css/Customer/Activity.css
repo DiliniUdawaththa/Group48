@@ -142,27 +142,31 @@ body{
      padding: 0;
      /* padding-top:0px; */
     }
+    h1{
+        font-size: 3vh;
+    }
     .heading{
         display: none;
+        font-size: 3vh;
     }
     .data{
         display: block;
         height: auto; 
-        /* font-size: 1.5em;    */
+        font-size: 2vh;
     }
     .data .date{
         display: flex;
-        width: 50%;
+        width: 100%;
         float: right;
     }
     .data .name{
         display: flex;
-        width: 50%;
+        width: 100%;
         float: left;
     }
     .data .vehicle{
         display: flex;
-        width: 30%;
+        width: 100%;
         float: left;
     }
     
@@ -174,8 +178,8 @@ body{
     }
     .data .fare{
         display: flex;
-        width: 30%;
-        float: right;
+        width: 50%;
+        float: left;
     }
     .h1{
         display: flex;
