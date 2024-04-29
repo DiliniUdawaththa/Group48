@@ -192,7 +192,13 @@
             },
             tooltip: {
               enabled: true
-            }
+            },
+            tickAmount: 5, // Display tick marks for each data point
+                labels: {
+                    formatter: function(val) {
+                        return Math.floor(val); // Ensure only integers are displayed
+                    }
+                }
           },
           // {
             // seriesName: 'Revenue',
@@ -256,6 +262,14 @@
             },
             xaxis: {
                 categories: weekdays
+            },
+            yaxis: {
+                tickAmount: 5, // Display tick marks for each data point
+                labels: {
+                    formatter: function(val) {
+                        return Math.floor(val); // Ensure only integers are displayed
+                    }
+                }
             }
         }
 
@@ -283,6 +297,14 @@
             },
             xaxis: {
                 categories: weekdays
+            },
+            yaxis: {
+                tickAmount: 3, // Display tick marks for each data point
+                labels: {
+                    formatter: function(val) {
+                        return Math.floor(val); // Ensure only integers are displayed
+                    }
+                }
             }
         }
 

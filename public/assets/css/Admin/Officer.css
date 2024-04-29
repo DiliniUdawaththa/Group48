@@ -247,7 +247,7 @@ table tbody tr:nth-child(odd) {
     cursor: pointer;
 }
 .td_button{
-    display: flex;
+    /* display: flex; */
     align-content: center;
 }
 /*------------------------------add officer form----------------------------*/
