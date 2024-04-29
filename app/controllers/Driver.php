@@ -121,6 +121,7 @@ class Driver extends Controller{
     }
     public function activity(){
         $data['errors'] = [];
+        $data['suspended_status'] = 0;
 
         $vehicle = new Vehicle();
         $owner = $_SESSION['USER_DATA']->id;
@@ -186,7 +187,6 @@ class Driver extends Controller{
                 
 
             }
-            echo "hids";
         }
 
             $this->view('driver/activity',$data);
@@ -297,6 +297,7 @@ class Driver extends Controller{
         $row3 = $current_rides->first([
             "id"=> $id,
         ]);
+
 
         $data['ride_info'] = $row3;
 
@@ -440,6 +441,15 @@ class Driver extends Controller{
 
         $cust = new User();
         $ride = new Rides();
+        $current_rides = new Current_rides();
+
+        //Information of the current ride stored in $row3
+        $row3 = $current_rides->first([
+            "id"=> $_SESSION['ride_id'],
+        ]);
+
+        $data['ride_info'] = $row3;
+
         $current_ride = $ride->first([
             "id" => $_SESSION['ride_id'],
         ]);
