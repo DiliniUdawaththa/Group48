@@ -93,7 +93,7 @@ class Database
 		$this->query($query);
 
 		$query = "
-		CREATE TABLE `vehicle` (
+		CREATE TABLE IF NOT EXISTS `vehicle` (
 			`licenseplate` varchar(100) NOT NULL,
 			`owner` int(20) NOT NULL,
 			`type` varchar(20) NOT NULL,
