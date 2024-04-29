@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="refresh" content="15" id="refreshMeta">
+    <!-- <meta http-equiv="refresh" content="15" id="refreshMeta"> -->
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_step4.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Customer/ride_side.css">   
@@ -45,13 +45,48 @@
                             <?php  foreach ($rows2 as $row2) :  ?>  <!--  //offers table -->
                                     <?php if( $_GET['vehicle'] == $row4->vehicle && $row4->id == $row2->ride_id  && $row4->passenger_id ==$_SESSION['USER_DATA']->id){  ?>
                                         <div class="driverlist" id="list_<?=$row2->driver_id?>" onclick="highlightBox('list_<?=$row2->driver_id?>')">
-                                            <div class="imgstar"><img src="<?= ROOT ?>/assets/img/customer/person.png" alt="">
+                                        <?php  foreach ($rows3 as $row3) :  ?>   <!--  //user table -->
+                                            <?php if($row3->id == $row2->driver_id){?>
+                                                  <div class="imgstar"><img src="<?= ROOT ?>/<?=$row3->img_path?>" alt="">
+                                            <?php } ?>
+                                            <?php endforeach; ?>
                                             <span>
-                                                <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                                                <i class="fa-solid fa-star" style="color: #D1B000;"></i>
-                                                <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
-                                                <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
-                                                <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
+                                            <?php 
+                                                $sum=0;
+                                                $count=0;
+                                                $star=0;
+                                                foreach ($rows1 as $row1) :                                              
+                                                    if($row1->role_id == $row2->driver_id)
+                                                    {
+                                                        $sum=$sum+$row1->rate;
+                                                        $count=$count+1;
+                                                    }
+                                                 endforeach; 
+                                                   if($sum==0)
+                                                   {
+                                                     $star=3;
+                                                   }
+                                                   else{
+                                                    $star=round($sum/$count);
+                                                   }
+                                                    // echo $sum;
+                                                   for($i=0;$i<5;$i++){
+                                                      if($i<$star)
+                                                      { ?>
+                                                        <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                                                      <?php }
+                                                      else{
+                                                        ?>
+                                                        <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
+                                                      <?php }
+                                                   }
+                                                    ?> <!--  //rating table --> 
+                                                    <!-- <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                                                    <i class="fa-solid fa-star" style="color: #D1B000;"></i>
+                                                    <i class="fa-solid fa-star" style="color: #D9D9D9;"></i>
+                                                    <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i>
+                                                    <i class="fa-solid fa-star" style="color: #D9D9D9;" ></i> -->
+                                               
                                             </span></div>
                                             <div class="name">Mr.
                                             <?php  foreach ($rows3 as $row3) :     // user table
@@ -126,6 +161,31 @@
     button.classList.toggle("beating");
    }
 
+   setInterval(() =>{
+                console.log("Hi");
+                let xhr = new XMLHttpRequest();
+                console.log(xhr);
+                xhr.open("POST", '<?php echo ROOT; ?>'+"/customer/ride_step4", true);
+                xhr.onload = ()=>{
+                    console.log("nol");
+                    if(xhr.readyState === XMLHttpRequest.DONE){
+                    
+                    if(xhr.status === 200){
+                        let data = xhr.response;
+                        console.log(data);
+                        if(data=="exists"){
+                            location.reload();
+                        }
+
+                        
+                    
+                }
+            }
+            }
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("incoming_id="+'yes');
+        }, 5000);
+
 
 </script>
 
@@ -160,6 +220,7 @@
         <?php  foreach ($rows as $row) :  ?>     //driver_state table
              <?php if( $_GET['vehicle'] == $row4->vehicle && $row4->id == $row2->ride_id  && $row4->passenger_id ==$_SESSION['USER_DATA']->id && $row->driver_id == $row2->driver_id){ ?>
                 if(listId=="list_<?=$row->driver_id?>"){
+                    // console.log('hello');
                     document.getElementById('form_fare').value=<?=$row2->offer_price;?>;
                     document.getElementById('ride_id').value=<?=$row4->id;?>;
                     map.flyTo([ <?=$row->lat?>,<?=$row->lng?>], 16)
@@ -168,7 +229,11 @@
                         iconSize: [38, 38]
                     });
                     var singlemarker=L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon: myIcon}).addTo(map); 
-                    var contant = "<center><img src='<?= ROOT ?>/assets/img/customer/person.png' alt='Your Image' style='width: 100px; height: auto; '><br><b style='color:red;'>2314B (RED)</b><br>I am waiting for you.</center>";
+                    <?php  foreach ($rows3 as $row3) :  ?>
+                        <?php if($row2->driver_id ==$row3->id ){?>
+                           var contant = "<center><img src='<?= ROOT ?>/<?=$row3->img_path?>' alt='Your Image' style='width: 100px; height: auto; '><br><b style='color:red;'>2314B (RED)</b><br>I am waiting for you.</center>";
+                        <?php } ?>
+                    <?php endforeach; ?>
                     var popup = singlemarker.bindPopup(contant)
                     singlemarker.openPopup();
                     }

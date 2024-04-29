@@ -30,6 +30,10 @@
             #email-upd-btn2,#phone-upd-btn2{
                 display:none;
             }
+            .validation-txt{
+                color:red;
+                font-size: 13px;
+            }
         </style>
     </head>
     <body>
@@ -42,6 +46,11 @@
             <div class="body-container">
                 <form action="" method="post" enctype="multipart/form-data">
                 <div class="profile-container">
+                    <?php if($data['emailValidation']!=" "): ?>
+                        <p><?php echo $data['emailValidation'] ?></p>
+                    <?php endif; ?>
+                    
+                    
                     <div class="profile-bar">
                         <div class="propic-container">
                             <img src="<?= ROOT ?>/<?php echo $_SESSION['USER_DATA']->img_path; ?>" class="propic">
@@ -62,6 +71,9 @@
                                     <td class="col2"><?php echo $_SESSION['USER_DATA']->id; ?></td>
                                     <td class="col3"></td>
                                 </tr>
+                                <?php if($data['emailValidation']!=" "): ?>
+                                    <tr><td colspan="3"><p class="validation-txt"><?php echo $data['emailValidation'] ?></p></td></tr>
+                                <?php endif; ?>
                                 <tr class="tr1">
                                     <td class="col1">Email</td>
                                     <td class="col2" id="email-col1"><?php echo $_SESSION['USER_DATA']->email; ?></td>
@@ -71,6 +83,9 @@
                                         <button type="submit" value="1" name="update-email" id="email-upd-btn2"><img src="<?= ROOT ?>/assets/img/images/done_icon.png" style="height:15px"></button>
                                     </td>
                                 </tr>
+                                <?php if($data['phoneValidation']!=" "): ?>
+                                    <tr><td colspan="3"><p class="validation-txt"><?php echo $data['phoneValidation'] ?></p></td></tr>
+                                <?php endif; ?>
                                 <tr>
                                     <td class="col1">Phone</td>
                                     <td class="col2" id="phone-col1"><?php echo $_SESSION['USER_DATA']->phone; ?></td>
@@ -97,7 +112,12 @@
                         
                     </div>
                     <div class="renew-registration-container">
-                        <p class="reg-exp">Your registration will be expired after <?php echo (365 - $data['dayDifference']) ?> days.</p>
+                        <?php if(365 - $data['dayDifference']>0): ?>
+                            <p class="reg-exp">Your registration will be expired after <?php echo (365 - $data['dayDifference']) ?> days.</p>
+                        <?php else: ?>
+                            <p class="reg-exp">Your registration has expired</p>
+                        <?php endif; ?>
+                        
                         <button type="button" class="renew-registraion">Renew Now</button>
                         </div>
                     

@@ -59,6 +59,7 @@ class Database
 		  `address` varchar(100) NOT NULL DEFAULT '',
 		  `nic` varchar(12) NOT NULL DEFAULT '',
 		  `dob` varchar(16) NOT NULL DEFAULT '',
+		  `status` int(2) NOT NULL DEFAULT 0,
 		  PRIMARY KEY (`id`),
 		  KEY `email` (`email`),
 		  KEY `name` (`email`),
@@ -92,13 +93,13 @@ class Database
 		$this->query($query);
 
 		$query = "
-			CREATE TABLE IF NOT EXISTS `vehicle` (
+		CREATE TABLE IF NOT EXISTS `vehicle` (
 			`licenseplate` varchar(100) NOT NULL,
-			`owner` varchar(100) NOT NULL,
+			`owner` int(20) NOT NULL,
 			`type` varchar(20) NOT NULL,
 			`color` varchar(10) DEFAULT NULL,
 			PRIMARY KEY (`licenseplate`)
-		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+		   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 		   
 		   ";
 		$this->query($query);
@@ -295,11 +296,9 @@ class Database
 		  `datetime` datetime NOT NULL,
 		  `complaint` text NOT NULL,
 		  `status_check` tinyint(1) NOT NULL DEFAULT '0',
+		  `officerCmnt` text DEFAULT 'Not Yet Added' NOT NULL,
 		  PRIMARY KEY (`cmt_id`)
 		) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
-
-		ALTER TABLE 'complaint'
-				ADD COLUMN `officerCmnt` text DEFAULT 'Not Yet Added' NOT NULL;
 		
 		";
 

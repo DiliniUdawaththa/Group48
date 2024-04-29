@@ -18,18 +18,29 @@
                     </div>
                     <span class="explanation">(Enter your valid email address, you use when login to the system)</span>
                     <input value="<?= set_value('email') ?>" type="text" name="email" required>       
+                      <?php if(!empty($errors['email'])):?>
+                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['email']?></small>
+                      <?php endif;?>
+                      <br>
                     
                     <div>
                         <label for="name" class="label" >Name</label><br>
                     </div>
                     <input value="<?= set_value('name') ?>" type="text" name="name" required>
+                      <?php if(!empty($errors['name'])):?>
+                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['name']?> </small>
+                      <?php endif;?>
+                      <br>
                     
                     <div>
                         <label for="pdf_file" class="label">Payment Slip</label><br>
                     </div>
                     <span class="explanation">(rename payment slip as "slip.pdf")</span>
                     <input type="file" name="pdf_file" accept=".pdf" required>
-                    <br>
+                    <?php if(!empty($errors['pdf_file'])):?>
+                        <small id="Firstname-error" class="signup-error" style="color: red;"> <?= $errors['pdf_file']?> </small>
+                      <?php endif;?>
+                      <br>
                     
                     <div class='btn'>
                         <a href="<?=ROOT?>/Driver/expire"><small class="skip">Cancel</button></a>

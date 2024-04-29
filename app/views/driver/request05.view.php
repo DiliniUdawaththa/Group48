@@ -34,6 +34,7 @@
         <div class="page-container">
             <div class="body-container">
 
+            <?php include 'driver_side.php'; ?>
           
             <form method="POST">
                 <div class="req-body">
@@ -181,7 +182,7 @@
                       document.getElementById('star').value=5;
                 });
 
-            
+                
             logout_option.addEventListener('click',function (){
                 logout_container.style.display = 'block';
             })
@@ -202,22 +203,6 @@
 
             })
 
-            active_btn.addEventListener('click',function (){
-                status = 1
-                status_icon.src = '<?= ROOT ?>/assets/img/images/active.png';
-                active_btn.style.backgroundColor = '#162938'
-                active_btn.style.color = 'white'
-                inactive_btn.style.backgroundColor = '#E4E4E4'
-                inactive_btn.style.color = 'black'
-            })
-            inactive_btn.addEventListener('click',function (){
-                status = 0
-                status_icon.src = '<?= ROOT ?>/assets/img/images/inactive.png';
-                active_btn.style.backgroundColor = '#E4E4E4'
-                active_btn.style.color = 'black'
-                inactive_btn.style.backgroundColor = '#162938'
-                inactive_btn.style.color = 'white'
-            })
 
             
             function map_view(){
@@ -235,15 +220,6 @@
                 addVehBtn.style.display = 'none';
                 document.querySelector('.add-vehicle').style.display = 'flex'
             }
-
-            document.querySelector('.update-veh').addEventListener('click', function(){
-                document.querySelector('.update-veh1').style.display = 'block'
-            })
-
-            document.querySelector('.cancel-veh-btn').addEventListener('click', function(){
-                document.querySelector('.update-veh1').style.display = 'none'
-            })
-
 
         </script>
     </body>

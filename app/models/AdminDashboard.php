@@ -2,6 +2,7 @@
 
 class AdminDashboard extends Model{
     protected $table = "users";
+    protected $table1 = "driverregistration";
 
     public function getRoleCounts() {
         $results = $this->query("SELECT role, COUNT(*) as count FROM users GROUP BY role;");
@@ -33,20 +34,25 @@ class AdminDashboard extends Model{
     }
 
     public function countUsersByMonth() {
+        $currentYear = date('Y');
         $query = "SELECT COUNT(*) as user_count, MONTH(date) as month 
                   FROM users 
                   WHERE role = 'user' 
+                  AND YEAR(date) = :year
                   GROUP BY MONTH(date)";
         
-        $results = $this->query($query);
+        $params = [':year' => $currentYear];
+        $results = $this->query($query, $params);
     
         $userCounts = [];
     
-        foreach ($results as $result) {
-            $month = $result->month;
-            $count = $result->user_count;
-    
-            $userCounts[$month] = $count;
+        if($results !== false){
+            foreach ($results as $result) {
+                $month = $result->month;
+                $count = $result->user_count;
+        
+                $userCounts[$month] = $count;
+            }
         }
     
         return $userCounts;
@@ -54,23 +60,34 @@ class AdminDashboard extends Model{
     
 
     public function countDriversByMonth() {
+        $currentYear = date('Y');
         $query = "SELECT COUNT(*) as driver_count, MONTH(date) as month 
-                  FROM users 
+                  FROM users
                   WHERE role = 'driver' 
+                  AND YEAR(date) = :year
                   GROUP BY MONTH(date)";
-        $results = $this->query($query);
+        
+        $params = [':year' => $currentYear];
+        $results = $this->query($query, $params);
     
-        $driverCounts = [];
+        // Check if $results is a valid result set
+        if ($results !== false) {
+            $driverCounts = [];
     
-        foreach ($results as $result) {
-            $month = $result->month;
-            $count = $result->driver_count;
+            foreach ($results as $result) {
+                $month = $result->month;
+                $count = $result->driver_count;
     
-            $driverCounts[$month] = $count;
+                $driverCounts[$month] = $count;
+            }
+    
+            return $driverCounts;
+        } else {
+            // Handle the case where the query failed
+            return [];
         }
-    
-        return $driverCounts;
     }
+    
     
     
     

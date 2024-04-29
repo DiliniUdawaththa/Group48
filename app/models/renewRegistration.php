@@ -10,8 +10,8 @@ require 'emails/src/SMTP.php';
 class renewRegistration extends Model{
     public $errors = [];
 	protected $table = "renewregistration";
-
 	protected $table1 = "users";
+    protected$table2 = "driverregistration";
 
 	protected $allowedColumns = [
 		'email',
@@ -77,6 +77,33 @@ class renewRegistration extends Model{
             return false;
         }
 	}
+
+    public function updateDate($email){
+        $userQuery = "SELECT id FROM users WHERE email = :email";
+        $userStmt = $this->pdo->prepare($userQuery);
+        $userStmt->bindParam(':email', $email, PDO::PARAM_STR);
+        
+        try {
+            $userStmt->execute();
+            $userId = $userStmt->fetchColumn(); // Fetch the ID
+        } catch (PDOException $e) {
+            $this->errors[] = $e->getMessage();
+            return false;
+        }
+
+        $sql = "UPDATE {$this->table2} SET date = CURRENT_DATE() WHERE id = :userId";
+
+		$stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            $this->errors[] = $e->getMessage();
+            return false;
+        }
+    }
 
 	public function confirmEmail($email){
         $mail = new PHPMailer(true);
