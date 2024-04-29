@@ -207,6 +207,12 @@ body{
     font-size: 20px;
     background-color: #0c052e;
     margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.report-link:hover {
+    background-color: #1a0f5e; 
+    transform: scale(1.05);
 }
 .linkbtn {
     display: flex;
@@ -242,12 +248,13 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     z-index: 9999; 
 
 }
 .report-container h3{
     margin-bottom: 40px;
+    color: #111827;
 }
 .report-container button{
     height:40px;
@@ -257,6 +264,7 @@ body{
     border-radius: 5px;
     margin-right: 20px;
     padding: 10px;
+    transition: background-color 0.3s, color 0.3s;
 }
 .ride-btn{
     background-color: #194672;
@@ -284,6 +292,10 @@ body{
     width: 200px;
     align-items: center;
     margin: auto auto;
+}
+.report-select:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+    border-radius: 5px; /* Rounded corners on hover */
 }
 
 
