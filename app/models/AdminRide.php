@@ -43,11 +43,13 @@ class AdminRide extends Model{
         }
     
         // Populate rideCounts with counts from the database results
-        foreach ($results as $result) {
-            $weekday = $result->weekday;
-            $count = $result->ride_count;
-    
-            $rideCounts[$weekday] = $count;
+        if($results !== false){
+            foreach ($results as $result) {
+                $weekday = $result->weekday;
+                $count = $result->ride_count;
+        
+                $rideCounts[$weekday] = $count;
+            }
         }
     
         return $rideCounts;
@@ -86,14 +88,15 @@ class AdminRide extends Model{
         for ($i = 0; $i < 7; $i++) {
             $rideCounts[$i + 1] = 0;
         }
-    
-        foreach ($results as $result) {
-            $weekday = $result->weekday;
-            $dayCount = $result->day_count;
-    
-            $rideCounts[$weekday] = $dayCount;
+
+        if($results !== false){ 
+            foreach ($results as $result) {
+                $weekday = $result->weekday;
+                $dayCount = $result->day_count;
+        
+                $rideCounts[$weekday] = $dayCount;
+            }
         }
-    
         return $rideCounts;
     }
     
@@ -141,12 +144,14 @@ class AdminRide extends Model{
         for ($i = 0; $i < 7; $i++) {
             $rideCounts[$i + 1] = 0;
         }
-    
-        foreach ($results as $result) {
-            $weekday = $result->weekday;
-            $nightCount = $result->night_count;
-    
-            $rideCounts[$weekday] = $nightCount;
+
+        if($results !== false){
+            foreach ($results as $result) {
+                $weekday = $result->weekday;
+                $nightCount = $result->night_count;
+        
+                $rideCounts[$weekday] = $nightCount;
+            }
         }
     
         return $rideCounts;
@@ -318,9 +323,11 @@ class AdminRide extends Model{
         ));
     
         $userCounts = [];
-        foreach ($result as $row) {
-            $rowArray = (array)$row; // Cast stdClass object to array
-            $userCounts[$rowArray['year']] = $rowArray['user_count'];
+        if($result !== false){
+            foreach ($result as $row) {
+                $rowArray = (array)$row; // Cast stdClass object to array
+                $userCounts[$rowArray['year']] = $rowArray['user_count'];
+            }
         }
 
         return $userCounts;
@@ -389,9 +396,11 @@ class AdminRide extends Model{
         ));
     
         $userCounts = [];
-        foreach ($result as $row) {
-            $rowArray = (array)$row; // Cast stdClass object to array
-            $userCounts[$rowArray['year']] = $rowArray['user_count'];
+        if($result !== false){
+            foreach ($result as $row) {
+                $rowArray = (array)$row; // Cast stdClass object to array
+                $userCounts[$rowArray['year']] = $rowArray['user_count'];
+            }
         }
 
         return $userCounts;
