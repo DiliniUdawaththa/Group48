@@ -23,7 +23,7 @@
         <a class="a" href="#section2" >Services</a>
         <a class="a" href="#section3" >About</a>
         <a class="a" href="#section4" >Contact</a>
-        <a href="http://localhost/FAREFLEX/public/login"  class="login">Log in</a>
+        <a href="http://localhost/FAREFLEX/public/login"  class="login" style="color:black;">Log in</a>
         <a href="http://localhost/FAREFLEX/public/signup" class="signup">Sign up </a>
     </div>
 </div>
