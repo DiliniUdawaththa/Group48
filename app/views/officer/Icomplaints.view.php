@@ -7,7 +7,7 @@
     <title><?=ucfirst(App::$page)?> - <?=APPNAME?></title>
     <script src="https://kit.fontawesome.com/cbd2a66f05.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/Officer.css">
-
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/Officer/renewDRegistration.css">
     <style>
     .error {
         border: 1px solid red;
@@ -53,31 +53,12 @@
         position: relative;
         top: 50px;
     }
-
-    .notification {
-        background-color: red;
-        color: white;
-        border-radius: 50%;
-        padding: 5px 8px;
-        font-size: 12px;
-        position: absolute;
-        top: 5px;
-        right: 5px;
-    }
     </style>
 </head>
 
 <body>
-
     <div class="main">
         <div class="sidebar">
-            <?php 
-$model = new Driverregistration();
-$count = $model->getPendingRCount();
-
-$model2 = new Complaint();
-            $count2 = $model2->getPendingCount();
-?>
             <div class="logo">
                 <img src="<?= ROOT ?>/assets/img/logoname.png" class="barimage">
                 <br>
@@ -92,10 +73,7 @@ $model2 = new Complaint();
                     <div class="linkbutton"><i class="fa-solid fa-gauge"></i>Dashboard</div>
                 </a>
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
-                    <div class="linkbutton1"><i class="fa-solid fa-id-card"></i>Driver Registration <div
-                            style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display: inline-block; text-align: center; color: white;">
-                            <?php echo $count ?></div>
-                    </div>
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration</div>
                 </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div>
@@ -104,10 +82,7 @@ $model2 = new Complaint();
                     <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
-                    <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains <div
-                            style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display: inline-block; text-align: center; color: white;">
-                            <?php echo $count2 ?></div>
-                    </div>
+                    <div class="linkbutton1"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
                 </a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div>
@@ -126,6 +101,8 @@ $model2 = new Complaint();
 
 
         </div>
+
+
 
         <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -155,11 +132,11 @@ $model2 = new Complaint();
 
             accept_buttons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const id = button.getAttribute('data-id');
+                    const cmt_id = button.getAttribute('data-cmt_id');
                     accept_container.style.display = 'block';
                     document.querySelector('.ok-btn').addEventListener('click', () => {
-                        window.location.href = "<?=ROOT?>/officer/RegistrationAccept/" +
-                            encodeURIComponent(id);
+                        window.location.href = "<?=ROOT?>/officer/investigate/" +
+                            encodeURIComponent(cmt_id);
                     });
                 });
             });
@@ -169,11 +146,11 @@ $model2 = new Complaint();
 
             reject_buttons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const email = button.getAttribute('data-email');
+                    const cmt_id = button.getAttribute('data-cmt_id');
                     reject_container.style.display = 'block';
                     document.querySelector('.reject-btn').addEventListener('click', () => {
-                        window.location.href = "<?=ROOT?>/officer/renewReject/" +
-                            encodeURIComponent(email);
+                        window.location.href = "<?=ROOT?>/officer/reject/" +
+                            encodeURIComponent(cmt_id);
                     });
                 });
             });
@@ -181,84 +158,114 @@ $model2 = new Complaint();
                 reject_container.style.display = 'none';
             });
 
+            var Rejected = <?php echo $rejected; ?>;
+            var pending = <?php echo $pending; ?>;
+            var investigated = <?php echo $Investigated; ?>;
+            var total = <?php echo $total; ?>;
+
+
+            var options = {
+                series: [rejected, investigated, pending],
+                chart: {
+                    type: 'donut',
+                },
+                labels: ['Rejected', 'Investigated', 'Pending'],
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 50
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+
 
         });
         </script>
-        <?php 
-$model = new officerrenew();
-$count = $model->renewcount();
-?>
-
-
 
         <div class="interface">
             <div class="navi">
                 <div class="navi1">
-                    <h2>DRIVER REGISTRATION</h2>
-                </div>
-                <div class="operation">
-
-                    <a href="<?=ROOT?>/officer/renewRegistration" class="link"><button type="button"
-                            class="button-style" id="plus"><i class="fa-solid fa-address-book"></i> Renew
-                            Registration <div
-                                style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display: inline-block; text-align: center; color: white;">
-                                <?php echo $count ?></div>
-                        </button></a>
+                    <h2>INVESTIGATED COMPLAINTS</h2>
                 </div>
             </div>
             <div class="table1">
                 <table>
                     <thead>
                         <tr>
-                            <td>Profile</td>
-                            <td>ID</td>
-                            <td>More</td>
-
-
-
+                            <td>Complainant</td>
+                            <td>Complaint</td>
+                            <td>Officer Action</td>
+                            <td>Option</td>
                         </tr>
                     </thead>
                     <?php foreach ($rows as $row) : ?>
+
                     <tr class="data">
-                        <td><img src="<?= ROOT . '/' . $row->profileimg ?>" alt="Profile Image"
-                                style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;"></td>
+                        <td><?= $row->complainant ?></td>
 
-                        <td><?=$row->id ?>
+                        <td><?= $row->complaint?></td>
+                        <td><?= $row->officerCmnt?></td>
+                        <td class="td_button1">
+                            <a href="<?=ROOT?>/officer/complainViewI/<?= urlencode($row->cmt_id) ?>"><button
+                                    class="detail_btn1">
+                                    DETAILS
+                                </button></a>
+                            <a href="<?=ROOT?>/officer/add_comment/<?=$row->cmt_id?>"><button class="detail_btn1">
+                                    <!--<i
+                    class="fa-solid fa-circle-info" style="color: black;">--></i>
+                                    COMMENT
+                                </button></a>
 
-                        <td class="td_button2">
-                            <a href="<?=ROOT?>/officer/driverregistration_view/<?= urlencode($row->id) ?>"><button
+                            <a href="<?=ROOT?>/Report/complaintReport/<?= urlencode($row->cmt_id) ?>"><button
                                     class="detail_btn1">
                                     <!--<i
-                                        class="fa-solid fa-circle-info" style="color: black;"></i>-->
-                                    DETAIL
+                                        class="fa-solid fa-circle-info" style="color: black;">--></i>
+                                    REPORT
                                 </button></a>
-                            <!-- <button class="suspend_btn" data-email="<?= $row->email ?>">SUSPEND</button>
-                            <td class="td_button"> -->
-                            <button class="accept_btn" data-id="<?= $row->id ?>">ACCEPT</button>
-                            <button class="reject_btn" data-id="<?= $row->id ?>">REJECT</button>
+
+                            <!-- <button class="reject_btn" data-cmt_id="<?= $row->cmt_id ?>">REJECT</button> -->
+
+                            <!--<button class="accept_btn" data-cmt_id="<?= $row->cmt_id ?>">INVESTIGATED</button>
+                            <button class="reject_btn" data-cmt_id="<?= $row->cmt_id ?>">REJECT</button>-->
+
 
                         </td>
                     </tr>
                     <?php endforeach; ?>
+
                 </table>
-
-            </div>
-            <div class="accept-container">
-                <h2>Approve renewal of driver registration</h2>
-                <p class="accept-text">Are you sure you want to approve?</p>
-                <div class="btn"><button class="cancel-accept-btn">Cancel</button> <button
-                        class="ok-btn">Approve</button></div>
             </div>
 
-            <div class="reject-container">
-                <h2>Reject renewal of driver registration</h2>
-                <p class="reject-text">Are you sure you want to reject?</p>
-                <div class="btn"><button class="cancel-reject-btn">Cancel</button> <button
-                        class="reject-btn">Reject</button></div>
-            </div>
 
 
         </div>
+
+
+    </div>
+    <!-- <div class="accept-container">
+        <h2>Investigate Complaint</h2>
+        <p class="accept-text">Are you sure you investigate this complaint?</p>
+        <div class="btn"><button class="cancel-accept-btn">NO</button> <button class="ok-btn">YES</button>
+        </div>
+    </div> -->
+
+    <div class="reject-container">
+        <h2>Reject Complaint</h2>
+        <p class="reject-text">Are you sure you want to reject this Complaint?</p>
+        <div class="btn"><button class="cancel-reject-btn">NO</button> <button class="reject-btn">YES</button>
+        </div>
+
+
+    </div>
+
 
 
 </body>

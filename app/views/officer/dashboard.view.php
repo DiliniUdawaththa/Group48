@@ -63,6 +63,15 @@
 <body>
     <div class="main">
         <div class="sidebar">
+            <?php 
+            $model = new Driverregistration();
+            $count1 = $model->getPendingRCount();
+$model = new Driverregistration();
+$count1 = $model->getPendingRCount();
+
+$model2 = new Complaint();
+$count2 = $model2->getPendingCount();
+?>
             <div class="logo">
                 <img src="<?= ROOT ?>/assets/img/logoname.png" class="barimage">
                 <br>
@@ -77,10 +86,10 @@
                     <div class="linkbutton1"><i class="fa-solid fa-gauge"></i>Dashboard</div>
                 </a>
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-id-card"></i>Driver Registration</div>
-                </a>
-                <a href="<?=ROOT?>/officer/renewRegistration" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-address-book"></i></i>Renew Registration</div>
+                    <div class="linkbutton"><i class="fa-solid fa-id-card"></i>Driver Registration <div
+                            style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display: inline-block; text-align: center; color: white;">
+                            <?php echo $count1 ?></div>
+                    </div>
                 </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div>
@@ -89,7 +98,10 @@
                     <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
-                    <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
+                    <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains <div style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display:
+                        inline-block; text-align: center; color: white;">
+                            <?php echo $count2 ?></div>
+                    </div>
                 </a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div>
@@ -194,14 +206,17 @@
                     <div class="content-2">
                         <div class="recent-payments">
                             <div class="title">
-                                <h2>DRIVER REGISTRATION</h2>
+                                <h2> &nbsp;&nbsp;DRIVER REGISTRATION &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
                                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="btn1">View All</a>
                             </div>
                             <table>
                                 <tr>
                                     <th>Profile Picture</th>
+                                    <th></th>
                                     <th>ID</th>
+                                    <th></th>
                                     <th>Status</th>
+                                    <th></th>
                                     <th>Option</th>
                                 </tr>
                                 <?php 
@@ -210,14 +225,17 @@
                                 if($top_5 !== false){
                                     foreach ($top_5 as $row) {
                                     echo "<tr>";
-                                    echo "<td><img src='" . ROOT . "/" . $row->profileimg . "' alt='Profile Image' style='width: 150px; height: 100px;'></td>";
+                                    echo "<td><img src='" . ROOT . "/" . $row->profileimg . "' alt='Profile Image' style='width: 100px; height: 100px; border-radius: 50%; object-fit: cover;'></td>";
+                                    echo "<td></td>";
                                     echo "<td>" . $row->id ."</td>";
+                                    echo "<td></td>";
                                     echo "<td>"; if ($row->status = '0') {
                                         echo "Pending";
                                     } elseif($row->status = '1') {
                                         echo "Accepted";
                                     }
                                     echo "</td>";
+                                    echo "<td></td>";
                                     echo "<td><a href='" . ROOT . "/officer/driverregistration_view/" . $row->id . "' class='btn1'>View</a></td>";
                                     echo "</tr>";
                                     }
@@ -233,8 +251,11 @@
                             <table>
                                 <tr>
                                     <th>Complainant</th>
+                                    <th></th>
                                     <th>Complaint</th>
+                                    <th></th>
                                     <th>status</th>
+                                    <th></th>
                                     <th>option</th>
                                 </tr>
                                 <?php 
@@ -244,13 +265,18 @@
                                     foreach ($top_5 as $row) {
                                     echo "<tr>";
                                     echo "<td>" . $row->complainant ."</td>";
+                                    echo "<td></td>";
                                     echo "<td>" . $row->complaint ."</td>";
+                                    echo "<td></td>";
                                     echo "<td>"; if ($row->status = '0') {
                                         echo "Pending";
                                     } elseif($row->status = '1') {
-                                        echo "Accepted";
+                                        echo "Investigated";
+                                    } elseif($row->status = '2') {
+                                        echo "Rejected";
                                     }
                                     echo "</td>";
+                                    echo "<td></td>";
                                     echo "<td><a href='" . ROOT . "/officer/complainView/" . $row->cmt_id . "' class='btn1'>View</a></td>";
                                     echo "</tr>";
                                     }

@@ -14,18 +14,6 @@
         color: red;
     }
 
-    .message {
-        height: 50px;
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .message p {
-        padding: 10px;
-        font-size: 1em;
-        color: #026334;
-        background-color: #a7cfbc;
-    }
 
     .con-button {
         width: 80%;
@@ -46,12 +34,16 @@
     }
 
 
-    .box1 {
-        width: 80%;
-        margin: auto;
-        text-align: center;
-        position: relative;
-        top: 50px;
+
+
+    .button-style2 {
+        background-color: green;
+        color: #FFFFFF;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
     }
     </style>
 </head>
@@ -59,6 +51,13 @@
 <body>
     <div class="main">
         <div class="sidebar">
+            <?php
+            $model = new Driverregistration();
+            $count1 = $model->getPendingRCount();
+            
+            $model2 = new Complaint();
+            $count2 = $model2->getPendingCount();
+            ?>
             <div class="logo">
                 <img src="<?= ROOT ?>/assets/img/logoname.png" class="barimage">
                 <br>
@@ -73,7 +72,10 @@
                     <div class="linkbutton"><i class="fa-solid fa-gauge"></i>Dashboard</div>
                 </a>
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration</div>
+                    <div class="linkbutton"><i class="fa-solid fa-users"></i>Driver Registration <div
+                            style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display: inline-block; text-align: center; color: white;">
+                            <?php echo $count1 ?></div>
+                    </div>
                 </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-user-group"></i>Drivers</div>
@@ -82,7 +84,11 @@
                     <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
-                    <div class="linkbutton1"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
+                    <div class="linkbutton1"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains <div
+                            style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display:
+                        inline-block; text-align: center; color: white;">
+                            <?php echo $count2 ?></div>
+                    </div>
                 </a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div>
@@ -168,9 +174,14 @@
                     <h2>COMPLAINTS</h2>
                 </div>
                 <div class="operation">
+                    <a href="<?=ROOT?>/officer/investigatedComplaint/"><button type="button" class="button-style2"
+                            id="plus">Investigated</button></a>
+                </div>
+                <div class="operation">
                     <a href="<?=ROOT?>/officer/rejectComplaint/"><button type="button" class="button-style1"
                             id="plus">Suspenders</button></a>
                 </div>
+
             </div>
             <div class="table1">
                 <table>

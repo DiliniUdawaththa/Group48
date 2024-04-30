@@ -56,6 +56,16 @@
 <body>
     <div class="main">
         <div class="sidebar">
+            <?php 
+            $model = new Driverregistration();
+            $count1 = $model->getPendingRCount();
+$model = new Driverregistration();
+$count1 = $model->getPendingRCount();
+
+$model2 = new Complaint();
+$count2 = $model2->getPendingCount();
+?>
+
             <div class="logo">
                 <img src="<?= ROOT ?>/assets/img/logoname.png" class="barimage">
                 <br>
@@ -67,7 +77,10 @@
             </div>
             <div class="items">
                 <a href="<?=ROOT?>/officer" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-gauge"></i>Dashboard</div>
+                    <div class="linkbutton"><i class="fa-solid fa-gauge"></i>Dashboard <div
+                            style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display: inline-block; text-align: center; color: white;">
+                            <?php echo $count1 ?></div>
+                    </div>
                 </a>
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-id-card"></i></i>Driver Registration</div>
@@ -79,7 +92,10 @@
                     <div class="linkbutton"><i class="fa-solid fa-users"></i>Customers</div>
                 </a>
                 <a href="<?=ROOT?>/officer/complains" class="link">
-                    <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains</div>
+                    <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains <div
+                            style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display: inline-block; text-align: center; color: white;">
+                            <?php echo $count2 ?></div>
+                    </div>
                 </a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link">
                     <div class="linkbutton"><i class="fa-solid fa-tag"></i>Standard Fare</div>

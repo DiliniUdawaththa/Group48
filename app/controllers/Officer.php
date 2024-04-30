@@ -214,28 +214,79 @@ class officer extends Controller{
         
     }
 
-    /*public function RegistrationAccept($id){
-        $renew_driver = new OfficerDriverRegistration($GLOBALS['pdo']);
-        $driver = new user();
+    public function RegistrationAccept($id){
+        $new_driver = new OfficerDriverRegistration($GLOBALS['pdo']);
+        $user = new OfficerDriver();
 
-        $email = $email;
-        $renew_driver->updateDriverStatus($id);
-        $renew_driver->updateRegDate($email);
-        $renew_driver->confirmEmail($email);
+        $new_driver->updateDriverStatus($id);
 
-        redirect('officer/renewRegistration');
+        $data = [
+            'id' => $id
+        ];
+        $rows = $new_driver->where($data);
+        $row = (object) $rows[0];
+
+        
+        $driver = $row->id;
+        $data2 = [
+            'id' => $driver
+        ];
+        $rows2 = $user->where($data2);
+        $row2 = null;
+        if (is_array($rows2) && count($rows2) > 0) {
+            $row2 = (object) $rows2[0];
+        }
+
+        $data = [
+            'title' => "driverRegistration",
+            'row' => $row,
+            'row2' => $row2,
+        ];
+
+
+        $email = $row2->email;
+        
+        $new_driver->OfficerAcceptEmail($email);
+
+        redirect('officer/officerdriverRegistration');
 
     }
 
-    public function RegistrationReject($email){
-        $renew_driver = new renewRegistration($GLOBALS['pdo']);
+    public function RegistrationReject($id){
+        $new_driver = new OfficerDriverRegistration($GLOBALS['pdo']);
+        $user = new OfficerDriver();
 
-        $renew_driver->rejectEmail($email);
-        $renew_driver->deleteRequest($email);
+        $data = [
+            'id' => $id
+        ];
+        $rows = $new_driver->where($data);
+        $row = (object) $rows[0];
 
-        redirect('officer/renewRegistration');
+        
+        $driver = $row->id;
+        $data2 = [
+            'id' => $driver
+        ];
+        $rows2 = $user->where($data2);
+        $row2 = null;
+        if (is_array($rows2) && count($rows2) > 0) {
+            $row2 = (object) $rows2[0];
+        }
+
+        $data = [
+            'title' => "driverRegistration",
+            'row' => $row,
+            'row2' => $row2,
+        ];
+
+
+        $email = $row2->email;
+        $new_driver->officerrejectEmail($email);
+        $new_driver->delete_rec($id);
+
+        redirect('officer/officerdriverRegistration');
     }
-*/
+
 
 
     //-----------------Standard Fare--------------------------
@@ -284,7 +335,7 @@ class officer extends Controller{
                 //  $_POST['fare'] =$add_standardFare->fare;
                 //  $_POST['updatedby'] =$add_standardFare->updatedby;
                 //  $_POST['date'] = $add_standardFare->date;
-                 $_POST['date'] = date("Y-m-d H:i:s");
+                 //$_POST['date'] = date("Y-m-d H:i:s");
                 $add_standardFare->insert($_POST);
 				redirect('officer/standardFare');
             }
@@ -458,32 +509,32 @@ class officer extends Controller{
     }*/
 
 /*--------------------------complaint-----------------------------*/
+    // public function complains(){
+    //     if(!Auth::logged_in())
+    //     {
+    //         message('please login to view the page');
+    //         redirect("login");
+    //     }
+    //     $data['errors'] = [];
+
+    //     $add_complaint = new complaint();
+
+    //     $rows = $add_complaint->findAll();
+    //     $data['rows'] = array();
+
+    //     if(isset($rows[0])){
+    //     for($i = 0;$i < count($rows); $i++)
+    //     {
+    //         $data['rows'][] = $rows[$i];
+    //     }
+
+    //     }
+    //     $data['title'] = "complains";
+    //     $this->view('officer/complains',$data);
+    // }
+
+
     public function complains(){
-        if(!Auth::logged_in())
-        {
-            message('please login to view the page');
-            redirect("login");
-        }
-        $data['errors'] = [];
-
-        $add_complaint = new complaint();
-
-        $rows = $add_complaint->findAll();
-        $data['rows'] = array();
-
-        if(isset($rows[0])){
-        for($i = 0;$i < count($rows); $i++)
-        {
-            $data['rows'][] = $rows[$i];
-        }
-
-        }
-        $data['title'] = "complains";
-        $this->view('officer/complains',$data);
-    }
-
-
-    /*public function complains(){
         if(!Auth::logged_in())
         {
             message('please login to view the admin section');
@@ -495,7 +546,7 @@ class officer extends Controller{
         $search = isset($_GET['sarch']) ? $_GET['search'] : null;
 
         $data = [
-            'status_check' => "0"
+            'status_check' => "0",
         ];
 
         if($search !== null){
@@ -511,7 +562,37 @@ class officer extends Controller{
         $data['title'] = "complaint";
         $this->view('officer/complains',$data);
         
-    }*/
+    }
+
+    // public function complains1(){
+    //     if(!Auth::logged_in())
+    //     {
+    //         message('please login to view the admin section');
+    //         redirect("login");
+    //     }
+
+    //     $add_complaint = new Complaint();
+
+    //     $search = isset($_GET['sarch']) ? $_GET['search'] : null;
+
+    //     $data = [
+    //         'status_check' => "1",
+    //     ];
+
+    //     if($search !== null){
+    //         $rows = $add_complaint->where2($data , $search);
+    //     }else {
+    //         // Otherwise, retrieve all
+    //         $rows = $add_complaint->where($data);
+    //     }
+
+    //     $data['rows'] = is_array($rows) ? $rows : [];
+
+       
+    //     $data['title'] = "complaint";
+    //     $this->view('officer/complains',$data);
+        
+    // }
 
 
 
@@ -560,6 +641,97 @@ class officer extends Controller{
         $this->view('officer/complaint_view',$data);
     }
 
+    public function complainViewI($cmt_id){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $complaint = new Complaint();
+        $user = new User();
+
+        $data = [
+            'cmt_id' => $cmt_id
+        ];
+        $rows = $complaint->where($data);
+        $row = (object) $rows[0];
+
+        $customer = $row->passenger_id;
+        $data1 = [
+            'id' => $customer
+        ];
+        $rows1 = $user->where($data1);
+        $row1 = null;
+        if (is_array($rows1) && count($rows1) > 0) {
+            $row1 = (object) $rows1[0];
+        }
+
+        $driver = $row->driver_id;
+        $data2 = [
+            'id' => $driver
+        ];
+        $rows2 = $user->where($data2);
+        $row2 = null;
+        if (is_array($rows2) && count($rows2) > 0) {
+            $row2 = (object) $rows2[0];
+        }
+
+        $data = [
+            'title' => "complaint",
+            'row' => $row,
+            'row1' => $row1,
+            'row2' => $row2,
+        ];
+
+        $this->view('officer/complaint_viewI',$data);
+    }
+
+    public function complainViewR($cmt_id){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $complaint = new Complaint();
+        $user = new User();
+
+        $data = [
+            'cmt_id' => $cmt_id
+        ];
+        $rows = $complaint->where($data);
+        $row = (object) $rows[0];
+
+        $customer = $row->passenger_id;
+        $data1 = [
+            'id' => $customer
+        ];
+        $rows1 = $user->where($data1);
+        $row1 = null;
+        if (is_array($rows1) && count($rows1) > 0) {
+            $row1 = (object) $rows1[0];
+        }
+
+        $driver = $row->driver_id;
+        $data2 = [
+            'id' => $driver
+        ];
+        $rows2 = $user->where($data2);
+        $row2 = null;
+        if (is_array($rows2) && count($rows2) > 0) {
+            $row2 = (object) $rows2[0];
+        }
+
+        $data = [
+            'title' => "complaint",
+            'row' => $row,
+            'row1' => $row1,
+            'row2' => $row2,
+        ];
+
+        $this->view('officer/complaint_viewR',$data);
+    }
+
+
     public function add_comment($cmt_id=null){
         if(!Auth::logged_in())
         {
@@ -595,6 +767,40 @@ class officer extends Controller{
         $this->view('officer/complaint_comment',$data);
     }
 
+    public function add_commentI($cmt_id=null){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+        $data['errors'] = [];
+        $add_comment = new Complaint();
+        $rows = $add_comment->findAll();
+        $data['rows'] = array();
+
+        for($i = 0;$i < count($rows); $i++)
+        {
+            if($rows[$i]->cmt_id == $cmt_id)
+                $data['rows'][] = $rows[$i];
+        }
+        // show($_POST);
+        if($_SERVER['REQUEST_METHOD'] == "POST")
+		{
+            
+			if($add_comment->validate($_POST))
+			{    
+                // show($_POST);
+                $_POST['cmt_id']=$cmt_id; 
+                // show($_POST);           
+                $add_comment->add_comment($cmt_id, $_POST);
+                redirect('officer/Icomplains');
+            }
+           
+        }
+
+        $data['title'] = "complaint";
+        $this->view('officer/complaint_commentI',$data);
+    }
     
     public function investigate($cmt_id){
         $investigate_complaint = new OfficerComplaint($GLOBALS['pdo']);
@@ -672,6 +878,36 @@ class officer extends Controller{
        
         $data['title'] = "complaint";
         $this->view('officer/rejectComplaint',$data);
+        
+    }
+
+    public function investigatedComplaint(){
+        if(!Auth::logged_in())
+        {
+            message('please login to view the admin section');
+            redirect("login");
+        }
+
+        $add_complaint = new Complaint();
+
+        $search = isset($_GET['sarch']) ? $_GET['search'] : null;
+
+        $data = [
+            'status_check' => "1"
+        ];
+
+        if($search !== null){
+            $rows = $add_complaint->where2($data , $search);
+        }else {
+            // Otherwise, retrieve all
+            $rows = $add_complaint->where($data);
+        }
+
+        $data['rows'] = is_array($rows) ? $rows : [];
+
+       
+        $data['title'] = "complaint";
+        $this->view('officer/IComplaints',$data);
         
     }
 
@@ -1311,6 +1547,8 @@ class officer extends Controller{
 
         redirect('officer/renewRegistration');
     }
+
+
 
     
 
