@@ -59,6 +59,11 @@ class Complaint extends Model
 	
 		return $result[0]->count3;
 	} 
+
+	public function getrec() {
+		$sql = "SELECT * FROM complaint WHERE ststus_check = '0' OR status_check = '1';";
+		return $this->query($sql);
+	}
 	 
 	 
 	 
