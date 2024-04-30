@@ -13,7 +13,23 @@ class Driver extends Controller{
         $data['registration-expire'] = 0;
 
         
-       
+       $user_rating = new Rating();
+       $all_rates = $user_rating -> where([
+        'role_id' => $_SESSION['USER_DATA']->id,
+       ]);
+
+       $total_rating = 0;
+       if(isset($all_rates[0])){
+         foreach($all_rates as $rate){
+            $total_rating = $total_rating + $rate->rate;
+            }
+            $_SESSION['rating'] = 'rating' . ($total_rating / count($all_rates));
+            if(($total_rating / count($all_rates)) == 0){
+                $_SESSION['rating'] = 'rating1';
+            }
+       }else{
+        $_SESSION['rating'] = 'rating3';
+       }
 
 
         $driverreg = new Driverregistration();
@@ -147,6 +163,23 @@ class Driver extends Controller{
     public function activity(){
         $data['errors'] = [];
         $data['suspended_status'] = 0;
+        $user_rating = new Rating();
+        $all_rates = $user_rating -> where([
+        'role_id' => $_SESSION['USER_DATA']->id,
+       ]);
+
+       $total_rating = 0;
+       if(isset($all_rates[0])){
+         foreach($all_rates as $rate){
+            $total_rating = $total_rating + $rate->rate;
+            }
+            $_SESSION['rating'] = 'rating' . ($total_rating / count($all_rates));
+            if(($total_rating / count($all_rates)) == 0){
+                $_SESSION['rating'] = 'rating1';
+            }
+       }else{
+        $_SESSION['rating'] = 'rating3';
+       }
 
         $vehicle = new Vehicle();
         $owner = $_SESSION['USER_DATA']->id;
@@ -166,23 +199,62 @@ class Driver extends Controller{
                 $vehicle_type="auto";
             }
         }
-        
-        
-
+        $user = new User();
         $current_rides = new Current_rides();
-        
+        $user_rating = new Rating();
         $currides = $current_rides ->findAll();
+        $count_currides = 0;
+        if(isset($currides[0])){
+            $count_currides = count($currides);
+        }
+
+        if($count_currides > 0) {
+            foreach ($currides as &$ride) {
+                    $row = $user -> first([
+                        'id' => $ride->passenger_id,
+                    ]);
+
+                    $all_rates = $user_rating -> where([
+                    'role_id' => $ride->passenger_id,
+                    ]);
+            
+                   $total_rating = 0;
+                   if(isset($all_rates[0])){
+                     foreach($all_rates as $rate){
+                        $total_rating = $total_rating + $rate->rate;
+                        }
+                        $ride->rating = 'rating' . ($total_rating / count($all_rates));
+                        if(($total_rating / count($all_rates)) == 0){
+                            $ride->rating = 'rating1';
+                        }
+                   }else{
+                    $ride->rating = 'rating3';
+                   }
+
+                   
+                
+                if($row){
+                    $img_path = $row->img_path;
+                    $ride->img_path = $img_path;
+                }else{
+                    $ride->img_path = 'person.jpg';
+                }
+                
+            }
+            unset($ride); // Unset the reference to the last element to avoid unexpected behavior
+        }
         
         $data['current_rides'] = $currides;
         $data['status'] = 0;
 
         $driverst = new Driver_status();
+        
 
         if($_SERVER['REQUEST_METHOD'] == "POST"){
 
             if(isset($_POST['driver_loc'])){
                 if($_POST['driver-status']=='active'){
-                    $data['status']=1;
+                    $_SESSION['active-status']= 1;
                     $row5 = $driverst-> where([
                         "driver_id" => $_SESSION['USER_DATA']->id,
                     ]);
@@ -196,7 +268,7 @@ class Driver extends Controller{
                     }
                 }
                 elseif($_POST['driver-status']=='inactive'){
-                    $data['status']=0;
+                    $_SESSION['active-status']= 0;
                     $row4 = $driverst-> where([
                         "driver_id" => $_SESSION['USER_DATA']->id,
                     ]);
@@ -232,10 +304,27 @@ class Driver extends Controller{
         $data['total_rides'] = 0;
         $data['total_distance'] = 0;
 
+        $driver_status = new Driver_status();
+
         $rides = new Rides();
         $allRides = $rides->where([
             'driver_id' => $_SESSION['USER_DATA']->id,
         ]);
+
+        $array = array();
+        for ($i = 0; $i < 4; $i++) {
+            $allRides1 = $rides->where([
+                'driver_id' => $_SESSION['USER_DATA']->id,
+                'date' => date('Y-m-d', strtotime('-'.$i.' day')),
+            ]);
+            if(!empty($allRides1)){
+                $array[$i] = count($allRides1);
+            }else{
+                $array[$i] = 0;
+            }
+            
+        }
+        $data['history-count'] = $array;
 
 
         $data['current_rides'] = $allRides;
@@ -330,11 +419,54 @@ class Driver extends Controller{
         $_SESSION['ride_id'] = $id;
         $_SESSION['pass_id'] = $passenger_id;
         $cust = new User();
+        $data['standard_fare'] = 100;
 
         $current_rides = new Current_rides();
         $row3 = $current_rides->first([
             "id"=> $id,
         ]);
+        
+        $vehicle = new Vehicle();
+
+
+        $driver_veh = $vehicle -> first_veh([
+            'owner' => $_SESSION['USER_DATA']->id,
+        ]);
+
+        $std_fare = new Standardfare();
+
+        if($driver_veh-> type == "threewheel"){
+            $std_fare1 = $std_fare -> where([
+                'vehicletype' => "Three-Wheel", //standard fare table name
+            ]);
+            if(isset($std_fare1[0])){
+                $data['standard_fare'] = $std_fare1[0]->fare;
+            }
+            
+        }elseif($driver_veh-> type == "bike"){
+            $std_fare1 = $std_fare -> where([
+                'vehicletype' => "Bike",
+            ]);
+            if(isset($std_fare1[0])){
+                $data['standard_fare'] = $std_fare1[0]->fare;
+            }
+        }elseif($driver_veh-> type == "car"){
+            $std_fare1 = $std_fare -> where([
+                'vehicletype' => "Car",
+            ]);
+            if(isset($std_fare1[0])){
+                $data['standard_fare'] = $std_fare1[0]->fare;
+            }
+        }elseif($driver_veh-> type == "Ac-car"){
+            $std_fare1 = $std_fare -> where([
+                'vehicletype' => "AC-Car",
+            ]);
+            if(isset($std_fare1[0])){
+                $data['standard_fare'] = $std_fare1[0]->fare;
+            }
+        }
+        
+
 
 
         $data['ride_info'] = $row3;
@@ -414,12 +546,12 @@ class Driver extends Controller{
             if(isset($_POST["accept-neg"])){
                 $current_offer[0]->offer_price = $current_offer[0]->negotiation_price;
                 $current_offer[0]->negotiation_status = 0;
-                $offers->update_offer_price($_SESSION['ride_id'],(array)$current_offer[0]);
+                $offers->update_offer_price($_SESSION['ride_id'],$_SESSION['USER_DATA']->id,(array)$current_offer[0]);
                 redirect('driver/request02');
             }
             elseif(isset($_POST['decline-neg'])){
                 $current_offer[0]->negotiation_status = 0;
-                $offers->update_offer_price($_SESSION['USER_DATA']->id,(array)$current_offer[0]);
+                $offers->update_offer_price($_SESSION['ride_id'],$_SESSION['USER_DATA']->id,(array)$current_offer[0]);
                 redirect('driver/request02');
             }
 
@@ -598,7 +730,7 @@ class Driver extends Controller{
             }
 
             if($complain_status==1){
-                $_POST['complainant'] = $_SESSION['USER_DATA'] -> id;
+                $_POST['complainant'] = "Driver";
                 $_POST['passenger_id'] =$_SESSION['pass_id'];
                 $_POST['driver_id'] = $_SESSION['USER_DATA'] -> id;
                 $_POST['datetime'] = date('Y-m-d H:i:s');
@@ -616,7 +748,7 @@ class Driver extends Controller{
 
     public function registration(){
         $data['errors'] = [];
-
+        $data['regiserror'] = " ";
         $driverreg = new Driverregistration();
         $user = new User();
 
@@ -633,6 +765,20 @@ class Driver extends Controller{
 
             if($_SERVER['REQUEST_METHOD'] == "POST"){
                 if(isset($_POST['registration'])){
+                    if($_SESSION['REGISITEMS']['profileimg'] == '0'){
+                        $data['regiserror'] = "Please upload all the files to proceed";
+                    }elseif($_SESSION['REGISITEMS']['driverlicenseimg'] == '0'){
+                        $data['regiserror'] = "Please upload all the files to proceed";
+                    }
+                    elseif($_SESSION['REGISITEMS']['revenuelicenseimg'] == '0'){
+                        $data['regiserror'] = "Please upload all the files to proceed";
+                    }
+                    elseif($_SESSION['REGISITEMS']['vehregistrationimg'] == '0'){
+                        $data['regiserror'] = "Please upload all the files to proceed";
+                    }
+                    elseif($_SESSION['REGISITEMS']['vehinsuranceimg'] == '0'){
+                        $data['regiserror'] = "Please upload all the files to proceed";
+                    }else{
         
                     $Registerdata['id'] = $_SESSION['USER_DATA']->id;
                     $Registerdata['date'] = date('Y-m-d');
@@ -641,11 +787,12 @@ class Driver extends Controller{
                     $Registerdata['revenuelicenseimg'] =  $_SESSION['REGISITEMS']['revenuelicenseimg'];
                     $Registerdata['vehregistrationimg'] =  $_SESSION['REGISITEMS']['vehregistrationimg'];
                     $Registerdata['vehinsuranceimg'] =  $_SESSION['REGISITEMS']['vehinsuranceimg'];
-                    $Registerdata['status'] = 1;
+                    $Registerdata['status'] = 0;
                     $_SESSION['USER_DATA'] -> img_path = $_SESSION['REGISITEMS']['profileimg'];
                     $user->update($_SESSION['USER_DATA']->id,(array)$_SESSION['USER_DATA']);
                     $driverreg->insert($Registerdata);
                     redirect('driver/ride');
+                    }
                 }
 
             }

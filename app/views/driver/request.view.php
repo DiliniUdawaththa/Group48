@@ -40,7 +40,7 @@
                     <div class="req-content">
                         <button class="req-back-btn"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
                         <div class="req-customer">
-                            <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="req-cus-pic">
+                            <img src="<?= ROOT ?>/assets/img/customer/profile/<?php echo $data['customer']->img_path?>" class="req-cus-pic">
                             <div class="req-customer-details">
                                
                                     <p class="customer-name"><?php echo ucfirst($data['customer']->name)?></p>
@@ -52,8 +52,8 @@
                         <div class="location-destination">
                             <p class="req-loc-des"><b>From:</b> <?php echo $data['ride_info']->location?></p>
                             <p class="req-loc-des"><b>To:</b> <?php echo $data['ride_info']->destination?></p>
-                            <p class="req-loc-des"><b>Distance:</b> 5.2km</p>
-                            <p class="req-loc-des"><b>Vehicle</b> Three Wheeler</p>
+                            <p class="req-loc-des"><b>Distance:</b> <span id="distance">5.2</span>km</p>
+                            <p class="req-loc-des"><b>Vehicle:</b> <?php echo ucfirst($data['ride_info']->vehicle)?></p>
                         </div>
                         <form method="post">
                         <div class="offer-btn">
@@ -102,6 +102,7 @@
         <script>
                 
             // map instalizion
+            let distance1 = 5;
             var map = L.map('map').setView([ 7.8774, 80.7003], 9);
             // google street
             googleStreets = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
@@ -129,6 +130,16 @@
                 ],
                 addWaypoints: false // Hide the waypoints
             });
+            Routing.on('routesfound', function(e) {
+                var route = e.routes[0];
+                var distance = route.summary.totalDistance; // Distance in meters
+                var time = route.summary.totalTime; // Time in seconds
+
+
+                document.getElementById('distance').innerHTML = (distance/1000).toFixed(1);
+                distance1 = (distance/1000).toFixed(1);
+                
+            });
 
             Routing.addTo(map);
             var lat2=(lat1+lat)/2
@@ -141,7 +152,7 @@
             standard_fare.addEventListener('click', function() {
                 if (standard_fare.checked) {
                     console.log("Hi")
-                    document.getElementById('offer-price').value = 600
+                    document.getElementById('offer-price').value = parseFloat(<?php echo $data['standard_fare']; ?>) * distance1 ;
                 } else {
                 }
             });

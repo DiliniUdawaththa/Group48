@@ -74,7 +74,7 @@ class offers extends Model
 
 		$this->query($query, $data);
 	}
-	public function update_offer_price($id, $data)
+	public function update_offer_price($id1,$id2, $data)
 	{
 		// show($data);
 		if (!empty($this->allowedColumns)) {
@@ -93,7 +93,8 @@ class offers extends Model
 			$query .= $key . "= :" . $key . ",";
 		}
 		$query = trim($query, ",");
-		$query .= " where ride_id =".$id;
+		$query .= " where ride_id =".$id1;
+		$query .= " 	&& driver_id =".$id2;
 		// print_r($query);	
 
 
