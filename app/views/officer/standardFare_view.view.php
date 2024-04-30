@@ -19,9 +19,9 @@
             <div class='content'>
                 <h3> Vehicle Type : <?= $row->vehicletype; ?></h3>
 
-                <h3> Fare Type:
+                <!-- <h3> Fare Type:
                     <?= $row->faretype; ?>
-                </h3>
+                </h3> -->
                 <h3> Fare per Km:
                     <?= $row->fare; ?>
                 </h3>
@@ -31,10 +31,10 @@
                 <h3>Updated Date:
                     <?= $row->date; ?>
                 </h3>
-                <h4>Vehicle Type: <?php echo isset($row->vehicletype) ? $row->vehicletype : 'N/A'; ?></h4>
+                <!-- <h4>Vehicle Type: <?php echo isset($row->vehicletype) ? $row->vehicletype : 'N/A'; ?></h4>
                 <h4>Fare Type: <?php echo isset($row->faretype) ? $row->faretype : 'N/A'; ?></h4>
                 <h4>Updated Officer Email: <?php echo isset($row->updatedby) ? $row->updatedby : 'N/A'; ?></h4>
-                <h4>Updated Date: <?php echo isset($row->date) ? $row->date : 'N/A'; ?></h4>
+                <h4>Updated Date: <?php echo isset($row->date) ? $row->date : 'N/A'; ?></h4> -->
 
             </div>
         </div>

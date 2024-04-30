@@ -1141,6 +1141,9 @@ class Report extends Controller{
         $driver_name = $row2->name;
         $complainant = $row->complainant;
         $complaint = $row->complaint;
+        $Date = $row->datetime;
+        $officerCmnt = $row->officerCmnt;
+
         
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetCreator('Officer');
@@ -1158,21 +1161,30 @@ class Report extends Controller{
 
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetFont('times', 'B', 14);
-        $pdf->Cell(0, 10, 'Details of the Driver', 0, 1, 'C');
-        $pdf->Ln(5);
+        $pdf->Cell(0, 10, 'Details of Complaint: ' . $complaint_id, 0, 1, 'C');
+        $pdf->Ln(15);
 
-        $w = array(45, 45, 45,45);
-        $pdf->SetTextColor(0, 0, 0);
-    $pdf->SetFont('helvetica', 'B', 14);
-    $pdf->Cell(0, 10, 'Complaint Details', 0, 1, 'C');
-    $pdf->Ln(5);
+    
 
-    $pdf->SetFont('helvetica', '', 12);
-    $pdf->MultiCell(0, 10, "Complaint ID: $complaint_id");
-    $pdf->MultiCell(0, 10, "Customer Name: $customer_name");
-    $pdf->MultiCell(0, 10, "Driver Name: $driver_name");
-    $pdf->MultiCell(0, 10, "Complainant: $complainant");
-    $pdf->MultiCell(0, 10, "Complaint: $complaint");
+    $pdf->cell(50, 10, 'complanant', 1, 0, 'c');
+    $pdf->cell(50, 10, $complainant, 1, 1, 'c');
+    $pdf->Ln(15);
+    $pdf->cell(50, 10, 'customer Name', 1, 0, 'c');
+    $pdf->cell(50, 10, $customer_name, 1, 1, 'c');
+    $pdf->Ln(15);
+    $pdf->cell(50, 10, 'Driver Name', 1, 0, 'c');
+    $pdf->cell(50, 10, $driver_name, 1, 1, 'c');
+    $pdf->Ln(15);
+    $pdf->cell(50, 10, 'Complaint', 1, 0, 'c');
+    $pdf->cell(50, 10, $complaint, 1, 1, 'c');
+    $pdf->Ln(15);
+    $pdf->cell(50, 10, 'Complaint Date', 1, 0, 'c');
+    $pdf->cell(50, 10, $Date, 1, 1, 'c');
+    $pdf->Ln(15);
+    $pdf->cell(50, 10, 'Officer Action', 1, 0, 'c');
+    $pdf->cell(50, 10, $officerCmnt, 1, 1, 'c');
+    $pdf->Ln(15);
+    
 
     $pdf->Ln(30);
 

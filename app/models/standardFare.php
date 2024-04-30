@@ -7,7 +7,7 @@ class standardFare extends Model
 	protected $table = "standardFare";
 
 	protected $allowedColumns = [
-        'Fid',
+        'id',
         'faretype',
         'vehicletype',
         'fare',
@@ -62,14 +62,14 @@ class standardFare extends Model
         return['Bike', 'Three-Weel', 'Car(Non A/C)', 'Car(A/C)', 'Mini-Van'];
     }*/
 
-    public function delete_standardFare($Fid = null)
+    public function delete_standardFare($id = null)
     {
-        $query = "delete from $this->table where Fid = :Fid;";
+        $query = "delete from $this->table where id = :id;";
 
-        return $this->query($query,['Fid' => $Fid]);
+        return $this->query($query,['id' => $id]);
     }
 
-    public function update_standardFare($Fid, $data)
+    public function update_standardFare($id, $data)
 	{
 		if (!empty($this->allowedColumns)) {
 			foreach ($data as $key => $value) {
@@ -87,19 +87,19 @@ class standardFare extends Model
 			$query .= $key . "=:" . $key . ",";
 		}
 		$query = trim($query, ",");
-		$query .= " where Fid = :Fid";
+		$query .= " where id = :id";
 		// print_r($query);	
 
 
 		$this->query($query, $data);
 	}
 
-    public function view_standardFare($Fid)
+    public function view_standardFare($id)
     {
        
         
-        $query = "SELECT * FROM " . $this->table . " where Fid = :Fid";
-        $params = array(":Fid" => $Fid);
+        $query = "SELECT * FROM " . $this->table . " where id = :id";
+        $params = array(":id" => $id);
         
 
         $result = $this->query($query, $params);

@@ -91,7 +91,7 @@ $count2 = $model2->getPendingCount();
                 <a href="<?=ROOT?>/officer/complains" class="link">
                     <div class="linkbutton"><i class="fa-sharp fa-solid fa-circle-exclamation"></i>Complains <div
                             style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display: inline-block; text-align: center; color: white;">
-                            <?php echo $count1 ?></div>
+                            <?php echo $count2 ?></div>
                     </div>
                 </a>
                 <a href="<?=ROOT?>/officer/standardFare" class="link">
@@ -147,7 +147,7 @@ $count2 = $model2->getPendingCount();
                     <thead>
                         <tr>
                             <!--<td>ID</td>-->
-                            <td>Fare Type</td>
+                            <!-- <td>Fare Type</td> -->
                             <td>Vehicle Type</td>
                             <td>Fare (Lkr.)</td>
                             <td>Option</td>
@@ -156,7 +156,7 @@ $count2 = $model2->getPendingCount();
                     <?php foreach ($rows as $row) : ?>
                     <tr class="data">
                         <!--<td class="td_Fid"><?= $row->Fid; ?></td>-->
-                        <td class="td_faretype"><?= $row->faretype; ?></td>
+                        <!-- <td class="td_faretype"><?= $row->faretype; ?></td> -->
                         <td class="td_vehicletype"><?= $row->vehicletype; ?></td>
                         <td class="td_fare"><?= $row->fare; ?></td>
                         <td class="td_button">
