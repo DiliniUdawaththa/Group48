@@ -144,13 +144,16 @@
                         <td class="td_vehicletype"><?= $row->vehicletype; ?></td>
                         <td class="td_fare"><?= $row->fare; ?></td>
                         <td class="td_button">
-                            <a href="<?=ROOT?>/officer/standardFare_update/<?=$row->Fid?>"><button class="update_btn"><i
+
+                        <!-- change -->
+                            <a href="<?=ROOT?>/officer/standardFare_update/<?=$row->id?>">
+                            <button class="update_btn"><i
                                         class="fa-solid fa-pen-to-square" style="color: black;"></i></i></button></a>
-                            <a href="<?=ROOT?>/officer/standardFare_delete/<?=$row->Fid?>">
+                            <a href="<?=ROOT?>/officer/standardFare_delete/<?=$row->id?>">
                                 <div class="dltbutton"><button class="delete_btn"><i class="fa-solid fa-trash"
                                             style="color: black;"></i></div></button>
-                                <a href="<?=ROOT?>/officer/standardFare_View/<?= urlencode($row->Fid) ?>"><button
-                                        class="detail_btn"><i class="fa-solid fa-circle-info"
+                                <a href="<?=ROOT?>/officer/standardFare_View/<?= urlencode($row->id) ?>">
+                                <button class="detail_btn"><i class="fa-solid fa-circle-info"
                                             style="color: black;"></i></button></a>
 
                         </td>

@@ -154,7 +154,8 @@
                     <div class="card">
                         <div class="box">
                             <?php $model1 = new OfficerDriver();
-                        $count = $model1->getSuspendedDriverCount();   
+                        // $count = $model1->getSuspendedDriverCount();   
+                        $count=0;
                         echo "<h1>$count</h1>"; ?>
                             <h3>SUSPENDS</h3>
                         </div>
@@ -177,10 +178,14 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card"> 
                         <div class="box">
                             <?php $model2 = new Complaint();
-                        $count = $model2->getPendingCount();   
+                            if($model2->getPendingCount()){
+                        $count = $model2->getPendingCount(); 
+                            }else{
+                                $count=0;
+                            }  
                         echo "<h1>$count</h1>"; ?>
                             <h3>COMPLAINTS</h3>
                         </div>

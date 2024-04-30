@@ -49,6 +49,7 @@ class Complaint extends Model
 	}
 
 	public function getRejectedCount() {
+		
 		$result = $this->query("SELECT COUNT(*) as count2 FROM complaint WHERE status_check = '2';");
 	
 		return $result[0]->count2;

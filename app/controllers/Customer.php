@@ -252,6 +252,7 @@
         $user = new User();
         $current_ride = new Current_rides();
         $rating = new Rating();
+        $vehicle = new Vehicle();
 
         $rate = $rating->where(['role_id'=>$_SESSION['USER_DATA']->id]);
         $sum = 0;
@@ -264,6 +265,18 @@
         } else {
             $data['rating'] = 3;
         }
+
+        $rows6 = $vehicle->findAll();
+        $data['rows6'] = array();
+       
+        if(isset($rows6[0])){
+
+            for($i = 0;$i < count($rows6); $i++)
+            {
+                    $data['rows6'][] = $rows6[$i];
+            }
+        }
+
 
 
         $img = array();
@@ -296,7 +309,7 @@
         $rows10 = $offers->where([
             'ride_id' => $curride ->id,
         ]);
-        $rows11 = $offers->where(['ride_id' => $curride ->id,'accept_status' => 1]);
+        // $rows11 = $offers->where(['ride_id' => $curride ->id]);
 
         $rows2 = $offers->findAll();
         $data['rows2'] = array();
@@ -414,20 +427,25 @@
                 } elseif ($_SESSION['offer_count'] - 2 == count($rows10)) {
                     $_SESSION['offer_count'] = $_SESSION['offer_count'] - 1;
                     echo "exists";
-                } 
+                }  elseif($rows10[0]->offer_price == $rows10[0]->negotiation_price  && $_SESSION['negotiation_status_count'] ==1 ){
+                    echo "exists";
+                    $_SESSION['negotiation_status_count'] =$_SESSION['negotiation_status_count'] +1;
+
+                }
                 
             }
 
-        //     if(!empty($rows11)){
-        //         if ( $_SESSION['negotiation_status_count'] == count($rows11)  && $_SESSION['negotiation_status_count']==1 ) {
-        //             $_SESSION['negotiation_status_count'] = $_SESSION['negotiation_status_count'] + 1;
-        //             echo "exists";
-        //         }
+
+            // if($rows10[0]->offer_price == $rows10[0]->negotiate_price ){
+            //     echo "hello";
+            // }
+
+            
                 
         //     }
         //     else{
                 // echo "no-change";  
-        // }
+        
         
         
    
@@ -473,6 +491,8 @@
             $data['rating'] = 3;
         }
 
+
+
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
         $data['img'] = $img[0]->img_path;
@@ -496,6 +516,11 @@
 
         $driver_id=array();
         $driver_id=$rides->where(['id' => $curr[0]->id]);
+
+        $driver_img = array();
+        $driver_img = $user->where(['id'=>$driver_id[0]->driver_id]);
+        $data['driver_img'] = $driver_img[0]->img_path;
+
         $rows2 = $user->findAll();
         $data['rows2'] = array();
         if(isset($rows2[0])){
@@ -592,6 +617,10 @@
         $vehicle = $rides->where(['id'=>$_GET['id']]);
         $data['vehicle']=$vehicle[0]->vehicle;
 
+        $driver_img = array();
+        $driver_img = $user->where(['id'=>$_GET['driver_id']]);
+        $data['driver_img'] = $driver_img[0]->img_path;
+
         $rows = $rides->findAll();
         $data['rows'] = array();
         if(isset($rows[0])){
@@ -632,6 +661,9 @@
             $data['rating'] = 3;
         }
 
+        $driver_img = array();
+        $driver_img = $user->where(['id'=>$_GET['driver_id']]);
+        $data['driver_img'] = $driver_img[0]->img_path;
 
         $img = array();
         $img = $user->where(['id'=>$_SESSION['USER_DATA']->id]);
