@@ -47,6 +47,31 @@ class Vehicle extends Model
 		return false;
 	}
 
+	public function first_veh($data)
+	{
+
+		$keys = array_keys($data);
+
+		$query = "select * from ".$this->table." where ";
+
+		foreach ($keys as $key) {
+			$query .= $key . "=:" . $key . " && ";
+		}
+ 
+ 		$query = trim($query,"&& ");
+ 		$query .= " order by licenseplate desc limit 1";
+
+		$res = $this->query($query,$data);
+
+		if(is_array($res))
+		{
+			return $res[0];
+		}
+
+		return false;
+
+	}
+
 
 
 

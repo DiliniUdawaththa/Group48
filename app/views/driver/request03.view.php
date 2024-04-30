@@ -43,7 +43,7 @@
                     <div class="req-content">
             
                         <div class="req-customer" style="padding-top:20px">
-                            <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="req-cus-pic">
+                            <img src="<?= ROOT ?>/assets/img/customer/profile/<?php echo $data['customer']->img_path?>" class="req-cus-pic">
                             <div class="req-customer-details">
                                
                                     <p class="customer-name"><?php echo ucfirst($data['customer']->name)?></p>
@@ -66,7 +66,7 @@
                                 <input type="submit" name="start-ride" value="Start Ride" class="start-ride">
                             </div>
                             <div class="driver-canceled">
-                                <p>Driver canceled the Ride</p>
+                                <p>Customer canceled the Ride</p>
                             </div>
                             
       
