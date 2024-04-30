@@ -202,53 +202,11 @@
 
             })
 
-            active_btn.addEventListener('click',function (){
-                status = 1
-                status_icon.src = '<?= ROOT ?>/assets/img/images/active.png';
-                active_btn.style.backgroundColor = '#162938'
-                active_btn.style.color = 'white'
-                inactive_btn.style.backgroundColor = '#E4E4E4'
-                inactive_btn.style.color = 'black'
-            })
-            inactive_btn.addEventListener('click',function (){
-                status = 0
-                status_icon.src = '<?= ROOT ?>/assets/img/images/inactive.png';
-                active_btn.style.backgroundColor = '#E4E4E4'
-                active_btn.style.color = 'black'
-                inactive_btn.style.backgroundColor = '#162938'
-                inactive_btn.style.color = 'white'
-            })
+
 
             
-            function map_view(){
-                document.querySelector('.map-route').style.display = 'block';
-            }
-            function close_map(){
-                document.querySelector('.map-route').style.display = 'none';
-            }
 
 
-            document.querySelector('.accept-btn').addEventListener('click', function(){
-                document.querySelector('.offer-container').style.display = 'block'
-            })
-
-            document.querySelector('.accept-btn1').addEventListener('click', function(){
-                document.querySelector('.offer-container').style.display = 'block'
-            })
-
-            document.querySelector('.close-offer').addEventListener('click', function(){
-                document.querySelector('.offer-container').style.display = 'none'
-            })
-
-            const standard_fare = document.getElementById('std-fare')
-            standard_fare.addEventListener('click', function() {
-                if (standard_fare.checked) {
-                    document.getElementById('fare-amount').value = '600'
-                    document.getElementById('fare-amount').disabled = true
-                } else {
-                    document.getElementById('fare-amount').disabled = false
-                }
-            });
 
             function addVehicle(){
                 addVehBtn.style.display = 'none';
@@ -259,9 +217,9 @@
                 document.querySelector('.update-veh1').style.display = 'block'
             })
 
-            document.querySelector('.cancel-veh-btn').addEventListener('click', function(){
-                document.querySelector('.update-veh1').style.display = 'none'
-            })
+            // document.querySelector('.cancel-veh-btn').addEventListener('click', function(){
+            //     document.querySelector('.update-veh1').style.display = 'none'
+            // })
 
 
         </script>

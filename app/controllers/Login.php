@@ -35,6 +35,8 @@ class Login extends Controller
                         $row1 = $driverreg->where([
                             "id"=> $_POST["id"],
                         ]);
+                        $_SESSION['active-status'] = 0;
+                        $_SESSION['rating'] = 'rating3';
                         if(!isset($row1[0])){
 
                             $registrationitems = array (

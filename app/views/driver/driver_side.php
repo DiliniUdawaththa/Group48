@@ -4,7 +4,7 @@
                     <img src="<?= ROOT ?>/<?php echo $_SESSION['USER_DATA']->img_path; ?>" class="profile-pic">
                     
                     <h4 class="name"><?php echo $_SESSION['USER_DATA']->name; ?> - Driver<img src="<?= ROOT ?>/assets/img/images/active.png" id="status_icon" class="status-light"></h4>
-                    <img src="<?= ROOT ?>/assets/img/images/rating.png" class="rating">
+                    <img src="<?= ROOT ?>/assets/img/images/<?php echo $_SESSION['rating']?>.png" class="rating">
                 </div>
                 <div class="options">
                     <a href="<?=ROOT?>/driver/activity"> <div class="opt1"><div><i class="fa fa-tasks" aria-hidden="true" style="margin-right: 10px;"></i>Hire Request</div><i class="fa fa-chevron-right" aria-hidden="true"></i></div></a>
@@ -41,6 +41,13 @@
 </div>
 
 <script>
+    <?php if($_SESSION['active-status']==1):?>
+                status_icon.src = '<?= ROOT ?>/assets/img/images/active.png';
+            <?php endif;?>
+            <?php if($_SESSION['active-status']==0):?>
+                status_icon.src = '<?= ROOT ?>/assets/img/images/inactive.png';
+            <?php endif;?>
+
     document.querySelector('.noti-icon').addEventListener('click', function() {
 
             if(document.querySelector('.notification-content').style.display != 'none'){

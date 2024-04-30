@@ -36,5 +36,6 @@ class Rides extends Model
 	{
 		
 	}
+	
    
 }
