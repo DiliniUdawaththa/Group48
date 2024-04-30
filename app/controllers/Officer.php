@@ -335,7 +335,11 @@ class officer extends Controller{
                 //  $_POST['fare'] =$add_standardFare->fare;
                 //  $_POST['updatedby'] =$add_standardFare->updatedby;
                 //  $_POST['date'] = $add_standardFare->date;
+<<<<<<< HEAD
                  //$_POST['date'] = date("Y-m-d H:i:s");
+=======
+                 $_POST['date'] = date("Y-m-d H:i:s");
+>>>>>>> main
                 $add_standardFare->insert($_POST);
 				redirect('officer/standardFare');
             }

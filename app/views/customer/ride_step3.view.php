@@ -26,7 +26,7 @@
 <div class="activity">
         <div class="mainbox">
             <div class="contant" >
-                <!-- <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a> -->
+                <a href="<?=ROOT?>/customer/ride_step1"><i class="fa-solid fa-circle-left fa-fade" id="back"></i></a>
                 <center>
                     
                     <h2>Select the Vehicle</h2>
