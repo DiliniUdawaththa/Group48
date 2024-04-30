@@ -92,11 +92,14 @@
                  <div class="image_box">
                  <?php foreach ($rows as $row) : ?>
                     <?php if($row->id==$_SESSION['USER_DATA']->id) { ?>
-                    <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="">
-                    <input type="file" name="image" id="fileInput" style="display:none;">
+                    <img src="<?= ROOT ?>/assets/img/customer/profile/<?=$img?>" alt="" class="propic">
+                    <input type="file" name="image" id="fileInput" onchange="load_image(this.files[0])" style="display:none;">
                       <label for="fileInput" style="cursor: pointer; margin:30px">
                           <center><span alt="Upload File" class="upload_file"style=" "> Upload <i class="fa-solid fa-upload"></i> </span></center>
                       </label>
+                      <?php if(!empty($errors['img'])):?>
+                        <center><small id="Firstname-error" class="signup-error" style="color:red;" > <?=$errors['img']?></small></center>
+                    <?php endif;?>
                  </div>
                  
                  
@@ -106,13 +109,25 @@
                     <label for="">E-Mail Address</label><br>
                     <input type="text" name="email" value="<?=$row->email;?>" readonly><br>
                     <label for="">Mobile Number</label><br>
-                    <input type="text" name="phone" value="<?=$row->phone;?>"   ><br>
+                    <input type="text" name="phone" value="<?=$row->phone;?>"><br>
+                    <?php if(!empty($errors['phone'])):?>
+                        <center><small id="Firstname-error" class="signup-error" style="color:red;" > <?=$errors['phone']?></small></center>
+                    <?php endif;?>
                     <label for="" >Address</label><br>
                     <input type="text" value="<?=$row->address;?>" name="address"><br>
+                    <?php if(!empty($errors['address'])):?>
+                        <center><small id="Firstname-error" class="signup-error" style="color:red;" > <?=$errors['address']?></small></center>
+                    <?php endif;?>
                     <label for="">NIC No</label><br>
                     <input placeholder="xxxxxxxxxxxx" type="text" value="<?=$row->nic;?>" name="nic" <?php if($row->nic !== ''){echo 'readonly';}?>><br>
+                    <?php if(!empty($errors['nic'])):?>
+                        <center><small id="Firstname-error" class="signup-error" style="color:red;" > <?=$errors['nic']?></small></center>
+                    <?php endif;?>
                     <label for="">DOB</label><br>
                     <input placeholder="dd/mm/yyyy" type="text" value="<?=$row->dob;?>" name="dob" <?php if($row->dob !== ''){echo 'readonly';}?>><br>
+                    <?php if(!empty($errors['dob'])):?>
+                        <center><small id="Firstname-error" class="signup-error" style="color:red;" > <?=$errors['dob']?></small></center>
+                    <?php endif;?>
                  </div>
                     <?php }?>
                     <?php endforeach; ?>
@@ -136,7 +151,11 @@
           document.querySelector('.container').style.opacity= '1';
           }
 
-         
+          function load_image(file){
+                var mylink = window.URL.createObjectURL(file);
+                console.log(mylink);
+                document.querySelector(".propic").src = mylink;
+          }
         </script>
 </body>
 </html>
