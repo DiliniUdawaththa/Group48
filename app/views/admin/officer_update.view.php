@@ -85,7 +85,7 @@
                             <!-- <i class="fa-solid fa-location-dot"></i> -->
                             <br>
                         </div>
-                        <input type="text" value="<?= $row->email; ?>" name="email" required>    
+                        <input type="text" value="<?= $row->email; ?>" name="email" readonly>    
                         <?php if(!empty($errors['email'])):?>
                                 <!-- <small id="Firstname-error" class="signup-error" style="color: red;"> <?=$errors['address']?></small> -->
                         <?php endif;?>
