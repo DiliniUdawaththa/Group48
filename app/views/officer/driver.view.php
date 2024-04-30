@@ -77,13 +77,12 @@ $count2 = $model2->getPendingCount();
             </div>
             <div class="items">
                 <a href="<?=ROOT?>/officer" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-gauge"></i>Dashboard <div
-                            style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display: inline-block; text-align: center; color: white;">
-                            <?php echo $count1 ?></div>
-                    </div>
+                    <div class="linkbutton"><i class="fa-solid fa-gauge"></i>Dashboard </div>
                 </a>
                 <a href="<?=ROOT?>/officer/officerdriverRegistration" class="link">
-                    <div class="linkbutton"><i class="fa-solid fa-id-card"></i></i>Driver Registration</div>
+                    <div class="linkbutton"><i class="fa-solid fa-id-card"></i></i>Driver Registration <div
+                            style="background-color: red; border-radius: 50%; width: 20px; height: 20px; display: inline-block; text-align: center; color: white;">
+                            <?php echo $count1 ?></div></div>
                 </a>
                 <a href="<?=ROOT?>/officer/driver" class="link">
                     <div class="linkbutton1"><i class="fa-solid fa-users"></i>Drivers</div>

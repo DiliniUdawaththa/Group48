@@ -346,7 +346,7 @@ class officer extends Controller{
 
     }
 
-    public function standardFare_delete($Fid=null){
+    public function standardFare_delete($id=null){
         if(!Auth::logged_in())
         {
             message('please login to view the admin section');
@@ -363,14 +363,14 @@ class officer extends Controller{
                 $data['rows'][] = $rows[$i];
         }
 
-        $add_standardFare->delete_standardFare($Fid);
+        $add_standardFare->delete_standardFare($id);
         
         redirect('officer/standardFare');
     }
 
 
 
-    public function standardFare_update($Fid=null){
+    public function standardFare_update($id=null){
         if(!Auth::logged_in())
         {
             message('please login to view the admin section');
@@ -383,7 +383,7 @@ class officer extends Controller{
 
         for($i = 0;$i < count($rows); $i++)
         {
-            if($rows[$i]->Fid == $Fid)
+            if($rows[$i]->id == $id)
                 $data['rows'][] = $rows[$i];
         }
         // show($_POST);
@@ -393,9 +393,9 @@ class officer extends Controller{
 			if($add_standardFare->validate($_POST))
 			{    
                 // show($_POST);
-                $_POST['Fid']=$Fid; 
+                $_POST['id']=$id; 
                 // show($_POST);           
-                $add_standardFare->update_standardFare($Fid, $_POST);
+                $add_standardFare->update_standardFare($id, $_POST);
                 redirect('officer/standardFare');
             }
            
@@ -406,7 +406,7 @@ class officer extends Controller{
     }
 
 
-    public function standardFare_View($Fid){
+    public function standardFare_View($id){
         if(!Auth::logged_in())
         {
             message('please login to view the admin section');
@@ -416,7 +416,7 @@ class officer extends Controller{
         $standardFare = new standardFare();
 
         $data = [
-            'Fid' => $Fid
+            'id' => $id
         ];
         $rows = $standardFare->where($data);
         $row = null;

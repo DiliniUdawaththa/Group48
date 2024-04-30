@@ -72,7 +72,7 @@
                 <a href="<?= ROOT ?>/customer/activity" class="link"><div class="linkbutton1"><i class="fa-solid fa-file-lines"></i>Activity</div></a>
                 <a href="<?=ROOT?>/customer/profile" class="link2"><div class="linkbutton"><i class="fa-solid fa-user"></i>Profile</div></a>
                 <a href="<?= ROOT ?>/customer/help" class="link2"><div class="linkbutton"><i class="fa-solid fa-handshake-angle"></i>Help</div></a>
-                <a href="#" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
+                <a href="<?= ROOT ?>/Login" class="link2"><div class="linkbutton2"><i class="fa-solid fa-right-from-bracket"></i>Logout</div></a>
             </div>
       
              <div class="logout-container">

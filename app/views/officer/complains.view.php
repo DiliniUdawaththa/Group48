@@ -179,7 +179,7 @@
                 </div>
                 <div class="operation">
                     <a href="<?=ROOT?>/officer/rejectComplaint/"><button type="button" class="button-style1"
-                            id="plus">Suspenders</button></a>
+                            id="plus">Rejected</button></a>
                 </div>
 
             </div>

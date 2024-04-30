@@ -20,8 +20,9 @@ class Forgot_password1 extends Controller
             } elseif (strlen($_POST['password']) < 8) {
                 message("Password must be at least 8 characters long.");
             } elseif ($_POST['password'] == $_POST['repassword']) {
-                
+                $_POST["password"] = password_hash($_POST['password'],PASSWORD_DEFAULT);
                $user->update($_GET['data'],$_POST);
+               message("Your password is change. please login");
                 redirect('Login/');
             }else{
                 

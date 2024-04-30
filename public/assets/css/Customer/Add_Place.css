@@ -343,4 +343,41 @@ form{
     #plus{
         font-size: 4vh;
     }
+
+    .input_box{
+        width: 100%;
+        height: 30vh;
+    }
+     
+    .map_point{
+        width: 100%;
+        height: 50%;
+    }
+    #map{
+        /* margin-top: 30px; */
+        width: 100%;
+        height: 50vh;
+       }
+       .form_map{
+        flex-direction: column;
+        height: 30vh;
+        width: 100%;
+       }
+       form{
+        width: 90%;
+       }
+       .label{
+        font-size: 1.5vh;
+       }
+
+       .input_box input{
+        height: 3vh;
+        font-size: 1.5vh;
+       }
+       .submit_btn{
+        font-size: 1.5vh;
+       }
+       .skip{
+        font-size: 1vh;
+       }
   }

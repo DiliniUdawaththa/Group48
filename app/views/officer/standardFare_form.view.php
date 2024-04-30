@@ -113,16 +113,16 @@
                             <input value="<?= set_value('vehicletype') ?>" list="vehicletype_list" name="vehicletype"
                                 id="vehicletype" required>
                             <datalist id="vehicletype_list">
-                                <option value="Bike">Bike</option>
-                                <option value="Three Weel">Three Weel</option>
-                                <option value="Car(Non A/C)">Car(Non A/C)</option>
-                                <option value="Car(A/C)">Car(A/C)</option>
-                                <option value="Mini Van">Mini Van</option>
+                                <option value="bike">bike</option>
+                                <option value="auto">auto</option>
+                                <option value="car">car</option>
+                                <option value="Ac-car">Ac-car</option>
+                                <!-- <option value="Mini Van">Mini Van</option> -->
                             </datalist>
 
 
 
-                            <div>
+                            <!-- <div>
                                 <label for="faretype" class="label">Fare Type</label><br>
                             </div>
                             <input value="<?= set_value('faretype') ?>" list="faretype_list" name="faretype"
@@ -131,9 +131,9 @@
                                 <option value="Heavy Trafic Time">Heavy Trafic Time</option>
                                 <option value="Trafic Time">Trafic Time</option>
                                 <option value="Late Night & Early Morning">Late Night & Early Morning</option>
-                                <!--<option value="Car(A/C)">-->
-                                <option value="Normal">Normal</option>
-                            </datalist>
+                                <option value="Car(A/C)">-->
+                                <!-- <option value="Normal">Normal</option>
+                            </datalist> -->
 
 
                             <div>

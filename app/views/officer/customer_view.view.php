@@ -42,7 +42,7 @@
                 <h4>Customer ID: <?php echo isset($row->id) ? $row->id : 'N/A'; ?></h4>
                 <h4>Contact Number: <?php echo isset($row->phone) ? $row->phone : 'N/A'; ?></h4>
                 <h4>Email: <?php echo isset($row->email) ? $row->email : 'N/A'; ?></h4>
-                <h4>Address: <?php echo isset($row->address) ? $row->adress : 'N/A'; ?></h4>
+                <h4>Address: <?php echo isset($row->address) ? $row->address : 'N/A'; ?></h4>
                 <h4>NIC NO: <?php echo isset($row->nic) ? $row->nic : 'N/A'; ?></h4>
                 <h4>Date Of Birth: <?php echo isset($row->dob) ? $row->dob : 'N/A'; ?></h4>
                 <br>

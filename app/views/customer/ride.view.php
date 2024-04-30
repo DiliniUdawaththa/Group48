@@ -430,7 +430,9 @@
                       rate.style.backgroundColor = '#D9D9D9';
                       report.style.color = '#D9D9D9';
                     });
-
+               //   ?usort($numbers, function($a, $b) {
+               //       return $a - $b;
+               //    });
 //star--------------------------------------------------------------------------------------
                 const star1 = document.getElementById('star1');
                 const star2 = document.getElementById('star2');
@@ -496,6 +498,9 @@
                     logout_button.addEventListener('click', ()=>{
                         window.location.href = "<?=ROOT?>/logout";
                     })
+                  //   usort($fruits, function($a, $b) {
+                  //       return strcmp(strtolower(substr($a, 0, 1)), strtolower(substr($b, 0, 1)));
+                  //    });
             </script>
         </div>
     </div>

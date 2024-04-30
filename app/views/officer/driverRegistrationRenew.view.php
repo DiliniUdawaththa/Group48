@@ -77,7 +77,7 @@
         <div class="interface">
             <div class="navi">
                 <div class="navi1">
-                    <h2>Renewal of Driver Registration</h2>
+                    <h2>RENEWAL OF DRIVER REGISTRATION</h2>
                 </div>
             </div>
 
