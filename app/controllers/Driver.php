@@ -163,6 +163,24 @@ class Driver extends Controller{
     public function activity(){
         $data['errors'] = [];
         $data['suspended_status'] = 0;
+        $data['registration_status'] = 1;
+
+        $driverreg = new Driverregistration();
+
+        $registration_data = $driverreg->where([
+            "id"=> $_SESSION['USER_DATA']->id,
+        ]);
+        if(isset($registration_data[0])){
+            if($registration_data[0]->status == 0){
+                $data['registration_status'] = 0;
+            }else{
+                $data['registration_status'] = 1;
+            }
+        }else{
+            $data['registration_status'] = 1;
+        }
+
+
         $user_rating = new Rating();
         $all_rates = $user_rating -> where([
         'role_id' => $_SESSION['USER_DATA']->id,
@@ -437,7 +455,7 @@ class Driver extends Controller{
 
         if($driver_veh-> type == "threewheel"){
             $std_fare1 = $std_fare -> where([
-                'vehicletype' => "Three-Wheel", //standard fare table name
+                'vehicletype' => "auto", //standard fare table name
             ]);
             if(isset($std_fare1[0])){
                 $data['standard_fare'] = $std_fare1[0]->fare;
@@ -445,21 +463,21 @@ class Driver extends Controller{
             
         }elseif($driver_veh-> type == "bike"){
             $std_fare1 = $std_fare -> where([
-                'vehicletype' => "Bike",
+                'vehicletype' => "bike",
             ]);
             if(isset($std_fare1[0])){
                 $data['standard_fare'] = $std_fare1[0]->fare;
             }
         }elseif($driver_veh-> type == "car"){
             $std_fare1 = $std_fare -> where([
-                'vehicletype' => "Car",
+                'vehicletype' => "car",
             ]);
             if(isset($std_fare1[0])){
                 $data['standard_fare'] = $std_fare1[0]->fare;
             }
         }elseif($driver_veh-> type == "Ac-car"){
             $std_fare1 = $std_fare -> where([
-                'vehicletype' => "AC-Car",
+                'vehicletype' => "Ac-car",
             ]);
             if(isset($std_fare1[0])){
                 $data['standard_fare'] = $std_fare1[0]->fare;
@@ -613,6 +631,20 @@ class Driver extends Controller{
         $cust = new User();
         $ride = new Rides();
         $current_rides = new Current_rides();
+        $driver_status = new Driver_status();
+        $data['driver-lat'] = 6.9020;
+        $data['driver-long'] = 79.861;
+
+        $driver_data = $driver_status -> where([
+            'driver_id' => $_SESSION['USER_DATA']->id,
+        ]);
+        if(isset($driver_data[0])){
+            if($driver_data[0]->lat != 0){
+                $data['driver-lat'] = $driver_data[0]->lat;
+                $data['driver-long'] = $driver_data[0]->lng;
+            }
+            
+        }
 
         //Information of the current ride stored in $row3
         $row3 = $current_rides->first([

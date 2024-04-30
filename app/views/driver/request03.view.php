@@ -202,8 +202,8 @@
 
             var Routing;
             <?php if (isset($data['ride_info']->l_lat) && isset($data['ride_info']->l_long) && isset($data['ride_info']->d_lat) && isset($data['ride_info']->d_lat)): ?>
-                var lat=parseFloat(driver_lat)
-                var long=parseFloat(driver_long)
+                var lat=parseFloat(<?php echo $data['driver-lat']; ?>)
+                var long=parseFloat(<?php echo $data['driver-long']; ?>)
                 var lat1=parseFloat("<?php echo $data['ride_info']->l_lat?>")
                 var lon1=parseFloat("<?php echo $data['ride_info']->l_long?>")
             <?php else: ?> 
@@ -227,7 +227,27 @@
             const popupElement = document.getElementsByClassName('leaflet-routing-container leaflet-bar leaflet-routing-collapsible leaflet-control')[0];
             popupElement.classList.add('leaflet-routing-container-hide');
         
-    
+            // var taxiIcon = L.icon({
+            //         iconUrl: '<?= ROOT ?>/assets/img/customer/auto.png',
+            //         iconSize: [50, 40]
+            //     })
+            //     var marker = L.marker([parseFloat(<?php echo $data['driver-lat']; ?>), parseFloat(<?php echo $data['driver-long']; ?>)], { icon: taxiIcon }).addTo(map);
+            //         L.Routing.control({
+            //             waypoints: [
+            //                 L.latLng(parseFloat(<?php echo $data['driver-lat']; ?>),parseFloat(<?php echo $data['driver-long']; ?>)),
+            //                 L.latLng(parseFloat("<?php echo $data['ride_info']->l_lat?>"),parseFloat("<?php echo $data['ride_info']->l_long?>"))
+            //             ]
+            //         }).on('routesfound', function (e) {
+            //             var routes = e.routes;
+            //             var time = e.routes[0].summary.totalTime; 
+            //             // document.getElementById("time_limit").innerText=Math.floor((time%3600)/60)+' min';
+            //             e.routes[0].coordinates.forEach(function (coord, index) {
+            //                 setTimeout(function () {
+            //                     marker.setLatLng([coord.lat, coord.lng]);
+            //                 }, 200* index)
+            //             })
+
+            //          }).addTo(map);
 
 
             function hide_popup(){

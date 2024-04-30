@@ -54,7 +54,7 @@
                         <?php if($data['total_rides']>0): ?>
                             <?php foreach ($data['current_rides'] as $rides) : ?>
                                 <tr>
-                                <td> <?php echo $rides -> date; ?></td>
+                                <td> <?php echo $rides -> passenger_id; ?></td>
                                 <td> <?php echo $rides -> date; ?></td>
                                 <td> <?php echo $rides -> location; ?></td>
                                 <td> <?php echo $rides -> destination; ?></td>

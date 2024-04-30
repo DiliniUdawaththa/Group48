@@ -59,6 +59,7 @@
 
                     <div class="request-container">
                         <h2 class="request-topic">Request for ride</h2>
+                        <?php if($data['registration_status']==1): ?>
                         <?php if($data['suspended_status']==0):?>
 
                             <?php if($_SESSION['active-status']==1):?>
@@ -94,6 +95,9 @@
 
                         <?php else: ?>
                             <p class="ride-box-text">Your are currently <b>Suspended!</b></p>
+                        <?php endif; ?>
+                        <?php else: ?>
+                            <p class="ride-box-text">Wait until an officer accepts your <b>Registration!</b></p>
                         <?php endif; ?>
 
 
