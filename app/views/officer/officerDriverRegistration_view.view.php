@@ -25,15 +25,27 @@
                 <h4>NIC NO: <?php echo isset($row2->nic) ? $row2->nic : 'N/A'; ?></h4>
                 <h4>Date Of Birth: <?php echo isset($row2->dob) ? $row2->dob : 'N/A'; ?></h4>
 
-                <center><img src="<?= ROOT . '/' . $row->driverlicenseimg ?>" alt="Driver Licensse"
-                        style="display: flex;align-items: center;justify-content: center; width: 200px; height: 200px;">
-                    <img src="<?= ROOT . '/' . $row->revenuelicenseimg ?>" alt="Revenue Licensse"
-                        style="position:center; width: 200px; height: 200px;">
-                    <img src="<?= ROOT . '/' . $row->vehregistrationimg ?>" alt="vehicle Registration"
-                        style="position:center; width: 200px; height: 200px;">
-                    <img src="<?= ROOT . '/' . $row->vehinsuranceimg ?>" alt="Vehicle insurence"
-                        style="position:center; width: 200px; height: 200px;">
-                </center>
+                <h4>Driver License: <center><a href="<?= ROOT . '/' . $row->driverlicenseimg ?>"><img
+                                src="<?= ROOT . '/' . $row->driverlicenseimg ?>" alt="Driver Licensse"
+                                style="display: flex;align-items: center;justify-content: center; width: 200px; height: 200px;"></a>
+                    </center>
+                </h4>
+                <h4>Revenue License:
+                    <center><a href="<?= ROOT . '/' . $row->revenuelicenseimg ?>"><img
+                                src="<?= ROOT . '/' . $row->revenuelicenseimg ?>" alt="Revenue Licensse"
+                                style="position:center; width: 200px; height: 200px;"></a></center>
+                </h4>
+                <h4>Vehicle Registration:
+                    <center><a href="<?= ROOT . '/' . $row->vehregistrationimg ?>"><img
+                                src="<?= ROOT . '/' . $row->vehregistrationimg ?>" alt="vehicle Registration"
+                                style="position:center; width: 200px; height: 200px;"></a></center>
+                </h4>
+                <h4>Vehicle Insurance:
+                    <center><a href="<?= ROOT . '/' . $row->vehinsuranceimg ?>"><img
+                                src="<?= ROOT . '/' . $row->vehinsuranceimg ?>" alt="Vehicle insurence"
+                                style="position:center; width: 200px; height: 200px;"></a></center>
+                </h4>
+
 
 
 

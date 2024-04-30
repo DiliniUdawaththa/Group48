@@ -61,13 +61,13 @@
                         <h2 class="request-topic">Request for ride</h2>
                         <?php if($data['suspended_status']==0):?>
 
-                            <?php if($data['status']==1):?>
-                                
+                            <?php if($_SESSION['active-status']==1):?>
+                            <?php if(!empty($data['current_rides'])): ?> 
                             <?php foreach ($data['current_rides'] as $rides) : ?>
                                     <div class="request-box">
                                         <div>
-                                            <img src="<?= ROOT ?>/assets/img/customer/profile/person.jpg" class="request-customer-pic">
-                                            <img src="<?= ROOT ?>/assets/img/images/rating.png" style="height: 10px;display: block;">
+                                            <img src="<?= ROOT ?>/assets/img/customer/profile/<?php echo $rides->img_path?>" class="request-customer-pic">
+                                            <img src="<?= ROOT ?>/assets/img/images/<?php echo $rides->rating?>.png" style="height: 10px;display: block;">
                                         </div>
                                         <div class="destination">
                                             <p style="display: block;margin: 5px;">From: <?php echo $rides -> location; ?></p>
@@ -84,7 +84,8 @@
                                         </div>
                                     </div>
                             <?php endforeach; ?>
-                            <?php if(count($data['current_rides'])==0):?>
+                            <?php endif; ?>
+                            <?php if(empty($data['current_rides'])): ?> 
                                 <p class="ride-box-text">No rides</p>
                             <?php endif; ?>
                             <?php else: ?>
@@ -176,14 +177,14 @@
             const cancel_button = document.querySelector('.cancel-btn')
             const logout_button = document.querySelector('.logout-btn')
 
-            <?php if($data['status']==1):?>
+            <?php if($_SESSION['active-status']==1):?>
                 status_icon.src = '<?= ROOT ?>/assets/img/images/active.png';
                 inactive_btn.style.backgroundColor = '#E4E4E4'
                 inactive_btn.style.color = 'black'
                 active_btn.style.backgroundColor = '#162938'
                 active_btn.style.color = 'white'
             <?php endif;?>
-            <?php if($data['status']==0):?>
+            <?php if($_SESSION['active-status']==0):?>
                 status_icon.src = '<?= ROOT ?>/assets/img/images/inactive.png';
                 active_btn.style.backgroundColor = '#E4E4E4'
                 active_btn.style.color = 'black'
@@ -278,6 +279,7 @@
                 document.querySelector('.update-veh1').style.display = 'none'
             })
 
+            <?php if(!empty($data['current_rides'])): ?>
             function delete_line(data)
           {
                 <?php foreach ($data['current_rides'] as $rides) : ?>
@@ -286,7 +288,7 @@
                 }
                 <?php endforeach; ?>
           }
-     
+          <?php endif; ?>
           
          
           

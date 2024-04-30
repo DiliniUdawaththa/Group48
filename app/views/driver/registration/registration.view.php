@@ -16,9 +16,12 @@
         <div class="outer-container">
             <div style="margin-top:60px;"></div>
             <p class="welcome-text">Welcome, <?php echo $_SESSION['USER_DATA']->name; ?></p>
-            <p class="text1">
+            <p class="text1" style="margin-bottom:20px;">
                 Here are the steps you need to follow to set up your profile.
             </p>
+            <?php if($data['regiserror'] != " "): ?>
+                <p class="text1" style="font-size: 15px; color:red;"><?php echo $data['regiserror'] ?></p>
+            <?php endif; ?>
             <div class="inner-container">
                 <div class="setup-options" id="op1">
                     <div><img class="document_icon" src="<?= ROOT?>/assets/img/images/document_icon.png"></div>

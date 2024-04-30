@@ -39,7 +39,7 @@
                     <div class="req-content">
                     
                         <div class="req-customer" style="padding-top:20px">
-                            <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="req-cus-pic">
+                            <img src="<?= ROOT ?>/assets/img/customer/profile/<?php echo $data['customer']->img_path?>" class="req-cus-pic">
                             <div class="req-customer-details">
                                
                                     <p class="customer-name"><?php echo ucfirst($data['customer']->name)?></p>
@@ -51,8 +51,8 @@
                         <div class="location-destination">
                             <p class="req-loc-des"><b>From:</b> <?php echo $data['ride_info']->location?></p>
                             <p class="req-loc-des"><b>To:</b> <?php echo $data['ride_info']->destination?></p>
-                            <p class="req-loc-des"><b>Distance:</b> 5.2km</p>
-                            <p class="req-loc-des"><b>Vehicle</b> Three Wheeler</p>
+                            <p class="req-loc-des"><b>Distance:</b> <span id="distance">5.2</span>km</p>
+                            <p class="req-loc-des"><b>Vehicle:</b> <?php echo ucfirst($data['ride_info']->vehicle)?></p>
                             <p class="req-loc-des"><b>Offer sent:</b> Rs <?php echo $data['offer_price'] ?></p>
                         </div>
                         
@@ -175,6 +175,16 @@
                     L.latLng(lat1,lon1)
                 ],
                 addWaypoints: false // Hide the waypoints
+            });
+
+            Routing.on('routesfound', function(e) {
+                var route = e.routes[0];
+                var distance = route.summary.totalDistance; // Distance in meters
+                var time = route.summary.totalTime; // Time in seconds
+
+
+                document.getElementById('distance').innerHTML = (distance/1000).toFixed(1);
+                
             });
 
             Routing.addTo(map);

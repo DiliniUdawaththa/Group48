@@ -91,10 +91,10 @@
                 },
                 series: [{
                     name: 'sales',
-                    data: [27,23,18,19,17,13,25,19,22]
+                    data: [<?php echo $data['history-count'][3]; ?>,<?php echo $data['history-count'][3]; ?>,<?php echo $data['history-count'][1]; ?>,<?php echo $data['history-count'][0]; ?>]
                 }],
                 xaxis: {
-                    categories: ["Feb 14","Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22"]
+                    categories: ["<?php echo date('m-d', strtotime('-3 day')); ?>","<?php echo date('m-d', strtotime('-2 day')); ?>","<?php echo date('m-d', strtotime('-1 day')); ?>","<?php echo date('m-d'); ?>"]
                 }
                 }
                 var chart = new ApexCharts(document.querySelector("#chart1"), options);

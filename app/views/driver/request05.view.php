@@ -42,7 +42,7 @@
                         <p class="rating-heading">Rating</p>
                         <div>
                             <h3>Mr. <?php echo ucfirst($data['customer']->name)?></h3>
-                            <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="rating-pro-pic">
+                            <img src="<?= ROOT ?>/assets/img/customer/profile/<?php echo $data['customer']->img_path?>" class="rating-pro-pic">
                             <div class="staricon">
                                 <i class="fa-solid fa-star" id="star1"></i>
                                 <i class="fa-solid fa-star" id="star2"></i>

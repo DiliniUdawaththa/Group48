@@ -40,7 +40,7 @@
                     <div class="req-content">
             
                         <div class="req-customer" style="padding-top:20px">
-                            <img src="<?= ROOT ?>/assets/img/images/default_profile.png" class="req-cus-pic">
+                            <img src="<?= ROOT ?>/assets/img/customer/profile/<?php echo $data['customer']->img_path?>" class="req-cus-pic">
                             <div class="req-customer-details">
                                
                                     <p class="customer-name"><?php echo ucfirst($data['customer']->name)?></p>
