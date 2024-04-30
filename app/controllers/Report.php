@@ -1204,8 +1204,4 @@ class Report extends Controller{
     }
 }
 
-
-
-
-}
 ?>
