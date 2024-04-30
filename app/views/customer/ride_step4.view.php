@@ -230,9 +230,11 @@
                     });
                     var singlemarker=L.marker([<?=$row->lat?>,<?=$row->lng?>],{icon: myIcon}).addTo(map); 
                     <?php  foreach ($rows3 as $row3) :  ?>
-                        <?php if($row2->driver_id ==$row3->id ){?>
-                           var contant = "<center><img src='<?= ROOT ?>/<?=$row3->img_path?>' alt='Your Image' style='width: 100px; height: auto; '><br><b style='color:red;'>2314B (RED)</b><br>I am waiting for you.</center>";
+                        <?php  foreach ($rows6 as $row6) :  ?>
+                        <?php if($row2->driver_id ==$row3->id && $row2->driver_id==$row6->owner ){?>
+                           var contant = "<center><img src='<?= ROOT ?>/<?=$row3->img_path?>' alt='Your Image' style='width: 100px; height: auto; '><br><b style='color:red;'> <?=$row6->licenseplate?></b><br>I am waiting for you.</center>";
                         <?php } ?>
+                        <?php endforeach; ?>
                     <?php endforeach; ?>
                     var popup = singlemarker.bindPopup(contant)
                     singlemarker.openPopup();

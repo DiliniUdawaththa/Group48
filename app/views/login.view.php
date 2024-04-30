@@ -64,7 +64,7 @@
                     <label>
                         <input type="checkbox">Remember me
                     </label>
-                    <a href="#">Forgot Password?</a>
+                    <a href="<?=ROOT?>/Forgot_password">Forgot Password?</a>
 
                 </div>
                 <button class="btn" type="submit">Login</button>

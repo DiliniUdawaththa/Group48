@@ -36,7 +36,7 @@
                 <h1>Rating</h1>
             </div>
              <div >
-                <img id="driver_photo" src="<?= ROOT ?>/assets/img/person.jpg" alt="">
+                <img id="driver_photo" src="<?= ROOT ?>/<?=$driver_img?>" alt="">
                 <h3>Mr.<?=$driver_name?></h3>
                 <div class="staricon">
                   <i class="fa-solid fa-star" id="star1"></i>

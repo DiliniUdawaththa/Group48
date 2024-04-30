@@ -41,7 +41,7 @@
                     <h6>Estimate time </h6>    
                     <h5 id='time_limit'></h5>
                     <div class="driver_profile">
-                        <img class="driver_image" src="<?= ROOT ?>/assets/img/customer/person.png" alt="">
+                        <img class="driver_image" src="<?= ROOT ?>/<?=$driver_img?>" alt="">
                         <img class="driver_vehicle" src="<?= ROOT ?>/assets/img/customer/<?=$vehicle?>.jpeg" alt="">
                     </div>
             </center>
