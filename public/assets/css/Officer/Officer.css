@@ -203,6 +203,15 @@ body{
     cursor: pointer;
     font-size: 20px; 
 }
+.button-style2 {
+    background-color: green; 
+    color: #FFFFFF; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer;
+    font-size: 20px; 
+}
 
 .button-style1:hover {
     background-color: #232c3c; 
@@ -428,6 +437,8 @@ table tbody tr:nth-child(odd) {
     cursor: pointer;
     margin-right: 10px;
 }
+
+
 
 .suspend-container{
     padding:30px;

@@ -69,6 +69,7 @@ class Report extends Controller{
         $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
         $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
         // $pdf->setFooterData('', 0, $footerNote);
+        // $pdf->setFooterData('', 0, $footerNote);
 
         // Set the footer line
         $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
@@ -141,6 +142,7 @@ class Report extends Controller{
         // Set the footer content and position
         $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
         $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
+        // $pdf->setFooterData('', 0, $footerNote);
         // $pdf->setFooterData('', 0, $footerNote);
 
         // Set the footer line
@@ -279,6 +281,7 @@ class Report extends Controller{
                             $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
                             $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
                             // $pdf->setFooterData('', 0, $footerNote);
+                            // $pdf->setFooterData('', 0, $footerNote);
 
                             // Set the footer line
                             $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
@@ -390,6 +393,7 @@ class Report extends Controller{
                             $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
                             $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
                             // $pdf->setFooterData('', 0, $footerNote);
+                            // $pdf->setFooterData('', 0, $footerNote);
 
                             // Set the footer line
                             $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
@@ -426,6 +430,7 @@ class Report extends Controller{
                             // Set the footer content and position
                             $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
                             $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
+                            // $pdf->setFooterData('', 0, $footerNote);
                             // $pdf->setFooterData('', 0, $footerNote);
 
                             // Set the footer line
@@ -576,6 +581,7 @@ class Report extends Controller{
                         $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
                         $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
                         // $pdf->setFooterData('', 0, $footerNote);
+                        // $pdf->setFooterData('', 0, $footerNote);
 
                         // Set the footer line
                         $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
@@ -712,6 +718,7 @@ class Report extends Controller{
                             $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
                             $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
                             // $pdf->setFooterData('', 0, $footerNote);
+                            // $pdf->setFooterData('', 0, $footerNote);
 
                             // Set the footer line
                             $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
@@ -743,6 +750,7 @@ class Report extends Controller{
                             // Set the footer content and position
                             $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
                             $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
+                            // $pdf->setFooterData('', 0, $footerNote);
                             // $pdf->setFooterData('', 0, $footerNote);
 
                             // Set the footer line
@@ -899,16 +907,12 @@ class Report extends Controller{
                         
                         // $pdf->Ln(30);
 
-                        // $footerLineY = $pdf->getPageHeight() - 2
+                        // $footerLineY = $pdf->getPageHeight() - 20;
+
                         // Set the footer content and position
                         $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
                         $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
                         // $pdf->setFooterData('', 0, $footerNote);
-                        // // Set the footer content and position
-                        // $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-                        // $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
-                        // // $pdf->setFooterData('', 0, $footerNote);
-
 
                         // // Set the footer line
                         // $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
@@ -1043,6 +1047,7 @@ class Report extends Controller{
                             $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
                             $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
                             // $pdf->setFooterData('', 0, $footerNote);
+                            // $pdf->setFooterData('', 0, $footerNote);
 
                             // Set the footer line
                             $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
@@ -1075,6 +1080,7 @@ class Report extends Controller{
                             $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
                             $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
                             // $pdf->setFooterData('', 0, $footerNote);
+                            // $pdf->setFooterData('', 0, $footerNote);
 
                             // Set the footer line
                             $pdf->Line(15, $footerLineY, $pdf->getPageWidth() - 15, $footerLineY);
@@ -1091,7 +1097,6 @@ class Report extends Controller{
             }
         }
     }
-
 
     public function complaintReport($cmt_id){
         $complaint = new Complaint();
@@ -1122,6 +1127,7 @@ class Report extends Controller{
         if (is_array($rows2) && count($rows2) > 0) {
             $row2 = (object) $rows2[0];
         }
+
 
         $data = [
             'title' => "complaint",
